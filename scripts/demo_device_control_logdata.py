@@ -106,25 +106,64 @@ from robosuite import load_controller_config
 from robosuite.utils.input_utils import input2action
 from robosuite.wrappers import VisualizationWrapper
 
-from utils.log_data import log_data, log_csv_data
-from paths import DATA_PATH
+from task_decomposition.utils.log_data import log_data, log_csv_data
+from task_decomposition.paths import DATA_PATH
 
 if __name__ == "__main__":
 
     parser = argparse.ArgumentParser()
     parser.add_argument("--environment", type=str, default="Lift")
-    parser.add_argument("--robots", nargs="+", type=str, default="Panda", help="Which robot(s) to use in the env")
     parser.add_argument(
-        "--config", type=str, default="single-arm-opposed", help="Specified environment configuration if necessary"
+        "--robots",
+        nargs="+",
+        type=str,
+        default="Panda",
+        help="Which robot(s) to use in the env",
     )
-    parser.add_argument("--arm", type=str, default="right", help="Which arm to control (eg bimanual) 'right' or 'left'")
-    parser.add_argument("--switch-on-grasp", action="store_true", help="Switch gripper control on gripper action")
-    parser.add_argument("--toggle-camera-on-grasp", action="store_true", help="Switch camera angle on gripper action")
-    parser.add_argument("--controller", type=str, default="osc", help="Choice of controller. Can be 'ik' or 'osc'")
+    parser.add_argument(
+        "--config",
+        type=str,
+        default="single-arm-opposed",
+        help="Specified environment configuration if necessary",
+    )
+    parser.add_argument(
+        "--arm",
+        type=str,
+        default="right",
+        help="Which arm to control (eg bimanual) 'right' or 'left'",
+    )
+    parser.add_argument(
+        "--switch-on-grasp",
+        action="store_true",
+        help="Switch gripper control on gripper action",
+    )
+    parser.add_argument(
+        "--toggle-camera-on-grasp",
+        action="store_true",
+        help="Switch camera angle on gripper action",
+    )
+    parser.add_argument(
+        "--controller",
+        type=str,
+        default="osc",
+        help="Choice of controller. Can be 'ik' or 'osc'",
+    )
     parser.add_argument("--device", type=str, default="keyboard")
-    parser.add_argument("--pos-sensitivity", type=float, default=1.0, help="How much to scale position user inputs")
-    parser.add_argument("--rot-sensitivity", type=float, default=1.0, help="How much to scale rotation user inputs")
-    parser.add_argument("--filename", type=str, default="teleop.json", help="Filename to save data")
+    parser.add_argument(
+        "--pos-sensitivity",
+        type=float,
+        default=1.0,
+        help="How much to scale position user inputs",
+    )
+    parser.add_argument(
+        "--rot-sensitivity",
+        type=float,
+        default=1.0,
+        help="How much to scale rotation user inputs",
+    )
+    parser.add_argument(
+        "--filename", type=str, default="teleop.json", help="Filename to save data"
+    )
     args = parser.parse_args()
 
     # Import controller config for EE IK or OSC (pos/ori)
@@ -175,14 +214,20 @@ if __name__ == "__main__":
     if args.device == "keyboard":
         from robosuite.devices import Keyboard
 
-        device = Keyboard(pos_sensitivity=args.pos_sensitivity, rot_sensitivity=args.rot_sensitivity)
+        device = Keyboard(
+            pos_sensitivity=args.pos_sensitivity, rot_sensitivity=args.rot_sensitivity
+        )
         env.viewer.add_keypress_callback(device.on_press)
     elif args.device == "spacemouse":
         from robosuite.devices import SpaceMouse
 
-        device = SpaceMouse(pos_sensitivity=args.pos_sensitivity, rot_sensitivity=args.rot_sensitivity)
+        device = SpaceMouse(
+            pos_sensitivity=args.pos_sensitivity, rot_sensitivity=args.rot_sensitivity
+        )
     else:
-        raise Exception("Invalid device choice: choose either 'keyboard' or 'spacemouse'.")
+        raise Exception(
+            "Invalid device choice: choose either 'keyboard' or 'spacemouse'."
+        )
 
     n_step = 0
     while True:
@@ -204,11 +249,18 @@ if __name__ == "__main__":
         stationary_action = np.array([0.0, 0.0, 0.0, 0.0, 0.0, -0.0, -1.0])
         while True:
             # Set active robot
-            active_robot = env.robots[0] if args.config == "bimanual" else env.robots[args.arm == "left"]
+            active_robot = (
+                env.robots[0]
+                if args.config == "bimanual"
+                else env.robots[args.arm == "left"]
+            )
 
             # Get the newest action
             action, grasp = input2action(
-                device=device, robot=active_robot, active_arm=args.arm, env_configuration=args.config
+                device=device,
+                robot=active_robot,
+                active_arm=args.arm,
+                env_configuration=args.config,
             )
 
             # If action is none, then this a reset so we should break
@@ -251,7 +303,6 @@ if __name__ == "__main__":
             env.render()
             n_step += 1
 
-
             # Log data only when there is a change in action
             if not np.array_equal(action, last_action):
                 # data = {
@@ -265,14 +316,16 @@ if __name__ == "__main__":
                 # }
                 # log_data(data=data, filename=args.filename)
 
-                data=[n_step, np.around(obs["robot0_eef_pos"],2).tolist(), 
-                      np.around(obs["cube_pos"],2).tolist(), 
-                      np.around(obs["gripper_to_cube_pos"],2).tolist(), 
-                      np.around(action,2).tolist(), 
-                      grasp, 
-                      np.around(reward, 3)]
-                
-                log_csv_data(data=data, filename=args.filename)
+                data = [
+                    n_step,
+                    np.around(obs["robot0_eef_pos"], 2).tolist(),
+                    np.around(obs["cube_pos"], 2).tolist(),
+                    np.around(obs["gripper_to_cube_pos"], 2).tolist(),
+                    np.around(action, 2).tolist(),
+                    grasp,
+                    np.around(reward, 3),
+                ]
 
+                log_csv_data(data=data, filename=args.filename)
 
             last_action = action

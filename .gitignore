@@ -1,0 +1,11 @@
+#mac os x
+.DS_Store
+
+# vs code
+.vscode/
+
+# python
+__pycache__/
+*.egg-info/
+*.__pycache__
+*.pyc

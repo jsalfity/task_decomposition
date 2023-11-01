@@ -1,25 +1,10 @@
+import argparse
 import numpy as np
 
 import robosuite as suite
 from robosuite import load_controller_config
 
-# from robosuite.utils.placement_samplers import UniformRandomSampler
-
-# config = load_controller_config(default_controller='IK_POSE')
 config = load_controller_config(default_controller="OSC_POSE")
-
-NUM_DEMOS = 5
-RENDER = True
-# reset_sampler = UniformRandomSampler(
-#     name="ObjectSampler",
-#     mujoco_objects=None,
-#     x_range=[-0.2, 0.2],
-#     y_range=[-0.2, 0.2],
-#     rotation=None,
-#     ensure_object_boundary_in_range=False,
-#     ensure_valid_placement=True,
-#     reference_pos=np.array((0, 0, 0.8)),
-#     z_offset=0.01)
 
 # create environment instance
 env = suite.make(
@@ -32,14 +17,24 @@ env = suite.make(
     control_freq=10,
     horizon=40,
     # placement_initializer=reset_sampler
-    # has_renderer=True,
+    has_renderer=True,
     # has_offscreen_renderer=False,
     # use_camera_obs=False,
 )
 
 
-def run_demo(n_demos: int = NUM_DEMOS):
-    for _ in range(n_demos):
+def _setup_parser():
+    """Set up Python's ArgumentParser with params"""
+    parser = argparse.ArgumentParser(add_help=False)
+
+    parser.add_argument("--n_trajectories", type=int, default=1)
+    parser.add_argument("--render", type=int, default=1)
+
+    return parser
+
+
+def run_demo(n_trajectories: int = 1, render: bool = True):
+    for _ in range(n_trajectories):
         obs = env.reset()
         stage = 0
         stage_counter = 0
@@ -48,9 +43,7 @@ def run_demo(n_demos: int = NUM_DEMOS):
         while not done:
             cube_pos = env.sim.data.body_xpos[env.cube_body_id]
             gripper_pos = np.array(
-                env.sim.data.site_xpos[
-                    env.sim.model.site_name2id("gripper0_grip_site")
-                ]
+                env.sim.data.site_xpos[env.sim.model.site_name2id("gripper0_grip_site")]
             )
 
             action = np.zeros(7)
@@ -78,8 +71,15 @@ def run_demo(n_demos: int = NUM_DEMOS):
                     action[2] = 0
 
             obs, reward, done, info = env.step(action)
-            env.render() if RENDER else None
+            env.render() if render else None
+
+
+def main():
+    parser = _setup_parser()
+    args = parser.parse_args()
+
+    run_demo(n_trajectories=args.n_trajectories, render=args.render)
 
 
 if __name__ == "__main__":
-    run_demo()
+    main()
