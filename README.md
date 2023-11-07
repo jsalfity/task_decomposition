@@ -17,3 +17,14 @@ Install this package
 ```
 pip install -e .
 ```
+
+## Running
+Running scripts is in `/scripts` folder.
+```py
+python scripts/run_open_door.py
+```
+
+To run a call to GPT (Not fully implemented yet):
+```py
+python analysis/query_GPT.py
+```

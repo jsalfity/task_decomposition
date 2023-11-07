@@ -5,7 +5,11 @@ import pandas as pd
 import robosuite as suite
 from robosuite import load_controller_config
 
-from task_decomposition.utils.utils import save_df_to_csv, save_df_to_txt
+from task_decomposition.utils.logging import (
+    save_df_to_csv,
+    save_df_to_txt,
+    save_groundtruth_to_txt,
+)
 
 # config = load_controller_config(default_controller='IK_POSE')
 config = load_controller_config(default_controller="OSC_POSE")
@@ -29,6 +33,7 @@ env = suite.make(
 actions_to_record = ["action"]
 meta_data_to_record = []
 obs_to_record = [
+    "step",
     #     "robot0_joint_pos_cos",
     #     "robot0_joint_pos_sin",
     #     "robot0_joint_vel",
@@ -53,16 +58,14 @@ def _setup_parser():
     """Set up Python's ArgumentParser with params"""
     parser = argparse.ArgumentParser(add_help=False)
 
-    parser.add_argument("--save_episode", type=int, default=1)
+    parser.add_argument("--save", type=int, default=1)
     parser.add_argument("--render", type=int, default=1)
     parser.add_argument("--filename", type=str, default="open_door.txt")
 
     return parser
 
 
-def run_demo(
-    render: bool = True, save_episode: bool = True, filename: str = "open_door.txt"
-):
+def run_demo(render: bool = True, save: bool = True, filename: str = "open_door.txt"):
     obs = env.reset()
     stage = 0
     stage_counter = 0
@@ -70,6 +73,8 @@ def run_demo(
 
     k = 0
     df = pd.DataFrame(columns=obs_to_record + actions_to_record + meta_data_to_record)
+    gt_df = pd.DataFrame(columns=["step", "subtask"])
+
     while not done:
         handle_pos = env._handle_xpos
         gripper_pos = np.array(
@@ -108,10 +113,10 @@ def run_demo(
             action[:3] *= 10
 
         obs, reward, done, info = env.step(action)
-        k += 1
         env.render() if render else None
 
         row_data = {
+            "step": k,
             "action": np.around(action, 2).tolist(),
             "robot0_eef_pos": np.around(obs["robot0_eef_pos"], 2).tolist(),
             "door_pos": np.around(obs["door_pos"], 2).tolist(),
@@ -121,15 +126,21 @@ def run_demo(
         }
         df.loc[k] = row_data
 
-    # save_df_to_csv(df=df, filename="open_door.csv") if save_episode else None
-    save_df_to_txt(df=df, filename="open_door.txt") if save_episode else None
+        gt_row_data = {"step": k, "subtask": stage}
+        gt_df.loc[k] = gt_row_data
+
+        k += 1
+
+    # save_df_to_csv(df=df, filename="open_door.csv") if save else None
+    save_df_to_txt(df=df, filename="open_door.txt") if save else None
+    save_groundtruth_to_txt(df=gt_df, filename="open_door_gt.txt") if save else None
 
 
 def main():
     parser = _setup_parser()
     args = parser.parse_args()
 
-    run_demo(render=args.render, save_episode=args.save_episode, filename=args.filename)
+    run_demo(render=args.render, save=args.save, filename=args.filename)
 
 
 if __name__ == "__main__":
