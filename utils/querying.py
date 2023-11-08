@@ -9,12 +9,16 @@ from task_decomposition.paths import DATA_PATH, GPT_MODEL
 openai.api_key = os.getenv("OPENAI_API_KEY")
 
 
-TASK_DESCRIPTION = """Your task is to ingest the following data and break down what occured during the robot episode into granular subtasks. Each subtask should be a sequential step that occured during the robot episode. You should identify the start and end step of each subtask. Create as many granular substasks as you see and report the list of subtasks in the following format:
+TASK_DESCRIPTION = """Your task is to ingest the following data and break down what occured during the robot episode into granular subtasks. Each subtask should be a sequential step that occured during the robot episode. You should identify the start and end step of each subtask. Create as many granular substasks as you see in the data. 
+
+Use chain of thought to break down the data into subtasks.
+
+Report the list of subtasks in the following format, a list of dictionaries, at the beginning of your response:
 ```
 [{'start_step': <>, 'end_step': <>, 'subtask': <name of subtask>}, {'start_step': <>, 'end_step': <>, 'subtask': <name of subtask>}, {'start_step': <>, 'end_step': <>, 'subtask': <name of subtask>}, ...]
 ```
 
-Use chain of thought to break down the data into subtasks and explain your thoughts.
+Then explain your thoughts.
 """
 
 DATA_DESCRIPTION = """The data captures a simulated episode of a robot end effector manipulating an environment. Each entry in the schema contains an observation."""
@@ -65,5 +69,5 @@ def get_prompt(filename: str) -> str:
     return f"""{TASK_DESCRIPTION}\n
     {DATA_DESCRIPTION}\n
     {SCHEMA_DESCRIPTION(columns)}\n
-    Data: {data_text}
+    Data to analyze: {data_text}
     """

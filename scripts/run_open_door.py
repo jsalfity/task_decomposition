@@ -6,7 +6,7 @@ import robosuite as suite
 from robosuite import load_controller_config
 
 from task_decomposition.utils.logging import (
-    save_df_to_csv,
+    # save_df_to_csv,
     save_df_to_txt,
     save_groundtruth_to_txt,
 )
@@ -132,8 +132,10 @@ def run_demo(render: bool = True, save: bool = True, filename: str = "open_door.
         k += 1
 
     # save_df_to_csv(df=df, filename="open_door.csv") if save else None
-    save_df_to_txt(df=df, filename="open_door.txt") if save else None
-    save_groundtruth_to_txt(df=gt_df, filename="open_door_gt.txt") if save else None
+    save_df_to_txt(df=df, filename=filename) if save else None
+    save_groundtruth_to_txt(
+        df=gt_df, filename=filename.split(".")[0] + "_gt." + filename.split(".")[-1]
+    ) if save else None
 
 
 def main():
