@@ -18,13 +18,17 @@ Install this package
 pip install -e .
 ```
 
-## Running
+## Running robosuite simulation and generating data
 Running scripts is in `/scripts` folder.
 ```py
 python scripts/run_open_door.py
 ```
 
-To run a call to GPT (Not fully implemented yet):
+## Analysis using GPT
+To run a call to GPT:
 ```py
 python analysis/query_GPT.py
 ```
+
+## Comparison between GPT output and groundtruth data
+Not Yet Implemented 

@@ -5,7 +5,7 @@ from typing import List
 
 import robosuite as suite
 
-from task_decomposition.paths import GIF_PATH, DATA_PATH
+from task_decomposition.paths import DATA_PATH
 
 
 def make_env(config):

@@ -1,0 +1,59 @@
+{
+    "timestamp": "07-11-2023_08:01",
+    "datafile": "open_door.txt",
+    "model": "gpt-3.5-turbo-1106",
+    "response": "[{'start_step': 0, 'end_step': 74, 'subtask': 'Robot end effector manipulating the environment'}]"
+}{
+    "timestamp": "07-11-2023_08:03",
+    "datafile": "open_door.txt",
+    "model": "gpt-3.5-turbo-1106",
+    "response": "[{'start_step': 0, 'end_step': 74, 'subtask': 'Robot end effector manipulating an environment'}]"
+}
+{
+    "timestamp": "07-11-2023_08:04",
+    "datafile": "open_door.txt",
+    "model": "gpt-3.5-turbo-1106",
+    "response": "[{'start_step': 0, 'end_step': 74, 'subtask': 'Robot end effector manipulating the environment'}]"
+}
+
+{
+    "timestamp": "07-11-2023_08:07",
+    "datafile": "open_door.txt",
+    "model": "gpt-3.5-turbo-1106",
+    "response": "```\n[{'start_step': 0, 'end_step': 74, 'subtask': 'Robot end effector manipulating the environment'}]\n```"
+}
+
+{
+    "timestamp": "07-11-2023_08:07",
+    "datafile": "open_door.txt",
+    "model": "gpt-3.5-turbo-1106",
+    "response": "[{'start_step': 0, 'end_step': 74, 'subtask': 'Robot end effector manipulating the environment'}]"
+}
+
+{
+    "timestamp": "07-11-2023_08:08",
+    "datafile": "open_door.txt",
+    "model": "gpt-3.5-turbo-1106",
+    "response": "[{'start_step': 0, 'end_step': 74, 'subtask': 'Robot end effector manipulating the environment'}]"
+}
+
+{
+    "timestamp": "07-11-2023_08:13",
+    "datafile": "open_door.txt",
+    "model": "gpt-3.5-turbo-1106",
+    "response": "```\n[{'start_step': 0, 'end_step': 6, 'subtask': 'Manipulating the door handle to open the door'},\n{'start_step': 7, 'end_step': 7, 'subtask': 'Pushing the door to open it'},\n{'start_step': 8, 'end_step': 74, 'subtask': 'Continuing to push the door to open it'}]\n```"
+}
+
+{
+    "timestamp": "07-11-2023_08:13",
+    "datafile": "open_door.txt",
+    "model": "gpt-3.5-turbo-1106",
+    "response": "[{'start_step': 0, 'end_step': 74, 'subtask': 'Robot end effector manipulating the environment'}]"
+}
+
+{
+    "timestamp": "07-11-2023_08:14",
+    "datafile": "open_door.txt",
+    "model": "gpt-3.5-turbo-1106",
+    "response": "```\n[{'start_step': 0, 'end_step': 6, 'subtask': 'Manipulating the door handle to open the door'},\n{'start_step': 7, 'end_step': 7, 'subtask': 'Pushing the door to open it'},\n{'start_step': 8, 'end_step': 74, 'subtask': 'Moving the door to the desired position'}]\n```"
+}

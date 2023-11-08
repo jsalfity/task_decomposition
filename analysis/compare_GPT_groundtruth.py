@@ -90,6 +90,12 @@ fake_gpt_subtask_list = [
     {"start_step": 46, "end_step": 74, "subtask": 3},
 ]
 
+gpt_subtask_list = [
+    {"start_step": 0, "end_step": 7, "subtask": "Manipulating the door"},
+    {"start_step": 8, "end_step": 32, "subtask": "Moving the door"},
+    {"start_step": 33, "end_step": 74, "subtask": "Adjusting the door"},
+]
+
 gt_df = pd.read_csv(DATA_PATH + gt_filename, delimiter="\t")
 actual_subtask_list = format_df_to_subtask_list(gt_df)
 print(
