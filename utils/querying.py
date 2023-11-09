@@ -26,15 +26,18 @@ DATA_DESCRIPTION = """The data captures a simulated episode of a robot end effec
 SCHEMA_DESCRIPTION = lambda columns: f"The schema is composed of {columns}."
 
 
-def get_completion(prompt, model=GPT_MODEL):
+def get_completion(prompt, model=GPT_MODEL) -> Union[dict, str]:
     messages = [{"role": "user", "content": prompt}]
 
-    response = openai.ChatCompletion.create(
+    API_response = openai.ChatCompletion.create(
         model=model,
         messages=messages,
         temperature=0,
     )
-    return response.choices[0].message["content"]
+
+    response = API_response.choices[0].message["content"]
+    usage = API_response.usage
+    return response, usage
 
 
 def get_data_for_prompt(filename: str) -> Union[pd.DataFrame, str]:

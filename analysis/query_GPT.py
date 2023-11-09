@@ -18,7 +18,7 @@ def _setup_parser():
 def run_decomposition(filename: str, save: bool = True):
     """ """
     prompt = get_prompt(filename=filename)
-    response = get_completion(prompt)
+    response, usage = get_completion(prompt)
 
     # append to json file
     if save:
@@ -30,6 +30,10 @@ def run_decomposition(filename: str, save: bool = True):
                         "timestamp": datetime.now().strftime("%d-%m-%Y_%H:%M"),
                         "datafile": filename,
                         "model": GPT_MODEL,
+                        "prompt_tokens": usage["prompt_tokens"],
+                        "completion_tokens": usage["completion_tokens"],
+                        "total_tokens": usage["total_tokens"],
+                        "usage": usage,
                         "response": response,
                     }
                 )
