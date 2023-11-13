@@ -33,7 +33,6 @@ env = suite.make(
 actions_to_record = ["action"]
 meta_data_to_record = []
 obs_to_record = [
-    "step",
     # "robot0_joint_pos_cos",
     # "robot0_joint_pos_sin",
     # "robot0_joint_vel",
@@ -53,7 +52,7 @@ obs_to_record = [
     # "object-state",
 ]
 
-data_to_record = actions_to_record + obs_to_record + meta_data_to_record
+data_to_record = ["step"] + actions_to_record + obs_to_record + meta_data_to_record
 
 
 def _setup_parser():
@@ -75,7 +74,7 @@ def run_demo(render: bool = True, save: bool = True, filename: str = "stack.txt"
 
     k = 0
     df = pd.DataFrame(columns=data_to_record)
-    gt_df = pd.DataFrame(columns=["step", "subtask"])
+    gt_df = pd.DataFrame(columns=["step", "subtask", "stage"])
 
     while not done:
         cube_a_pos = env.sim.data.body_xpos[env.cubeA_body_id]
@@ -86,6 +85,7 @@ def run_demo(render: bool = True, save: bool = True, filename: str = "stack.txt"
 
         action = np.zeros(7)
         if stage == 0:
+            subtask = "Move to above Cube A"
             action[:2] = cube_a_pos[:2] - gripper_pos[:2]
             action[-1] = -1
             if (action[:3] ** 2).sum() < 0.0001:
@@ -93,6 +93,7 @@ def run_demo(render: bool = True, save: bool = True, filename: str = "stack.txt"
             action[:3] *= 10
 
         if stage == 1:
+            subtask = "Move directly down to Cube A"
             action[:3] = cube_a_pos - gripper_pos
             action[-1] = -1
             if (action[:3] ** 2).sum() < 0.0001:
@@ -100,6 +101,7 @@ def run_demo(render: bool = True, save: bool = True, filename: str = "stack.txt"
             action[:3] *= 10
 
         if stage == 2:
+            subtask = "Grasp Cube A"
             action[:] = 0
             action[-1] = 1
             stage_counter += 1
@@ -108,6 +110,7 @@ def run_demo(render: bool = True, save: bool = True, filename: str = "stack.txt"
                 stage_counter = 0
 
         if stage == 3:
+            subtask = "Vertically pick up Cube A"
             action[:] = 0
             action[2] = 0.25
             action[-1] = 1
@@ -117,6 +120,7 @@ def run_demo(render: bool = True, save: bool = True, filename: str = "stack.txt"
                 stage_counter = 0
 
         if stage == 4:
+            subtask = "Align Cube A with Cube B"
             action[:2] = cube_b_pos[:2] - cube_a_pos[:2]
             action[-1] = 1
             if (action[:3] ** 2).sum() < 0.0001:
@@ -124,6 +128,7 @@ def run_demo(render: bool = True, save: bool = True, filename: str = "stack.txt"
             action[:3] *= 10
 
         if stage == 5:
+            subtask = "Move Cube A vertically down to Cube B"
             action[:3] = cube_b_pos + np.array([0, 0, 0.05]) - cube_a_pos
             action[-1] = 1
             if (action[:3] ** 2).sum() < 0.0001:
@@ -132,6 +137,7 @@ def run_demo(render: bool = True, save: bool = True, filename: str = "stack.txt"
             action[:3] *= 10
 
         if stage == 6:
+            subtask = "Release Cube A onto Cube B"
             action[:] = 0
             action[-1] = -1
             stage_counter += 1
@@ -140,6 +146,7 @@ def run_demo(render: bool = True, save: bool = True, filename: str = "stack.txt"
                 stage_counter = 0
 
         if stage == 7:
+            subtask = "Return Home"
             action[:] = 0
             action[2] = 1
             action[-1] = -1
@@ -160,10 +167,9 @@ def run_demo(render: bool = True, save: bool = True, filename: str = "stack.txt"
             "gripper_to_cubeB": np.around(obs["gripper_to_cubeB"], 2).tolist(),
             "cubeA_to_cubeB": np.around(obs["cubeA_to_cubeB"], 2).tolist(),
         }
-
         df.loc[k] = row_data
 
-        gt_row_data = {"step": k, "subtask": stage}
+        gt_row_data = {"step": k, "subtask": subtask, "stage": stage}
         gt_df.loc[k] = gt_row_data
 
         k += 1

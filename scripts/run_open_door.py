@@ -33,7 +33,6 @@ env = suite.make(
 actions_to_record = ["action"]
 meta_data_to_record = []
 obs_to_record = [
-    "step",
     #     "robot0_joint_pos_cos",
     #     "robot0_joint_pos_sin",
     #     "robot0_joint_vel",
@@ -52,6 +51,8 @@ obs_to_record = [
     #     "robot0_proprio-state",
     #     "object-state",
 ]
+
+data_to_record = ["step"] + actions_to_record + obs_to_record + meta_data_to_record
 
 
 def _setup_parser():
@@ -72,8 +73,8 @@ def run_demo(render: bool = True, save: bool = True, filename: str = "open_door.
     done = False
 
     k = 0
-    df = pd.DataFrame(columns=obs_to_record + actions_to_record + meta_data_to_record)
-    gt_df = pd.DataFrame(columns=["step", "subtask"])
+    df = pd.DataFrame(columns=data_to_record)
+    gt_df = pd.DataFrame(columns=["step", "subtask", "stage"])
 
     while not done:
         handle_pos = env._handle_xpos
@@ -83,6 +84,7 @@ def run_demo(render: bool = True, save: bool = True, filename: str = "open_door.
 
         action = np.zeros(7)
         if stage == 0:
+            subtask = "Align manipulator height with Door"
             action[:] = 0
             action[2] = 1
             action[-1] = -1
@@ -92,6 +94,7 @@ def run_demo(render: bool = True, save: bool = True, filename: str = "open_door.
                 stage_counter = 0
 
         if stage == 1:
+            subtask = "Get closer to Door"
             action[:2] = handle_pos[:2] - gripper_pos[:2] - np.array([0, -0.025])
             action[-1] = -1
             if (action[:3] ** 2).sum() < 0.0001:
@@ -99,6 +102,7 @@ def run_demo(render: bool = True, save: bool = True, filename: str = "open_door.
             action[:3] *= 10
 
         if stage == 2:
+            subtask = "Turn Door handle"
             action[:3] = handle_pos - gripper_pos - np.array([0, -0.02, 0.05])
             action[-1] = -1
             if gripper_pos[2] < 0.1:
@@ -108,6 +112,7 @@ def run_demo(render: bool = True, save: bool = True, filename: str = "open_door.
             action[:3] *= 10
 
         if stage == 3:
+            subtask = "Open Door"
             action[:3] = handle_pos - gripper_pos - np.array([0, -0.1, 0])
             action[-1] = -1
             action[:3] *= 10
@@ -126,7 +131,7 @@ def run_demo(render: bool = True, save: bool = True, filename: str = "open_door.
         }
         df.loc[k] = row_data
 
-        gt_row_data = {"step": k, "subtask": stage}
+        gt_row_data = {"step": k, "subtask": subtask, "stage": stage}
         gt_df.loc[k] = gt_row_data
 
         k += 1

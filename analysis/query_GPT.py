@@ -2,6 +2,7 @@ import argparse
 from datetime import datetime
 import json
 
+from task_decomposition.utils.offload_cost import usage_cost
 from task_decomposition.utils.querying import get_completion, get_prompt
 from task_decomposition.paths import GPT_OUTPUT_PATH, GPT_MODEL
 
@@ -17,30 +18,29 @@ def _setup_parser():
 
 def run_decomposition(filename: str, save: bool = True):
     """ """
+    timestamp = datetime.now().strftime("%d-%m-%Y_%H:%M")
     prompt = get_prompt(filename=filename)
+    print(f"[{timestamp}] Querying GPT...\n")
     response, usage = get_completion(prompt)
+
+    data = {
+        "timestamp": timestamp,
+        "datafile": filename,
+        "model": GPT_MODEL,
+        "usage": usage,
+        "usage_cost": f"${usage_cost(gpt_model=GPT_MODEL, usage=usage)}",
+        "response": response,
+    }
 
     # append to json file
     if save:
         with open(GPT_OUTPUT_PATH, "a") as f:
-            f.write(
-                "\n"
-                + json.dumps(
-                    {
-                        "timestamp": datetime.now().strftime("%d-%m-%Y_%H:%M"),
-                        "datafile": filename,
-                        "model": GPT_MODEL,
-                        "prompt_tokens": usage["prompt_tokens"],
-                        "completion_tokens": usage["completion_tokens"],
-                        "total_tokens": usage["total_tokens"],
-                        "usage": usage,
-                        "response": response,
-                    }
-                )
-                + "\n"
-            )
-    print(response)
+            f.write("\n" + json.dumps(data) + "\n")
 
+    print(f"GPT Response: ")
+    print(response)
+    print("\n")
+    print(f"Saved to {GPT_OUTPUT_PATH}")
     return response
 
 
