@@ -74,7 +74,7 @@ def _setup_parser():
     """Set up Python's ArgumentParser with params"""
     parser = argparse.ArgumentParser(add_help=False)
 
-    parser.add_argument("--save", type=int, default=0)
+    parser.add_argument("--save", type=int, default=1)
     parser.add_argument("--render", type=int, default=1)
     parser.add_argument("--filename", type=str, default="picknplace.txt")
 
@@ -183,10 +183,10 @@ def run_demo(render: bool = True, save: bool = True, filename: str = "picknplace
         k += 1
 
     # save_df_to_csv(df=df, filename="open_door.csv") if save else None
-    # save_df_to_txt(df=df, filename=filename) if save else None
-    # save_groundtruth_to_txt(
-    #     df=gt_df, filename=filename.split(".")[0] + "_gt." + filename.split(".")[-1]
-    # ) if save else None
+    save_df_to_txt(df=df, filename=filename) if save else None
+    save_groundtruth_to_txt(
+        df=gt_df, filename=filename.split(".")[0] + "_gt." + filename.split(".")[-1]
+    ) if save else None
 
 
 def main():
