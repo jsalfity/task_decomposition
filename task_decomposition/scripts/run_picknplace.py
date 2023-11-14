@@ -5,16 +5,16 @@ import pandas as pd
 import robosuite as suite
 from robosuite import load_controller_config
 
+# from robosuite.utils.placement_samplers import UniformRandomSampler
+
 from task_decomposition.utils.logging import (
     # save_df_to_csv,
     save_df_to_txt,
     save_groundtruth_to_txt,
 )
 
-
 config = load_controller_config(default_controller="OSC_POSE")
 
-# from robosuite.utils.placement_samplers import UniformRandomSampler
 # reset_sampler = UniformRandomSampler(
 #     name="ObjectSampler",
 #     mujoco_objects=None,
@@ -41,7 +41,7 @@ env = suite.make(
     object_type="can",
     bin1_pos=(0.1, -0.27, 0.8),
     bin2_pos=(0.1, 0.27, 0.8),
-    # placement_initializer=reset_sampler
+    # placement_initializer=reset_sampler,
     has_renderer=True,
     # has_offscreen_renderer=False,
     # use_camera_obs=False,
@@ -100,7 +100,7 @@ def run_demo(render: bool = True, save: bool = True, filename: str = "picknplace
 
         action = np.zeros(7)
         if stage == 0:
-            subtask = "Move to can"
+            subtask = "Move to above can"
             action[:3] = obj_pos - gripper_pos
             action[2] = 0
             action[-1] = -1
@@ -109,6 +109,7 @@ def run_demo(render: bool = True, save: bool = True, filename: str = "picknplace
             action[:3] *= 10
 
         if stage == 1:
+            subtask = "Move down to can"
             action[:3] = obj_pos + np.array([0, 0, 0.015]) - gripper_pos
             action[-1] = -1
             if (action[:3] ** 2).sum() < 0.0001:
@@ -116,6 +117,7 @@ def run_demo(render: bool = True, save: bool = True, filename: str = "picknplace
             action[:3] *= 10
 
         if stage == 2:
+            subtask = "Grasp can"
             action[:] = 0
             action[-1] = 1
             stage_counter += 1
@@ -124,6 +126,7 @@ def run_demo(render: bool = True, save: bool = True, filename: str = "picknplace
                 stage_counter = 0
 
         if stage == 3:
+            subtask = "Pick up can"
             action[:] = 0
             action[2] = 1
             action[-1] = 1
@@ -133,6 +136,7 @@ def run_demo(render: bool = True, save: bool = True, filename: str = "picknplace
                 stage_counter = 0
 
         if stage == 4:
+            subtask = "Move to goal position"
             action[:2] = goal_pos[:2] - obj_pos[:2]
             action[-1] = 1
             if (action[:3] ** 2).sum() < 0.0001:
@@ -145,6 +149,7 @@ def run_demo(render: bool = True, save: bool = True, filename: str = "picknplace
             if (action[:3] ** 2).sum() < 0.0001:
                 stage = 6
                 stage_counter = 0
+                input("stage 5 -- unlabeled")
             action[:3] *= 10
 
         if stage == 6:
@@ -154,6 +159,7 @@ def run_demo(render: bool = True, save: bool = True, filename: str = "picknplace
             if stage_counter == 8:
                 stage = 7
                 stage_counter = 0
+                input("stage 6 -- unlabeled")
 
         if stage == 7:
             action[:] = 0
@@ -162,6 +168,7 @@ def run_demo(render: bool = True, save: bool = True, filename: str = "picknplace
             stage_counter += 1
             if stage_counter >= 5:
                 action[2] = 0
+                input("stage 7 -- unlabeled")
 
         obs, reward, done, info = env.step(action)
         env.render() if render else None
