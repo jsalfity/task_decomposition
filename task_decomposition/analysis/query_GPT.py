@@ -2,7 +2,7 @@ from datetime import datetime
 import json
 import yaml
 
-from task_decomposition.utils.offload_cost import usage_cost
+from task_decomposition.utils.offload_cost import calculate_usage_cost
 from task_decomposition.utils.querying import get_completion, get_prompt
 from task_decomposition.paths import GPT_OUTPUT_PATH, GPT_QUERY_CONFIG_YAML
 
@@ -14,6 +14,7 @@ def run_decomposition(config: dict):
     prompt = get_prompt(config)
     print(f"[{timestamp}] Querying GPT...\n")
     response, usage = get_completion(prompt, model=config["gpt_model"])
+    usage_cost = calculate_usage_cost(gpt_model=config["gpt_model"], usage=usage)
 
     data = {
         "timestamp": timestamp,
@@ -23,7 +24,7 @@ def run_decomposition(config: dict):
         "frames": config["frames"],
         "model": config["gpt_model"],
         "usage": usage,
-        "usage_cost": f"${usage_cost(gpt_model=config['gpt_model'], usage=usage)}",
+        "usage_cost": f"${usage_cost}",
         "response": response,
     }
 
@@ -33,8 +34,10 @@ def run_decomposition(config: dict):
             f.write("\n" + json.dumps(data) + "\n")
 
     print(f"GPT Response: ")
+    print("==========================")
     print(response)
-    print("\n")
+    print("==========================")
+    print(f"This request costs: ${usage_cost}")
     print(f"Saved to {GPT_OUTPUT_PATH}")
     return response
 

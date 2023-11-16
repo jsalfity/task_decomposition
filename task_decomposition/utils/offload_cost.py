@@ -1,7 +1,7 @@
 from typing import Dict
 
 
-def usage_cost(gpt_model: str, usage: Dict) -> float:
+def calculate_usage_cost(gpt_model: str, usage: Dict) -> float:
     """
     Return the cost of the offload
     https://openai.com/pricing
