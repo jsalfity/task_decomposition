@@ -3,6 +3,8 @@
 
 # vs code
 .vscode/*
+.vscode/launch.json
+.vscode/settings.json
 
 # python
 __pycache__/

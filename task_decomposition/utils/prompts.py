@@ -15,20 +15,22 @@ TASK_DESCRIPTION = """Your task is to ingest the following data and break down w
 Use chain of thought to break down the data into subtasks.
 
 Report the list of subtasks as a dictionary with at the beginning of your response:
-```
-{1: <subtask_name>,
-1.1: {'start_step: 1, 'end_step': 10, subtask: '<low level primitive>'},
-1.2: {'start_step: 11, 'end_step': 20, subtask: '<low level primitive>'},
-2: <subtask_name>,
-2.1: {'start_step: 21, 'end_step': 30, subtask: '<low level primitive>'},
+```subtask_decomposition = [
+{1.1: {'start_step: <>, 'end_step': <>, subtask: '<low level primitive>'},
+1.2: {'start_step: <>, 'end_step': <>, subtask: '<low level primitive>'},
+2.1: {'start_step: <>, 'end_step': <>, subtask: '<low level primitive>'},
 ...
-}
+}]
 ```
+The major numbers are the subtask and the minor numbers are the subsubtask.
+
 Then explain your thoughts.
 """
 
-DATA_DESCRIPTION = """The data captures a simulated episode of a robot end effector manipulating an environment. Each entry in the schema contains the action for the robot and an observation."""
+TXT_DATA_DESCRIPTION = (
+    lambda columns: f"""The data captures a simulated episode of a robot end effector manipulating an environment. Each entry in the schema contains the action for the robot and an observation. The schema is composed of {columns}. The action column contains 6 DoF torque values for the robot arm and the 7th entry being gripper state. Each observation is x-y-z position values."""
+)
 
-SCHEMA_DESCRIPTION = (
-    lambda columns: f"The schema is composed of {columns}. The action column contains 6 DoF torque values for the robot arm and the 7th entry being gripper state. Each observation is x-y-z position values."
+FRAME_DATA_DESCRIPTION = (
+    """The frames are the associated observation images for each step."""
 )

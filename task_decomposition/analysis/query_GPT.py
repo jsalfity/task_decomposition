@@ -1,39 +1,34 @@
-import argparse
 from datetime import datetime
 import json
+import yaml
 
 from task_decomposition.utils.offload_cost import usage_cost
 from task_decomposition.utils.querying import get_completion, get_prompt
-from task_decomposition.paths import GPT_OUTPUT_PATH, GPT_MODEL
+from task_decomposition.paths import GPT_OUTPUT_PATH, GPT_QUERY_CONFIG_YAML
 
 
-def _setup_parser():
-    """Set up Python's ArgumentParser with params"""
-    parser = argparse.ArgumentParser(add_help=False)
-
-    parser.add_argument("--filename", type=str, default="open_door.txt")
-    parser.add_argument("--save", type=int, default=1)
-    return parser
-
-
-def run_decomposition(filename: str, save: bool = True):
+def run_decomposition(config: dict):
     """ """
     timestamp = datetime.now().strftime("%d-%m-%Y_%H:%M")
-    prompt = get_prompt(filename=filename)
+
+    prompt = get_prompt(config)
     print(f"[{timestamp}] Querying GPT...\n")
-    response, usage = get_completion(prompt)
+    response, usage = get_completion(prompt, model=config["gpt_model"])
 
     data = {
         "timestamp": timestamp,
-        "datafile": filename,
-        "model": GPT_MODEL,
+        "use_txt": config["use_txt"],
+        "txt_datafile": config["txt_filename"],
+        "use_frames": config["use_frames"],
+        "frames": config["frames"],
+        "model": config["gpt_model"],
         "usage": usage,
-        "usage_cost": f"${usage_cost(gpt_model=GPT_MODEL, usage=usage)}",
+        "usage_cost": f"${usage_cost(gpt_model=config['gpt_model'], usage=usage)}",
         "response": response,
     }
 
     # append to json file
-    if save:
+    if config["save_response"]:
         with open(GPT_OUTPUT_PATH, "a") as f:
             f.write("\n" + json.dumps(data) + "\n")
 
@@ -45,10 +40,11 @@ def run_decomposition(filename: str, save: bool = True):
 
 
 def main():
-    parser = _setup_parser()
-    args = parser.parse_args()
 
-    run_decomposition(filename=args.filename, save=args.save)
+    with open(GPT_QUERY_CONFIG_YAML, "r") as file:
+        config = yaml.safe_load(file)
+
+    run_decomposition(config=config)
 
 
 if __name__ == "__main__":

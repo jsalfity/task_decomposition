@@ -1,0 +1,10 @@
+gpt_model: "gpt-4-vision-preview"
+# gpt_model: "gpt-4-1106-preview"
+# gpt_model: "gpt-3.5-turbo-1106"
+use_txt: True
+txt_filename: picknplace.txt
+use_frames: True
+frames: picknplace
+frame_step: 25
+resize_frames: 256
+save_response: True
