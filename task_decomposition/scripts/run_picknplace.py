@@ -7,11 +7,7 @@ from robosuite import load_controller_config
 
 # from robosuite.utils.placement_samplers import UniformRandomSampler
 
-from task_decomposition.utils.logging import (
-    # save_df_to_csv,
-    save_df_to_txt,
-    save_groundtruth_to_txt,
-)
+from task_decomposition.utils.logging import save_frames_fn, save_df_to_txt
 
 config = load_controller_config(default_controller="OSC_POSE")
 
@@ -33,8 +29,8 @@ env = suite.make(
     robots="Panda",
     controller_configs=config,
     camera_names=["frontview", "robot0_eye_in_hand"],
-    camera_heights=128,
-    camera_widths=128,
+    camera_heights=256,
+    camera_widths=256,
     control_freq=10,
     horizon=120,
     single_object_mode=2,
@@ -44,7 +40,7 @@ env = suite.make(
     # placement_initializer=reset_sampler,
     has_renderer=True,
     # has_offscreen_renderer=False,
-    # use_camera_obs=False,
+    use_camera_obs=True,
 )
 
 actions_to_record = ["action"]
@@ -74,14 +70,23 @@ def _setup_parser():
     """Set up Python's ArgumentParser with params"""
     parser = argparse.ArgumentParser(add_help=False)
 
-    parser.add_argument("--save", type=int, default=1)
+    parser.add_argument("--save_gt", type=int, default=0)
+    parser.add_argument("--save_frames", type=int, default=0)
+    parser.add_argument("--save_txt", type=int, default=0)
     parser.add_argument("--render", type=int, default=1)
-    parser.add_argument("--filename", type=str, default="picknplace.txt")
+    parser.add_argument("--filename", type=str, default="picknplace")
 
     return parser
 
 
-def run_demo(render: bool = True, save: bool = True, filename: str = "picknplace.txt"):
+def run_demo(
+    save_gt: bool = True,
+    save_txt: bool = True,
+    save_frames: bool = True,
+    render: bool = True,
+    filename: str = "picknplace",
+):
+    print("Running Simulation...")
     obs = env.reset()
     stage = 0
     stage_counter = 0
@@ -91,6 +96,7 @@ def run_demo(render: bool = True, save: bool = True, filename: str = "picknplace
     df = pd.DataFrame(columns=data_to_record)
     gt_df = pd.DataFrame(columns=["step", "subtask", "stage"])
 
+    frames = []
     while not done:
         obj_pos = env.sim.data.body_xpos[env.obj_body_id["Can"]]
         goal_pos = env.target_bin_placements[env.object_to_id["can"]]
@@ -171,6 +177,9 @@ def run_demo(render: bool = True, save: bool = True, filename: str = "picknplace
                 input("stage 7 -- unlabeled")
 
         obs, reward, done, info = env.step(action)
+        frame = np.flip(obs["frontview_image"], axis=0)
+        frames.append(frame)
+
         env.render() if render else None
 
         row_data = {}
@@ -189,18 +198,25 @@ def run_demo(render: bool = True, save: bool = True, filename: str = "picknplace
 
         k += 1
 
-    # save_df_to_csv(df=df, filename="open_door.csv") if save else None
-    save_df_to_txt(df=df, filename=filename) if save else None
-    save_groundtruth_to_txt(
-        df=gt_df, filename=filename.split(".")[0] + "_gt." + filename.split(".")[-1]
-    ) if save else None
+    env.close()
+
+    print("Done Running Simulation.")
+    save_frames_fn(frames=frames, filename=filename) if save_frames else None
+    save_df_to_txt(df=df, filename=filename) if save_txt else None
+    save_df_to_txt(df=gt_df, filename=filename + "_gt") if save_gt else None
 
 
 def main():
     parser = _setup_parser()
     args = parser.parse_args()
 
-    run_demo(render=args.render, save=args.save, filename=args.filename)
+    run_demo(
+        save_gt=args.save_gt,
+        save_txt=args.save_txt,
+        save_frames=args.save_frames,
+        render=args.render,
+        filename=args.filename,
+    )
 
 
 if __name__ == "__main__":

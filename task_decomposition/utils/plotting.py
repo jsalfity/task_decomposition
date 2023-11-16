@@ -1,5 +1,6 @@
 import matplotlib.pyplot as plt
 import matplotlib.patches as mpatches
+import base64
 
 # def visualize_trajectory_decompositions(actual, predicted, title):
 #     """
@@ -121,3 +122,9 @@ def visualize_trajectory_decompositions(actual, predicted, title):
     plt.title(title)
     plt.grid(True)
     plt.show()
+
+
+# Function to encode the image
+def encode_image(image_path):
+    with open(image_path, "rb") as image_file:
+        return base64.b64encode(image_file.read()).decode("utf-8")

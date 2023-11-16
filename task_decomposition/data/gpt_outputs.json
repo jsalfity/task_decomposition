@@ -184,3 +184,119 @@
     "usage_cost": "$0.05",
     "response": "```\n{\n1: 'Approach Phase',\n1.1: {'start_step': 0, 'end_step': 10, 'subtask': 'Move end effector towards the cube'},\n2: 'Gripping Phase',\n2.1: {'start_step': 11, 'end_step': 13, 'subtask': 'Position end effector above the cube'},\n2.2: {'start_step': 13, 'end_step': 14, 'subtask': 'Activate gripper to grasp the cube'},\n3: 'Lifting Phase',\n3.1: {'start_step': 15, 'end_step': 20, 'subtask': 'Lift the cube upwards'},\n4: 'Holding Phase',\n4.1: {'start_step': 21, 'end_step': 39, 'subtask': 'Hold the cube steady in the air'}\n}\n```\n\nExplanation of thought process:\n\n1. **Approach Phase**: The robot end effector moves towards the cube. This is indicated by the decreasing 'gripper_to_cube_pos' values from step 0 to step 10, which show the end effector getting closer to the cube.\n\n2. **Gripping Phase**: The robot positions its end effector directly above the cube and then activates the gripper to grasp the cube. This is shown by the action values at step 13, where the 7th entry changes from -1.0 (gripper open) to 1.0 (gripper closed), indicating the gripper has been activated to grasp the cube.\n\n3. **Lifting Phase**: The robot lifts the cube upwards. This is indicated by the increasing 'robot0_eef_pos' z-values from step 15 to step 20, showing that the end effector (and thus the cube) is being lifted.\n\n4. **Holding Phase**: The robot holds the cube steady in the air. This is indicated by the consistent 'robot0_eef_pos' and 'cube_pos' values from step 21 to step 39, showing that the cube is being held at a steady position."
 }
+{
+    "timestamp": "15-11-2023_17:31",
+    "txt_datafile": "picknplace.txt",
+    "frames": "picknplace",
+    "model": "gpt-4-1106-preview",
+    "usage": {
+        "prompt_tokens": 10512,
+        "completion_tokens": 731,
+        "total_tokens": 11243
+    },
+    "usage_cost": "$0.13",
+    "response": "To break down the robot episode into hierarchical granular subtasks, I will analyze the data and identify distinct phases of the robot's actions based on the provided schema. The schema includes the step number, the action taken by the robot (6 DoF torque values and gripper state), the robot end effector position, the can position, and the relative position of the can to the robot end effector.\n\nHere's the breakdown of subtasks:\n\n```\n{\n1.1: {'start_step': 0, 'end_step': 8, 'subtask': 'Approach the can'},\n1.2: {'start_step': 9, 'end_step': 17, 'subtask': 'Position above the can'},\n1.3: {'start_step': 18, 'end_step': 18, 'subtask': 'Open gripper'},\n1.4: {'start_step': 19, 'end_step': 19, 'subtask': 'Maintain position with open gripper'},\n1.5: {'start_step': 20, 'end_step': 26, 'subtask': 'Lower gripper towards the can'},\n1.6: {'start_step': 27, 'end_step': 27, 'subtask': 'Close gripper to grasp the can'},\n1.7: {'start_step': 28, 'end_step': 110, 'subtask': 'Lift and move the can to the target location'},\n1.8: {'start_step': 111, 'end_step': 119, 'subtask': 'Release the can and retract gripper'}\n}\n```\n\nExplanation of thought process:\n\n1.1: The robot starts by approaching the can. This is indicated by the decreasing distance between the robot end effector and the can in the 'Can_to_robot0_eef_pos' column.\n\n1.2: The robot positions itself directly above the can. This is shown by the 'Can_to_robot0_eef_pos' values approaching zero in the x and y dimensions, indicating alignment above the can.\n\n1.3: The robot opens its gripper. This is a single action step where the gripper state changes from -1.0 to 1.0, indicating the transition from a closed to an open state.\n\n1.4: The robot maintains its position with the gripper open, preparing to lower onto the can.\n\n1.5: The robot lowers the gripper towards the can. This is shown by the z-value of 'robot0_eef_pos' increasing, indicating a downward movement.\n\n1.6: The robot closes the gripper to grasp the can. This is another single action step where the gripper state likely changes, but since the action values are not explicitly shown for gripper state, we infer this from the significant change in the action values.\n\n1.7: The robot lifts and moves the can to the target location. This is indicated by the consistent movement in the 'robot0_eef_pos' and 'Can_pos' columns, showing that the can is being transported.\n\n1.8: The robot releases the can and retracts the gripper. This is the final phase where the robot would open the gripper to release the can and then retract the gripper away from the can. The data does not show the gripper opening again, but we can infer this step as the logical conclusion to the task.\n\nEach subtask is a logical grouping of steps based on the changes observed in the robot's actions and the positions of the robot end effector and the can."
+}
+{
+    "timestamp": "15-11-2023_17:35",
+    "txt_datafile": "picknplace.txt",
+    "frames": "picknplace",
+    "model": "gpt-4-vision-preview",
+    "usage": {
+        "prompt_tokens": 452,
+        "completion_tokens": 367,
+        "total_tokens": 819
+    },
+    "usage_cost": "$0.02",
+    "response": "```\n{1.1: {'start_step': 0, 'end_step': 35, 'subtask': 'Grasping the red object'},\n1.2: {'start_step': 36, 'end_step': 80, 'subtask': 'Transporting the red object to the designated area'},\n1.3: {'start_step': 81, 'end_step': 100, 'subtask': 'Releasing the red object into the designated area'}\n}\n```\n\nTo break down the data into subtasks, I observed the sequence of images and identified distinct actions performed by the robot. Here's the chain of thought:\n\n- The first image shows the robot arm positioned above a table with a red object on it. This indicates the beginning of the episode, where the robot is likely to start its task. The step number is 0, which confirms it's the starting point.\n- The second image shows the robot arm holding the red object and moving it to a different location. The step number is 36, which suggests that the action of grasping the object and starting to move it occurred between step 0 and step 36.\n- The third image shows the robot arm has placed the red object into a designated area. The step number is 81, which indicates that the action of transporting and releasing the object occurred between step 36 and step 81.\n\nBased on these observations, I've created three subtasks: grasping the object, transporting the object, and releasing the object. Each subtask is associated with a range of steps that represent the start and end of that particular action. The end step of the last subtask is not provided, so I've estimated it to be step 100, assuming that the task was completed shortly after the last image was taken."
+}
+
+{
+    "timestamp": "15-11-2023_17:36",
+    "txt_datafile": "picknplace.txt",
+    "frames": "picknplace",
+    "model": "gpt-4-vision-preview",
+    "usage": {
+        "prompt_tokens": 10937,
+        "completion_tokens": 500,
+        "total_tokens": 11437
+    },
+    "usage_cost": "$0.12",
+    "response": "```\n{\n1.1: {'start_step': 0, 'end_step': 8, 'subtask': 'Approach the Can'},\n1.2: {'start_step': 9, 'end_step': 18, 'subtask': 'Descend towards the Can'},\n1.3: {'start_step': 19, 'end_step': 27, 'subtask': 'Grip the Can'},\n1.4: {'start_step': 28, 'end_step': 36, 'subtask': 'Lift the Can'},\n1.5: {'start_step': 37, 'end_step': 59, 'subtask': 'Move the Can to the new location'},\n1.6: {'start_step': 60, 'end_step': 78, 'subtask': 'Lower the Can'},\n1.7: {'start_step': 79, 'end_step': 103, 'subtask': 'Release the Can'},\n1.8: {'start_step': 104, 'end_step': 119, 'subtask': 'Retract the Arm'}\n}\n```\n\nTo break down the data into subtasks, I analyzed the sequence of steps and the corresponding actions and observations. Here's the rationale behind each subtask:\n\n1.1: 'Approach the Can' - The robot end effector starts far from the can and moves closer to it. This is indicated by the decreasing 'Can_to_robot0_eef_pos' values, which show the distance between the can and the end effector.\n\n1.2: 'Descend towards the Can' - The robot end effector descends vertically towards the can. This is shown by the 'robot0_eef_pos' z-coordinate decreasing, bringing the end effector closer to the can's z-coordinate.\n\n1.3: 'Grip the Can' - The gripper state changes from -1.0 to 1.0, indicating that the robot is now gripping the can.\n\n1.4: 'Lift the Can' - The robot lifts the can upwards, which is shown by the increasing z-coordinate of the 'robot0_eef_pos'.\n\n1.5: 'Move the Can to the new location' - The robot moves the can horizontally to a new location. This is indicated by changes in the x and y coordinates of the 'robot0_eef_pos' and 'Can_pos'.\n\n1.6:"
+}
+{
+    "timestamp": "15-11-2023_17:39",
+    "use_txt": true,
+    "txt_datafile": "picknplace.txt",
+    "use_frames": true,
+    "frames": "picknplace",
+    "model": "gpt-4-vision-preview",
+    "usage": {
+        "prompt_tokens": 10954,
+        "completion_tokens": 500,
+        "total_tokens": 11454
+    },
+    "usage_cost": "$0.12",
+    "response": "```\n{\n1.1: {'start_step': 0, 'end_step': 8, 'subtask': 'Approach the can'},\n1.2: {'start_step': 9, 'end_step': 18, 'subtask': 'Descend towards the can'},\n1.3: {'start_step': 19, 'end_step': 27, 'subtask': 'Grip the can'},\n2.1: {'start_step': 28, 'end_step': 36, 'subtask': 'Lift the can'},\n2.2: {'start_step': 37, 'end_step': 59, 'subtask': 'Move the can to the target location'},\n2.3: {'start_step': 60, 'end_step': 78, 'subtask': 'Lower the can to the target location'},\n3.1: {'start_step': 79, 'end_step': 98, 'subtask': 'Release the can'},\n3.2: {'start_step': 99, 'end_step': 119, 'subtask': 'Retract the arm from the target location'}\n}\n```\n\nTo break down the data into hierarchical granular subtasks, I analyzed the step-by-step actions and observations provided in the schema. Here's the thought process:\n\n1. **Approach the Can**: The robot begins by moving its end effector towards the can. This is indicated by the decreasing values in the 'Can_to_robot0_eef_pos' column, which represent the distance between the can and the robot's end effector. This phase ends when the robot's end effector is directly above the can, which is around step 8.\n\n2. **Descend Towards the Can**: After positioning itself above the can, the robot begins to lower its end effector to reach the can. This is shown by the negative z-axis values in the 'action' column and the decreasing z-axis values in the 'robot0_eef_pos' column. This subtask continues until the robot's gripper is close enough to grip the can, which occurs by step 18.\n\n3. **Grip the Can**: The robot closes its gripper to secure the can. This is indicated by the change in the gripper state from -1.0 to 1.0 in the 'action' column at step 18. The gripping action is completed by step 27.\n\n"
+}
+{
+    "timestamp": "15-11-2023_17:40",
+    "use_txt": true,
+    "txt_datafile": "picknplace.txt",
+    "use_frames": true,
+    "frames": "picknplace",
+    "model": "gpt-4-vision-preview",
+    "usage": {
+        "prompt_tokens": 10959,
+        "completion_tokens": 689,
+        "total_tokens": 11648
+    },
+    "usage_cost": "$0.13",
+    "response": "To decompose the robot episode into hierarchical granular subtasks, I will analyze the provided data and images to identify distinct phases of the robot's actions. The data includes step numbers, actions (torque values and gripper state), the position of the robot's end effector, the position of the can, and the relative position of the can to the robot's end effector.\n\nBased on the data and images, I can infer the following subtasks:\n\n1.1: Approach the can - The robot moves its end effector closer to the can.\n1.2: Align with the can - The robot adjusts its end effector to be directly above the can.\n2.1: Descend towards the can - The robot lowers its end effector to reach the can.\n2.2: Grasp the can - The robot closes its gripper to hold the can.\n3.1: Lift the can - The robot raises its end effector while gripping the can.\n3.2: Transport the can - The robot moves the can to a new location.\n4.1: Lower the can - The robot lowers the can to the desired drop-off location.\n4.2: Release the can - The robot opens its gripper to release the can.\n5.1: Retreat the end effector - The robot moves its end effector away from the can.\n\nThe images show the robot at different steps, which helps to visualize the subtasks. For example, the first image shows the robot before it starts the task, the second image shows the robot aligning with the can, the third image shows the robot lifting the can, the fourth image shows the robot transporting the can, and the fifth image shows the robot after releasing the can.\n\nHere is the subtask decomposition based on the data and images:\n\n```subtask_decomposition = [\n{1.1: {'start_step': 0, 'end_step': 8, 'subtask': 'Approach the can'}},\n{1.2: {'start_step': 9, 'end_step': 18, 'subtask': 'Align with the can'}},\n{2.1: {'start_step': 19, 'end_step': 19, 'subtask': 'Descend towards the can'}},\n{2.2: {'start_step': 20, 'end_step': 20, 'subtask': 'Grasp the can'}},\n{3.1: {'start_step': 21, 'end_step': 27, 'subtask': 'Lift the can'}},\n{3.2: {'start_step': 28, 'end_step': 36, 'subtask': 'Transport the can'}},\n{4.1: {'start_step': 37, 'end_step': 59, 'subtask': 'Lower the can'}},\n{4.2: {'start_step': 60, 'end_step': 60, 'subtask': 'Release the can'}},\n{5.1: {'start_step': 61, 'end_step': 119, 'subtask': 'Retreat the end effector'}}\n]\n```\n\nThe start and end steps for each subtask are determined by changes in the robot's actions and positions, as well as the gripper state. The images provide additional context to confirm the actions taking place at various steps."
+}
+{
+    "timestamp": "15-11-2023_18:04",
+    "use_txt": true,
+    "txt_datafile": "picknplace.txt",
+    "use_frames": true,
+    "frames": "picknplace",
+    "model": "gpt-4-vision-preview",
+    "usage": {
+        "prompt_tokens": 10970,
+        "completion_tokens": 722,
+        "total_tokens": 11692
+    },
+    "usage_cost": "$0.13",
+    "response": "```subtask_decomposition = [\n{1.1: {'start_step': 0, 'end_step': 8, 'subtask': 'Approach the can'}},\n{1.2: {'start_step': 9, 'end_step': 17, 'subtask': 'Descend towards the can'}},\n{1.3: {'start_step': 18, 'end_step': 18, 'subtask': 'Close gripper to grasp the can'}},\n{1.4: {'start_step': 19, 'end_step': 27, 'subtask': 'Lift the can upwards'}},\n{1.5: {'start_step': 28, 'end_step': 36, 'subtask': 'Move the can to the new location'}},\n{1.6: {'start_step': 37, 'end_step': 59, 'subtask': 'Lower the can to the target position'}},\n{1.7: {'start_step': 60, 'end_step': 60, 'subtask': 'Release the can'}},\n{1.8: {'start_step': 61, 'end_step': 119, 'subtask': 'Return to the initial position'}}\n]\n```\n\nTo break down the data into hierarchical granular subtasks, I analyzed the sequence of steps and the corresponding actions and observations. Here's the thought process:\n\n- **Approach the can (1.1):** From step 0 to step 8, the robot end effector moves closer to the can, as indicated by the decreasing 'Can_to_robot0_eef_pos' values, which represent the distance between the can and the end effector.\n\n- **Descend towards the can (1.2):** From step 9 to step 17, the robot end effector descends towards the can, which is evident from the 'robot0_eef_pos' z-values decreasing, bringing the end effector closer to the can's z-position.\n\n- **Close gripper to grasp the can (1.3):** At step 18, the gripper state changes from -1.0 to 1.0, indicating that the gripper closes to grasp the can.\n\n- **Lift the can upwards (1.4):** From step 19 to step 27, the robot lifts the can upwards, as shown by the increasing z-values of 'robot0_eef_pos'.\n\n- **Move the can to the new location (1.5):** From step 28 to step 36, the robot moves the can to a new location, which is reflected in the changes in the x and y values of 'robot0_eef_pos'.\n\n- **Lower the can to the target position (1.6):** From step 37 to step 59, the robot lowers the can to the target position, indicated by the decreasing z-values of 'robot0_eef_pos'.\n\n- **Release the can (1.7):** At step 60, the gripper state changes from 1.0 back to -1.0, indicating that the gripper opens to release the can.\n\n- **Return to the initial position (1.8):** From step 61 to step 119, the robot end effector returns to its initial position, as the 'robot0_eef_pos' values gradually change back to the starting values.\n\nThe images provided show the robot at various steps, visually confirming the subtasks identified from the data."
+}
+{
+    "timestamp": "15-11-2023_18:09",
+    "use_txt": true,
+    "txt_datafile": "picknplace.txt",
+    "use_frames": true,
+    "frames": "picknplace",
+    "model": "gpt-4-vision-preview",
+    "usage": {
+        "prompt_tokens": 10964,
+        "completion_tokens": 632,
+        "total_tokens": 11596
+    },
+    "usage_cost": "$0.13",
+    "response": "```subtask_decomposition = [\n{1.1: {'start_step': 0, 'end_step': 7, 'subtask': 'Approach the can'}},\n{1.2: {'start_step': 8, 'end_step': 18, 'subtask': 'Descend towards the can'}},\n{1.3: {'start_step': 18, 'end_step': 18, 'subtask': 'Close gripper to grasp the can'}},\n{1.4: {'start_step': 19, 'end_step': 26, 'subtask': 'Lift the can upwards'}},\n{1.5: {'start_step': 27, 'end_step': 119, 'subtask': 'Transport the can to a new location'}},\n{2.1: {'start_step': 119, 'end_step': 119, 'subtask': 'Release the can'}}\n]\n```\n\nTo break down the data into hierarchical granular subtasks, I analyzed the schema and the provided images to understand the sequence of actions performed by the robot's end effector. Here's the thought process:\n\n1. **Approach the can**: The robot starts at a position away from the can and moves towards it. This is indicated by the decreasing 'Can_to_robot0_eef_pos' values from step 0 to step 7. The gripper state remains at -1.0, indicating it is open.\n\n2. **Descend towards the can**: Once the robot is above the can, it needs to descend to reach the can. This is seen from step 8 to step 18, where the z-component of 'robot0_eef_pos' decreases, bringing the end effector closer to the can's position.\n\n3. **Close gripper to grasp the can**: At step 18, the gripper state changes from -1.0 to 1.0, indicating that the gripper closes to grasp the can.\n\n4. **Lift the can upwards**: After grasping the can, the robot lifts it upwards. This is observed from step 19 to step 26, where the z-component of 'robot0_eef_pos' increases.\n\n5. **Transport the can to a new location**: The robot then moves the can to a new location. This is a longer process, from step 27 to step 119, where the robot's end effector position changes in the x, y, and z directions, indicating movement across the workspace.\n\n6. **Release the can**: Finally, the robot releases the can at its new location. This is not explicitly shown in the data, but it is the final step after transporting the can.\n\nThe images provided show the robot at different steps, visually confirming the subtasks identified in the data. For example, the image at step 0 shows the robot before it has approached the can, while the image at step 13 shows the robot with the gripper closed around the can, and the image at step 36 shows the robot transporting the can to a new location."
+}
+
+{
+    "timestamp": "15-11-2023_18:18",
+    "use_txt": true,
+    "txt_datafile": "picknplace.txt",
+    "use_frames": true,
+    "frames": "picknplace",
+    "model": "gpt-4-vision-preview",
+    "usage": {
+        "prompt_tokens": 10964,
+        "completion_tokens": 855,
+        "total_tokens": 11819
+    },
+    "usage_cost": "$0.14",
+    "response": "```subtask_decomposition = [\n{1.1: {'start_step': 0, 'end_step': 7, 'subtask': 'Approach the can'}},\n{1.2: {'start_step': 8, 'end_step': 18, 'subtask': 'Descend towards the can'}},\n{1.3: {'start_step': 18, 'end_step': 18, 'subtask': 'Close gripper to grasp the can'}},\n{1.4: {'start_step': 19, 'end_step': 27, 'subtask': 'Lift the can upwards'}},\n{1.5: {'start_step': 28, 'end_step': 36, 'subtask': 'Move the can to the new location horizontally'}},\n{1.6: {'start_step': 37, 'end_step': 59, 'subtask': 'Lower the can to the target location'}},\n{1.7: {'start_step': 60, 'end_step': 60, 'subtask': 'Release the can'}},\n{1.8: {'start_step': 61, 'end_step': 119, 'subtask': 'Retract the arm to the home position'}}\n]\n```\n\nTo break down the data into hierarchical granular subtasks, I analyzed the step-by-step actions and positions provided in the data. Here's the thought process:\n\n1. **Approach the can**: The robot starts at a position away from the can and moves towards it. This is indicated by the decreasing values in the 'Can_to_robot0_eef_pos' column, which represent the distance between the end effector and the can. This subtask starts at step 0 and ends at step 7, where the robot has approached close enough to the can.\n\n2. **Descend towards the can**: The robot then moves vertically downwards towards the can. This is shown by the negative z-axis torque values in the 'action' column and the decreasing z-coordinate in the 'robot0_eef_pos' column. This subtask starts at step 8 and ends at step 18, where the gripper is close enough to grasp the can.\n\n3. **Close gripper to grasp the can**: At step 18, the gripper state changes from -1.0 to 1.0, indicating that the gripper closes to grasp the can.\n\n4. **Lift the can upwards**: After grasping the can, the robot lifts it upwards. This is indicated by the positive z-axis torque values in the 'action' column and the increasing z-coordinate in the 'robot0_eef_pos' column. This subtask starts at step 19 and ends at step 27, where the robot has lifted the can to a certain height.\n\n5. **Move the can to the new location horizontally**: The robot moves the can horizontally to a new location. This is indicated by the changes in the x and y coordinates in the 'robot0_eef_pos' column. This subtask starts at step 28 and ends at step 36.\n\n6. **Lower the can to the target location**: The robot lowers the can to the target location. This is indicated by the negative z-axis torque values in the 'action' column and the decreasing z-coordinate in the 'robot0_eef_pos' column. This subtask starts at step 37 and ends at step 59.\n\n7. **Release the can**: At step 60, the gripper state changes from 1.0 to -1.0, indicating that the gripper opens to release the can.\n\n8. **Retract the arm to the home position**: Finally, the robot retracts its arm to the home position. This is indicated by the continued negative z-axis torque values in the 'action' column and the robot's end effector moving away from the can's position. This subtask starts at step 61 and ends at step 119, which is the last step recorded.\n\nThe associated observation images for selected steps show the robot at different stages of the task, visually confirming the subtasks identified from the data."
+}

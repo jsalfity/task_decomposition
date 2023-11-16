@@ -4,24 +4,25 @@ import csv
 import pandas as pd
 from typing import Union
 
-from task_decomposition.paths import DATA_PATH, GPT_MODEL
+from task_decomposition.paths import DATA_TXT_PATH, DATA_FRAMES_PATH
+from task_decomposition.utils.plotting import encode_image
+
 
 openai.api_key = os.getenv("OPENAI_API_KEY")
 
-from utils.prompts import (
+from task_decomposition.utils.prompts import (
     TASK_DESCRIPTION,
-    DATA_DESCRIPTION,
-    SCHEMA_DESCRIPTION,
+    TXT_DATA_DESCRIPTION,
+    FRAME_DATA_DESCRIPTION,
 )
 
 
-def get_completion(prompt, model=GPT_MODEL) -> Union[dict, str]:
+def get_completion(prompt: str, model: str) -> Union[dict, str]:
+    """"""
     messages = [{"role": "user", "content": prompt}]
 
     API_response = openai.ChatCompletion.create(
-        model=model,
-        messages=messages,
-        temperature=0,
+        model=model, messages=messages, temperature=0, max_tokens=1000
     )
 
     response = API_response.choices[0].message["content"]
@@ -33,7 +34,7 @@ def get_data_for_prompt(filename: str) -> Union[pd.DataFrame, str]:
     """
     Read a csv or text file and return the data frame and text
     """
-    full_filename = DATA_PATH + "/" + filename
+    full_filename = DATA_TXT_PATH + "/" + filename
 
     if filename.split(".")[-1] == "txt":
         df = pd.read_csv(full_filename, delimiter="\t", encoding="utf-8")
@@ -52,14 +53,31 @@ def get_data_for_prompt(filename: str) -> Union[pd.DataFrame, str]:
     return df, text
 
 
-def get_prompt(filename: str) -> str:
+def get_prompt(config: dict) -> str:
     """ """
+    PROMPT = f"""{TASK_DESCRIPTION}\n"""
 
-    data_df, data_text = get_data_for_prompt(filename=filename)
-    columns = str(data_df.columns.to_list())
+    if config["use_txt"]:
+        data_df, data_text = get_data_for_prompt(filename=config["txt_filename"])
+        columns = str(data_df.columns.to_list())
+        PROMPT += TXT_DATA_DESCRIPTION(columns)
+        PROMPT += data_text
 
-    return f"""{TASK_DESCRIPTION}\n
-    {DATA_DESCRIPTION}\n
-    {SCHEMA_DESCRIPTION(columns)}\n
-    Data to analyze: {data_text}
-    """
+    if config["use_frames"]:
+        encoded_frames = [
+            encode_image(os.path.join(DATA_FRAMES_PATH, config["frames"], file))
+            for file in sorted(
+                os.listdir(os.path.join(DATA_FRAMES_PATH, config["frames"]))
+            )
+        ]
+        # Need to add a lambda function in the prompt messages
+        # https://cookbook.openai.com/examples/gpt_with_vision_for_video_understanding
+        PROMPT = [
+            PROMPT + FRAME_DATA_DESCRIPTION,
+            *map(
+                lambda x: {"image": x, "resize": config["resize_frames"]},
+                encoded_frames[0 :: config["frame_step"]],
+            ),
+        ]
+
+    return PROMPT
