@@ -42,3 +42,28 @@ def save_frames_fn(frames: List, filename: str):
         )
         plt.imsave(f"{DATA_FRAMES_PATH}/{filename}/{idx}.png", frame)
     return
+
+
+def get_device(device: str):
+    """
+    Get device
+    """
+    if device == "keyboard":
+        from robosuite.devices import Keyboard
+
+        device = Keyboard(
+            pos_sensitivity=args.pos_sensitivity, rot_sensitivity=args.rot_sensitivity
+        )
+        env.viewer.add_keypress_callback(device.on_press)
+    elif device == "spacemouse":
+        from robosuite.devices import SpaceMouse
+
+        device = SpaceMouse(
+            pos_sensitivity=args.pos_sensitivity, rot_sensitivity=args.rot_sensitivity
+        )
+    else:
+        raise Exception(
+            "Invalid device choice: choose either 'keyboard' or 'spacemouse'."
+        )
+
+    return device
