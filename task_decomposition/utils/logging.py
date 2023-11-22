@@ -44,7 +44,7 @@ def save_frames_fn(frames: List, filename: str):
     return
 
 
-def get_device(device: str):
+def get_device(device: str, pos_sensitivity: float = 1.0, rot_sensitivity: float = 1.0):
     """
     Get device
     """
@@ -52,14 +52,17 @@ def get_device(device: str):
         from robosuite.devices import Keyboard
 
         device = Keyboard(
-            pos_sensitivity=args.pos_sensitivity, rot_sensitivity=args.rot_sensitivity
+            pos_sensitivity=pos_sensitivity, rot_sensitivity=rot_sensitivity
         )
         env.viewer.add_keypress_callback(device.on_press)
     elif device == "spacemouse":
         from robosuite.devices import SpaceMouse
 
         device = SpaceMouse(
-            pos_sensitivity=args.pos_sensitivity, rot_sensitivity=args.rot_sensitivity
+            vendor_id=9583,
+            product_id=50734,
+            pos_sensitivity=pos_sensitivity,
+            rot_sensitivity=rot_sensitivity,
         )
     else:
         raise Exception(
