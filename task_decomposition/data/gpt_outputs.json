@@ -753,4 +753,118 @@
     "usage_cost": "$0.06",
     "response": "```subtask_decomposition = [\n{1.1: {'start_step': 9, 'end_step': 9, 'subtask': 'apply torque and close gripper'}},\n{1.2: {'start_step': 9, 'end_step': 9, 'subtask': 'move to position'}},\n{2.1: {'start_step': 19, 'end_step': 19, 'subtask': 'apply torque and close gripper'}},\n{2.2: {'start_step': 19, 'end_step': 19, 'subtask': 'move to position'}},\n{3.1: {'start_step': 29, 'end_step': 29, 'subtask': 'apply torque and close gripper'}},\n{3.2: {'start_step': 29, 'end_step': 29, 'subtask': 'move to position'}},\n{4.1: {'start_step': 39, 'end_step': 39, 'subtask': 'apply torque and close gripper'}},\n{4.2: {'start_step': 39, 'end_step': 39, 'subtask': 'move to position'}},\n{5.1: {'start_step': 49, 'end_step': 49, 'subtask': 'apply torque and close gripper'}},\n{5.2: {'start_step': 49, 'end_step': 49, 'subtask': 'move to position'}},\n...\n{67.1: {'start_step': 669, 'end_step': 669, 'subtask': 'apply torque and open gripper'}},\n{67.2: {'start_step': 669, 'end_step': 669, 'subtask': 'move to position'}},\n{68.1: {'start_step': 679, 'end_step': 679, 'subtask': 'apply torque and open gripper'}},\n{68.2: {'start_step': 679, 'end_step': 679, 'subtask': 'move to position'}}\n]\n```\n\nTo break down the data into subtasks, we consider each step as a separate subtask since the robot performs an action and then moves to a new position. Each subtask consists of two subsubtasks: applying torque to the robot's joints (including opening or closing the gripper) and moving the end effector to a new position. The gripper state is indicated by the 7th entry in the robot0_action array, where -1.0 represents closing the gripper and 1.0 represents opening the gripper.\n\nThe start and end steps of each subsubtask are the same because the action and the movement to the new position are considered to occur within the same step in the provided data. The sequence of subtasks shows a pattern of the robot applying torque to its joints and moving its end effector, which is repeated throughout the episode with varying torque values and end effector positions."
 }
-{"timestamp": "24-11-2023_12:42", "gpt_model": "gpt-4-1106-preview", "env_name": "tool_hang", "use_txt": true, "txt_filename": "tool_hang.txt", "txt_step": 10, "frame_step": 10, "resize_frames": 256, "save_response": true, "use_images": false, "use_video": false, "usage": {"prompt_tokens": 3928, "completion_tokens": 1114, "total_tokens": 5042}, "usage_cost": "$0.07", "response": "```subtask_decomposition = [\n{1.1: {'start_step': 9, 'end_step': 19, 'subtask': 'Move to position'}},\n{1.2: {'start_step': 19, 'end_step': 29, 'subtask': 'Adjust position'}},\n{1.3: {'start_step': 29, 'end_step': 39, 'subtask': 'Refine position'}},\n{1.4: {'start_step': 39, 'end_step': 49, 'subtask': 'Approach target'}},\n{1.5: {'start_step': 49, 'end_step': 59, 'subtask': 'Align with target'}},\n{1.6: {'start_step': 59, 'end_step': 69, 'subtask': 'Prepare for interaction'}},\n{1.7: {'start_step': 69, 'end_step': 79, 'subtask': 'Grip tool'}},\n{1.8: {'start_step': 79, 'end_step': 89, 'subtask': 'Lift tool'}},\n{1.9: {'start_step': 89, 'end_step': 99, 'subtask': 'Move to new position with tool'}},\n{1.10: {'start_step': 99, 'end_step': 109, 'subtask': 'Navigate to fixture'}},\n{1.11: {'start_step': 109, 'end_step': 119, 'subtask': 'Position tool above fixture'}},\n{1.12: {'start_step': 119, 'end_step': 129, 'subtask': 'Lower tool into fixture'}},\n{1.13: {'start_step': 129, 'end_step': 139, 'subtask': 'Adjust tool position'}},\n{1.14: {'start_step': 139, 'end_step': 149, 'subtask': 'Secure tool in fixture'}},\n{1.15: {'start_step': 149, 'end_step': 159, 'subtask': 'Release grip'}},\n{1.16: {'start_step': 159, 'end_step': 169, 'subtask': 'Retract from fixture'}},\n{1.17: {'start_step': 169, 'end_step': 179, 'subtask': 'Move to next tool'}},\n{1.18: {'start_step': 179, 'end_step': 189, 'subtask': 'Adjust for next interaction'}},\n{1.19: {'start_step': 189, 'end_step': 199, 'subtask': 'Prepare for next grip'}},\n{1.20: {'start_step': 199, 'end_step': 209, 'subtask': 'Grip next tool'}},\n{1.21: {'start_step': 209, 'end_step': 219, 'subtask': 'Lift next tool'}},\n{1.22: {'start_step': 219, 'end_step': 229, 'subtask': 'Move to new position with next tool'}},\n{1.23: {'start_step': 229, 'end_step': 239, 'subtask': 'Navigate to next fixture'}},\n{1.24: {'start_step': 239, 'end_step': 249, 'subtask': 'Position next tool above next fixture'}},\n{1.25: {'start_step': 249, 'end_step': 259, 'subtask': 'Lower next tool into next fixture'}},\n{1.26: {'start_step': 259, 'end_step': 269, 'subtask': 'Adjust next tool position'}},\n{1.27: {'start_step': 269, 'end_step': 279, 'subtask': 'Secure next tool in next fixture'}},\n{1.28: {'start_step': 279, 'end_step': 289, 'subtask': 'Release grip on next tool'}},\n{1.29: {'start_step': 289, 'end_step': 299, 'subtask': 'Retract from next fixture'}},\n{1.30: {'start_step': 299, 'end_step': 309, 'subtask': 'End of episode'}},\n...\n]\n```\n\nTo break down the data into subtasks, I considered the sequence of steps and the corresponding robot actions and end effector positions. The subtasks are defined by the changes in the robot's actions and positions, which indicate different stages of the robot's task, such as moving to a position, adjusting its position, gripping a tool, moving the tool, and placing the tool in a fixture.\n\nEach subtask is a low-level primitive that represents a specific action or movement by the robot. The start and end steps of each subtask are determined by the changes in the robot's actions and end effector positions from one step to the next. The subtasks are sequential and build upon each other to complete the overall task of hanging tools on a fixture.\n\nThe subtask decomposition is hierarchical, with each subtask representing a specific action within the episode. The repeated lower-level primitives, such as gripping, moving, and placing, are used multiple times throughout the episode as the robot interacts with different tools and fixtures."}
+{
+    "timestamp": "24-11-2023_13:49",
+    "gpt_model": "gpt-4-vision-preview",
+    "env_name": "tool_hang",
+    "txt_step": 1,
+    "use_video": true,
+    "video_filename": "robomimic/tool_hang/tool_hang_annotated.mp4",
+    "frame_step": 5,
+    "start_frame": 0,
+    "end_frame": 30,
+    "resize_frames": 256,
+    "save_response": true,
+    "use_txt": false,
+    "use_images": false,
+    "usage": {
+        "prompt_tokens": 749,
+        "completion_tokens": 455,
+        "total_tokens": 1204
+    },
+    "usage_cost": "$0.02",
+    "response": "```subtask_decomposition = [\n{1.1: {'start_step': 0, 'end_step': 25, 'subtask': 'approach_tool'}},\n{1.2: {'start_step': 25, 'end_step': 50, 'subtask': 'grasp_tool'}},\n{1.3: {'start_step': 50, 'end_step': 75, 'subtask': 'lift_tool'}},\n{1.4: {'start_step': 75, 'end_step': 100, 'subtask': 'transport_tool_to_fixture'}},\n{1.5: {'start_step': 100, 'end_step': 125, 'subtask': 'position_tool_above_fixture'}},\n{1.6: {'start_step': 125, 'end_step': 150, 'subtask': 'release_tool'}},\n]\n```\n\nTo break down the robot episode into hierarchical, granular subtasks, I've observed the sequence of images and identified the following steps:\n\n1.1: The robot approaches the tool. This is the initial movement towards the tool before any interaction occurs.\n1.2: The robot grasps the tool. This involves aligning its gripper with the tool and closing the gripper to secure the tool.\n1.3: The robot lifts the tool. After securing the tool, the robot lifts it from the initial position.\n1.4: The robot transports the tool to the fixture. This involves moving the tool from its lifted position to the location of the fixture.\n1.5: The robot positions the tool above the fixture. The robot aligns the tool with the specific location on the fixture where it will be placed.\n1.6: The robot releases the tool onto the fixture. This is the final step where the robot opens its gripper to place the tool onto the fixture.\n\nEach of these subtasks is a lower-level primitive that contributes to the overall task of hanging a tool on a fixture. The start and end steps are estimated based on the progression seen in the images. The final step (150) is assumed to be the step after the last provided image (125), where the tool is fully released and the task is completed."
+}
+
+{
+    "timestamp": "24-11-2023_13:50",
+    "gpt_model": "gpt-4-vision-preview",
+    "env_name": "tool_hang",
+    "txt_step": 1,
+    "use_video": true,
+    "video_filename": "robomimic/tool_hang/tool_hang_annotated.mp4",
+    "frame_step": 5,
+    "start_frame": 30,
+    "end_frame": 60,
+    "resize_frames": 256,
+    "save_response": true,
+    "use_txt": false,
+    "use_images": false,
+    "usage": {
+        "prompt_tokens": 749,
+        "completion_tokens": 521,
+        "total_tokens": 1270
+    },
+    "usage_cost": "$0.02",
+    "response": "```subtask_decomposition = [\n{1.1: {'start_step': 150, 'end_step': 175, 'subtask': 'Positioning over the tool'}},\n{1.2: {'start_step': 175, 'end_step': 200, 'subtask': 'Descending towards the tool'}},\n{1.3: {'start_step': 200, 'end_step': 225, 'subtask': 'Aligning with the tool'}},\n{1.4: {'start_step': 225, 'end_step': 250, 'subtask': 'Grasping the tool'}},\n{1.5: {'start_step': 250, 'end_step': 275, 'subtask': 'Lifting the tool'}},\n{2.1: {'start_step': 275, 'end_step': 'unknown', 'subtask': 'Transporting the tool to the fixture'}}\n]\n```\n\nExplanation of thought process:\n\n1.1: The first subtask involves the robot positioning itself over the tool. This is indicated by the change in the robot's arm position from step 150 to step 175, where it moves from a neutral position to being directly over the tool.\n\n1.2: The next subtask is the robot descending towards the tool, which is seen from step 175 to step 200. The robot's arm is lowered closer to the tool.\n\n1.3: Aligning with the tool is the third subtask, which occurs between steps 200 and 225. The robot's end effector (the part of the arm designed to interact with the environment) is positioned in such a way that it appears to be aligning with the tool for a proper grasp.\n\n1.4: The fourth subtask is the actual grasping of the tool, which we can infer happens between steps 225 and 250. The robot's arm does not move much in terms of position, but the end effector likely engages to secure the tool.\n\n1.5: Lifting the tool is the fifth subtask, which is seen from step 250 to step 275. The robot's arm raises, indicating that the tool has been picked up.\n\n2.1: The final subtask in the sequence would be transporting the tool to the fixture. However, the provided images only show the robot lifting the tool and do not depict the actual placement on the fixture. Therefore, the end step is unknown, and this subtask is inferred from the context but not visually confirmed in the images provided."
+}
+
+{
+    "timestamp": "24-11-2023_13:50",
+    "gpt_model": "gpt-4-vision-preview",
+    "env_name": "tool_hang",
+    "txt_step": 1,
+    "use_video": true,
+    "video_filename": "robomimic/tool_hang/tool_hang_annotated.mp4",
+    "frame_step": 5,
+    "start_frame": 60,
+    "end_frame": 90,
+    "resize_frames": 256,
+    "save_response": true,
+    "use_txt": false,
+    "use_images": false,
+    "usage": {
+        "prompt_tokens": 749,
+        "completion_tokens": 679,
+        "total_tokens": 1428
+    },
+    "usage_cost": "$0.03",
+    "response": "```subtask_decomposition = [\n{1.1: {'start_step': 300, 'end_step': 325, 'subtask': 'Positioning for tool pickup'}},\n{1.2: {'start_step': 325, 'end_step': 350, 'subtask': 'Descending towards the tool'}},\n{1.3: {'start_step': 350, 'end_step': 375, 'subtask': 'Aligning with the tool'}},\n{1.4: {'start_step': 375, 'end_step': 400, 'subtask': 'Grasping the tool'}},\n{2.1: {'start_step': 400, 'end_step': 425, 'subtask': 'Lifting the tool'}},\n{2.2: {'start_step': 425, 'end_step': 450, 'subtask': 'Transporting the tool to the fixture'}},\n{2.3: {'start_step': 450, 'end_step': 475, 'subtask': 'Positioning the tool above the fixture'}},\n{2.4: {'start_step': 475, 'end_step': 500, 'subtask': 'Releasing the tool onto the fixture'}},\n{2.5: {'start_step': 500, 'end_step': 525, 'subtask': 'Retracting from the fixture'}},\n{3.1: {'start_step': 525, 'end_step': 550, 'subtask': 'Returning to the initial position'}}\n]\n```\n\nTo break down the robot episode into hierarchical, granular subtasks, I've considered the sequence of actions that a single-arm robot would typically perform to pick up a tool and hang it on a fixture. The images provided show the robot at different steps, which helps to infer the actions between these steps.\n\n1.1: The robot starts by positioning itself to pick up the tool. This involves moving from its rest position to a location above the tool.\n1.2: The robot then descends towards the tool, which is necessary for it to be within reach.\n1.3: Once the robot is close to the tool, it needs to align its gripper with the tool to ensure a secure grasp.\n1.4: The robot grasps the tool, which is the action of closing its gripper around the tool to hold it firmly.\n\n2.1: After securing the tool, the robot lifts it from the surface to clear any obstacles.\n2.2: The robot transports the tool to the fixture, which involves moving it from the pickup location to the hanging location.\n2.3: The robot positions the tool above the fixture, getting ready to place it.\n2.4: The robot releases the tool onto the fixture, which involves opening its gripper so that the tool can rest on the fixture.\n2.5: The robot retracts from the fixture to avoid any interference with the newly hung tool.\n\n3.1: Finally, the robot returns to its initial position, ready for the next task.\n\nThe subtasks are ordered sequentially, and each represents a distinct action or movement that the robot would perform during the episode. The start and end steps are estimated based on the images provided and the typical movements of a robot in such a scenario."
+}
+
+{
+    "timestamp": "24-11-2023_13:51",
+    "gpt_model": "gpt-4-vision-preview",
+    "env_name": "tool_hang",
+    "txt_step": 1,
+    "use_video": true,
+    "video_filename": "robomimic/tool_hang/tool_hang_annotated.mp4",
+    "frame_step": 5,
+    "start_frame": 90,
+    "end_frame": 120,
+    "resize_frames": 256,
+    "save_response": true,
+    "use_txt": false,
+    "use_images": false,
+    "usage": {
+        "prompt_tokens": 749,
+        "completion_tokens": 644,
+        "total_tokens": 1393
+    },
+    "usage_cost": "$0.03",
+    "response": "```subtask_decomposition = [\n{1.1: {'start_step': 450, 'end_step': 475, 'subtask': 'Identify tool location'},\n1.2: {'start_step': 475, 'end_step': 500, 'subtask': 'Move towards tool'},\n2.1: {'start_step': 500, 'end_step': 525, 'subtask': 'Grasp the tool'},\n2.2: {'start_step': 525, 'end_step': 550, 'subtask': 'Lift the tool'},\n3.1: {'start_step': 550, 'end_step': 575, 'subtask': 'Move tool to fixture'},\n3.2: {'start_step': 575, 'end_step': 600, 'subtask': 'Release tool onto fixture'}\n}]\n```\n\nTo break down the robot episode into hierarchical, granular subtasks, we can observe the sequence of images and identify the actions taking place. Here's the chain of thought for each subtask:\n\n1.1: Identify tool location - The robot needs to locate the tool it will hang. This is the first step in the process, and it involves visual or sensor-based recognition of the tool's position. The start step is when the tool is first within the robot's operational range, and the end step is when the robot has a clear target for movement.\n\n1.2: Move towards tool - Once the tool is identified, the robot must move towards it to be in a position to grasp it. This involves the robot navigating its arm to the proximity of the tool. The start step is the completion of the identification, and the end step is when the robot is in position to grasp the tool.\n\n2.1: Grasp the tool - The robot must then grasp the tool. This involves closing the gripper around the tool securely. The start step is when the robot is in position, and the end step is when the tool is firmly grasped.\n\n2.2: Lift the tool - After grasping the tool, the robot needs to lift it from its resting position. This involves upward movement while maintaining a secure grip. The start step is when the tool is grasped, and the end step is when the tool is clear of any obstructions and ready to be moved to the fixture.\n\n3.1: Move tool to fixture - The robot must transport the tool to the fixture where it will be hung. This involves moving the arm to the location of the fixture. The start step is when the tool is lifted, and the end step is when the tool is positioned above the fixture.\n\n3.2: Release tool onto fixture - Finally, the robot needs to release the tool onto the fixture. This involves opening the gripper and ensuring the tool is properly placed. The start step is when the tool is positioned above the fixture, and the end step is when the tool is released and the task is completed.\n\nEach of these subtasks is a lower-level primitive that contributes to the overall task of hanging a tool on a fixture. The sequence of steps is important for the robot to successfully complete the task."
+}
+
+{
+    "timestamp": "24-11-2023_13:52",
+    "gpt_model": "gpt-4-vision-preview",
+    "env_name": "tool_hang",
+    "txt_step": 1,
+    "use_video": true,
+    "video_filename": "robomimic/tool_hang/tool_hang_annotated.mp4",
+    "frame_step": 5,
+    "start_frame": 120,
+    "end_frame": 137,
+    "resize_frames": 256,
+    "save_response": true,
+    "use_txt": false,
+    "use_images": false,
+    "usage": {
+        "prompt_tokens": 579,
+        "completion_tokens": 531,
+        "total_tokens": 1110
+    },
+    "usage_cost": "$0.02",
+    "response": "```subtask_decomposition = [\n{1.1: {'start_step': 600, 'end_step': 625, 'subtask': 'Approach the tool'}},\n{1.2: {'start_step': 625, 'end_step': 650, 'subtask': 'Grasp the tool'}},\n{1.3: {'start_step': 650, 'end_step': 675, 'subtask': 'Lift the tool'}},\n{1.4: {'start_step': 675, 'end_step': 700, 'subtask': 'Transport the tool to the fixture'}},\n{1.5: {'start_step': 700, 'end_step': 725, 'subtask': 'Position the tool above the fixture'}},\n{1.6: {'start_step': 725, 'end_step': 750, 'subtask': 'Release the tool'}},\n{1.7: {'start_step': 750, 'end_step': 775, 'subtask': 'Retract the arm'}}\n]\n```\n\nExplanation of thoughts:\n\n1.1: The robot begins by approaching the tool. This is the initial movement towards the tool before any interaction occurs.\n\n1.2: Once the robot is in proximity to the tool, the next step is to grasp it. This involves closing the gripper around the tool to secure it.\n\n1.3: After the tool is grasped, the robot must lift it from its resting position. This is the upward movement that separates the tool from its base or any surface it was resting on.\n\n1.4: With the tool secured and lifted, the robot then transports it to the fixture. This involves moving the arm from the location of the tool to the location of the fixture.\n\n1.5: Upon reaching the fixture, the robot must position the tool above the fixture in the correct orientation for hanging.\n\n1.6: Once the tool is correctly positioned, the robot releases the tool, allowing it to hang or be placed on the fixture.\n\n1.7: The final step is for the robot to retract its arm, moving it away from the fixture and the now-hung tool, completing the task.\n\nThe end step of each subtask is assumed to be the start step of the next subtask, and the end step of the final subtask is estimated based on the pattern of the steps provided. The images provided show the robot at various stages of the task, but without images for every step, some assumptions are made about the exact step numbers for the start and end of each subtask."
+}
+{"timestamp": "24-11-2023_13:55", "gpt_model": "gpt-4-vision-preview", "env_name": "tool_hang", "use_txt": true, "txt_filename": "tool_hang.txt", "txt_step": 50, "use_video": true, "video_filename": "robomimic/tool_hang/tool_hang_annotated.mp4", "frame_step": 5, "start_frame": 120, "end_frame": 137, "resize_frames": 256, "save_response": true, "use_images": false, "usage": {"prompt_tokens": 1364, "completion_tokens": 999, "total_tokens": 2363}, "usage_cost": "$0.04", "response": "```subtask_decomposition = [\n{1.1: {'start_step': 49, 'end_step': 99, 'subtask': 'Approach tool'}},\n{1.2: {'start_step': 99, 'end_step': 149, 'subtask': 'Align with tool'}},\n{1.3: {'start_step': 149, 'end_step': 199, 'subtask': 'Grasp tool'}},\n{1.4: {'start_step': 199, 'end_step': 249, 'subtask': 'Lift tool'}},\n{1.5: {'start_step': 249, 'end_step': 299, 'subtask': 'Position tool above fixture'}},\n{1.6: {'start_step': 299, 'end_step': 349, 'subtask': 'Orient tool for placement'}},\n{1.7: {'start_step': 349, 'end_step': 399, 'subtask': 'Lower tool onto fixture'}},\n{1.8: {'start_step': 399, 'end_step': 449, 'subtask': 'Release tool'}},\n{1.9: {'start_step': 449, 'end_step': 499, 'subtask': 'Retract end effector'}},\n{1.10: {'start_step': 499, 'end_step': 549, 'subtask': 'Move to next tool or rest position'}},\n{1.11: {'start_step': 549, 'end_step': 599, 'subtask': 'Approach next tool'}},\n{1.12: {'start_step': 599, 'end_step': 649, 'subtask': 'Align with next tool'}},\n{2.1: {'start_step': 600, 'end_step': 625, 'subtask': 'Visual confirmation of tool placement'}},\n{2.2: {'start_step': 625, 'end_step': 650, 'subtask': 'Visual confirmation of end effector position'}},\n{2.3: {'start_step': 650, 'end_step': 675, 'subtask': 'Visual confirmation of tool alignment'}},\n]\n```\n\nExplanation of thought process:\n\n1.1: The robot begins by approaching the tool. This is inferred from the change in the end effector's position from step 49 to 99, moving closer to the tool's expected location.\n\n1.2: Once near the tool, the robot aligns its end effector with the tool, preparing for grasping. This is seen from step 99 to 149, where the position changes are more subtle, suggesting fine adjustments.\n\n1.3: The robot then grasps the tool. The gripper state changes from -1.0 to 1.0 between steps 149 and 199, indicating that the gripper has closed to hold the tool.\n\n1.4: After securing the tool, the robot lifts it from its original position. This is indicated by the increase in the z-coordinate of the end effector's position from step 199 to 249.\n\n1.5: The robot positions the tool above the fixture, preparing for placement. This is a continuation of the lifting and moving process, from step 249 to 299.\n\n1.6: The robot orients the tool for placement onto the fixture, which involves adjusting the tool's orientation in space, as seen from step 299 to 349.\n\n1.7: The robot lowers the tool onto the fixture, which is the reverse of lifting, moving the tool downwards, from step 349 to 399.\n\n1.8: The robot releases the tool onto the fixture. The gripper state changes from 1.0 to -1.0 between steps 399 and 449, indicating that the gripper has opened.\n\n1.9: The robot retracts its end effector away from the tool and fixture, which is seen from step 449 to 499.\n\n1.10: The robot moves to the next tool or to a rest position, preparing for the next cycle or to end the task, from step 499 to 549.\n\n1.11: The robot approaches the next tool, indicated by the change in position from step 549 to 599.\n\n1.12: The robot aligns with the next tool, preparing to repeat the process, from step 599 to 649.\n\n2.1 - 2.3: These subtasks involve visual confirmation steps, where the robot or an external system checks the status of the task. This is inferred from the provided images at steps 600, 625, and 650, showing the robot's end effector in different positions relative to the fixture, confirming the successful placement and alignment of the tool and preparing for the next action."}

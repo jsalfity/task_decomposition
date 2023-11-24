@@ -11,13 +11,19 @@ gpt_model: "gpt-4-1106-preview"
 # resize_frames: 256
 # save_response: True
 
-# gpt_model: "gpt-4-vision-preview"
+gpt_model: "gpt-4-vision-preview"
 env_name: tool_hang
+
 use_txt: True
-txt_filename: tool_hang.txt
+start_txt_idx: 0
+end_txt_idx: 100
 txt_step: 10
-# use_video: True
-# video_filename: robomimic/tool_hang/tool_hang_annotated.mp4
-frame_step: 10
+txt_filename: tool_hang.txt
+
+use_video: True
+video_filename: robomimic/tool_hang/tool_hang_annotated.mp4
+frame_step: 5
+start_frame: 120
+end_frame: 137
 resize_frames: 256
 save_response: True

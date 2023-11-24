@@ -1,0 +1,62 @@
+GROUND_TRUTH = {
+    "stack": [
+        {"start_step": 0, "end_step": 7, "subtask": "Move to above Cube A"},
+        {"start_step": 8, "end_step": 19, "subtask": "Moving directly down to Cube A"},
+        {"start_step": 20, "end_step": 21, "subtask": "Grasping Cube A"},
+        {"start_step": 22, "end_step": 35, "subtask": "Vertically picking up Cube A"},
+        {"start_step": 36, "end_step": 43, "subtask": "Aligning Cube A with Cube B"},
+        {
+            "start_step": 44,
+            "end_step": 49,
+            "subtask": "Moving Cube A vertically down to Cube B",
+        },
+        {"start_step": 50, "end_step": 53, "subtask": "Releasing Cube A onto Cube B"},
+        {"start_step": 54, "end_step": 79, "subtask": "Returning Home"},
+    ],
+    "lift": [
+        {"start_step": 0, "end_step": 12, "subtask": "Move to above cube"},
+        {"start_step": 13, "end_step": 14, "subtask": "Grasp Cube"},
+        {"start_step": 15, "end_step": 39, "subtask": "Lift Cube"},
+    ],
+    "open_door": [
+        {
+            "start_step": 0,
+            "end_step": 6,
+            "subtask": "Align manipulator height with Door",
+        },
+        {"start_step": 7, "end_step": 19, "subtask": "Get closer to Door"},
+        {"start_step": 20, "end_step": 41, "subtask": "Turn Door handle"},
+        {"start_step": 42, "end_step": 74, "subtask": "Open Door"},
+    ],
+    "picknplace": [
+        {"start_step": 0, "end_step": 9, "subtask": "Move to above can"},
+        {"start_step": 10, "end_step": 17, "subtask": "Move down to can"},
+        {"start_step": 18, "end_step": 19, "subtask": "Grasp can"},
+        {"start_step": 20, "end_step": 26, "subtask": "Pick up can"},
+        {"start_step": 27, "end_step": 119, "subtask": "Move to goal position"},
+    ],
+    "tool_hang": [
+        {"start_step": 0, "end_step": 60, "subtask": "Move to first tool"},
+        {"start_step": 61, "end_step": 75, "subtask": "Fine tune position for grasping"},
+        {"start_step": 76, "end_step": 80, "subtask": "Grasp tool"},
+        {
+            "start_step": 78,
+            "end_step": 150,
+            "subtask": "Move around the general region of the fixture",
+        },
+        {
+            "start_step": 151,
+            "end_step": 195,
+            "subtask": "Fine tune to get ready for insertion",
+        },
+        {"start_step": 196, "end_step": 235, "subtask": "Attempt to insert tool"},
+        {"start_step": 236, "end_step": 290, "subtask": "Insert tip of tool into fixture"},
+        {"start_step": 291, "end_step": 400, "subtask", "Insert full length of tool into fixture"},
+        {"start_step": 401, "end_step": 470, "subtask": "Move to second tool"},
+        {"start_step": 471, "end_step": 500, "subtask": "Fine tune position for grasping"},
+        {"start_step": 500, "end_step": 505, "subtask": "Grasp second tool"},
+        {"start_step": 506, "end_step": 615, "subtask": "Move to fixture"},
+        {"start_step": 615, "end_step": 670, "subtask": "Fine tune position for hanging"},
+        {"start_step": 671, "end_step": 680, "subtask": "Realse tool"},
+    ],
+}

@@ -55,10 +55,13 @@ def get_data_for_prompt(config: dict) -> Union[pd.DataFrame, str]:
     else:
         raise NotImplementedError
 
-    # return every Nth row
-    txt_step = config["txt_step"] if config["txt_step"] is not None else 1
-    df = df.iloc[::txt_step, :]
-    text = "\n".join(text.split("\n")[::txt_step])
+    # return a subset of the data frame and txt file
+    idx_step = config["txt_step"] if config["txt_step"] is not None else 1
+    start_idx = config["start_txt_idx"] if config["start_txt_idx"] is not None else 0
+    end_idx = config["end_txt_idx"] if config["end_txt_idx"] is not None else -1
+
+    df = df.iloc[start_idx:end_idx:idx_step]
+    text = "\n".join(text.split("\n")[start_idx:end_idx:idx_step])
 
     return df, text
 
@@ -72,6 +75,11 @@ def get_prompt(config: dict) -> str:
 
     if config["use_images"] and config["use_video"]:
         raise ValueError("Cannot use both images and video.")
+
+    # modify the frame step to be the same as the txt step
+    frame_step = config["frame_step"] if config["frame_step"] is not None else 1
+    start_frame = config["start_frame"] if config["start_frame"] is not None else 0
+    end_frame = config["end_frame"] if config["end_frame"] is not None else -1
 
     if config["use_txt"]:
         data_df, data_text = get_data_for_prompt(config)
@@ -92,7 +100,7 @@ def get_prompt(config: dict) -> str:
             PROMPT + FRAME_DATA_DESCRIPTION,
             *map(
                 lambda x: {"image": x, "resize": config["resize_frames"]},
-                encoded_frames[0 :: config["frame_step"]],
+                encoded_frames[start_frame:end_frame:frame_step],
             ),
         ]
 
@@ -113,8 +121,8 @@ def get_prompt(config: dict) -> str:
         PROMPT = [
             PROMPT + FRAME_DATA_DESCRIPTION,
             *map(
-                lambda x: {"image": x, "resize": 480},
-                base64Frames[0 :: config["frame_step"]],
+                lambda x: {"image": x, "resize": config["resize_frames"]},
+                base64Frames[start_frame:end_frame:frame_step],
             ),
         ]
 
