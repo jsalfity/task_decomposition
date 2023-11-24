@@ -1,3 +1,5 @@
+from pprint import pprint
+from collections import defaultdict
 from datetime import datetime
 import json
 import yaml
@@ -12,17 +14,14 @@ def run_decomposition(config: dict):
     timestamp = datetime.now().strftime("%d-%m-%Y_%H:%M")
 
     prompt = get_prompt(config)
-    print(f"[{timestamp}] Querying GPT...\n")
+    print(f"[{timestamp}] Querying GPT...")
+    pprint(dict(config))
     response, usage = get_completion(prompt, model=config["gpt_model"])
     usage_cost = calculate_usage_cost(gpt_model=config["gpt_model"], usage=usage)
 
     data = {
         "timestamp": timestamp,
-        "use_txt": config["use_txt"],
-        "txt_datafile": config["txt_filename"],
-        "use_frames": config["use_frames"],
-        "frames": config["frames"],
-        "model": config["gpt_model"],
+        **config,
         "usage": usage,
         "usage_cost": f"${usage_cost}",
         "response": response,
@@ -43,9 +42,10 @@ def run_decomposition(config: dict):
 
 
 def main():
-
     with open(GPT_QUERY_CONFIG_YAML, "r") as file:
         config = yaml.safe_load(file)
+
+    config = defaultdict(lambda: False, config if config is not None else {})
 
     run_decomposition(config=config)
 

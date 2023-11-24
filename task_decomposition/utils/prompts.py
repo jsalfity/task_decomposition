@@ -1,16 +1,4 @@
-# TASK_DESCRIPTION = """Your task is to ingest the following data and break down what occured during the robot episode into granular subtasks. Each subtask should be a sequential step that occured during the robot episode. You should identify the start and end step of each subtask. Create as many granular substasks as you see in the data.
-
-# Use chain of thought to break down the data into subtasks.
-
-# Report the list of subtasks in the following format, a list of dictionaries, at the beginning of your response:
-# ```
-# [{'start_step': <>, 'end_step': <>, 'subtask': <name of subtask>}, {'start_step': <>, 'end_step': <>, 'subtask': <name of subtask>}, {'start_step': <>, 'end_step': <>, 'subtask': <name of subtask>}, ...]
-# ```
-
-# Then explain your thoughts.
-# """
-
-TASK_DESCRIPTION = """Your task is to ingest the following data and break down what occurred during the robot episode into hierarchical granular subtasks. Each subtask should be a sequential step that occurred during the robot episode. You should identify the start step and end step of each subtask. Create as many granular subtasks as you see in the data.
+TASK_DESCRIPTION = """Your task is to ingest the following data and break down what occurred during the robot episode into hierarchical, granular subtasks. Each subtask should be a sequential step that occurred during the robot episode. Identify the start step and end step of each subtask. Focus on hierarchy with repeated lower level primitives.
 
 Use chain of thought to break down the data into subtasks.
 
@@ -34,3 +22,5 @@ TXT_DATA_DESCRIPTION = (
 FRAME_DATA_DESCRIPTION = (
     """The frames are the associated observation images for each step."""
 )
+
+ENV_DESCRIPTION = """The environment is a titled tool_hang and consists of a robot hanging arbitrary tools on a fixture."""
