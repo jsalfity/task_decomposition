@@ -23,4 +23,15 @@ FRAME_DATA_DESCRIPTION = (
     """The frames are the associated observation images for each step."""
 )
 
-ENV_DESCRIPTION = """The environment is a titled tool_hang and consists of a robot hanging arbitrary tools on a fixture."""
+env2description = {
+    "lift": "a single arm robot lifting a can",
+    "open_door": "a single arm robot opening a door",
+    "picknplace": "a single arm robot picking and placing a can",
+    "stack": "a single arm robot stacking a cube on top of another cube",
+    "transport": "two robot arms with one robot transporting an object to the other robot",
+    "tool_hang": "a single arm robot hanging arbitrary tools on fixture",
+}
+
+ENV_DESCRIPTION = (
+    lambda env_name: f"""The environment is a titled {env_name} and consists {env2description[env_name]}."""
+)

@@ -65,7 +65,7 @@ def get_data_for_prompt(config: dict) -> Union[pd.DataFrame, str]:
 
 def get_prompt(config: dict) -> str:
     """ """
-    PROMPT = f"""{TASK_DESCRIPTION} + {ENV_DESCRIPTION}\n"""
+    PROMPT = f"""{TASK_DESCRIPTION} + {ENV_DESCRIPTION(config['env_name'])}\n"""
 
     if not config["use_txt"] and not config["use_images"] and not config["use_video"]:
         raise ValueError("Must use at least one of txt, frames, or video.")

@@ -12,6 +12,7 @@ gpt_model: "gpt-4-1106-preview"
 # save_response: True
 
 # gpt_model: "gpt-4-vision-preview"
+env_name: tool_hang
 use_txt: True
 txt_filename: tool_hang.txt
 txt_step: 10
