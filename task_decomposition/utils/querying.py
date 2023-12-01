@@ -6,7 +6,7 @@ from typing import Union
 import cv2
 import base64
 
-from task_decomposition.paths import DATA_TXT_PATH, DATA_FRAMES_PATH, DATA_PATH
+from task_decomposition.paths import DATA_TXT_PATH, DATA_VIDEO_PATH, DATA_PATH
 from task_decomposition.utils.plotting import encode_image
 
 
@@ -56,9 +56,10 @@ def get_data_for_prompt(config: dict) -> Union[pd.DataFrame, str]:
         raise NotImplementedError
 
     # return a subset of the data frame and txt file
-    idx_step = config["txt_step"] if config["txt_step"] is not None else 1
-    start_idx = config["start_txt_idx"] if config["start_txt_idx"] is not None else 0
-    end_idx = config["end_txt_idx"] if config["end_txt_idx"] is not None else -1
+    idx_step = config["txt_step"] if config["txt_step"] is not False else 1
+    start_idx = config["start_txt_idx"] if config["start_txt_idx"] is not False else 0
+    if config["end_txt_idx"] is not None or config["end_txt_idx"] > df.shape[0]:
+        end_idx = -1
 
     df = df.iloc[start_idx:end_idx:idx_step]
     text = "\n".join(text.split("\n")[start_idx:end_idx:idx_step])
@@ -77,9 +78,9 @@ def get_prompt(config: dict) -> str:
         raise ValueError("Cannot use both images and video.")
 
     # modify the frame step to be the same as the txt step
-    frame_step = config["frame_step"] if config["frame_step"] is not None else 1
-    start_frame = config["start_frame"] if config["start_frame"] is not None else 0
-    end_frame = config["end_frame"] if config["end_frame"] is not None else -1
+    frame_step = config["frame_step"] if config["frame_step"] is not False else 1
+    start_frame = config["start_frame"] if config["start_frame"] is not False else 0
+    end_frame = config["start_frame"] if config["end_frame"] is not False else -1
 
     if config["use_txt"]:
         data_df, data_text = get_data_for_prompt(config)
@@ -87,25 +88,10 @@ def get_prompt(config: dict) -> str:
         PROMPT += TXT_DATA_DESCRIPTION(columns)
         PROMPT += data_text
 
-    if config["use_images"]:
-        encoded_frames = [
-            encode_image(os.path.join(DATA_FRAMES_PATH, config["frames"], file))
-            for file in sorted(
-                os.listdir(os.path.join(DATA_FRAMES_PATH, config["frames"]))
-            )
-        ]
-        # Need to add a lambda function in the prompt messages
-        # https://cookbook.openai.com/examples/gpt_with_vision_for_video_understanding
-        PROMPT = [
-            PROMPT + FRAME_DATA_DESCRIPTION,
-            *map(
-                lambda x: {"image": x, "resize": config["resize_frames"]},
-                encoded_frames[start_frame:end_frame:frame_step],
-            ),
-        ]
-
     if config["use_video"]:
-        video = cv2.VideoCapture(os.path.join(DATA_PATH, config["video_filename"]))
+        video = cv2.VideoCapture(
+            os.path.join(DATA_VIDEO_PATH, config["video_filename"])
+        )
         base64Frames = []
         while video.isOpened():
             success, frame = video.read()
@@ -116,13 +102,15 @@ def get_prompt(config: dict) -> str:
 
         video.release()
 
+        # slices the frames
+        base64Frames = base64Frames[start_frame:end_frame:frame_step]
         # Need to add a lambda function in the prompt messages
         # https://cookbook.openai.com/examples/gpt_with_vision_for_video_understanding
         PROMPT = [
             PROMPT + FRAME_DATA_DESCRIPTION,
             *map(
                 lambda x: {"image": x, "resize": config["resize_frames"]},
-                base64Frames[start_frame:end_frame:frame_step],
+                base64Frames,
             ),
         ]
 

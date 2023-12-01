@@ -1,14 +1,15 @@
-import json
-import csv
 import cv2
 import pandas as pd
 from typing import List
 import matplotlib.pyplot as plt
 import numpy as np
+import imageio
 
 import robosuite as suite
 
 from task_decomposition.paths import DATA_TXT_PATH, DATA_FRAMES_PATH
+
+FONT = cv2.FONT_HERSHEY_SIMPLEX
 
 
 def make_env(config):
@@ -23,22 +24,20 @@ def save_df_to_txt(df: pd.DataFrame, filename):
     df.to_csv(DATA_TXT_PATH + "/" + filename, sep="\t", index=False)
 
 
-def save_frames_fn(frames: List, filename: str):
+def save_video_fn(frames: List, filename: str):
     """
-    Write the step number on images and save to folder
-    https://docs.opencv.org/4.x/d6/d6e/group__imgproc__draw.html#ga5126f47f883d730f633d74f07456c576
+    Save a video of the frames
     """
+    full_filename = DATA_FRAMES_PATH + "/" + filename + "_annotated.mp4"
+    video_writer = imageio.get_writer(full_filename, fps=20)
     for idx, frame in enumerate(frames):
-        # Add text to the image
+        # annotate videos with step number
         frame = frame.astype(np.uint8)
         cv2.putText(
-            img=frame,
-            text=f"step number: {idx}",
-            org=(0, 15),
-            fontFace=cv2.FONT_HERSHEY_SIMPLEX,
-            fontScale=0.5,
-            color=(255, 255, 255),
-            # thickness=2,
+            frame, f"step number: {idx}", (10, 30), FONT, 1, (0, 0, 255), 2, cv2.LINE_AA
         )
-        plt.imsave(f"{DATA_FRAMES_PATH}/{filename}/{idx}.png", frame)
+
+        video_writer.append_data(frame)
+
+    video_writer.close()
     return

@@ -37,7 +37,11 @@ GROUND_TRUTH = {
     ],
     "tool_hang": [
         {"start_step": 0, "end_step": 60, "subtask": "Move to first tool"},
-        {"start_step": 61, "end_step": 75, "subtask": "Fine tune position for grasping"},
+        {
+            "start_step": 61,
+            "end_step": 75,
+            "subtask": "Fine tune position for grasping",
+        },
         {"start_step": 76, "end_step": 80, "subtask": "Grasp tool"},
         {
             "start_step": 78,
@@ -50,13 +54,29 @@ GROUND_TRUTH = {
             "subtask": "Fine tune to get ready for insertion",
         },
         {"start_step": 196, "end_step": 235, "subtask": "Attempt to insert tool"},
-        {"start_step": 236, "end_step": 290, "subtask": "Insert tip of tool into fixture"},
-        {"start_step": 291, "end_step": 400, "subtask", "Insert full length of tool into fixture"},
+        {
+            "start_step": 236,
+            "end_step": 290,
+            "subtask": "Insert tip of tool into fixture",
+        },
+        {
+            "start_step": 291,
+            "end_step": 400,
+            "subtask": "Insert full length of tool into fixture",
+        },
         {"start_step": 401, "end_step": 470, "subtask": "Move to second tool"},
-        {"start_step": 471, "end_step": 500, "subtask": "Fine tune position for grasping"},
+        {
+            "start_step": 471,
+            "end_step": 500,
+            "subtask": "Fine tune position for grasping",
+        },
         {"start_step": 500, "end_step": 505, "subtask": "Grasp second tool"},
         {"start_step": 506, "end_step": 615, "subtask": "Move to fixture"},
-        {"start_step": 615, "end_step": 670, "subtask": "Fine tune position for hanging"},
+        {
+            "start_step": 615,
+            "end_step": 670,
+            "subtask": "Fine tune position for hanging",
+        },
         {"start_step": 671, "end_step": 680, "subtask": "Realse tool"},
     ],
 }

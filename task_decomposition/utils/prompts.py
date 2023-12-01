@@ -1,16 +1,11 @@
-TASK_DESCRIPTION = """Your task is to ingest the following data and break down what occurred during the robot episode into hierarchical, granular subtasks. Each subtask should be a sequential step that occurred during the robot episode. Identify the start step and end step of each subtask. Focus on hierarchy with repeated lower level primitives.
+TASK_DESCRIPTION = """Your task is to ingest the following data and break down what occurred during the robot episode into hierarchical, granular subtasks. Each subtask should be a sequential step that occurred during the robot episode. Identify the start step and end step of each subtask. Focus on hierarchy. The lowest level primitives should be the most granular steps and are probably repeated throughout the episode. The highest level primitives should be the most abstract steps and are probably only performed once.
 
 Use chain of thought to break down the data into subtasks.
 
 Report the list of subtasks as a dictionary with at the beginning of your response:
-```subtask_decomposition = [
-{1.1: {'start_step: <>, 'end_step': <>, subtask: '<low level primitive>'},
-1.2: {'start_step: <>, 'end_step': <>, subtask: '<low level primitive>'},
-2.1: {'start_step: <>, 'end_step': <>, subtask: '<low level primitive>'},
-...
-}]
+```subtask_decomposition = [{'start_step: <>, 'end_step': <>, subtask: '<low level primitive>', 'hierarchy': 1.1},{'start_step: <>, 'end_step': <>, subtask: '<low level primitive>', 'hierarchy': 1.2},{'start_step: <>, 'end_step': <>, subtask: '<low level primitive>', 'hieracchy': 2.1}, {'start_step: <>, 'end_step': <>, subtask: '<low level primitive>', 'hieracchy': 2.2},...]
 ```
-The major numbers are the subtask and the minor numbers are the subsubtask.
+The 'hierarchy' major numbers are the subtask and the minor numbers are the subsubtask further down in the hierarchy.
 
 Then explain your thoughts.
 """

@@ -1,29 +1,53 @@
 # gpt_model: "gpt-4-vision-preview"
-gpt_model: "gpt-4-1106-preview"
+# gpt_model: "gpt-4-1106-preview"
 # gpt_model: "gpt-3.5-turbo-1106"
 
+##  PICKNPLACE   ##
 # gpt_model: "gpt-4-vision-preview"
+# env_name: picknplace
 # use_txt: True
 # txt_filename: picknplace.txt
 # use_frames: True
 # frames: picknplace
-# frame_step: 25
+# frame_step: 10
 # resize_frames: 256
 # save_response: True
 
+##  OPEN DOOR   ##
+# gpt_model: "gpt-4-vision-preview"
+# env_name: open_door
+# use_txt: True
+# txt_filename: open_door.txt
+# use_frames: True
+# frames: open_door
+# frame_step: 2
+# resize_frames: 256
+# save_response: True
+
+##  TOOL HANG  ##
+# gpt_model: "gpt-4-vision-preview"
+# env_name: tool_hang
+# multiple_queries: False
+# n_queries: 10
+# N_TXT_STEPS: 680
+# N_FRAME_STEPS: 137
+# use_txt: True
+# txt_step: 1
+# txt_filename: tool_hang.txt
+# use_video: True
+# video_filename: robomimic/tool_hang/tool_hang_annotated.mp4
+# frame_step: 10
+# resize_frames: 256
+
+##  TRANSPORT ##
 gpt_model: "gpt-4-vision-preview"
-env_name: tool_hang
-
+env_name: transport
 use_txt: True
-start_txt_idx: 0
-end_txt_idx: 100
-txt_step: 10
-txt_filename: tool_hang.txt
-
+txt_step: 1
+txt_filename: transport.txt
 use_video: True
-video_filename: robomimic/tool_hang/tool_hang_annotated.mp4
-frame_step: 5
-start_frame: 120
-end_frame: 137
+video_filename: robomimic/transport/transport_annotated.mp4
+frame_step: 20
 resize_frames: 256
+
 save_response: True

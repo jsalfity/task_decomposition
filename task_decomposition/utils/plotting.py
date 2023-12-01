@@ -116,11 +116,12 @@ def visualize_trajectory_decompositions(actual, predicted, title):
         mpatches.Patch(color=ACTUAL_COLOR, label="actual"),
         mpatches.Patch(color=PREDICTED_COLOR, label="predicted"),
     ]
+    plt.tight_layout()
     plt.legend(handles=legend_labels, loc="upper left")
-    plt.xlabel("Number of Steps")
+    plt.xlabel("Step Number")
     plt.ylabel("Subtask Number")
     plt.title(title)
-    plt.grid(True)
+    plt.grid(False)
     plt.show()
 
 
