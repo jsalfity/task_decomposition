@@ -6,8 +6,7 @@ from typing import Union
 import cv2
 import base64
 
-from task_decomposition.paths import DATA_TXT_PATH, DATA_VIDEO_PATH, DATA_PATH
-from task_decomposition.utils.plotting import encode_image
+from task_decomposition.paths import DATA_TXT_PATH, DATA_VIDEOS_PATH
 
 
 openai.api_key = os.getenv("OPENAI_API_KEY")
@@ -90,7 +89,7 @@ def get_prompt(config: dict) -> str:
 
     if config["use_video"]:
         video = cv2.VideoCapture(
-            os.path.join(DATA_VIDEO_PATH, config["video_filename"])
+            os.path.join(DATA_VIDEOS_PATH, config["video_filename"])
         )
         base64Frames = []
         while video.isOpened():

@@ -7,7 +7,11 @@ from robosuite import load_controller_config
 
 # from robosuite.utils.placement_samplers import UniformRandomSampler
 
-from task_decomposition.utils.logging import save_video_fn, save_df_to_txt
+from task_decomposition.utils.logging import (
+    save_video_fn,
+    save_df_to_txt,
+    gpt_annotate_video_fn,
+)
 
 config = load_controller_config(default_controller="OSC_POSE")
 
@@ -73,7 +77,8 @@ def _setup_parser():
     parser.add_argument("--save_gt", type=int, default=0)
     parser.add_argument("--save_video", type=int, default=0)
     parser.add_argument("--save_txt", type=int, default=0)
-    parser.add_argument("--render", type=int, default=1)
+    parser.add_argument("--gpt_annotate", type=int, default=0)
+    parser.add_argument("--render", type=int, default=0)
     parser.add_argument("--filename", type=str, default="picknplace")
 
     return parser
@@ -83,6 +88,7 @@ def run_demo(
     save_gt: bool = True,
     save_txt: bool = True,
     save_video: bool = True,
+    gpt_annotate: bool = False,
     render: bool = True,
     filename: str = "picknplace",
 ):
@@ -202,6 +208,7 @@ def run_demo(
 
     print("Done Running Simulation.")
     save_video_fn(frames=frames, filename=filename) if save_video else None
+    gpt_annotate_video_fn(frames=frames, filename=filename) if gpt_annotate else None
     save_df_to_txt(df=df, filename=filename) if save_txt else None
     save_df_to_txt(df=gt_df, filename=filename + "_gt") if save_gt else None
 
@@ -214,6 +221,7 @@ def main():
         save_gt=args.save_gt,
         save_txt=args.save_txt,
         save_video=args.save_video,
+        gpt_annotate=args.gpt_annotate,
         render=args.render,
         filename=args.filename,
     )

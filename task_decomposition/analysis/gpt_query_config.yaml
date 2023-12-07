@@ -2,16 +2,35 @@
 # gpt_model: "gpt-4-1106-preview"
 # gpt_model: "gpt-3.5-turbo-1106"
 
+## STACK ##
+gpt_model: "gpt-4-vision-preview"
+env_name: stack
+use_txt: True
+txt_filename: stack.txt
+use_video: True
+video_filename: stack
+frame_step: 2
+resize_frames: 256
+
+## LIFT ##
+# gpt_model: "gpt-4-vision-preview"
+# env_name: lift
+# use_txt: True
+# txt_filename: lift.txt
+# use_video: True
+# video_filename: lift
+# frame_step: 2
+# resize_frames: 256
+
 ##  PICKNPLACE   ##
 # gpt_model: "gpt-4-vision-preview"
 # env_name: picknplace
 # use_txt: True
 # txt_filename: picknplace.txt
-# use_frames: True
-# frames: picknplace
+# use_video: True
+# video_filename: picknplace
 # frame_step: 10
 # resize_frames: 256
-# save_response: True
 
 ##  OPEN DOOR   ##
 # gpt_model: "gpt-4-vision-preview"
@@ -40,14 +59,14 @@
 # resize_frames: 256
 
 ##  TRANSPORT ##
-gpt_model: "gpt-4-vision-preview"
-env_name: transport
-use_txt: True
-txt_step: 1
-txt_filename: transport.txt
-use_video: True
-video_filename: robomimic/transport/transport_annotated.mp4
-frame_step: 20
-resize_frames: 256
+# gpt_model: "gpt-4-vision-preview"
+# env_name: transport
+# use_txt: True
+# txt_step: 1
+# txt_filename: transport.txt
+# use_video: True
+# video_filename: robomimic/transport/transport_annotated.mp4
+# frame_step: 20
+# resize_frames: 256
 
 save_response: True
