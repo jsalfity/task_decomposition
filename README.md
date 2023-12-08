@@ -23,12 +23,13 @@ Running scripts is in `/scripts` folder.
 ```py
 python scripts/run_open_door.py
 ```
+Check appropriate command line arguments for saving data.
 
 ## Analysis using GPT
-To run a call to GPT:
+To run a call to GPT, set the config in `analysis/gpt_query_config.yaml` and run
 ```py
 python analysis/query_GPT.py
 ```
 
 ## Comparison between GPT output and groundtruth data
-Not Yet Implemented 
+See `analysis/compare_GPT_groundtruth.ipynb` to generate plots show in the report.
