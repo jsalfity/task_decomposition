@@ -1,0 +1,52 @@
+{
+    "timestamp": "02-12-2023_15:14",
+    "gpt_model": "gpt-4-vision-preview",
+    "env_name": "stack",
+    "use_txt": true,
+    "txt_filename": "stack.txt",
+    "use_video": true,
+    "video_filename": "stack",
+    "frame_step": 10,
+    "resize_frames": 256,
+    "save_response": true,
+    "multiple_queries": false,
+    "use_images": false,
+    "start_frame": false,
+    "end_frame": false,
+    "txt_step": false,
+    "start_txt_idx": false,
+    "end_txt_idx": false,
+    "usage": {
+        "prompt_tokens": 11053,
+        "completion_tokens": 583,
+        "total_tokens": 11636
+    },
+    "usage_cost": "$0.13",
+    "response": "subtask_decomposition = [\n(0, 9, \"approach cube A\", 1.1),\n(10, 23, \"descend towards cube A\", 1.2),\n(24, 38, \"close gripper to grasp cube A\", 1.3),\n(39, 54, \"lift cube A\", 2.1),\n(55, 58, \"move cube A above cube B\", 2.2),\n(59, 73, \"descend cube A onto cube B\", 2.3),\n(74, 79, \"release cube A\", 2.4)\n]\n\nThe robot's task can be broken down into the following subtasks:\n\n1.1: The robot approaches cube A, which involves moving the end effector from its initial position to a position above cube A. This is seen in steps 0 to 9, where the robot's end effector position changes in the x and y axes while maintaining a consistent height (z-axis).\n\n1.2: The robot descends towards cube A, which involves lowering the end effector to reach cube A. This is seen in steps 10 to 23, where the z-axis value of the robot's end effector position decreases, indicating a downward movement.\n\n1.3: The robot closes its gripper to grasp cube A. This is seen in steps 24 to 38, where the gripper state changes from -1.0 (open) to 1.0 (closed).\n\n2.1: The robot lifts cube A, which involves raising the end effector while holding cube A. This is seen in steps 39 to 54, where the z-axis value of the robot's end effector position increases, indicating an upward movement.\n\n2.2: The robot moves cube A above cube B, which involves adjusting the position of the end effector so that cube A is directly above cube B. This is seen in steps 55 to 58, where the x and y axes values of the robot's end effector position change to align with cube B's position.\n\n2.3: The robot descends cube A onto cube B, which involves lowering the end effector to place cube A on top of cube B. This is seen in steps 59 to 73, where the z-axis value of the robot's end effector position decreases, indicating a downward movement.\n\n2.4: The robot releases cube A, which involves opening the gripper to let go of cube A. This is seen in steps 74 to 79, where the gripper state changes from 1.0 (closed) to -1.0 (open).\n\nEach subtask represents a distinct intent or goal of the robot, and the steps within each subtask represent the granular actions taken to achieve that goal."
+}
+{
+    "timestamp": "06-12-2023_11:11",
+    "gpt_model": "gpt-4-vision-preview",
+    "env_name": "stack",
+    "use_txt": true,
+    "txt_filename": "stack.txt",
+    "use_video": true,
+    "video_filename": "stack",
+    "frame_step": 2,
+    "resize_frames": 256,
+    "save_response": true,
+    "multiple_queries": false,
+    "use_images": false,
+    "start_frame": false,
+    "end_frame": false,
+    "txt_step": false,
+    "start_txt_idx": false,
+    "end_txt_idx": false,
+    "usage": {
+        "prompt_tokens": 11053,
+        "completion_tokens": 457,
+        "total_tokens": 11510
+    },
+    "usage_cost": "$0.12",
+    "response": "subtask_decomposition = [\n(0, 6, \"approach cube A\", 1.1),\n(7, 19, \"align with cube A\", 1.2),\n(20, 34, \"descend towards cube A\", 1.3),\n(35, 42, \"grasp cube A\", 2.1),\n(43, 50, \"lift cube A\", 2.2),\n(51, 53, \"move cube A above cube B\", 3.1),\n(54, 56, \"align cube A with cube B\", 3.2),\n(57, 79, \"place cube A on cube B\", 3.3)\n]\n\nThe robot episode can be broken down into the following hierarchical subtasks:\n\n1.1 Approach cube A: The robot moves its end effector towards the position of cube A without descending or changing the gripper state (steps 0-6).\n1.2 Align with cube A: The robot adjusts its end effector position to be directly above cube A, still without descending or changing the gripper state (steps 7-19).\n1.3 Descend towards cube A: The robot moves its end effector downwards towards cube A, preparing to grasp it (steps 20-34).\n\n2.1 Grasp cube A: The robot changes the gripper state to grasp cube A (steps 35-42).\n2.2 Lift cube A: The robot lifts cube A upwards after successfully grasping it (steps 43-50).\n\n3.1 Move cube A above cube B: The robot moves the grasped cube A to a position above cube B (steps 51-53).\n3.2 Align cube A with cube B: The robot adjusts the position of cube A to align it with cube B for stacking (steps 54-56).\n3.3 Place cube A on cube B: The robot descends and places cube A on top of cube B, completing the stacking task (steps 57-79).\n\nEach subtask represents a major intent change of the robot, and the steps within each subtask are the granular motion primitives that achieve the overall goal of stacking cube A on cube B."
+}

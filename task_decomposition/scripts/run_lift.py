@@ -6,9 +6,9 @@ import robosuite as suite
 from robosuite import load_controller_config
 
 from task_decomposition.utils.logging import (
-    # save_df_to_csv,
+    save_video_fn,
     save_df_to_txt,
-    save_groundtruth_to_txt,
+    gpt_annotate_video_fn,
 )
 
 config = load_controller_config(default_controller="OSC_POSE")
@@ -19,14 +19,14 @@ env = suite.make(
     robots="Panda",
     controller_configs=config,
     camera_names=["frontview"],
-    camera_heights=128,
-    camera_widths=128,
+    camera_heights=480,
+    camera_widths=480,
     control_freq=10,
     horizon=40,
     # placement_initializer=reset_sampler
     has_renderer=True,
     # has_offscreen_renderer=False,
-    # use_camera_obs=False,
+    use_camera_obs=True,
 )
 
 actions_to_record = ["action"]
@@ -55,14 +55,24 @@ def _setup_parser():
     """Set up Python's ArgumentParser with params"""
     parser = argparse.ArgumentParser(add_help=False)
 
-    parser.add_argument("--save", type=int, default=1)
-    parser.add_argument("--render", type=int, default=1)
-    parser.add_argument("--filename", type=str, default="lift.txt")
+    parser.add_argument("--save_gt", type=int, default=0)
+    parser.add_argument("--save_video", type=int, default=0)
+    parser.add_argument("--save_txt", type=int, default=0)
+    parser.add_argument("--render", type=int, default=0)
+    parser.add_argument("--gpt_annotate", type=int, default=0)
+    parser.add_argument("--filename", type=str, default="lift")
 
     return parser
 
 
-def run_demo(render: bool = True, save: bool = True, filename: str = "lift.txt"):
+def run_demo(
+    save_gt: bool = True,
+    save_txt: bool = True,
+    save_video: bool = True,
+    gpt_annotate: bool = True,
+    render: bool = True,
+    filename: str = "lift.txt",
+):
     obs = env.reset()
     stage = 0
     stage_counter = 0
@@ -72,6 +82,7 @@ def run_demo(render: bool = True, save: bool = True, filename: str = "lift.txt")
     df = pd.DataFrame(columns=data_to_record)
     gt_df = pd.DataFrame(columns=["step", "subtask", "stage"])
 
+    frames = []
     while not done:
         cube_pos = env.sim.data.body_xpos[env.cube_body_id]
         gripper_pos = np.array(
@@ -106,35 +117,45 @@ def run_demo(render: bool = True, save: bool = True, filename: str = "lift.txt")
                 action[2] = 0
 
         obs, reward, done, info = env.step(action)
+        frame = np.flip(obs["frontview_image"], axis=0)
+        frames.append(frame)
         env.render() if render else None
 
-        row_data = {
-            "step": k,
-            "action": np.around(action, 2).tolist(),
-            "robot0_eef_pos": np.around(obs["robot0_eef_pos"], 2).tolist(),
-            "cube_pos": np.around(obs["cube_pos"], 2).tolist(),
-            "gripper_to_cube_pos": np.around(obs["gripper_to_cube_pos"], 2).tolist(),
-        }
+        row_data = {}
+        for o in data_to_record:
+            if o == "step":
+                row_data[o] = k
+            elif o == "action":
+                row_data[o] = np.around(action, 2).tolist()
+            else:
+                row_data[o] = np.around(obs[o], 2).tolist()
+
         df.loc[k] = row_data
 
         gt_row_data = {"step": k, "subtask": subtask, "stage": stage}
         gt_df.loc[k] = gt_row_data
-        print(gt_row_data)
 
         k += 1
 
-    # save_df_to_csv(df=df, filename="open_door.csv") if save else None
-    save_df_to_txt(df=df, filename=filename) if save else None
-    save_groundtruth_to_txt(
-        df=gt_df, filename=filename.split(".")[0] + "_gt." + filename.split(".")[-1]
-    ) if save else None
+    print("Done Running Simulation.")
+    save_video_fn(frames=frames, filename=filename) if save_video else None
+    gpt_annotate_video_fn(frames=frames, filename=filename) if gpt_annotate else None
+    save_df_to_txt(df=df, filename=filename) if save_txt else None
+    save_df_to_txt(df=gt_df, filename=filename + "_gt") if save_gt else None
 
 
 def main():
     parser = _setup_parser()
     args = parser.parse_args()
 
-    run_demo(render=args.render, save=args.save, filename=args.filename)
+    run_demo(
+        save_gt=args.save_gt,
+        save_txt=args.save_txt,
+        save_video=args.save_video,
+        gpt_annotate=args.gpt_annotate,
+        render=args.render,
+        filename=args.filename,
+    )
 
 
 if __name__ == "__main__":

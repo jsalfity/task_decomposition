@@ -6,7 +6,7 @@ import yaml
 
 from task_decomposition.utils.offload_cost import calculate_usage_cost
 from task_decomposition.utils.querying import get_completion, get_prompt
-from task_decomposition.paths import GPT_OUTPUT_PATH, GPT_QUERY_CONFIG_YAML
+from task_decomposition.paths import CUSTOM_GPT_OUTPUT_PATH, GPT_QUERY_CONFIG_YAML
 
 
 def run_decomposition(config: dict):
@@ -29,16 +29,17 @@ def run_decomposition(config: dict):
 
     # append to json file
     if config["save_response"]:
-        with open(GPT_OUTPUT_PATH, "a") as f:
+        with open(CUSTOM_GPT_OUTPUT_PATH(config["env_name"]), "a") as f:
             f.write("\n" + json.dumps(data) + "\n")
 
     print(f"GPT Response: ")
     print("==========================")
     print(response)
     print("==========================")
+    print(f"usage: {usage}")
     print(f"This request costs: ${usage_cost}")
-    print(f"Saved to {GPT_OUTPUT_PATH}")
-    return response
+    print("Saved to:" + CUSTOM_GPT_OUTPUT_PATH(config["env_name"]))
+    return response, usage
 
 
 def main():
@@ -47,7 +48,25 @@ def main():
 
     config = defaultdict(lambda: False, config if config is not None else {})
 
-    run_decomposition(config=config)
+    if config["multiple_queries"]:
+        N_TXT_STEPS = config["N_TXT_STEPS"]
+        N_FRAME_STEPS = config["N_FRAME_STEPS"]
+
+        for n_txt, n_frame in zip(range(N_TXT_STEPS), range(N_FRAME_STEPS)):
+            config["start_txt_idx"] = n_txt * N_TXT_STEPS // config["n_queries"] + 1
+            config["end_txt_idx"] = (n_txt + 1) * N_TXT_STEPS // config["n_queries"]
+            config["start_frame"] = n_frame * N_FRAME_STEPS // config["n_queries"] + 1
+            config["end_frame"] = (n_frame + 1) * N_FRAME_STEPS // config["n_queries"]
+
+            try:
+                response, usage = run_decomposition(config=config)
+            except Exception as e:
+                print(f"{e}")
+
+            input("Press Enter to continue...")
+
+    else:
+        response, usage = run_decomposition(config=config)
 
 
 if __name__ == "__main__":
