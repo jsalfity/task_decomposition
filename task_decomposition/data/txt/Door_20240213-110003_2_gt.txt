@@ -1,0 +1,76 @@
+step	subtask	stage
+0	Align manipulator height with Door	0
+1	Align manipulator height with Door	0
+2	Align manipulator height with Door	0
+3	Align manipulator height with Door	0
+4	Align manipulator height with Door	0
+5	Align manipulator height with Door	0
+6	Align manipulator height with Door	0
+7	Get closer to Door	1
+8	Get closer to Door	1
+9	Get closer to Door	1
+10	Get closer to Door	1
+11	Get closer to Door	1
+12	Get closer to Door	1
+13	Get closer to Door	1
+14	Get closer to Door	1
+15	Get closer to Door	1
+16	Get closer to Door	1
+17	Get closer to Door	1
+18	Get closer to Door	1
+19	Get closer to Door	1
+20	Get closer to Door	1
+21	Get closer to Door	1
+22	Get closer to Door	1
+23	Get closer to Door	1
+24	Get closer to Door	1
+25	Get closer to Door	1
+26	Get closer to Door	1
+27	Get closer to Door	1
+28	Get closer to Door	1
+29	Get closer to Door	1
+30	Turn Door handle	2
+31	Turn Door handle	2
+32	Turn Door handle	2
+33	Turn Door handle	2
+34	Turn Door handle	2
+35	Turn Door handle	2
+36	Turn Door handle	2
+37	Turn Door handle	2
+38	Turn Door handle	2
+39	Turn Door handle	2
+40	Turn Door handle	2
+41	Turn Door handle	2
+42	Turn Door handle	2
+43	Turn Door handle	2
+44	Turn Door handle	2
+45	Turn Door handle	2
+46	Turn Door handle	2
+47	Turn Door handle	2
+48	Turn Door handle	2
+49	Turn Door handle	2
+50	Turn Door handle	2
+51	Turn Door handle	2
+52	Turn Door handle	2
+53	Turn Door handle	2
+54	Turn Door handle	2
+55	Turn Door handle	2
+56	Turn Door handle	2
+57	Turn Door handle	2
+58	Turn Door handle	2
+59	Turn Door handle	2
+60	Turn Door handle	2
+61	Turn Door handle	2
+62	Turn Door handle	2
+63	Turn Door handle	2
+64	Turn Door handle	2
+65	Turn Door handle	2
+66	Turn Door handle	2
+67	Turn Door handle	2
+68	Turn Door handle	2
+69	Turn Door handle	2
+70	Turn Door handle	2
+71	Turn Door handle	2
+72	Turn Door handle	2
+73	Turn Door handle	2
+74	Turn Door handle	2

@@ -2,6 +2,7 @@ import os
 
 cd = os.path.dirname(os.path.realpath(__file__))
 
+DEMO_CONFIG_YAML = cd + "/scripts/demo_config.yaml"
 DATA_PATH = cd + "/data"
 DATA_TXT_PATH = cd + "/data/txt"
 DATA_VIDEOS_PATH = cd + "/data/videos"

@@ -1,0 +1,76 @@
+step	subtask	stage
+0	Align manipulator height with Door	0
+1	Align manipulator height with Door	0
+2	Align manipulator height with Door	0
+3	Align manipulator height with Door	0
+4	Align manipulator height with Door	0
+5	Align manipulator height with Door	0
+6	Align manipulator height with Door	0
+7	Get closer to Door	1
+8	Get closer to Door	1
+9	Get closer to Door	1
+10	Get closer to Door	1
+11	Get closer to Door	1
+12	Get closer to Door	1
+13	Get closer to Door	1
+14	Get closer to Door	1
+15	Get closer to Door	1
+16	Get closer to Door	1
+17	Get closer to Door	1
+18	Get closer to Door	1
+19	Get closer to Door	1
+20	Get closer to Door	1
+21	Get closer to Door	1
+22	Get closer to Door	1
+23	Get closer to Door	1
+24	Get closer to Door	1
+25	Get closer to Door	1
+26	Get closer to Door	1
+27	Get closer to Door	1
+28	Get closer to Door	1
+29	Get closer to Door	1
+30	Get closer to Door	1
+31	Get closer to Door	1
+32	Get closer to Door	1
+33	Get closer to Door	1
+34	Get closer to Door	1
+35	Get closer to Door	1
+36	Get closer to Door	1
+37	Get closer to Door	1
+38	Get closer to Door	1
+39	Get closer to Door	1
+40	Get closer to Door	1
+41	Get closer to Door	1
+42	Get closer to Door	1
+43	Get closer to Door	1
+44	Get closer to Door	1
+45	Get closer to Door	1
+46	Get closer to Door	1
+47	Get closer to Door	1
+48	Get closer to Door	1
+49	Get closer to Door	1
+50	Get closer to Door	1
+51	Get closer to Door	1
+52	Get closer to Door	1
+53	Get closer to Door	1
+54	Get closer to Door	1
+55	Get closer to Door	1
+56	Get closer to Door	1
+57	Get closer to Door	1
+58	Get closer to Door	1
+59	Get closer to Door	1
+60	Get closer to Door	1
+61	Get closer to Door	1
+62	Get closer to Door	1
+63	Get closer to Door	1
+64	Get closer to Door	1
+65	Get closer to Door	1
+66	Get closer to Door	1
+67	Get closer to Door	1
+68	Get closer to Door	1
+69	Get closer to Door	1
+70	Get closer to Door	1
+71	Get closer to Door	1
+72	Get closer to Door	1
+73	Get closer to Door	1
+74	Get closer to Door	1

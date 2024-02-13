@@ -27,7 +27,7 @@ def save_df_to_txt(df: pd.DataFrame, filename):
 
 def save_video_fn(frames: List, filename: str):
     """
-    Save a video of the frames
+    Save video of the frames and annotate each frame with step number.
     """
     full_filename = DATA_VIDEOS_PATH + "/" + filename + "_annotated.mp4"
     video_writer = imageio.get_writer(full_filename, fps=20)

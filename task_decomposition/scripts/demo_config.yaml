@@ -1,0 +1,25 @@
+n_demos: 20
+render: False
+save_txt: True
+save_video: True
+save_gt: True
+gpt_annotate: False
+
+# env_name: Stack
+# placement_initializer: True
+# horizon: 80
+
+# env_name: Lift
+# placement_initializer: True
+# horizon: 50
+
+# env_name: Door
+# placement_initializer: False
+# horizon: 75
+
+env_name: PickPlace
+object_type: milk # bread, cereal, can
+horizon: 120
+
+
+
