@@ -35,7 +35,7 @@ def get_data_to_record(env_name: str):
     if env_name == "NutAssemblySquare":
         meta_data_to_record = ["nut0_pos", "nut1_pos"]
     elif env_name == "ToolHang":
-        meta_data_to_record = ["tool_pos", "stand_pos"]
+        meta_data_to_record = ["tool_pos", "frame_pos", "stand_pos"]
     else:
         raise ValueError(f"Environment {env_name} has no defined data to record.")
 
@@ -43,6 +43,9 @@ def get_data_to_record(env_name: str):
 
 
 def query_sim_for_data(env, desired_obs):
+    """
+    Helper function to query the simulator for data to record.
+    """
     if env.name == "NutAssemblySquare":
         if desired_obs == "nut0_pos":
             return env.env.sim.data.body_xpos[env.env.obj_body_id[env.env.nuts[0].name]]
@@ -53,22 +56,17 @@ def query_sim_for_data(env, desired_obs):
     elif env.name == "ToolHang":
         if desired_obs == "tool_pos":
             return env.env.sim.data.body_xpos[env.env.obj_body_id[env.env.tool.name]]
+        elif desired_obs == "frame_pos":
+            return env.env.sim.data.body_xpos[env.env.obj_body_id[env.env.frame.name]]
         elif desired_obs == "stand_pos":
             return env.env.sim.data.body_xpos[env.env.obj_body_id[env.env.stand.name]]
         else:
             raise ValueError(f"Environment {env.name} has no defined data to record.")
+    else:
+        raise ValueError(f"Environment {env.name} has no defined data to record.")
 
 
-def extract_trajectory(
-    env,
-    initial_state,
-    states,
-    actions,
-    done_mode,
-    camera_names=None,
-    camera_height=480,
-    camera_width=480,
-):
+def extract_trajectory(env, initial_state, states, actions, done_mode):
     """
     Helper function to extract observations, rewards, and dones along a trajectory using
     the simulator environment.
@@ -88,17 +86,6 @@ def extract_trajectory(
     # load the initial state
     env.reset()
     obs = env.reset_to(initial_state)
-
-    # maybe add in intrinsics and extrinsics for all cameras
-    camera_info = None
-    is_robosuite_env = EnvUtils.is_robosuite_env(env=env)
-    if is_robosuite_env:
-        camera_info = get_camera_info(
-            env=env,
-            camera_names=camera_names,
-            camera_height=camera_height,
-            camera_width=camera_width,
-        )
 
     data_to_record = get_data_to_record(env_name=env.name)
     df = pd.DataFrame(columns=get_data_to_record(env_name=env.name))
@@ -140,60 +127,6 @@ def extract_trajectory(
 
     print(" Done Running Simulation.")
     return df, frames
-
-
-def get_camera_info(
-    env,
-    camera_names=None,
-    camera_height=480,
-    camera_width=480,
-):
-    """
-    Helper function to get camera intrinsics and extrinsics for cameras being used for observations.
-    """
-
-    # TODO: make this function more general than just robosuite environments
-    assert EnvUtils.is_robosuite_env(env=env)
-
-    if camera_names is None:
-        return None
-
-    camera_info = dict()
-    for cam_name in camera_names:
-        K = env.get_camera_intrinsic_matrix(
-            camera_name=cam_name, camera_height=camera_height, camera_width=camera_width
-        )
-        R = env.get_camera_extrinsic_matrix(
-            camera_name=cam_name
-        )  # camera pose in world frame
-        if "eye_in_hand" in cam_name:
-            # convert extrinsic matrix to be relative to robot eef control frame
-            assert cam_name.startswith("robot0")
-            eef_site_name = env.base_env.robots[0].controller.eef_name
-            eef_pos = np.array(
-                env.base_env.sim.data.site_xpos[
-                    env.base_env.sim.model.site_name2id(eef_site_name)
-                ]
-            )
-            eef_rot = np.array(
-                env.base_env.sim.data.site_xmat[
-                    env.base_env.sim.model.site_name2id(eef_site_name)
-                ].reshape([3, 3])
-            )
-            eef_pose = np.zeros((4, 4))  # eef pose in world frame
-            eef_pose[:3, :3] = eef_rot
-            eef_pose[:3, 3] = eef_pos
-            eef_pose[3, 3] = 1.0
-            eef_pose_inv = np.zeros((4, 4))
-            eef_pose_inv[:3, :3] = eef_pose[:3, :3].T
-            eef_pose_inv[:3, 3] = -eef_pose_inv[:3, :3].dot(eef_pose[:3, 3])
-            eef_pose_inv[3, 3] = 1.0
-            R = R.dot(eef_pose_inv)  # T_E^W * T_W^C = T_E^C
-        camera_info[cam_name] = dict(
-            intrinsics=K.tolist(),
-            extrinsics=R.tolist(),
-        )
-    return camera_info
 
 
 def record_dataset(args, save_txt=True, save_video=True):
@@ -248,9 +181,6 @@ def record_dataset(args, save_txt=True, save_video=True):
             states=states,
             actions=actions,
             done_mode=args.done_mode,
-            camera_names=args.camera_names,
-            camera_height=args.camera_height,
-            camera_width=args.camera_width,
         )
 
         # save data
