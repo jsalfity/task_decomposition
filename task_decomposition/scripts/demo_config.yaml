@@ -6,20 +6,15 @@ save_gt: True
 gpt_annotate: False
 
 # env_name: Stack
-# placement_initializer: True
+# custom_placement_initializer: True
 # horizon: 80
 
 # env_name: Lift
-# placement_initializer: True
+# custom_placement_initializer: True
 # horizon: 50
 
 # env_name: Door
-# placement_initializer: False
-# horizon: 75
+# horizon: 80
 
 env_name: PickPlace
-object_type: milk # bread, cereal, can
-horizon: 120
-
-
-
+horizon: 100

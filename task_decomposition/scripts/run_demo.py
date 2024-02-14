@@ -118,7 +118,10 @@ def run_demo(demo_config: dict, filename: str):
     env_config["camera_widths"] = 480
     env_config["control_freq"] = 10
     env_config["horizon"] = demo_config["horizon"]
-    if "placement_initializer" in demo_config:
+    if (
+        "custom_placement_initializer" in demo_config
+        and demo_config["custom_placement_initializer"]
+    ):
         env_config["placement_initializer"] = reset_sampler
     if "object_type" in demo_config:
         env_config["object_type"] = demo_config["object_type"]
