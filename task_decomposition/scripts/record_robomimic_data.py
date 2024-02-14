@@ -129,7 +129,7 @@ def extract_trajectory(env, initial_state, states, actions, done_mode):
     return df, frames
 
 
-def record_dataset(args, save_txt=True, save_video=True):
+def record_dataset(args):
     # create environment to use for data processing
     env_meta = FileUtils.get_env_metadata_from_dataset(dataset_path=args.dataset)
     env = EnvUtils.create_env_for_data_processing(
@@ -142,6 +142,8 @@ def record_dataset(args, save_txt=True, save_video=True):
         render_offscreen=True,
     )
 
+    save_txt = True if args.save_txt == 1 else False
+    save_video = True if args.save_video == 1 else False
     print("==== Using environment with the following metadata ====")
     print(json.dumps(env.serialize(), indent=4))
     print("")
@@ -195,19 +197,34 @@ if __name__ == "__main__":
         "--dataset",
         type=str,
         default=None,
+        required=True,
         help="path to input hdf5 dataset",
     )
 
-    # specify number of demos to process - useful for debugging conversion with a handful
-    # of trajectories
     parser.add_argument(
         "--n",
         type=int,
         default=None,
-        help="(optional) stop after n trajectories are processed",
+        help="(Required) stop after n trajectories are processed",
     )
 
-    # flag for reward shaping
+    parser.add_argument(
+        "--save_txt",
+        type=int,
+        default=1,
+        help="(Required) but default to True, save txt files",
+    )
+
+    parser.add_argument(
+        "--save_video",
+        type=int,
+        default=1,
+        help="(Required) but default to True, save video files",
+    )
+
+    ####################################################################################
+    # THE BELOW ARGS ARE REQUIRED BY THE ROBOMIMIC UTILITIES TO CREATE THE ENVIRONMENT
+    # see original script `robomimic/robomimic/scripts/dataset_states_to_obs.py`
     parser.add_argument(
         "--shaped",
         action="store_true",
@@ -244,10 +261,6 @@ if __name__ == "__main__":
         help="(optional) use depth observations for each camera",
     )
 
-    # specifies how the "done" signal is written. If "0", then the "done" signal is 1 wherever
-    # the transition (s, a, s') has s' in a task completion state. If "1", the "done" signal
-    # is one at the end of every trajectory. If "2", the "done" signal is 1 at task completion
-    # states for successful trajectories and 1 at the end of all trajectories.
     parser.add_argument(
         "--done_mode",
         type=int,
@@ -255,6 +268,7 @@ if __name__ == "__main__":
         help="how to write done signal. If 0, done is 1 whenever s' is a success state.\
             If 1, done is 1 at the end of each trajectory. If 2, both.",
     )
+    ####################################################################################
 
     args = parser.parse_args()
     record_dataset(args)
