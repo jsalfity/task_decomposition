@@ -1,0 +1,20 @@
+n_demos: 20
+render: False
+save_txt: True
+save_video: True
+save_gt: True
+gpt_annotate: False
+
+# env_name: Stack
+# custom_placement_initializer: True
+# horizon: 80
+
+# env_name: Lift
+# custom_placement_initializer: True
+# horizon: 50
+
+# env_name: Door
+# horizon: 80
+
+env_name: PickPlace
+horizon: 100

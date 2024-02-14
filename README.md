@@ -19,13 +19,16 @@ pip install -e .
 ```
 
 ## Running robosuite simulation and generating data
-Running scripts is in `/scripts` folder.
-```py
-python scripts/run_open_door.py
-```
-Check appropriate command line arguments for saving data.
+Configure which environment to run in the `/scripts/demo_config.yaml`. 
+Currently we have 4 environments: "Stack", "Lift", "Door", "PickPlace".
+Follow the uncommented lines in `/scripts/demo_config.yaml` to set the correct fields.
+Run the data generation script
 
-## Analysis using GPT
+```py
+python scripts/run_demo.py
+```
+
+## [WIP] Analysis using GPT
 To run a call to GPT, set the config in `analysis/gpt_query_config.yaml` and run
 ```py
 python analysis/query_GPT.py
