@@ -6,7 +6,7 @@ from typing import Union
 import cv2
 import base64
 
-from task_decomposition.paths import DATA_TXT_PATH, DATA_VIDEOS_PATH
+from task_decomposition.paths import DATA_RAW_TXT_PATH, DATA_VIDEOS_PATH
 
 
 openai.api_key = os.getenv("OPENAI_API_KEY")
@@ -38,7 +38,7 @@ def get_data_for_prompt(config: dict) -> Union[pd.DataFrame, str]:
     """
     Read a csv or text file and return the data frame and text
     """
-    full_filename = DATA_TXT_PATH + "/" + config["txt_filename"]
+    full_filename = DATA_RAW_TXT_PATH + "/" + config["txt_filename"]
 
     if full_filename.split(".")[-1] == "txt":
         df = pd.read_csv(full_filename, delimiter="\t", encoding="utf-8")
@@ -72,9 +72,6 @@ def get_prompt(config: dict) -> str:
 
     if not config["use_txt"] and not config["use_images"] and not config["use_video"]:
         raise ValueError("Must use at least one of txt, frames, or video.")
-
-    if config["use_images"] and config["use_video"]:
-        raise ValueError("Cannot use both images and video.")
 
     # modify the frame step to be the same as the txt step
     frame_step = config["frame_step"] if config["frame_step"] is not False else 1

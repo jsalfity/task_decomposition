@@ -1,14 +1,16 @@
-# gpt_model: "gpt-4-vision-preview"
+gpt_model: "gpt-4-vision-preview"
 # gpt_model: "gpt-4-1106-preview"
 # gpt_model: "gpt-3.5-turbo-1106"
 
+save_response: True
+multiple_queries: True
+
 ## STACK ##
-gpt_model: "gpt-4-vision-preview"
-env_name: stack
+env_name: Stack
+txt_filename: Stack*
+video_filename: Stack*
 use_txt: True
-txt_filename: stack.txt
 use_video: True
-video_filename: stack
 frame_step: 2
 resize_frames: 256
 
@@ -68,5 +70,3 @@ resize_frames: 256
 # video_filename: robomimic/transport/transport_annotated.mp4
 # frame_step: 20
 # resize_frames: 256
-
-save_response: True
