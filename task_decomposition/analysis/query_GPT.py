@@ -1,7 +1,7 @@
 import os
 from pprint import pprint
 from collections import defaultdict
-from datetime import datetime
+from datetime import datetime, timedelta
 import json
 import yaml
 import tqdm
@@ -75,7 +75,16 @@ def main():
         env_name_video_files.sort(), env_name_txt_files.sort()
 
         # For mulitiple files, we want to run the same query on all files
+        last_API_call_timestamp = datetime.now() - timedelta(seconds=1000)
         for txt_file, video_file in zip(env_name_txt_files, env_name_video_files):
+
+            # check if we need to wait before making the next API call
+            timetowait = 60 - (datetime.now() - last_API_call_timestamp).total_seconds()
+            timetowait = int(timetowait) + 1
+            if timetowait < 60:
+                print(f"Waiting {timetowait} seconds before making the next API call.")
+                sleep_with_progress(timetowait)
+
             assert txt_file.split(".")[0] == video_file.split(".")[0]
             config["txt_filename"] = txt_file
             config["video_filename"] = video_file
@@ -84,14 +93,8 @@ def main():
             try:
                 response, usage = run_decomposition(config)
             except Exception as e:
-                print(f"{e}")
                 input("Something went wrong. Press enter to continue.")
-
-            # wait one minute before making the next API call
-            timetowait = 60 - (datetime.now() - last_API_call_timestamp).total_seconds()
-            timetowait = int(timetowait) + 1
-            print(f"Waiting for {timetowait} seconds before making the next API call.")
-            sleep_with_progress(timetowait)
+                print(f"{e}")
 
     # Single query means we want to run the query on a single file
     else:

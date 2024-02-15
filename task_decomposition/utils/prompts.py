@@ -27,5 +27,5 @@ env2description = {
 }
 
 ENV_DESCRIPTION = (
-    lambda env_name: f"""The environment is a titled {env_name} and consists {env2description[env_name]}."""
+    lambda env_name: f"""The environment is a titled {env_name} and consists {env2description[env_name]}. Do not assume the environment is a success, in other words, the robot may not have completed the task."""
 )
