@@ -29,7 +29,7 @@ def save_video_fn(frames: List, filename: str):
     """
     Save video of the frames and annotate each frame with step number.
     """
-    full_filename = DATA_VIDEOS_PATH + "/" + filename + "_annotated.mp4"
+    full_filename = DATA_VIDEOS_PATH + "/" + filename + ".mp4"
     video_writer = imageio.get_writer(full_filename, fps=20)
     for idx, frame in enumerate(frames):
         # annotate videos with step number
