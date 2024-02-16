@@ -154,95 +154,7 @@ def semantic_distance(A: str, B: str) -> float:
     return round(similarity, ROUND_DIGITS)
 
 
-def subtask_similarity(subtask_decomp_A: list, subtask_decomp_B: list) -> None:
-    """
-    This function calculates the similarity between two subtasks.
-    The metric follows the transitive property as sim(A, B) = sim(B, A)
-    """
-    # Assumptions
-    assert len(subtask_decomp_A) > 0 and len(subtask_decomp_B) > 0
-    assert subtask_decomp_A[0][START_IDX] == subtask_decomp_B[0][START_IDX]
-    assert subtask_decomp_A[-1][END_IDX] == subtask_decomp_B[-1][END_IDX]
-    # TODO: assert subtask_decomp_A and subtask_decomp_B are non-overlapping
-
-    weight_temporal = 0.5
-    weight_semantic = 0.5
-
-    N = subtask_decomp_A[-1][END_IDX] + 1  # +1 because index starts at 0
-    score = 0
-
-    # debug variables
-    total_temporal = 0
-    total_relative_temporal = 0
-    total_semantic = 0
-    total_relative_semantic = 0
-    for subtask in subtask_decomp_A:
-
-        # the temporal weight of the subtask,
-        # i.e. how long this subtask is compared to the entire task
-        subtask_temporal_relative_weight = (
-            subtask[END_IDX] - subtask[START_IDX] + 1
-        ) / N
-
-        # find subtasks that intersect temporally
-        intersect_subtasks = [s for s in subtask_decomp_B if intersection(subtask, s)]
-        start_step_intersectin = intersect_subtasks[0][START_IDX]
-        end_step_intersectin = intersect_subtasks[-1][END_IDX]
-        N_intersect = end_step_intersectin - start_step_intersectin + 1
-
-        ### TEMPORAL SIMILARITY ###
-        # IOUs = np.sum([get_IOU(subtask, s) for s in intersect_subtasks])
-        # relative_IOUs = IOUs * subtask_temporal_relative_weight
-        temporal = 0
-        relative_temporal = 0
-        for s in intersect_subtasks:
-            s_relative_weight = (s[END_IDX] - s[START_IDX] + 1) / N_intersect
-            temporal += get_IOU(subtask, s)
-            relative_temporal += get_IOU(subtask, s) * subtask_temporal_relative_weight
-
-        ### SEMANTIC SIMILARITY ###
-        relative_semantic_score = 0
-        for s in intersect_subtasks:
-            s_relative_weight = (s[END_IDX] - s[START_IDX] + 1) / N_intersect
-            relative_semantic_score += (
-                compare_description_similarity(
-                    subtask[SUBTASK_NAME_IDX], s[SUBTASK_NAME_IDX]
-                )
-                * s_relative_weight
-            )
-
-        ### COMBINED SCORE ###
-        subtask_score = (
-            weight_temporal * total_relative_temporal
-            + weight_semantic * relative_semantic_score
-        )
-        score += subtask_score
-
-        # extras to debug
-        total_temporal += temporal
-        total_relative_temporal += relative_temporal
-        total_semantic += relative_semantic_score
-        total_relative_semantic += total_semantic * subtask_temporal_relative_weight
-
-        if True:
-            print(f" IOUs: {[get_IOU(subtask, s) for s in intersect_subtasks]}")
-            print(f" Temporal relative weight: {subtask_temporal_relative_weight}")
-            print(f" Relative IOU: {total_relative_temporal}")
-            # print(f" Semantic scores: {semantic_scores}")
-            # print(f" Relative BERT score: {relative_BERT_score}")
-            # print(f" temporal relative weight: {subtask_temporal_relative_weight}")
-            # print(f" subtask score: {subtask_score}")
-            print(f" ")
-
-    print(f"Total temporal: {total_temporal}")
-    print(f"Total relative temporal: {total_relative_temporal}")
-    print(f"Total semantic: {total_semantic}")
-    print(f"Total relative semantic: {total_relative_semantic}")
-
-    return score
-
-
-def subtask_similarity2(
+def subtask_similarity(
     subtask_decomp_A: list, subtask_decomp_B: list, DEBUG: bool = True
 ) -> float:
     """Com"""
@@ -301,10 +213,10 @@ def test():
     print(gpt_subtask_decomposition)
     print(" ")
 
-    score1 = subtask_similarity2(subtask_decomposition, gpt_subtask_decomposition)
+    score1 = subtask_similarity(subtask_decomposition, gpt_subtask_decomposition)
     print(f"Score1: {score1}")
 
-    score2 = subtask_similarity2(gpt_subtask_decomposition, subtask_decomposition)
+    score2 = subtask_similarity(gpt_subtask_decomposition, subtask_decomposition)
     print(f"Score2: {score2}")
 
 
