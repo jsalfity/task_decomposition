@@ -4,46 +4,34 @@ gpt_model: "gpt-4-vision-preview"
 
 save_response: True
 multiple_queries: True
-
-## STACK ##
-env_name: Stack
-txt_filename: Stack*
-video_filename: Stack*
 use_txt: True
 use_video: True
-frame_step: 2
-resize_frames: 256
+
+## STACK ##
+# env_name: Stack
+# txt_filename: Stack*
+# video_filename: Stack*
+# resize_frames: 256
 
 ## LIFT ##
-# gpt_model: "gpt-4-vision-preview"
-# env_name: lift
-# use_txt: True
-# txt_filename: lift.txt
-# use_video: True
-# video_filename: lift
-# frame_step: 2
+# env_name: Lift
+# txt_filename: Lift*
+# video_filename: Lift*
 # resize_frames: 256
 
 ##  PICKNPLACE   ##
-# gpt_model: "gpt-4-vision-preview"
-# env_name: picknplace
-# use_txt: True
-# txt_filename: picknplace.txt
-# use_video: True
-# video_filename: picknplace
-# frame_step: 10
+# env_name: PickPlace
+# txt_filename: PickPlace_20240213-110236_0.txt
+# video_filename: PickPlace_20240213-110236_0.mp4
+# frame_step: 3
 # resize_frames: 256
 
 ##  OPEN DOOR   ##
-# gpt_model: "gpt-4-vision-preview"
-# env_name: open_door
-# use_txt: True
-# txt_filename: open_door.txt
-# use_frames: True
-# frames: open_door
-# frame_step: 2
-# resize_frames: 256
-# save_response: True
+env_name: Door
+txt_filename: Door*
+video_filename: Door*
+frame_step: 5
+resize_frames: 256
 
 ##  TOOL HANG  ##
 # gpt_model: "gpt-4-vision-preview"
