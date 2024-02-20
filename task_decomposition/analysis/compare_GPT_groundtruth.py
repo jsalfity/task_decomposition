@@ -156,11 +156,13 @@ def semantic_distance(A: str, B: str) -> float:
 
 def subtask_similarity(
     subtask_decomp_A: list, subtask_decomp_B: list, DEBUG: bool = True
-) -> float:
-    """Com"""
+) -> dict:
+    """
+    This function computes the similarity between two subtask decompositions.
+    """
     assert len(subtask_decomp_A) > 0 and len(subtask_decomp_B) > 0
-    assert subtask_decomp_A[0][START_IDX] == subtask_decomp_B[0][START_IDX]
-    assert subtask_decomp_A[-1][END_IDX] == subtask_decomp_B[-1][END_IDX]
+    # assert subtask_decomp_A[0][START_IDX] == subtask_decomp_B[0][START_IDX]
+    # assert subtask_decomp_A[-1][END_IDX] == subtask_decomp_B[-1][END_IDX]
 
     TEMPORAL_WEIGHT = 0.5
     SEMANTIC_WEIGHT = 0.5

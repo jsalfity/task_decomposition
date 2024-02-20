@@ -100,7 +100,8 @@ def main():
     else:
         txt_file = config["txt_filename"]
         video_file = config["video_filename"]
-        assert txt_file.split(".")[0] == video_file.split(".")[0]
+        if config["use_txt_file"] and config["use_video_file"]:
+            assert txt_file.split(".")[0] == video_file.split(".")[0]
         config["demo_id"] = video_file.split(".")[0]
         try:
             response, usage = run_decomposition(config=config)
