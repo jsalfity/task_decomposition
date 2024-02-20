@@ -179,8 +179,8 @@ def run_demo(demo_config: dict, filename: str):
     print(" Done Running Simulation.")
     save_video_fn(frames=frames, filename=filename) if save_video else None
     gpt_annotate_video_fn(frames=frames, filename=filename) if gpt_annotate else None
-    save_df_to_txt(df=df, filename=filename) if save_txt else None
-    save_df_to_txt(df=gt_df, filename=filename + "_gt") if save_gt else None
+    save_df_to_txt(df=df, filename=filename, kind="raw") if save_txt else None
+    save_df_to_txt(df=gt_df, filename=filename + "_gt", kind="gt") if save_gt else None
 
 
 def main():

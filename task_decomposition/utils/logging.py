@@ -7,8 +7,12 @@ import imageio
 
 import robosuite as suite
 
-from task_decomposition.paths import DATA_TXT_PATH, DATA_VIDEOS_PATH
-from task_decomposition.data.gpt_outputs import GPT_OUTPUTS
+from task_decomposition.paths import (
+    DATA_GT_TXT_PATH,
+    DATA_RAW_TXT_PATH,
+    DATA_VIDEOS_PATH,
+    CUSTOM_GPT_OUTPUT_PATH,
+)
 
 FONT = cv2.FONT_HERSHEY_SIMPLEX
 
@@ -17,12 +21,19 @@ def make_env(config):
     return suite.make(**config)
 
 
-def save_df_to_txt(df: pd.DataFrame, filename):
+def save_df_to_txt(df: pd.DataFrame, filename, kind):
     """
     Dump pandas dataframe to file
     """
+    if kind == "raw":
+        savepath = DATA_RAW_TXT_PATH
+    elif kind == "gt":
+        savepath = DATA_GT_TXT_PATH
+    else:
+        raise ValueError("Category must be 'raw' or 'gt'")
+
     filename = filename + ".txt" if filename.split(".")[-1] != "txt" else None
-    df.to_csv(DATA_TXT_PATH + "/" + filename, sep="\t", index=False)
+    df.to_csv(savepath + "/" + filename, sep="\t", index=False)
 
 
 def save_video_fn(frames: List, filename: str):
@@ -56,7 +67,7 @@ def get_annotation(idx: int, filename: str):
         (21, 38, "hold the cube steady", 2.2)
     ]
     """
-    response = GPT_OUTPUTS[filename]
+    response = CUSTOM_GPT_OUTPUT_PATH[filename]
     for start, end, annotation, stage in response:
         if idx >= start and idx <= end:
             return annotation
