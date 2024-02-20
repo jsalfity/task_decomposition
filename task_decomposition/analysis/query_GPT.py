@@ -57,6 +57,9 @@ def run_decomposition(config: dict):
     return response, usage
 
 
+WAITTIME = 60
+
+
 def main():
     with open(GPT_QUERY_CONFIG_YAML, "r") as file:
         config = yaml.safe_load(file)
@@ -77,18 +80,20 @@ def main():
         # For mulitiple files, we want to run the same query on all files
         last_API_call_timestamp = datetime.now() - timedelta(seconds=1000)
         for txt_file, video_file in zip(env_name_txt_files, env_name_video_files):
-
-            # check if we need to wait before making the next API call
-            timetowait = 60 - (datetime.now() - last_API_call_timestamp).total_seconds()
-            timetowait = int(timetowait) + 1
-            if timetowait < 60:
-                print(f"Waiting {timetowait} seconds before making the next API call.")
-                sleep_with_progress(timetowait)
-
             assert txt_file.split(".")[0] == video_file.split(".")[0]
             config["txt_filename"] = txt_file
             config["video_filename"] = video_file
             config["demo_id"] = txt_file.split(".")[0]
+
+            # check if we need to wait before making the next API call
+            timetowait = (
+                WAITTIME - (datetime.now() - last_API_call_timestamp).total_seconds()
+            )
+            timetowait = int(timetowait) + 1
+            if timetowait < WAITTIME:
+                print(f"Waiting {timetowait} seconds before making the next API call.")
+                sleep_with_progress(timetowait)
+
             last_API_call_timestamp = datetime.now()
             try:
                 response, usage = run_decomposition(config)
