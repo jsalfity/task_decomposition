@@ -93,6 +93,7 @@ def stack_state_machine(
         stage_counter += 1
         if stage_counter >= 5:
             action[2] = 0
+            action = False  # end the episode
 
     return action, stage, stage_counter, subtask
 
@@ -139,8 +140,9 @@ def lift_state_machine(
         action[2] = 0.25
         action[-1] = 1
         stage_counter += 1
-        if stage_counter >= 10:
-            action[2] = 0
+        if stage_counter >= 15:
+            # action[2] = 0
+            action = False  # end the episode
 
     return action, stage, stage_counter, subtask
 
@@ -266,30 +268,6 @@ def pickplace_state_machine(
         action[:3] *= 10
 
     if stage == 5:
-        action[:3] = goal_pos + np.array([0, 0, 0.05]) - obj_pos
-        action[-1] = 1
-        if (action[:3] ** 2).sum() < 0.0001:
-            stage = 6
-            stage_counter = 0
-            input("stage 5 -- unlabeled")
-        action[:3] *= 10
-
-    if stage == 6:
-        action[:] = 0
-        action[-1] = -1
-        stage_counter += 1
-        if stage_counter == 8:
-            stage = 7
-            stage_counter = 0
-            input("stage 6 -- unlabeled")
-
-    if stage == 7:
-        action[:] = 0
-        action[2] = 1
-        action[-1] = -1
-        stage_counter += 1
-        if stage_counter >= 5:
-            action[2] = 0
-            input("stage 7 -- unlabeled")
+        action = False  # end the episode
 
     return action, stage, stage_counter, subtask
