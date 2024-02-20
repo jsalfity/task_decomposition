@@ -155,6 +155,8 @@ def run_demo(demo_config: dict, filename: str):
     frames = []
     while not done:
         action, stage, stage_counter, subtask = state_machine(env, stage, stage_counter)
+        if action is False:
+            break
         obs, reward, done, info = env.step(action)
         frame = np.flip(obs["frontview_image"], axis=0)
         frames.append(frame)
