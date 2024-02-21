@@ -10,4 +10,4 @@ DATA_VIDEOS_PATH = cd + "/data/videos"
 
 GPT_QUERY_CONFIG_YAML = cd + "/analysis/gpt_query_config.yaml"
 GPT_OUTPUT_PATH = cd + "/data/gpt_outputs"
-CUSTOM_GPT_OUTPUT_PATH = lambda f: cd + f"/data/gpt_outputs/{f}.json"
+CUSTOM_GPT_OUTPUT_PATH = lambda env, runid: cd + f"/data/gpt_outputs/{env}/{runid}.json"

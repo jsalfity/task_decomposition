@@ -17,13 +17,15 @@ from task_decomposition.paths import (
     DATA_VIDEOS_PATH,
 )
 
+WAITTIME = 60  # [seconds] the waittime to make the next API call
+
 
 def sleep_with_progress(n):
     for i in tqdm(range(n)):
         sleep(1)
 
 
-def run_decomposition(config: dict):
+def run_decomposition(config: dict, verbose=False):
     """ """
     timestamp = datetime.now().strftime("%d-%m-%Y_%H:%M")
 
@@ -43,21 +45,22 @@ def run_decomposition(config: dict):
 
     # append to json file
     if config["save_response"]:
-        with open(CUSTOM_GPT_OUTPUT_PATH(config["demo_id"]), "a") as f:
+        savepath = CUSTOM_GPT_OUTPUT_PATH(config["env_name"], config["demo_id"])
+        if config["use_txt"] and config["use_video"]:
+            savepath = savepath + "/textvideo"
+        with open(savepath, "a") as f:
             f.write("\n" + json.dumps(data) + "\n")
+        print("Saved to:" + savepath)
 
-    print(f"GPT Response: ")
-    print("==========================")
-    print(response)
-    print("==========================")
-    print(f"usage: {usage}")
-    print(f"This request costs: ${usage_cost}")
-    if config["save_response"]:
-        print("Saved to:" + CUSTOM_GPT_OUTPUT_PATH(config["demo_id"]))
+    if verbose:
+        print(f"GPT Response: ")
+        print("==========================")
+        print(response)
+        print("==========================")
+        print(f"usage: {usage}")
+        print(f"This request costs: ${usage_cost}")
+
     return response, usage
-
-
-WAITTIME = 60
 
 
 def main():
@@ -78,6 +81,7 @@ def main():
         env_name_video_files.sort(), env_name_txt_files.sort()
 
         # For mulitiple files, we want to run the same query on all files
+        failed_calls = []
         last_API_call_timestamp = datetime.now() - timedelta(seconds=1000)
         for txt_file, video_file in zip(env_name_txt_files, env_name_video_files):
             assert txt_file.split(".")[0] == video_file.split(".")[0]
@@ -98,8 +102,13 @@ def main():
             try:
                 response, usage = run_decomposition(config)
             except Exception as e:
-                input("Something went wrong. Press enter to continue.")
+                print(f"Error calling {config['txt_filename']}. Skipping...")
                 print(f"{e}")
+                failed_calls.append(config["txt_filename"])
+
+        if len(failed_calls) > 0:
+            print("The following files failed to call the API:")
+            pprint(failed_calls)
 
     # Single query means we want to run the query on a single file
     else:
