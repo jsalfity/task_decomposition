@@ -1,4 +1,3 @@
-# %%
 import ast
 import json
 import numpy as np
@@ -22,7 +21,6 @@ END_IDX = 1
 SUBTASK_NAME_IDX = 2
 
 
-# %%
 def extract_subtask_from_groundtruth_file(filepath: str) -> list:
     """
     This function extracts the subtask from the groundtruth file
@@ -104,7 +102,18 @@ def extract_subtask_from_gpt_output_file(filepath: str) -> list:
     return subtask_decomposition
 
 
-# %%
+def extract_subtask_from_video_llava_file(filepath: str) -> list:
+    """
+    This function extracts the subtask from the video_llava file.
+    The video_llava file is a json, with the field "response" containing the output of the gpt model.
+    """
+    # read the json file and load as a dictionary
+    with open(filepath, "r") as f:
+        data = json.load(f)
+
+    return data["subtask_decomposition"]
+
+
 def intersection(subtask_A: tuple, subtask_B: tuple) -> bool:
     """
     This function checks if two subtasks intersect.
@@ -156,11 +165,13 @@ def semantic_distance(A: str, B: str) -> float:
 
 def subtask_similarity(
     subtask_decomp_A: list, subtask_decomp_B: list, DEBUG: bool = True
-) -> float:
-    """Com"""
+) -> dict:
+    """
+    This function computes the similarity between two subtask decompositions.
+    """
     assert len(subtask_decomp_A) > 0 and len(subtask_decomp_B) > 0
-    assert subtask_decomp_A[0][START_IDX] == subtask_decomp_B[0][START_IDX]
-    assert subtask_decomp_A[-1][END_IDX] == subtask_decomp_B[-1][END_IDX]
+    # assert subtask_decomp_A[0][START_IDX] == subtask_decomp_B[0][START_IDX]
+    # assert subtask_decomp_A[-1][END_IDX] == subtask_decomp_B[-1][END_IDX]
 
     TEMPORAL_WEIGHT = 0.5
     SEMANTIC_WEIGHT = 0.5
@@ -170,7 +181,13 @@ def subtask_similarity(
     temporal_score = 0
     semantic_score = 0
     for subtask_a in subtask_decomp_A:
+        # ERROR CHECK
+        if subtask_a[END_IDX] < subtask_a[START_IDX]:
+            return {"temporal": -1, "semantic": -1, "total": -1}
         for subtask_b in subtask_decomp_B:
+            if subtask_b[END_IDX] < subtask_b[START_IDX]:
+                return {"temporal": -1, "semantic": -1, "total": -1}
+
             if intersection(subtask_a, subtask_b):
                 IOU = get_IOU(subtask_a, subtask_b)
                 _temporal = IOU
@@ -181,6 +198,7 @@ def subtask_similarity(
                     * IOU
                 )
                 # Apply weight based on intersection length relative to total task length
+                # Combined window length
                 temporal_weight = (
                     max(subtask_a[END_IDX], subtask_b[END_IDX])
                     - min(subtask_a[START_IDX], subtask_b[START_IDX])
@@ -203,7 +221,6 @@ def subtask_similarity(
     return score
 
 
-# %%
 def test():
     filepath = DATA_GT_TXT_PATH + "/Lift_20240213-110117_5_gt.txt"
     subtask_decomposition = extract_subtask_from_groundtruth_file(filepath)
