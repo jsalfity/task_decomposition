@@ -183,6 +183,7 @@ def subtask_similarity(
                     * IOU
                 )
                 # Apply weight based on intersection length relative to total task length
+                # Combined window length
                 temporal_weight = (
                     max(subtask_a[END_IDX], subtask_b[END_IDX])
                     - min(subtask_a[START_IDX], subtask_b[START_IDX])

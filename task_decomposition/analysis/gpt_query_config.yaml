@@ -4,13 +4,13 @@ gpt_model: "gpt-4-vision-preview"
 
 save_response: True
 multiple_queries: True
-use_txt: True
-use_video: False
+use_txt: False
+use_video: True
 
 ## STACK ##
 # env_name: Stack
-# txt_filename: Stack*
-# video_filename: Stack*
+# txt_filename: Stack_20240220-130954_28.txt
+# video_filename: Stack_20240220-130954_28.mp4
 # resize_frames: 256
 # frame_step: 2
 
@@ -23,7 +23,7 @@ use_video: False
 ##  PICKNPLACE   ##
 env_name: PickPlace
 txt_filename: PickPlace*
-video_filename: PickPlace&
+video_filename: PickPlace*
 frame_step: 3
 resize_frames: 256
 
@@ -31,7 +31,7 @@ resize_frames: 256
 # env_name: Door
 # txt_filename: Door*
 # video_filename: Door*
-# frame_step: 3
+# frame_step: 2
 # resize_frames: 256
 
 ##  TOOL HANG  ##
