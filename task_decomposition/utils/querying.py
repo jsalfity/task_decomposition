@@ -1,15 +1,18 @@
 import os
-import openai
 import csv
-import pandas as pd
 from typing import Union
+import pandas as pd
 import cv2
 import base64
+
+import openai
+import google.generativeai as genai
 
 from task_decomposition.paths import DATA_RAW_TXT_PATH, DATA_VIDEOS_PATH
 
 
 openai.api_key = os.getenv("OPENAI_API_KEY")
+genai.configure(api_key=os.getenv("GOOGLE_API_KEY"))
 
 from task_decomposition.utils.prompts import (
     TASK_DESCRIPTION,
@@ -18,19 +21,30 @@ from task_decomposition.utils.prompts import (
     ENV_DESCRIPTION,
 )
 
-MAX_TOKENS = 2000
+MAX_TOKENS = 20000
 
 
-def get_completion(prompt: str, model: str) -> Union[dict, str]:
+def get_completion(prompt: str, llm_model: str) -> Union[dict, str]:
     """"""
-    messages = [{"role": "user", "content": prompt}]
+    if llm_model == "gpt-4-vision-preview":
+        messages = [{"role": "user", "content": prompt}]
 
-    API_response = openai.ChatCompletion.create(
-        model=model, messages=messages, temperature=0, max_tokens=MAX_TOKENS
-    )
+        API_response = openai.ChatCompletion.create(
+            model=llm_model, messages=messages, temperature=0, max_tokens=MAX_TOKENS
+        )
 
-    response = API_response.choices[0].message["content"]
-    usage = API_response.usage
+        response = API_response.choices[0].message["content"]
+        usage = API_response.usage
+
+    elif llm_model == "gemini-pro":
+        model = genai.GenerativeModel(llm_model)
+        response = model.generate_content(prompt)
+        usage = {}
+
+    elif llm_model == "gemini-pro-vision":
+        response = "Not implemented"
+        usage = {}
+
     return response, usage
 
 
