@@ -36,14 +36,16 @@ def get_completion(prompt: str, llm_model: str) -> Union[dict, str]:
         response = API_response.choices[0].message["content"]
         usage = API_response.usage
 
-    elif llm_model == "gemini-pro":
+    elif llm_model == "gemini-pro" or llm_model == "gemini-pro-vision":
         model = genai.GenerativeModel(llm_model)
         response = model.generate_content(prompt)
         usage = {}
 
-    elif llm_model == "gemini-pro-vision":
-        response = "Not implemented"
-        usage = {}
+    else:
+        raise NotImplementedError
+    # elif llm_model == "gemini-pro-vision":
+    #     response = "Not implemented"
+    #     usage = {}
 
     return response, usage
 
@@ -99,9 +101,8 @@ def get_prompt(config: dict) -> str:
         PROMPT += data_text
 
     if config["use_video"]:
-        video = cv2.VideoCapture(
-            os.path.join(DATA_VIDEOS_PATH, config["video_filename"])
-        )
+        video_path = os.path.join(DATA_VIDEOS_PATH, config["video_filename"])
+        video = cv2.VideoCapture(video_path)
         base64Frames = []
         while video.isOpened():
             success, frame = video.read()
@@ -114,14 +115,41 @@ def get_prompt(config: dict) -> str:
 
         # slices the frames
         base64Frames = base64Frames[start_frame:end_frame:frame_step]
-        # Need to add a lambda function in the prompt messages
-        # https://cookbook.openai.com/examples/gpt_with_vision_for_video_understanding
-        PROMPT = [
-            PROMPT + FRAME_DATA_DESCRIPTION,
-            *map(
-                lambda x: {"image": x, "resize": config["resize_frames"]},
-                base64Frames,
-            ),
-        ]
+        if config["llm_model"] == "gpt-4-vision-preview":
+            # Need to add a lambda function in the prompt messages
+            # https://cookbook.openai.com/examples/gpt_with_vision_for_video_understanding
+            PROMPT = [
+                PROMPT + FRAME_DATA_DESCRIPTION,
+                *map(
+                    lambda x: {"image": x, "resize": config["resize_frames"]},
+                    base64Frames,
+                ),
+            ]
+        elif config["llm_model"] == "gemini-pro-vision":
+            ## This is to upload a video, but its not working
+            # base64video = base64.b64encode(open(video_path, "rb").read()).decode(
+            #     "utf-8"
+            # )
+            # PROMPT = {
+            #     "parts": [
+            #         {
+            #             "text": PROMPT + FRAME_DATA_DESCRIPTION,
+            #             "inline_data": {
+            #                 "mime_type": "video/mp4",
+            #                 "data": base64video,
+            #             },
+            #         }
+            #     ],
+            # }
+
+            ## This is to upload images, but only accepting 16 at a time.
+            N_FRAMES_ACCEPTED = 16
+            PROMPT = {
+                "parts": [{"text": PROMPT + FRAME_DATA_DESCRIPTION}]
+                + [
+                    {"inline_data": {"mime_type": "image/jpeg", "data": frame_data}}
+                    for frame_data in base64Frames[:N_FRAMES_ACCEPTED]
+                ]
+            }
 
     return PROMPT
