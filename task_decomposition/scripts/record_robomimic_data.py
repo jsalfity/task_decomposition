@@ -39,9 +39,7 @@ def get_data_to_record(env_name: str):
     else:
         raise ValueError(f"Environment {env_name} has no defined data to record.")
 
-    return (
-        ["step", "sub_task"] + actions_to_record + obs_to_record + meta_data_to_record
-    )
+    return ["step"] + actions_to_record + obs_to_record + meta_data_to_record
 
 
 def query_sim_for_data(env, desired_obs):
@@ -95,19 +93,20 @@ def extract_trajectory(env, initial_state, states, actions, done_mode):
 
     data_to_record = get_data_to_record(env_name=env.name)
     df = pd.DataFrame(columns=get_data_to_record(env_name=env.name))
+    gt_df = pd.DataFrame(columns=["step", "subtask", "stage"])
 
     traj_len = states.shape[0]
     frames = []
 
     if env.name == "NutAssemblySquare":
-        sub_tasks = [
+        subtask_list = [
             "Reach for the Square Nut",
             "Grasp the Square Nut",
             "Align the Square Nut with the Squre Peg",
             "Insert the Square Nut",
         ]
     elif env.name == "ToolHang":
-        sub_tasks = [
+        subtask_list = [
             "Reach for the Frame",
             "Grasp the Frame",
             "Align the Frame with the Stand",
@@ -153,7 +152,9 @@ def extract_trajectory(env, initial_state, states, actions, done_mode):
                     query_sim_for_data(env, desired_obs=o), 2
                 ).tolist()
 
-        # Advange the stage
+        df.loc[k] = row_data
+
+        # Advange the stage for ground truth label
         if env.name == "NutAssemblySquare":
             if stage == 0 and actions[k][6] > 0:
                 stage = 1
@@ -177,13 +178,10 @@ def extract_trajectory(env, initial_state, states, actions, done_mode):
             elif stage == 6 and actions[k][6] < 0:
                 stage = 7
 
-        # Infer sub_task
-        row_data["sub_task"] = sub_tasks[stage]
+        gt_row_data = {"step": k, "subtask": subtask_list[stage], "stage": stage}
+        gt_df.loc[k] = gt_row_data
 
-        df.loc[k] = row_data
-
-    print("Done Running Simulation.")
-    return df, frames
+    return df, gt_df, frames
 
 
 def record_dataset(args):
@@ -200,6 +198,7 @@ def record_dataset(args):
     )
 
     save_txt = True if args.save_txt == 1 else False
+    save_gt = True if args.save_gt == 1 else False
     save_video = True if args.save_video == 1 else False
     print("==== Using environment with the following metadata ====")
     print(json.dumps(env.serialize(), indent=4))
@@ -234,7 +233,7 @@ def record_dataset(args):
         actions = f["data/{}/actions".format(ep)][()]
         timenow = datetime.now().strftime("%Y%m%d-%H%M%S")
         idx = timenow + f"_{idx}"
-        df, frames = extract_trajectory(
+        df, gt_df, frames = extract_trajectory(
             env=env,
             initial_state=initial_state,
             states=states,
@@ -244,8 +243,14 @@ def record_dataset(args):
 
         # save data
         filename = env.name + f"_{idx}"
+        print(" Done Running Simulation.")
         save_video_fn(frames=frames, filename=filename) if save_video else None
-        save_df_to_txt(df=df, filename=filename, kind="gt") if save_txt else None
+        save_df_to_txt(df=df, filename=filename, kind="raw") if save_txt else None
+        (
+            save_df_to_txt(df=gt_df, filename=filename + "_gt", kind="gt")
+            if save_gt
+            else None
+        )
 
 
 if __name__ == "__main__":
@@ -253,8 +258,8 @@ if __name__ == "__main__":
     parser.add_argument(
         "--dataset",
         type=str,
-        default=None,
-        required=True,
+        default="/Users/jonathansalfity/Documents/dev/task_decomposition/task_decomposition/data/robomimic/tool_hang/demo_v141.hdf5",
+        # required=True,
         help="path to input hdf5 dataset",
     )
 
@@ -270,6 +275,13 @@ if __name__ == "__main__":
         type=int,
         default=1,
         help="(Required) but default to True, save txt files",
+    )
+
+    parser.add_argument(
+        "--save_gt",
+        type=int,
+        default=1,
+        help="(Required) but default to True, save ground truth files",
     )
 
     parser.add_argument(
