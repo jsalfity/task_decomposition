@@ -5,7 +5,7 @@ from pprint import pprint
 from typing import Union
 
 from task_decomposition.utils.plotting import visualize_trajectory_decompositions
-from task_decomposition.paths import DATA_GT_TXT_PATH, GPT_OUTPUT_PATH
+from task_decomposition.paths import DATA_GT_TXT_PATH, LLM_OUTPUT_PATH
 
 from transformers import BertTokenizer, BertModel
 from scipy.spatial.distance import cosine
@@ -81,37 +81,67 @@ def extract_subtask_from_groundtruth_file(filepath: str) -> list:
     return subtask_decomposition
 
 
-def extract_subtask_from_gpt_output_file(filepath: str) -> list:
+# def extract_subtask_from_gpt_output_file(filepath: str) -> list:
+#     """
+#     This function extracts the subtask from the gpt output file.
+#     The gpt output file is a json, with the field "response" containing the output of the gpt model.
+#     """
+#     # read the json file and load as a dictionary
+#     with open(filepath, "r") as f:
+#         data = json.load(f)
+
+#     response = data["response"]
+#     start = response.find("subtask_decomposition = [") + len(
+#         "subtask_decomposition = ["
+#     )
+#     end = response.find("]", start)
+#     list_str = response[start:end]
+
+#     # Converting string representation of list to actual Python list
+#     subtask_decomposition = ast.literal_eval("[" + list_str + "]")
+#     return subtask_decomposition
+
+
+# def extract_subtask_from_video_llava_file(filepath: str) -> list:
+#     """
+#     This function extracts the subtask from the video_llava file.
+#     The video_llava file is a json, with the field "response" containing the output of the gpt model.
+#     """
+#     # read the json file and load as a dictionary
+#     with open(filepath, "r") as f:
+#         data = json.load(f)
+
+#     return data["subtask_decomposition"]
+
+
+def extract_subtask_from_LLM_output_file(filepath: str, llm_model: str) -> list:
     """
-    This function extracts the subtask from the gpt output file.
-    The gpt output file is a json, with the field "response" containing the output of the gpt model.
+    This function extracts the subtask from the LLM output file.
+    The LLM output file is a json, with the field "response" containing the output of the LLM model.
     """
     # read the json file and load as a dictionary
     with open(filepath, "r") as f:
         data = json.load(f)
 
-    response = data["response"]
-    start = response.find("subtask_decomposition = [") + len(
-        "subtask_decomposition = ["
-    )
-    end = response.find("]", start)
-    list_str = response[start:end]
+    if "gpt" in llm_model or "gemini" in llm_model:
+        response = data["response"]
+        if "subtask_decomposition" not in response:
+            return []
+        start = response.find("subtask_decomposition = [") + len(
+            "subtask_decomposition = ["
+        )
+        end = response.find("]", start)
+        list_str = response[start:end]
 
-    # Converting string representation of list to actual Python list
-    subtask_decomposition = ast.literal_eval("[" + list_str + "]")
+        # Converting string representation of list to actual Python list
+        try:
+            subtask_decomposition = ast.literal_eval("[" + list_str + "]")
+        except:
+            subtask_decomposition = []
+    else:
+        raise NotImplementedError
+
     return subtask_decomposition
-
-
-def extract_subtask_from_video_llava_file(filepath: str) -> list:
-    """
-    This function extracts the subtask from the video_llava file.
-    The video_llava file is a json, with the field "response" containing the output of the gpt model.
-    """
-    # read the json file and load as a dictionary
-    with open(filepath, "r") as f:
-        data = json.load(f)
-
-    return data["subtask_decomposition"]
 
 
 def intersection(subtask_A: tuple, subtask_B: tuple) -> bool:
@@ -225,7 +255,7 @@ def test():
     filepath = DATA_GT_TXT_PATH + "/Lift_20240213-110117_5_gt.txt"
     subtask_decomposition = extract_subtask_from_groundtruth_file(filepath)
     print(subtask_decomposition)
-    filepath = GPT_OUTPUT_PATH + "/Lift_20240213-110117_5.json"
+    filepath = LLM_OUTPUT_PATH + "/Lift_20240213-110117_5.json"
     gpt_subtask_decomposition = extract_subtask_from_gpt_output_file(filepath)
     print(gpt_subtask_decomposition)
     print(" ")
