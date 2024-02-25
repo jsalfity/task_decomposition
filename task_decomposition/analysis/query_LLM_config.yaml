@@ -17,17 +17,16 @@ use_video: True
 # frame_step: 2
 
 ## LIFT ##
-env_name: Lift
-txt_filename: Lift*
-video_filename: Lift*
-resize_frames: 256
+# env_name: Lift
+# txt_filename: Lift*
+# video_filename: Lift*
+# resize_frames: 256
 
 ##  PICKNPLACE   ##
-# env_name: PickPlace
-# txt_filename: PickPlace*
-# video_filename: PickPlace*
-# frame_step: 1
-# resize_frames: 256
+env_name: PickPlace
+txt_filename: PickPlace*
+video_filename: PickPlace*
+resize_frames: 256
 
 ##  OPEN DOOR   ##
 # env_name: Door
