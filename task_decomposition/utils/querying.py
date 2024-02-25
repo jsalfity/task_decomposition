@@ -1,15 +1,18 @@
 import os
-import openai
 import csv
-import pandas as pd
 from typing import Union
+import pandas as pd
 import cv2
 import base64
+
+import openai
+import google.generativeai as genai
 
 from task_decomposition.paths import DATA_RAW_TXT_PATH, DATA_VIDEOS_PATH
 
 
 openai.api_key = os.getenv("OPENAI_API_KEY")
+genai.configure(api_key=os.getenv("GOOGLE_API_KEY"))
 
 from task_decomposition.utils.prompts import (
     TASK_DESCRIPTION,
@@ -18,19 +21,32 @@ from task_decomposition.utils.prompts import (
     ENV_DESCRIPTION,
 )
 
-MAX_TOKENS = 2000
+MAX_TOKENS = 20000
 
 
-def get_completion(prompt: str, model: str) -> Union[dict, str]:
+def get_completion(prompt: str, llm_model: str) -> Union[dict, str]:
     """"""
-    messages = [{"role": "user", "content": prompt}]
+    if llm_model == "gpt-4-vision-preview":
+        messages = [{"role": "user", "content": prompt}]
 
-    API_response = openai.ChatCompletion.create(
-        model=model, messages=messages, temperature=0, max_tokens=MAX_TOKENS
-    )
+        API_response = openai.ChatCompletion.create(
+            model=llm_model, messages=messages, temperature=0, max_tokens=MAX_TOKENS
+        )
 
-    response = API_response.choices[0].message["content"]
-    usage = API_response.usage
+        response = API_response.choices[0].message["content"]
+        usage = API_response.usage
+
+    elif llm_model == "gemini-pro" or llm_model == "gemini-pro-vision":
+        model = genai.GenerativeModel(llm_model)
+        response = model.generate_content(prompt)
+        usage = {}
+
+    else:
+        raise NotImplementedError
+    # elif llm_model == "gemini-pro-vision":
+    #     response = "Not implemented"
+    #     usage = {}
+
     return response, usage
 
 
@@ -85,9 +101,8 @@ def get_prompt(config: dict) -> str:
         PROMPT += data_text
 
     if config["use_video"]:
-        video = cv2.VideoCapture(
-            os.path.join(DATA_VIDEOS_PATH, config["video_filename"])
-        )
+        video_path = os.path.join(DATA_VIDEOS_PATH, config["video_filename"])
+        video = cv2.VideoCapture(video_path)
         base64Frames = []
         while video.isOpened():
             success, frame = video.read()
@@ -100,14 +115,41 @@ def get_prompt(config: dict) -> str:
 
         # slices the frames
         base64Frames = base64Frames[start_frame:end_frame:frame_step]
-        # Need to add a lambda function in the prompt messages
-        # https://cookbook.openai.com/examples/gpt_with_vision_for_video_understanding
-        PROMPT = [
-            PROMPT + FRAME_DATA_DESCRIPTION,
-            *map(
-                lambda x: {"image": x, "resize": config["resize_frames"]},
-                base64Frames,
-            ),
-        ]
+        if config["llm_model"] == "gpt-4-vision-preview":
+            # Need to add a lambda function in the prompt messages
+            # https://cookbook.openai.com/examples/gpt_with_vision_for_video_understanding
+            PROMPT = [
+                PROMPT + FRAME_DATA_DESCRIPTION,
+                *map(
+                    lambda x: {"image": x, "resize": config["resize_frames"]},
+                    base64Frames,
+                ),
+            ]
+        elif config["llm_model"] == "gemini-pro-vision":
+            ## This is to upload a video, but its not working
+            # base64video = base64.b64encode(open(video_path, "rb").read()).decode(
+            #     "utf-8"
+            # )
+            # PROMPT = {
+            #     "parts": [
+            #         {
+            #             "text": PROMPT + FRAME_DATA_DESCRIPTION,
+            #             "inline_data": {
+            #                 "mime_type": "video/mp4",
+            #                 "data": base64video,
+            #             },
+            #         }
+            #     ],
+            # }
+
+            ## This is to upload images, but only accepting 16 at a time.
+            N_FRAMES_ACCEPTED = 16
+            PROMPT = {
+                "parts": [{"text": PROMPT + FRAME_DATA_DESCRIPTION}]
+                + [
+                    {"inline_data": {"mime_type": "image/jpeg", "data": frame_data}}
+                    for frame_data in base64Frames[:N_FRAMES_ACCEPTED]
+                ]
+            }
 
     return PROMPT

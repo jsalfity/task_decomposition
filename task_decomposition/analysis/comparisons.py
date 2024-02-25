@@ -5,7 +5,7 @@ from pprint import pprint
 from typing import Union
 
 from task_decomposition.utils.plotting import visualize_trajectory_decompositions
-from task_decomposition.paths import DATA_GT_TXT_PATH, GPT_OUTPUT_PATH
+from task_decomposition.paths import DATA_GT_TXT_PATH, LLM_OUTPUT_PATH
 
 from transformers import BertTokenizer, BertModel
 from scipy.spatial.distance import cosine
@@ -102,16 +102,43 @@ def extract_subtask_from_gpt_output_file(filepath: str) -> list:
     return subtask_decomposition
 
 
-def extract_subtask_from_video_llava_file(filepath: str) -> list:
+def extract_subtask_from_LLM_output_file(filepath: str, llm_model: str) -> list:
     """
-    This function extracts the subtask from the video_llava file.
-    The video_llava file is a json, with the field "response" containing the output of the gpt model.
+    This function extracts the subtask from the LLM output file.
+    The LLM output file is a json, with the field "response" containing the output of the LLM model.
     """
     # read the json file and load as a dictionary
     with open(filepath, "r") as f:
         data = json.load(f)
 
-    return data["subtask_decomposition"]
+    if (
+        llm_model == "gpt-4-vision-preview"
+        or llm_model == "gpt-4-1106-preview"
+        or llm_model == "gemini-pro"
+        or llm_model == "gemini-pro-vision"
+    ):
+        response = data["response"]
+        if "subtask_decomposition" not in response:
+            return []
+        start = response.find("subtask_decomposition = [") + len(
+            "subtask_decomposition = ["
+        )
+        end = response.find("]", start)
+        list_str = response[start:end]
+
+        # Converting string representation of list to actual Python list
+        try:
+            subtask_decomposition = ast.literal_eval("[" + list_str + "]")
+        except:
+            subtask_decomposition = []
+
+    elif llm_model == "video-llava":
+        subtask_decomposition = data["subtask_decomposition"]
+
+    else:
+        raise NotImplementedError
+
+    return subtask_decomposition
 
 
 def intersection(subtask_A: tuple, subtask_B: tuple) -> bool:
@@ -124,7 +151,7 @@ def intersection(subtask_A: tuple, subtask_B: tuple) -> bool:
     return a1 <= b2 and b1 <= a2
 
 
-def get_IOU(subtask_A: tuple, subtask_B: tuple) -> float:
+def get_IOU(subtask_A: tuple, subtask_B: tuple) -> np.float64:
     a1, a2 = subtask_A[START_IDX], subtask_A[END_IDX]
     b1, b2 = subtask_B[START_IDX], subtask_B[END_IDX]
 
@@ -141,7 +168,7 @@ def get_IOU(subtask_A: tuple, subtask_B: tuple) -> float:
     # Calculate the IoU
     iou = intersection / union
 
-    return round(iou, ROUND_DIGITS)
+    return iou
 
 
 def bert_encode(text):
@@ -153,21 +180,28 @@ def bert_encode(text):
     return outputs.last_hidden_state.mean(dim=1)[0].detach().numpy()
 
 
-def semantic_distance(A: str, B: str) -> float:
+def semantic_distance(A: str, B: str) -> np.float64:
     """
     Compare the similarity between two descriptions using BERT embeddings
     """
     embedding1 = bert_encode(A)
     embedding2 = bert_encode(B)
     similarity = 1 - cosine(embedding1, embedding2)
-    return round(similarity, ROUND_DIGITS)
+    return similarity
 
 
-def subtask_similarity(
-    subtask_decomp_A: list, subtask_decomp_B: list, DEBUG: bool = True
-) -> dict:
+def subtask_similarity(subtask_decomp_A: list, subtask_decomp_B: list) -> dict:
     """
     This function computes the similarity between two subtask decompositions.
+    INPUT:
+    subtask_decomp_A: list of tuples
+    subtask_decomp_B: list of tuples
+
+    OUTPUT:
+    score: dict
+        - temporal: np.float64
+        - semantic: np.float64
+        - total: np.float64
     """
     assert len(subtask_decomp_A) > 0 and len(subtask_decomp_B) > 0
     # assert subtask_decomp_A[0][START_IDX] == subtask_decomp_B[0][START_IDX]
@@ -178,8 +212,9 @@ def subtask_similarity(
 
     # TODO: assert subtask_decomp_A and subtask_decomp_B are non-overlapping
     N = subtask_decomp_A[-1][END_IDX] + 1  # Assuming the last index is end index
-    temporal_score = 0
-    semantic_score = 0
+    temporal_scores = np.array([], dtype=np.float64)
+    semantic_scores = np.array([], dtype=np.float64)
+    interval_weights = np.array([], dtype=np.float64)
     for subtask_a in subtask_decomp_A:
         # ERROR CHECK
         if subtask_a[END_IDX] < subtask_a[START_IDX]:
@@ -189,35 +224,31 @@ def subtask_similarity(
                 return {"temporal": -1, "semantic": -1, "total": -1}
 
             if intersection(subtask_a, subtask_b):
-                IOU = get_IOU(subtask_a, subtask_b)
-                _temporal = IOU
-                _semantic = (
-                    semantic_distance(
-                        subtask_a[SUBTASK_NAME_IDX], subtask_b[SUBTASK_NAME_IDX]
-                    )
-                    * IOU
+                _IOU = get_IOU(subtask_a, subtask_b)
+                _SD = semantic_distance(
+                    subtask_a[SUBTASK_NAME_IDX], subtask_b[SUBTASK_NAME_IDX]
                 )
-                # Apply weight based on intersection length relative to total task length
-                # Combined window length
-                temporal_weight = (
+                # Combined window length normalized over entire traject length
+                _INTERVAL_WEIGHT = (
                     max(subtask_a[END_IDX], subtask_b[END_IDX])
                     - min(subtask_a[START_IDX], subtask_b[START_IDX])
                     + 1
                 ) / N
-                # semantic_weight = (
-                #     min(subtask_a[END_IDX], subtask_b[END_IDX])
-                #     - max(subtask_a[START_IDX], subtask_b[START_IDX])
-                #     + 1
-                # ) / N
-                temporal_score += _temporal * temporal_weight
-                semantic_score += (
-                    _semantic * temporal_weight
-                )  # or without IOU and just semantic_weight
+
+                temporal_scores = np.append(temporal_scores, _IOU)
+                semantic_scores = np.append(semantic_scores, _SD)
+                interval_weights = np.append(interval_weights, _INTERVAL_WEIGHT)
+
+    ## Assert everything is the same size
+    assert len(temporal_scores) == len(semantic_scores) == len(interval_weights)
 
     score = {}
-    score["temporal"] = temporal_score
-    score["semantic"] = semantic_score
-    score["total"] = TEMPORAL_WEIGHT * temporal_score + SEMANTIC_WEIGHT * semantic_score
+    sum_interval_weights = np.sum(interval_weights)
+    score["temporal"] = np.dot(temporal_scores, interval_weights) / sum_interval_weights
+    score["semantic"] = np.dot(semantic_scores, interval_weights) / sum_interval_weights
+    score["total"] = (
+        TEMPORAL_WEIGHT * score["temporal"] + SEMANTIC_WEIGHT * score["semantic"]
+    )
     return score
 
 
@@ -225,7 +256,7 @@ def test():
     filepath = DATA_GT_TXT_PATH + "/Lift_20240213-110117_5_gt.txt"
     subtask_decomposition = extract_subtask_from_groundtruth_file(filepath)
     print(subtask_decomposition)
-    filepath = GPT_OUTPUT_PATH + "/Lift_20240213-110117_5.json"
+    filepath = LLM_OUTPUT_PATH + "/Lift_20240213-110117_5.json"
     gpt_subtask_decomposition = extract_subtask_from_gpt_output_file(filepath)
     print(gpt_subtask_decomposition)
     print(" ")
