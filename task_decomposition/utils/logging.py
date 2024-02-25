@@ -21,9 +21,10 @@ def make_env(config):
     return suite.make(**config)
 
 
-def save_df_to_txt(df: pd.DataFrame, filename, kind):
+def save_df_to_txt(df: pd.DataFrame, filename: str, kind: str):
     """
     Dump pandas dataframe to file
+    kind: "raw" or "gt"
     """
     if kind == "raw":
         savepath = DATA_RAW_TXT_PATH

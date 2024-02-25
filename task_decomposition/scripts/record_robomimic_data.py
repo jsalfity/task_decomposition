@@ -258,8 +258,8 @@ if __name__ == "__main__":
     parser.add_argument(
         "--dataset",
         type=str,
-        default="/Users/jonathansalfity/Documents/dev/task_decomposition/task_decomposition/data/robomimic/tool_hang/demo_v141.hdf5",
-        # required=True,
+        default=None,  # Example: "/Users/jonathansalfity/Documents/dev/task_decomposition/task_decomposition/data/robomimic/tool_hang/demo_v141.hdf5",
+        required=True,
         help="path to input hdf5 dataset",
     )
 
