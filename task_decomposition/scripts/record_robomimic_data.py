@@ -33,13 +33,15 @@ def get_data_to_record(env_name: str):
 
     # Unique to each environment
     if env_name == "NutAssemblySquare":
-        meta_data_to_record = ["nut0_pos", "nut1_pos"]
+        meta_data_to_record = ["nut0_pos", "peg1_pos"]
     elif env_name == "ToolHang":
         meta_data_to_record = ["tool_pos", "frame_pos", "stand_pos"]
     else:
         raise ValueError(f"Environment {env_name} has no defined data to record.")
 
-    return ["step"] + actions_to_record + obs_to_record + meta_data_to_record
+    return (
+        ["step", "sub_task"] + actions_to_record + obs_to_record + meta_data_to_record
+    )
 
 
 def query_sim_for_data(env, desired_obs):
@@ -51,6 +53,10 @@ def query_sim_for_data(env, desired_obs):
             return env.env.sim.data.body_xpos[env.env.obj_body_id[env.env.nuts[0].name]]
         elif desired_obs == "nut1_pos":
             return env.env.sim.data.body_xpos[env.env.obj_body_id[env.env.nuts[1].name]]
+        elif desired_obs == "peg1_pos":
+            return env.env.sim.data.body_xpos[env.env.peg1_body_id]
+        elif desired_obs == "peg2_pos":
+            return env.env.sim.data.body_xpos[env.env.peg2_body_id]
         else:
             raise ValueError(f"Environment {env.name} has no defined data to record.")
     elif env.name == "ToolHang":
@@ -92,8 +98,29 @@ def extract_trajectory(env, initial_state, states, actions, done_mode):
 
     traj_len = states.shape[0]
     frames = []
-    for k in range(traj_len):
 
+    if env.name == "NutAssemblySquare":
+        sub_tasks = [
+            "Reach for the Square Nut",
+            "Grasp the Square Nut",
+            "Align the Square Nut with the Squre Peg",
+            "Insert the Square Nut",
+        ]
+    elif env.name == "ToolHang":
+        sub_tasks = [
+            "Reach for the Frame",
+            "Grasp the Frame",
+            "Align the Frame with the Stand",
+            "Insert the Frame into the Stand",
+            "Reach for the Tool",
+            "Grasp the Tool",
+            "Align the Tool with the Frame",
+            "Hang the Tool",
+        ]
+
+    stage = 0
+
+    for k in range(traj_len):
         obs = env.reset_to({"states": states[k]})
         frame = obs[IMAGE_VIEW_TO_RECORD]
         frames.append(frame)
@@ -119,13 +146,43 @@ def extract_trajectory(env, initial_state, states, actions, done_mode):
                 row_data[o] = np.around(actions[k], 2).tolist()
             elif o == "robot0_eef_pos":
                 row_data[o] = np.around(obs[o], 2).tolist()
+            elif o == "sub_task":
+                pass
             else:
                 row_data[o] = np.around(
                     query_sim_for_data(env, desired_obs=o), 2
                 ).tolist()
+
+        # Advange the stage
+        if env.name == "NutAssemblySquare":
+            if stage == 0 and actions[k][6] > 0:
+                stage = 1
+            elif stage == 1 and row_data["nut0_pos"][2] > 0.83:
+                stage = 2
+            elif stage == 2 and actions[k][6] < 0:
+                stage = 3
+        elif env.name == "ToolHang":
+            if stage == 0 and actions[k][6] > 0:
+                stage = 1
+            elif stage == 1 and row_data["frame_pos"][2] > 0.81:
+                stage = 2
+            elif stage == 2 and actions[k][6] < 0:
+                stage = 3
+            elif stage == 3 and row_data["frame_pos"][2] < 1:
+                stage = 4
+            elif stage == 4 and actions[k][6] > 0:
+                stage = 5
+            elif stage == 5 and row_data["tool_pos"][2] > 0.81:
+                stage = 6
+            elif stage == 6 and actions[k][6] < 0:
+                stage = 7
+
+        # Infer sub_task
+        row_data["sub_task"] = sub_tasks[stage]
+
         df.loc[k] = row_data
 
-    print(" Done Running Simulation.")
+    print("Done Running Simulation.")
     return df, frames
 
 
@@ -188,7 +245,7 @@ def record_dataset(args):
         # save data
         filename = env.name + f"_{idx}"
         save_video_fn(frames=frames, filename=filename) if save_video else None
-        save_df_to_txt(df=df, filename=filename) if save_txt else None
+        save_df_to_txt(df=df, filename=filename, kind="gt") if save_txt else None
 
 
 if __name__ == "__main__":
