@@ -106,8 +106,19 @@ def extract_trajectory(env, initial_state, states, actions, done_mode):
             "Align the Square Nut with the Squre Peg",
             "Insert the Square Nut",
         ]
+    elif env.name == "ToolHang":
+        sub_tasks = [
+            "Reach for the Frame",
+            "Grasp the Frame",
+            "Align the Frame with the Stand",
+            "Insert the Frame into the Stand",
+            "Reach for the Tool",
+            "Grasp the Tool",
+            "Align the Tool with the Frame",
+            "Hang the Tool",
+        ]
 
-        stage = 0
+    stage = 0
 
     for k in range(traj_len):
         obs = env.reset_to({"states": states[k]})
@@ -150,6 +161,21 @@ def extract_trajectory(env, initial_state, states, actions, done_mode):
                 stage = 2
             elif stage == 2 and actions[k][6] < 0:
                 stage = 3
+        elif env.name == "ToolHang":
+            if stage == 0 and actions[k][6] > 0:
+                stage = 1
+            elif stage == 1 and row_data["frame_pos"][2] > 0.81:
+                stage = 2
+            elif stage == 2 and actions[k][6] < 0:
+                stage = 3
+            elif stage == 3 and row_data["frame_pos"][2] < 1:
+                stage = 4
+            elif stage == 4 and actions[k][6] > 0:
+                stage = 5
+            elif stage == 5 and row_data["tool_pos"][2] > 0.81:
+                stage = 6
+            elif stage == 6 and actions[k][6] < 0:
+                stage = 7
 
         # Infer sub_task
         row_data["sub_task"] = sub_tasks[stage]
