@@ -191,6 +191,20 @@ def get_semantic_distance(A: str, B: str) -> np.float64:
     return similarity
 
 
+def is_valid_subtask(subtask: tuple) -> bool:
+    """
+    This function checks if a subtask is valid
+    """
+    return (
+        type(subtask[START_STEP_IDX]) is int
+        and type(subtask[END_STEP_IDX]) is int
+        and subtask[END_STEP_IDX] >= subtask[START_STEP_IDX]
+        and subtask[START_STEP_IDX] >= 0
+        and subtask[END_STEP_IDX] >= 0
+        and type(subtask[DESCRIPTION_IDX]) is str
+    )
+
+
 def get_subtask_similarity(subtask_decomp_A: list, subtask_decomp_B: list) -> dict:
     """
     This function computes the similarity between two subtask decompositions.
@@ -206,13 +220,8 @@ def get_subtask_similarity(subtask_decomp_A: list, subtask_decomp_B: list) -> di
     """
     # Error Checking
     assert len(subtask_decomp_A) > 0 and len(subtask_decomp_B) > 0
-    # assert subtask_decomp_A[0][START_STEP_IDX] == subtask_decomp_B[0][START_STEP_IDX]
-    # assert subtask_decomp_A[-1][END_STEP_IDX] == subtask_decomp_B[-1][END_STEP_IDX]
     for subtask in subtask_decomp_A + subtask_decomp_B:  # Check both lists
-        if subtask[END_STEP_IDX] < subtask[START_STEP_IDX]:
-            assert (
-                subtask[START_STEP_IDX] <= subtask[END_STEP_IDX]
-            ), "Invalid subtask: start index after end index"
+        assert is_valid_subtask(subtask), "Invalid subtask: start index after end index"
 
     temporal_scores = np.array([], dtype=np.float64)
     semantic_scores = np.array([], dtype=np.float64)
@@ -224,15 +233,12 @@ def get_subtask_similarity(subtask_decomp_A: list, subtask_decomp_B: list) -> di
 
     for subtask_a in subtask_decomp_A:
         for subtask_b in subtask_decomp_B:
-            if subtask_b[END_STEP_IDX] < subtask_b[START_STEP_IDX]:
-                return {"temporal": -1, "semantic": -1, "total": -1}
-
             if intersection(subtask_a, subtask_b):
                 _IOU = get_IOU(subtask_a, subtask_b)
                 _SD = get_semantic_distance(
                     subtask_a[DESCRIPTION_IDX], subtask_b[DESCRIPTION_IDX]
                 )
-                # Combined window length normalized over entire traject length
+                # Combined window length normalized over entire trajectory length
                 _INTERVAL_WEIGHT = (
                     max(subtask_a[END_STEP_IDX], subtask_b[END_STEP_IDX])
                     - min(subtask_a[START_STEP_IDX], subtask_b[START_STEP_IDX])
