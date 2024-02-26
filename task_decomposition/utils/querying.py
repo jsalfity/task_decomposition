@@ -8,7 +8,7 @@ import base64
 import openai
 import google.generativeai as genai
 
-from task_decomposition.paths import DATA_RAW_TXT_PATH, DATA_VIDEOS_PATH
+from task_decomposition.paths import ROBOT_TRAJ_TEXT_PATH, ROBOT_TRAJ_VIDEO_PATH
 
 
 openai.api_key = os.getenv("OPENAI_API_KEY")
@@ -21,7 +21,18 @@ from task_decomposition.utils.prompts import (
     ENV_DESCRIPTION,
 )
 
-MAX_TOKENS = 20000
+MAX_RESPONSE_TOKENS = 100
+
+
+def _get_runid_filename(config: dict, kind: str) -> str:
+    env_name = config["env_name"]
+    runid = config["robot_traj_runid"]
+    if kind == "textual":
+        return ROBOT_TRAJ_TEXT_PATH(env_name) + "/" + runid + ".txt"
+    elif kind == "video":
+        return ROBOT_TRAJ_VIDEO_PATH(env_name) + "/" + runid + ".mp4"
+    else:
+        raise ValueError("Kind must be 'textual' or 'video'")
 
 
 def get_completion(prompt: str, llm_model: str) -> Union[dict, str]:
@@ -30,7 +41,10 @@ def get_completion(prompt: str, llm_model: str) -> Union[dict, str]:
         messages = [{"role": "user", "content": prompt}]
 
         API_response = openai.ChatCompletion.create(
-            model=llm_model, messages=messages, temperature=0, max_tokens=MAX_TOKENS
+            model=llm_model,
+            messages=messages,
+            temperature=0,
+            max_tokens=MAX_RESPONSE_TOKENS,
         )
 
         response = API_response.choices[0].message["content"]
@@ -43,32 +57,19 @@ def get_completion(prompt: str, llm_model: str) -> Union[dict, str]:
 
     else:
         raise NotImplementedError
-    # elif llm_model == "gemini-pro-vision":
-    #     response = "Not implemented"
-    #     usage = {}
 
     return response, usage
 
 
-def get_data_for_prompt(config: dict) -> Union[pd.DataFrame, str]:
+def get_textual_data_for_prompt(config: dict) -> Union[pd.DataFrame, str]:
     """
     Read a csv or text file and return the data frame and text
     """
-    full_filename = DATA_RAW_TXT_PATH + "/" + config["txt_filename"]
+    full_filename = _get_runid_filename(config, kind="textual")
 
-    if full_filename.split(".")[-1] == "txt":
-        df = pd.read_csv(full_filename, delimiter="\t", encoding="utf-8")
-        with open(full_filename, "r") as f:
-            text = f.read()
-
-    elif full_filename.split(".")[-1] == "csv":
-        with open(full_filename, "r") as file:
-            csv_reader = csv.reader(file)
-            text = "\n".join(["\t".join(row) for row in csv_reader])
-        df = pd.read_csv(full_filename, encoding="utf-8")
-
-    else:
-        raise NotImplementedError
+    df = pd.read_csv(full_filename, delimiter="\t", encoding="utf-8")
+    with open(full_filename, "r") as f:
+        text = f.read()
 
     # return a subset of the data frame and txt file
     idx_step = config["txt_step"] if config["txt_step"] is not False else 1
@@ -95,13 +96,13 @@ def get_prompt(config: dict) -> str:
     end_frame = config["start_frame"] if config["end_frame"] is not False else -1
 
     if config["use_txt"]:
-        data_df, data_text = get_data_for_prompt(config)
+        data_df, data_text = get_textual_data_for_prompt(config)
         columns = str(data_df.columns.to_list())
         PROMPT += TXT_DATA_DESCRIPTION(columns)
         PROMPT += data_text
 
     if config["use_video"]:
-        video_path = os.path.join(DATA_VIDEOS_PATH, config["video_filename"])
+        video_path = _get_runid_filename(config, kind="video")
         video = cv2.VideoCapture(video_path)
         base64Frames = []
         while video.isOpened():

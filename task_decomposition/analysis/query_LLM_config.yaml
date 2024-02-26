@@ -1,62 +1,28 @@
-# llm_model: "gpt-4-vision-preview"
-# gpt_model: "gpt-4-1106-preview"
-# gpt_model: "gpt-3.5-turbo-1106"
+###### LLM Options (Choose One) ######
+llm_model: "gpt-4-vision-preview"
+# llm_model: "gpt-4-1106-preview"
+# llm_model: "gpt-3.5-turbo-1106"
 # llm_model: "gemini-pro"
-llm_model: "gemini-pro-vision"
+# llm_model: "gemini-pro-vision" # ONLY ACCEPTING 16 IMAGES AT THIS TIME :(
 
-save_response: True
-multiple_queries: True
-use_txt: False
+###### Environment Options (Choose One) ######
+env_name: ToolHang # Stack Lift PickPlace Door NutAssemblySquare
+
+multiple_queries: True # Query on all files according to llm_model and env_name
+
+### When calling invidiual files, you have to specify the file name:
+# robot_traj_runid = <env_name>_<data>-time_<>
+
+
+# Input Modality to the LLM
+use_text: True
 use_video: True
 
-## STACK ##
-# env_name: Stack
-# txt_filename: Stack*
-# video_filename: Stack*
-# resize_frames: 256
-# frame_step: 2
 
-## LIFT ##
-# env_name: Lift
-# txt_filename: Lift*
-# video_filename: Lift*
-# resize_frames: 256
+save_response: True
 
-##  PICKNPLACE   ##
-env_name: PickPlace
-txt_filename: PickPlace*
-video_filename: PickPlace*
+# Video Options
 resize_frames: 256
+frame_step: 20
+txt_step: 20
 
-##  OPEN DOOR   ##
-# env_name: Door
-# txt_filename: Door*
-# video_filename: Door*
-# frame_step: 2
-# resize_frames: 256
-
-##  TOOL HANG  ##
-# gpt_model: "gpt-4-vision-preview"
-# env_name: tool_hang
-# multiple_queries: False
-# n_queries: 10
-# N_TXT_STEPS: 680
-# N_FRAME_STEPS: 137
-# use_txt: True
-# txt_step: 1
-# txt_filename: tool_hang.txt
-# use_video: True
-# video_filename: robomimic/tool_hang/tool_hang_annotated.mp4
-# frame_step: 10
-# resize_frames: 256
-
-##  TRANSPORT ##
-# gpt_model: "gpt-4-vision-preview"
-# env_name: transport
-# use_txt: True
-# txt_step: 1
-# txt_filename: transport.txt
-# use_video: True
-# video_filename: robomimic/transport/transport_annotated.mp4
-# frame_step: 20
-# resize_frames: 256
