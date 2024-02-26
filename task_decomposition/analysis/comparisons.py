@@ -4,8 +4,7 @@ import numpy as np
 from pprint import pprint
 from typing import Union
 
-from task_decomposition.utils.plotting import visualize_trajectory_decompositions
-from task_decomposition.paths import DATA_GT_TXT_PATH, LLM_OUTPUT_PATH
+from task_decomposition.paths import ROBOT_TRAJ_GROUNDTRUTH_DATA_PATH, LLM_OUTPUT_PATH
 
 from transformers import BertTokenizer, BertModel
 from scipy.spatial.distance import cosine
@@ -253,7 +252,10 @@ def subtask_similarity(subtask_decomp_A: list, subtask_decomp_B: list) -> dict:
 
 
 def test():
-    filepath = DATA_GT_TXT_PATH + "/Lift_20240213-110117_5_gt.txt"
+    env_name = "Lift"
+    filepath = (
+        ROBOT_TRAJ_GROUNDTRUTH_DATA_PATH(env_name) + "/Lift_20240213-110117_5_gt.txt"
+    )
     subtask_decomposition = extract_subtask_from_groundtruth_file(filepath)
     print(subtask_decomposition)
     filepath = LLM_OUTPUT_PATH + "/Lift_20240213-110117_5.json"

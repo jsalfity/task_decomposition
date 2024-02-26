@@ -43,11 +43,34 @@ python scripts/record_robomimic_data.py --dataset path/to/robomimic/demo_v141.hd
 
 (Hacky) To modify the columns recorded in the txt file, modify the `get_data_to_record(env_name: str)` and `def query_sim_for_data(env, desired_obs):` functions.
 
-## [WIP] Analysis using GPT
-To run a call to GPT, set the config in `analysis/gpt_query_config.yaml` and run
+## Querying an LLM
+(Assuming you have set up OpenAI and generativeai python packages and set the API keys as environment variables, i.e. `OPENAI_API_KEY` and `GENERATIVEAI_API_KEY`)
+
+The configuration file for the LLM is in `config/query_LLM_config.yaml`.
+The following are options for the LLM model:
+- `gpt-4-vision-preview`
+- `gpt-4-1106-preview`
+- `gemini-pro`
+- `gemini-pro-vision`
+
+The following are options for the environment:
+- `Stack`
+- `Lift`
+- `Door`
+- `PickPlace`
+- `ToolHang`
+- `NutAssemblySquare`
+
+The following are options for input modalities to include in the LLM prompt query, which can be used in combination with each other:
+- `textual_input` 
+- `video_input`
+
+Set the configuration file for the LLM and the environment to query in `config/query_LLM_config.yaml`.
+
+To run the LLM, run the following command:
 ```sh
-python analysis/query_GPT.py
+python analysis/query_LLM.py
 ```
 
-## Comparison between GPT output and groundtruth data
+## Comparison between GPT output and groundtruth data (WIP)
 See `analysis/compare_GPT_groundtruth.ipynb` to generate plots show in the report.

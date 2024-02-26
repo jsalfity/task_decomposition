@@ -12,9 +12,9 @@ from task_decomposition.utils.querying import get_completion, get_prompt
 from tqdm import tqdm
 from task_decomposition.paths import (
     LLM_QUERY_CONFIG_YAML,
-    CUSTOM_LLM_OUTPUT_PATH,
-    DATA_RAW_TXT_PATH,
-    DATA_VIDEOS_PATH,
+    ROBOT_TRAJ_TEXT_PATH,
+    ROBOT_TRAJ_VIDEO_PATH,
+    LLM_OUTPUT_PATH,
 )
 
 WAITTIME = 2  # [seconds] the waittime to make the next API call
@@ -25,32 +25,49 @@ def sleep_with_progress(n):
         sleep(1)
 
 
+def _get_input_mode(config: dict) -> str:
+    if config["textual_input"] and config["video_input"]:
+        return "textualvideo"
+    elif config["textual_input"]:
+        return "textual"
+    elif config["video_input"]:
+        return "video"
+    else:
+        raise ValueError("One of textual_input or video_input must be True")
+
+
 def run_decomposition(config: dict, verbose=False):
     """ """
     timestamp = datetime.now().strftime("%d-%m-%Y_%H:%M")
 
     prompt = get_prompt(config)
-    print(f"[{timestamp}] Querying GPT...")
-    pprint(config["demo_id"])
+    print(f"[{timestamp}] Querying {config['llm_model']}...")
+    print(config["robot_traj_runid"])
+
+    ######################
+    #### Call the LLM ####
     response, usage = get_completion(prompt, llm_model=config["llm_model"])
-    if usage != {}:
-        usage_cost = calculate_usage_cost(gpt_model=config["llm_model"], usage=usage)
+    ######################
+
+    usage_cost = calculate_usage_cost(llm_model=config["llm_model"], usage=usage)
 
     data = {
         "timestamp": timestamp,
         **config,
-        "usage": usage if usage is not {} else None,
-        "usage_cost": None,  # f"${usage_cost}" if usage is not {} else None,
-        "response": response.parts[0].text,
+        "usage": usage,
+        "usage_cost": usage_cost,
+        "response": response,
     }
 
     # append to json file
     if config["save_response"]:
-        savepath = CUSTOM_LLM_OUTPUT_PATH(
-            config["llm_model"], config["env_name"], config["demo_id"]
+        input_mode = _get_input_mode(config)
+        savepath = LLM_OUTPUT_PATH(
+            llm_model=config["llm_model"],
+            input_mode=input_mode,
+            env_name=config["env_name"],
         )
-        if config["use_txt"] and config["use_video"]:
-            savepath = savepath + "/textvideo"
+        savepath = savepath + "/" + config["robot_traj_runid"] + ".json"
         with open(savepath, "a") as f:
             f.write("\n" + json.dumps(data) + "\n")
         print("Saved to:" + savepath)
@@ -74,23 +91,29 @@ def main():
 
     # Multiple queries means we want to run the same query on multiple files
     if config["multiple_queries"]:
-        # list all files with with the same prefix in DATA_TXT and DATA_VIDEOS
-        txt_files = os.listdir(DATA_RAW_TXT_PATH)
-        env_name_txt_files = [f for f in txt_files if config["env_name"] in f]
-        video_files = os.listdir(DATA_VIDEOS_PATH)
-        env_name_video_files = [f for f in video_files if config["env_name"] in f]
 
-        assert len(env_name_txt_files) == len(env_name_video_files)
-        env_name_video_files.sort(), env_name_txt_files.sort()
+        # Get all files in the directory
+        textual_files = os.listdir(ROBOT_TRAJ_TEXT_PATH(config["env_name"]))
+        video_files = os.listdir(ROBOT_TRAJ_VIDEO_PATH(config["env_name"]))
+
+        # Remove .git* files
+        textual_files = [f for f in textual_files if not f.startswith(".git")]
+        video_files = [f for f in video_files if not f.startswith(".git")]
+
+        assert len(textual_files) == len(video_files)
+        textual_files.sort(), video_files.sort()
 
         # For mulitiple files, we want to run the same query on all files
+        # Some will fail, so keep track of them
         failed_calls = []
         last_API_call_timestamp = datetime.now() - timedelta(seconds=1000)
-        for txt_file, video_file in zip(env_name_txt_files, env_name_video_files):
-            assert txt_file.split(".")[0] == video_file.split(".")[0]
-            config["txt_filename"] = txt_file
-            config["video_filename"] = video_file
-            config["demo_id"] = txt_file.split(".")[0]
+        for txt_file, video_file in zip(textual_files, video_files):
+            assert (
+                txt_file.split(".")[0] == video_file.split(".")[0]
+            ), f"Inconsistent run_ids, txt runid: {txt_file}, video runid: {video_file}"
+            config["txt_filename"] = txt_file if config["textual_input"] else False
+            config["video_filename"] = video_file if config["video_input"] else False
+            config["robot_traj_runid"] = txt_file.split(".")[0]
 
             # check if we need to wait before making the next API call
             timetowait = (
@@ -116,7 +139,7 @@ def main():
     # Single query means we want to run the query on a single file
     else:
         video_file = config["video_filename"]
-        if config["use_txt_file"] and config["use_video_file"]:
+        if config["textual_input_file"] and config["video_input_file"]:
             assert txt_file.split(".")[0] == video_file.split(".")[0]
         config["demo_id"] = video_file.split(".")[0]
         try:

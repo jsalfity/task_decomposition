@@ -5,8 +5,8 @@ Use chain of thought to break down the data into subtasks.
 In your response, only report the list of subtasks as a tuple. As an example, only report this:
 ```
 subtask_decomposition = [(0, 9, "move to above object"), 
-                            (10, 15, <subtask_description>), 
-                            (16, 50, <subtask_description>)]
+                            (<start_step>, <end_step>, <subtask_description>), 
+                            (<start_step>, <end_step>, <subtask_description>)]
 ```
 """
 
@@ -24,6 +24,7 @@ env2description = {
     "PickPlace": "a single arm robot picking and placing a can",
     "Stack": "a single arm robot stacking a cube on top of another cube",
     "ToolHang": "a single arm robot hanging arbitrary tools on fixture",
+    "NutAssemblySquare": "a single arm robot assembling nuts on a fixture",
 }
 
 ENV_DESCRIPTION = (
