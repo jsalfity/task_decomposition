@@ -62,8 +62,8 @@ The following are options for the environment:
 - `NutAssemblySquare`
 
 The following are options for input modalities to include in the LLM prompt query, which can be used in combination with each other:
-- `use_txt` 
-- `use_video`
+- `textual_input` 
+- `video_input`
 
 Set the configuration file for the LLM and the environment to query in `config/query_LLM_config.yaml`.
 

@@ -2,8 +2,8 @@
 # llm_model: "gpt-4-vision-preview"
 # llm_model: "gpt-4-1106-preview"
 # llm_model: "gpt-3.5-turbo-1106"
-# llm_model: "gemini-pro"
-llm_model: "gemini-pro-vision" # ONLY ACCEPTING 16 IMAGES AT THIS TIME :(
+llm_model: "gemini-pro"
+# llm_model: "gemini-pro-vision" # ONLY ACCEPTING 16 IMAGES AT THIS TIME :(
 
 ###### Environment Options (Choose One) ######
 env_name: ToolHang # Stack Lift PickPlace Door NutAssemblySquare
@@ -15,8 +15,8 @@ multiple_queries: True # Query on all files according to llm_model and env_name
 
 
 # Input Modality to the LLM
-use_text: True
-use_video: True
+textual_input: True
+video_input: False
 save_response: True
 
 # Data Slicing Options

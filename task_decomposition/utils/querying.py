@@ -53,6 +53,7 @@ def get_completion(prompt: str, llm_model: str) -> Union[dict, str]:
     elif llm_model == "gemini-pro" or llm_model == "gemini-pro-vision":
         model = genai.GenerativeModel(llm_model)
         response = model.generate_content(prompt)
+        response = response.parts[0].text
         usage = {}
 
     else:
@@ -87,7 +88,7 @@ def get_prompt(config: dict) -> str:
     """ """
     PROMPT = f"""{TASK_DESCRIPTION} + {ENV_DESCRIPTION(config['env_name'])}\n"""
 
-    if not config["use_txt"] and not config["use_images"] and not config["use_video"]:
+    if not config["textual_input"] and not config["video_input"]:
         raise ValueError("Must use at least one of txt, frames, or video.")
 
     # modify the frame step to be the same as the txt step
@@ -95,13 +96,13 @@ def get_prompt(config: dict) -> str:
     start_frame = config["start_frame"] if config["start_frame"] is not False else 0
     end_frame = config["start_frame"] if config["end_frame"] is not False else -1
 
-    if config["use_txt"]:
+    if config["textual_input"]:
         data_df, data_text = get_textual_data_for_prompt(config)
         columns = str(data_df.columns.to_list())
         PROMPT += TXT_DATA_DESCRIPTION(columns)
         PROMPT += data_text
 
-    if config["use_video"]:
+    if config["video_input"]:
         video_path = _get_runid_filename(config, kind="video")
         video = cv2.VideoCapture(video_path)
         base64Frames = []

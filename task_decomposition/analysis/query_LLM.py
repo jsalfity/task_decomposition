@@ -26,14 +26,14 @@ def sleep_with_progress(n):
 
 
 def _get_input_mode(config: dict) -> str:
-    if config["use_txt"] and config["use_video"]:
+    if config["textual_input"] and config["video_input"]:
         return "textvideo"
-    elif config["use_txt"]:
+    elif config["textual_input"]:
         return "text"
-    elif config["use_video"]:
+    elif config["video_input"]:
         return "video"
     else:
-        raise ValueError("One of use_txt or use_video must be True")
+        raise ValueError("One of textual_input or video_input must be True")
 
 
 def run_decomposition(config: dict, verbose=False):
@@ -43,10 +43,11 @@ def run_decomposition(config: dict, verbose=False):
     prompt = get_prompt(config)
     print(f"[{timestamp}] Querying {config['llm_model']}...")
     print(config["robot_traj_runid"])
-    response, usage = get_completion(prompt, llm_model=config["llm_model"])
 
-    # process the response and usage
-    response = response if "gpt" in config["llm_model"] else response.parts[0].text
+    ######################
+    #### Call the LLM ####
+    response, usage = get_completion(prompt, llm_model=config["llm_model"])
+    ######################
 
     usage_cost = calculate_usage_cost(llm_model=config["llm_model"], usage=usage)
 
@@ -138,7 +139,7 @@ def main():
     # Single query means we want to run the query on a single file
     else:
         video_file = config["video_filename"]
-        if config["use_txt_file"] and config["use_video_file"]:
+        if config["textual_input_file"] and config["video_input_file"]:
             assert txt_file.split(".")[0] == video_file.split(".")[0]
         config["demo_id"] = video_file.split(".")[0]
         try:
