@@ -47,15 +47,14 @@ def run_decomposition(config: dict, verbose=False):
 
     # process the response and usage
     response = response if "gpt" in config["llm_model"] else response.parts[0].text
-    usage = usage if usage is not {} else None
 
     usage_cost = calculate_usage_cost(llm_model=config["llm_model"], usage=usage)
 
     data = {
         "timestamp": timestamp,
         **config,
-        "usage": usage if usage is not {} else None,
-        "usage_cost": None,  # f"${usage_cost}" if usage is not {} else None,
+        "usage": usage,
+        "usage_cost": usage_cost,
         "response": response,
     }
 
