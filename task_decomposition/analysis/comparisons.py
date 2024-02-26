@@ -238,10 +238,10 @@ def get_subtask_similarity(subtask_decomp_A: list, subtask_decomp_B: list) -> di
                 _SD = get_semantic_distance(
                     subtask_a[DESCRIPTION_IDX], subtask_b[DESCRIPTION_IDX]
                 )
-                # Combined window length normalized over entire trajectory length
+                # Small window length normalized over entire trajectory length
                 _INTERVAL_WEIGHT = (
-                    max(subtask_a[END_STEP_IDX], subtask_b[END_STEP_IDX])
-                    - min(subtask_a[START_STEP_IDX], subtask_b[START_STEP_IDX])
+                    min(subtask_a[END_STEP_IDX], subtask_b[END_STEP_IDX])
+                    - max(subtask_a[START_STEP_IDX], subtask_b[START_STEP_IDX])
                     + 1
                 ) / _MAX_LENGTH
 
