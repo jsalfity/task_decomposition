@@ -5,19 +5,13 @@ from pprint import pprint
 from typing import Union
 
 from task_decomposition.paths import ROBOT_TRAJ_GROUNDTRUTH_DATA_PATH, LLM_OUTPUT_PATH
-
+from task_decomposition.constants import START_STEP_IDX, END_STEP_IDX, DESCRIPTION_IDX
 from transformers import BertTokenizer, BertModel
 from scipy.spatial.distance import cosine
 
 # Initialize BERT tokenizer and model
 tokenizer = BertTokenizer.from_pretrained("bert-base-uncased")
 model = BertModel.from_pretrained("bert-base-uncased")
-
-ROUND_DIGITS = 4
-
-START_IDX = 0
-END_IDX = 1
-SUBTASK_NAME_IDX = 2
 
 
 def extract_subtask_from_groundtruth_file(filepath: str) -> list:
@@ -144,15 +138,15 @@ def intersection(subtask_A: tuple, subtask_B: tuple) -> bool:
     """
     This function checks if two subtasks intersect.
     """
-    a1, a2 = subtask_A[START_IDX], subtask_A[END_IDX]
-    b1, b2 = subtask_B[START_IDX], subtask_B[END_IDX]
+    a1, a2 = subtask_A[START_STEP_IDX], subtask_A[END_STEP_IDX]
+    b1, b2 = subtask_B[START_STEP_IDX], subtask_B[END_STEP_IDX]
 
     return a1 <= b2 and b1 <= a2
 
 
 def get_IOU(subtask_A: tuple, subtask_B: tuple) -> np.float64:
-    a1, a2 = subtask_A[START_IDX], subtask_A[END_IDX]
-    b1, b2 = subtask_B[START_IDX], subtask_B[END_IDX]
+    a1, a2 = subtask_A[START_STEP_IDX], subtask_A[END_STEP_IDX]
+    b1, b2 = subtask_B[START_STEP_IDX], subtask_B[END_STEP_IDX]
 
     # Calculate the intersection
     intersection = max(0, min(a2, b2) - max(a1, b1))
@@ -203,34 +197,34 @@ def subtask_similarity(subtask_decomp_A: list, subtask_decomp_B: list) -> dict:
         - total: np.float64
     """
     assert len(subtask_decomp_A) > 0 and len(subtask_decomp_B) > 0
-    # assert subtask_decomp_A[0][START_IDX] == subtask_decomp_B[0][START_IDX]
-    # assert subtask_decomp_A[-1][END_IDX] == subtask_decomp_B[-1][END_IDX]
+    # assert subtask_decomp_A[0][START_STEP_IDX] == subtask_decomp_B[0][START_STEP_IDX]
+    # assert subtask_decomp_A[-1][END_STEP_IDX] == subtask_decomp_B[-1][END_STEP_IDX]
 
     TEMPORAL_WEIGHT = 0.5
     SEMANTIC_WEIGHT = 0.5
 
     # TODO: assert subtask_decomp_A and subtask_decomp_B are non-overlapping
-    N = subtask_decomp_A[-1][END_IDX] + 1  # Assuming the last index is end index
+    N = subtask_decomp_A[-1][END_STEP_IDX] + 1  # Assuming the last index is end index
     temporal_scores = np.array([], dtype=np.float64)
     semantic_scores = np.array([], dtype=np.float64)
     interval_weights = np.array([], dtype=np.float64)
     for subtask_a in subtask_decomp_A:
         # ERROR CHECK
-        if subtask_a[END_IDX] < subtask_a[START_IDX]:
+        if subtask_a[END_STEP_IDX] < subtask_a[START_STEP_IDX]:
             return {"temporal": -1, "semantic": -1, "total": -1}
         for subtask_b in subtask_decomp_B:
-            if subtask_b[END_IDX] < subtask_b[START_IDX]:
+            if subtask_b[END_STEP_IDX] < subtask_b[START_STEP_IDX]:
                 return {"temporal": -1, "semantic": -1, "total": -1}
 
             if intersection(subtask_a, subtask_b):
                 _IOU = get_IOU(subtask_a, subtask_b)
                 _SD = semantic_distance(
-                    subtask_a[SUBTASK_NAME_IDX], subtask_b[SUBTASK_NAME_IDX]
+                    subtask_a[DESCRIPTION_IDX], subtask_b[DESCRIPTION_IDX]
                 )
                 # Combined window length normalized over entire traject length
                 _INTERVAL_WEIGHT = (
-                    max(subtask_a[END_IDX], subtask_b[END_IDX])
-                    - min(subtask_a[START_IDX], subtask_b[START_IDX])
+                    max(subtask_a[END_STEP_IDX], subtask_b[END_STEP_IDX])
+                    - min(subtask_a[START_STEP_IDX], subtask_b[START_STEP_IDX])
                     + 1
                 ) / N
 
