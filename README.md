@@ -61,7 +61,7 @@ The following are options for the environment:
 - `ToolHang`
 - `NutAssemblySquare`
 
-The following are options for input modalities to include in the LLM prompt query:
+The following are options for input modalities to include in the LLM prompt query, which can be used in combination with each other:
 - `use_txt` 
 - `use_video`
 
@@ -69,7 +69,7 @@ Set the configuration file for the LLM and the environment to query in `config/q
 
 To run the LLM, run the following command:
 ```sh
-python scripts/query_LLM.py
+python analysis/query_LLM.py
 ```
 
 ## Comparison between GPT output and groundtruth data (WIP)
