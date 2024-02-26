@@ -6,13 +6,12 @@ llm_model: "gemini-pro"
 # llm_model: "gemini-pro-vision" # ONLY ACCEPTING 16 IMAGES AT THIS TIME :(
 
 ###### Environment Options (Choose One) ######
-env_name: ToolHang # Stack Lift PickPlace Door NutAssemblySquare
+env_name: NutAssemblySquare # Stack Lift PickPlace Door NutAssemblySquare ToolHang
 
 multiple_queries: True # Query on all files according to llm_model and env_name
 
 ### When calling invidiual files, you have to specify the file name:
 # robot_traj_runid = <env_name>_<data>-time_<>
-
 
 # Input Modality to the LLM
 textual_input: True
@@ -23,4 +22,3 @@ save_response: True
 resize_frames: 256
 frame_step: 1
 txt_step: 1
-

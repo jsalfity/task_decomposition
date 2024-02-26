@@ -27,9 +27,9 @@ def sleep_with_progress(n):
 
 def _get_input_mode(config: dict) -> str:
     if config["textual_input"] and config["video_input"]:
-        return "textvideo"
+        return "textualvideo"
     elif config["textual_input"]:
-        return "text"
+        return "textual"
     elif config["video_input"]:
         return "video"
     else:
@@ -111,8 +111,8 @@ def main():
             assert (
                 txt_file.split(".")[0] == video_file.split(".")[0]
             ), f"Inconsistent run_ids, txt runid: {txt_file}, video runid: {video_file}"
-            config["txt_filename"] = txt_file
-            config["video_filename"] = video_file
+            config["txt_filename"] = txt_file if config["textual_input"] else False
+            config["video_filename"] = video_file if config["video_input"] else False
             config["robot_traj_runid"] = txt_file.split(".")[0]
 
             # check if we need to wait before making the next API call
