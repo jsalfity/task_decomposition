@@ -9,7 +9,7 @@ import openai
 import google.generativeai as genai
 
 from task_decomposition.paths import ROBOT_TRAJ_TEXT_PATH, ROBOT_TRAJ_VIDEO_PATH
-
+from task_decomposition.constants import MAX_RESPONSE_TOKENS
 
 openai.api_key = os.getenv("OPENAI_API_KEY")
 genai.configure(api_key=os.getenv("GOOGLE_API_KEY"))
@@ -20,8 +20,6 @@ from task_decomposition.utils.prompts import (
     FRAME_DATA_DESCRIPTION,
     ENV_DESCRIPTION,
 )
-
-MAX_RESPONSE_TOKENS = 100
 
 
 def _get_runid_filename(config: dict, kind: str) -> str:

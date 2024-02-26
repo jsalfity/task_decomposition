@@ -1,8 +1,8 @@
 ###### LLM Options (Choose One) ######
-# llm_model: "gpt-4-vision-preview"
+llm_model: "gpt-4-vision-preview"
 # llm_model: "gpt-4-1106-preview"
 # llm_model: "gpt-3.5-turbo-1106"
-llm_model: "gemini-pro"
+# llm_model: "gemini-pro"
 # llm_model: "gemini-pro-vision" # ONLY ACCEPTING 16 IMAGES AT THIS TIME :(
 
 ###### Environment Options (Choose One) ######
