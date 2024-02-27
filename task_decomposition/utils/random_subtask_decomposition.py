@@ -1,7 +1,7 @@
 import os
 import random
 
-from task_decomposition.constants import POSSIBLE_SUBTASKS
+from task_decomposition.constants import POSSIBLE_SUBTASKS, SHAKESPEARE_SUBTASKS
 import google.generativeai as genai
 
 genai.configure(api_key=os.getenv("GOOGLE_API_KEY"))

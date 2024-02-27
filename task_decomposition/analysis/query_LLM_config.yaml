@@ -15,10 +15,10 @@ multiple_queries: True # Query on all files according to llm_model and env_name
 
 # Input Modality to the LLM
 textual_input: True
-video_input: False
+video_input: True
 save_response: True
 
 # Data Slicing Options
 resize_frames: 256
-frame_step: 1
+frame_step: 10
 txt_step: 1

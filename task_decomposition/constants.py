@@ -13,9 +13,9 @@ SEMANTIC_WEIGHT = 0.5
 ENVIRONMENT_NAMES = [
     "Door",
     "Lift",
-    "NutAssemblySquare",
     "PickPlace",
     "Stack",
+    # "NutAssemblySquare",
 ]  # ToolHang Not implementeed yet.
 
 POSSIBLE_SUBTASKS = [
