@@ -211,7 +211,6 @@ def get_USE_distance(A: str, B: str) -> np.float64:
     similarity = (
         cosine_similarity + 1
     ) / 2  # map cosine similarity from [-1, 1] to [0, 1]
-    similarity = np.clip((similarity - 0.5) * 2, 0, 1)
     return similarity
 
 
@@ -221,6 +220,9 @@ def get_semantic_distance(A: str, B: str) -> np.float64:
     """
     # similarity = get_BERT_distance(A, B)
     similarity = get_USE_distance(A, B)
+
+    # Normalize the similarity to [0, 1], removing the bias
+    similarity = np.clip((similarity - 0.5) * 2, 0, 1)
     assert similarity >= 0 and similarity <= 1, f"{similarity} is not in [0, 1] range."
     return similarity
 
