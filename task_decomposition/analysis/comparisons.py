@@ -5,19 +5,19 @@ from pprint import pprint
 from typing import Union
 
 from task_decomposition.paths import ROBOT_TRAJ_GROUNDTRUTH_DATA_PATH, LLM_OUTPUT_PATH
-
+from task_decomposition.constants import (
+    START_STEP_IDX,
+    END_STEP_IDX,
+    DESCRIPTION_IDX,
+    TEMPORAL_WEIGHT,
+    SEMANTIC_WEIGHT,
+)
 from transformers import BertTokenizer, BertModel
 from scipy.spatial.distance import cosine
 
 # Initialize BERT tokenizer and model
 tokenizer = BertTokenizer.from_pretrained("bert-base-uncased")
 model = BertModel.from_pretrained("bert-base-uncased")
-
-ROUND_DIGITS = 4
-
-START_IDX = 0
-END_IDX = 1
-SUBTASK_NAME_IDX = 2
 
 
 def extract_subtask_from_groundtruth_file(filepath: str) -> list:
@@ -144,15 +144,15 @@ def intersection(subtask_A: tuple, subtask_B: tuple) -> bool:
     """
     This function checks if two subtasks intersect.
     """
-    a1, a2 = subtask_A[START_IDX], subtask_A[END_IDX]
-    b1, b2 = subtask_B[START_IDX], subtask_B[END_IDX]
+    a1, a2 = subtask_A[START_STEP_IDX], subtask_A[END_STEP_IDX]
+    b1, b2 = subtask_B[START_STEP_IDX], subtask_B[END_STEP_IDX]
 
     return a1 <= b2 and b1 <= a2
 
 
 def get_IOU(subtask_A: tuple, subtask_B: tuple) -> np.float64:
-    a1, a2 = subtask_A[START_IDX], subtask_A[END_IDX]
-    b1, b2 = subtask_B[START_IDX], subtask_B[END_IDX]
+    a1, a2 = subtask_A[START_STEP_IDX], subtask_A[END_STEP_IDX]
+    b1, b2 = subtask_B[START_STEP_IDX], subtask_B[END_STEP_IDX]
 
     # Calculate the intersection
     intersection = max(0, min(a2, b2) - max(a1, b1))
@@ -167,6 +167,7 @@ def get_IOU(subtask_A: tuple, subtask_B: tuple) -> np.float64:
     # Calculate the IoU
     iou = intersection / union
 
+    assert iou >= 0 and iou <= 1, f"{iou} is not in [0, 1] range."
     return iou
 
 
@@ -179,17 +180,32 @@ def bert_encode(text):
     return outputs.last_hidden_state.mean(dim=1)[0].detach().numpy()
 
 
-def semantic_distance(A: str, B: str) -> np.float64:
+def get_semantic_distance(A: str, B: str) -> np.float64:
     """
     Compare the similarity between two descriptions using BERT embeddings
     """
     embedding1 = bert_encode(A)
     embedding2 = bert_encode(B)
     similarity = 1 - cosine(embedding1, embedding2)
+    assert similarity >= 0 and similarity <= 1, f"{similarity} is not in [0, 1] range."
     return similarity
 
 
-def subtask_similarity(subtask_decomp_A: list, subtask_decomp_B: list) -> dict:
+def is_valid_subtask(subtask: tuple) -> bool:
+    """
+    This function checks if a subtask is valid
+    """
+    return (
+        type(subtask[START_STEP_IDX]) is int
+        and type(subtask[END_STEP_IDX]) is int
+        and subtask[END_STEP_IDX] >= subtask[START_STEP_IDX]
+        and subtask[START_STEP_IDX] >= 0
+        and subtask[END_STEP_IDX] >= 0
+        and type(subtask[DESCRIPTION_IDX]) is str
+    )
+
+
+def get_subtask_similarity(subtask_decomp_A: list, subtask_decomp_B: list) -> dict:
     """
     This function computes the similarity between two subtask decompositions.
     INPUT:
@@ -202,37 +218,32 @@ def subtask_similarity(subtask_decomp_A: list, subtask_decomp_B: list) -> dict:
         - semantic: np.float64
         - total: np.float64
     """
+    # Error Checking
     assert len(subtask_decomp_A) > 0 and len(subtask_decomp_B) > 0
-    # assert subtask_decomp_A[0][START_IDX] == subtask_decomp_B[0][START_IDX]
-    # assert subtask_decomp_A[-1][END_IDX] == subtask_decomp_B[-1][END_IDX]
+    for subtask in subtask_decomp_A + subtask_decomp_B:  # Check both lists
+        assert is_valid_subtask(subtask), "Invalid subtask: start index after end index"
 
-    TEMPORAL_WEIGHT = 0.5
-    SEMANTIC_WEIGHT = 0.5
-
-    # TODO: assert subtask_decomp_A and subtask_decomp_B are non-overlapping
-    N = subtask_decomp_A[-1][END_IDX] + 1  # Assuming the last index is end index
     temporal_scores = np.array([], dtype=np.float64)
     semantic_scores = np.array([], dtype=np.float64)
     interval_weights = np.array([], dtype=np.float64)
-    for subtask_a in subtask_decomp_A:
-        # ERROR CHECK
-        if subtask_a[END_IDX] < subtask_a[START_IDX]:
-            return {"temporal": -1, "semantic": -1, "total": -1}
-        for subtask_b in subtask_decomp_B:
-            if subtask_b[END_IDX] < subtask_b[START_IDX]:
-                return {"temporal": -1, "semantic": -1, "total": -1}
 
+    _FINAL_STEP_A = subtask_decomp_A[-1][END_STEP_IDX]
+    _FINAL_STEP_B = subtask_decomp_B[-1][END_STEP_IDX]
+    _MAX_LENGTH = max(_FINAL_STEP_A, _FINAL_STEP_B)
+
+    for subtask_a in subtask_decomp_A:
+        for subtask_b in subtask_decomp_B:
             if intersection(subtask_a, subtask_b):
                 _IOU = get_IOU(subtask_a, subtask_b)
-                _SD = semantic_distance(
-                    subtask_a[SUBTASK_NAME_IDX], subtask_b[SUBTASK_NAME_IDX]
+                _SD = get_semantic_distance(
+                    subtask_a[DESCRIPTION_IDX], subtask_b[DESCRIPTION_IDX]
                 )
-                # Combined window length normalized over entire traject length
+                # Small window length normalized over entire trajectory length
                 _INTERVAL_WEIGHT = (
-                    max(subtask_a[END_IDX], subtask_b[END_IDX])
-                    - min(subtask_a[START_IDX], subtask_b[START_IDX])
+                    min(subtask_a[END_STEP_IDX], subtask_b[END_STEP_IDX])
+                    - max(subtask_a[START_STEP_IDX], subtask_b[START_STEP_IDX])
                     + 1
-                ) / N
+                ) / _MAX_LENGTH
 
                 temporal_scores = np.append(temporal_scores, _IOU)
                 semantic_scores = np.append(semantic_scores, _SD)
@@ -263,10 +274,10 @@ def test():
     print(gpt_subtask_decomposition)
     print(" ")
 
-    score1 = subtask_similarity(subtask_decomposition, gpt_subtask_decomposition)
+    score1 = get_subtask_similarity(subtask_decomposition, gpt_subtask_decomposition)
     print(f"Score1: {score1}")
 
-    score2 = subtask_similarity(gpt_subtask_decomposition, subtask_decomposition)
+    score2 = get_subtask_similarity(gpt_subtask_decomposition, subtask_decomposition)
     print(f"Score2: {score2}")
 
 
