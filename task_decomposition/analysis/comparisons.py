@@ -19,8 +19,8 @@ from task_decomposition.constants import (
 )
 
 
-Bert_Tokenizer = BertTokenizer.from_pretrained("bert-base-uncased")
-Bert = BertModel.from_pretrained("bert-base-uncased")
+# Bert_Tokenizer = BertTokenizer.from_pretrained("bert-base-uncased")
+# Bert = BertModel.from_pretrained("bert-base-uncased")
 UniversalSentenceEncoder = hub.load(USE_MODULE_URL)
 
 
@@ -274,10 +274,10 @@ def get_subtask_similarity(subtask_decomp_A: list, subtask_decomp_B: list) -> di
                 _SD = get_semantic_distance(
                     subtask_a[DESCRIPTION_IDX], subtask_b[DESCRIPTION_IDX]
                 )
-                # Combined window length normalized over entire trajectory length
+                # Shortest window length normalized over entire trajectory length
                 _INTERVAL_WEIGHT = (
-                    max(subtask_a[END_STEP_IDX], subtask_b[END_STEP_IDX])
-                    - min(subtask_a[START_STEP_IDX], subtask_b[START_STEP_IDX])
+                    min(subtask_a[END_STEP_IDX], subtask_b[END_STEP_IDX])
+                    - max(subtask_a[START_STEP_IDX], subtask_b[START_STEP_IDX])
                     + 1
                 ) / _MAX_LENGTH
 
@@ -292,6 +292,8 @@ def get_subtask_similarity(subtask_decomp_A: list, subtask_decomp_B: list) -> di
     sum_interval_weights = np.sum(interval_weights)
     score["temporal"] = np.dot(temporal_scores, interval_weights) / sum_interval_weights
     score["semantic"] = np.dot(semantic_scores, interval_weights) / sum_interval_weights
+    assert score["temporal"] >= 0 and score["temporal"] <= 1
+    assert score["semantic"] >= 0 and score["semantic"] <= 1
     score["total"] = (
         TEMPORAL_WEIGHT * score["temporal"] + SEMANTIC_WEIGHT * score["semantic"]
     )
