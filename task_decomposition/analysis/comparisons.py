@@ -211,6 +211,7 @@ def get_USE_distance(A: str, B: str) -> np.float64:
     similarity = (
         cosine_similarity + 1
     ) / 2  # map cosine similarity from [-1, 1] to [0, 1]
+    similarity = np.clip((similarity - 0.5) * 2, 0, 1)
     return similarity
 
 
@@ -260,8 +261,8 @@ def get_subtask_similarity(subtask_decomp_A: list, subtask_decomp_B: list) -> di
     semantic_scores = np.array([], dtype=np.float64)
     interval_weights = np.array([], dtype=np.float64)
 
-    _FINAL_STEP_A = subtask_decomp_A[-1][END_STEP_IDX]
-    _FINAL_STEP_B = subtask_decomp_B[-1][END_STEP_IDX]
+    _FINAL_STEP_A = subtask_decomp_A[-1][END_STEP_IDX] + 1
+    _FINAL_STEP_B = subtask_decomp_B[-1][END_STEP_IDX] + 1
     _MAX_LENGTH = max(_FINAL_STEP_A, _FINAL_STEP_B)
 
     for subtask_a in subtask_decomp_A:
@@ -271,10 +272,10 @@ def get_subtask_similarity(subtask_decomp_A: list, subtask_decomp_B: list) -> di
                 _SD = get_semantic_distance(
                     subtask_a[DESCRIPTION_IDX], subtask_b[DESCRIPTION_IDX]
                 )
-                # Small window length normalized over entire trajectory length
+                # Combined window length normalized over entire trajectory length
                 _INTERVAL_WEIGHT = (
-                    min(subtask_a[END_STEP_IDX], subtask_b[END_STEP_IDX])
-                    - max(subtask_a[START_STEP_IDX], subtask_b[START_STEP_IDX])
+                    max(subtask_a[END_STEP_IDX], subtask_b[END_STEP_IDX])
+                    - min(subtask_a[START_STEP_IDX], subtask_b[START_STEP_IDX])
                     + 1
                 ) / _MAX_LENGTH
 
