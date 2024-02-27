@@ -175,25 +175,30 @@ def get_IOU(subtask_A: tuple, subtask_B: tuple) -> np.float64:
     return iou
 
 
-def bert_encode(text):
+def get_BERT_distance(A: str, B: str) -> np.float64:
     """
-    Encode the text using BERT
+    Compare the similarity between two descriptions using BERT Encodings
     """
-    inputs = Bert_Tokenizer(text, return_tensors="pt")
-    outputs = Bert(**inputs)
-    return outputs.last_hidden_state.mean(dim=1)[0].detach().numpy()
+
+    def _bert_encode(text):
+        """
+        Encode the text using BERT
+        """
+        inputs = Bert_Tokenizer(text, return_tensors="pt")
+        outputs = Bert(**inputs)
+        return outputs.last_hidden_state.mean(dim=1)[0].detach().numpy()
+
+    ## BERT model
+    embedding1 = _bert_encode(A)
+    embedding2 = _bert_encode(B)
+    similarity = 1 - cosine(embedding1, embedding2)
+    return similarity
 
 
-def get_semantic_distance(A: str, B: str) -> np.float64:
+def get_USE_distance(A: str, B: str) -> np.float64:
     """
     Compare the similarity between two descriptions using USE Encodings
     """
-
-    ## BERT model
-    # embedding1 = bert_encode(A)
-    # embedding2 = bert_encode(B)
-    # similarity = 1 - cosine(embedding1, embedding2)
-
     ## USE model
     embedding1 = UniversalSentenceEncoder([A])
     embedding2 = UniversalSentenceEncoder([B])
@@ -202,10 +207,19 @@ def get_semantic_distance(A: str, B: str) -> np.float64:
     cosine_similarity = tf.reduce_sum(
         tf.multiply(normalized_tensor1, normalized_tensor2), axis=-1
     )
+    cosine_similarity = cosine_similarity.numpy()[0]
     similarity = (
         cosine_similarity + 1
     ) / 2  # map cosine similarity from [-1, 1] to [0, 1]
+    return similarity
 
+
+def get_semantic_distance(A: str, B: str) -> np.float64:
+    """
+    Compare the similarity between two descriptions using USE Encodings
+    """
+    # similarity = get_BERT_distance(A, B)
+    similarity = get_USE_distance(A, B)
     assert similarity >= 0 and similarity <= 1, f"{similarity} is not in [0, 1] range."
     return similarity
 
