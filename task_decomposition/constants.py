@@ -40,3 +40,5 @@ POSSIBLE_SUBTASKS = [
     "Prepare a meal",
     "Serve a meal",
 ]
+
+USE_MODULE_URL = "https://tfhub.dev/google/universal-sentence-encoder/4"

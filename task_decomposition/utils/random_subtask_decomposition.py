@@ -21,6 +21,9 @@ def get_random_subtask_decomposition(N: int):
     """
     # create a subtask decomposition, with random start and end steps,
     # until we've reached the length limit
+    if POSSIBLE_SUBTASKS == []:
+        assert f"POSSIBLE_SUBTASKS in task_decomposition/constants.py is empty"
+
     subtask_decomposition = []
     i = 0
     while i <= N:
