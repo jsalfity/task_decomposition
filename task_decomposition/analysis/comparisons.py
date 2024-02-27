@@ -1,8 +1,12 @@
 import ast
 import json
 import numpy as np
-from pprint import pprint
-from typing import Union
+
+
+import tensorflow_hub as hub
+import tensorflow as tf
+from transformers import BertTokenizer, BertModel
+from scipy.spatial.distance import cosine
 
 from task_decomposition.paths import ROBOT_TRAJ_GROUNDTRUTH_DATA_PATH, LLM_OUTPUT_PATH
 from task_decomposition.constants import (
@@ -11,13 +15,13 @@ from task_decomposition.constants import (
     DESCRIPTION_IDX,
     TEMPORAL_WEIGHT,
     SEMANTIC_WEIGHT,
+    USE_MODULE_URL,
 )
-from transformers import BertTokenizer, BertModel
-from scipy.spatial.distance import cosine
 
-# Initialize BERT tokenizer and model
-tokenizer = BertTokenizer.from_pretrained("bert-base-uncased")
-model = BertModel.from_pretrained("bert-base-uncased")
+
+Bert_Tokenizer = BertTokenizer.from_pretrained("bert-base-uncased")
+Bert = BertModel.from_pretrained("bert-base-uncased")
+UniversalSentenceEncoder = hub.load(USE_MODULE_URL)
 
 
 def extract_subtask_from_groundtruth_file(filepath: str) -> list:
@@ -171,22 +175,54 @@ def get_IOU(subtask_A: tuple, subtask_B: tuple) -> np.float64:
     return iou
 
 
-def bert_encode(text):
+def get_BERT_distance(A: str, B: str) -> np.float64:
     """
-    Encode the text using BERT
+    Compare the similarity between two descriptions using BERT Encodings
     """
-    inputs = tokenizer(text, return_tensors="pt")
-    outputs = model(**inputs)
-    return outputs.last_hidden_state.mean(dim=1)[0].detach().numpy()
+
+    def _bert_encode(text):
+        """
+        Encode the text using BERT
+        """
+        inputs = Bert_Tokenizer(text, return_tensors="pt")
+        outputs = Bert(**inputs)
+        return outputs.last_hidden_state.mean(dim=1)[0].detach().numpy()
+
+    ## BERT model
+    embedding1 = _bert_encode(A)
+    embedding2 = _bert_encode(B)
+    similarity = 1 - cosine(embedding1, embedding2)
+    return similarity
+
+
+def get_USE_distance(A: str, B: str) -> np.float64:
+    """
+    Compare the similarity between two descriptions using USE Encodings
+    """
+    ## USE model
+    embedding1 = UniversalSentenceEncoder([A])
+    embedding2 = UniversalSentenceEncoder([B])
+    normalized_tensor1 = tf.nn.l2_normalize(embedding1, axis=-1)
+    normalized_tensor2 = tf.nn.l2_normalize(embedding2, axis=-1)
+    cosine_similarity = tf.reduce_sum(
+        tf.multiply(normalized_tensor1, normalized_tensor2), axis=-1
+    )
+    cosine_similarity = cosine_similarity.numpy()[0]
+    similarity = (
+        cosine_similarity + 1
+    ) / 2  # map cosine similarity from [-1, 1] to [0, 1]
+    return similarity
 
 
 def get_semantic_distance(A: str, B: str) -> np.float64:
     """
-    Compare the similarity between two descriptions using BERT embeddings
+    Compare the similarity between two descriptions using USE Encodings
     """
-    embedding1 = bert_encode(A)
-    embedding2 = bert_encode(B)
-    similarity = 1 - cosine(embedding1, embedding2)
+    # similarity = get_BERT_distance(A, B)
+    similarity = get_USE_distance(A, B)
+
+    # Normalize the similarity to [0, 1], removing the bias
+    similarity = np.clip((similarity - 0.5) * 2, 0, 1)
     assert similarity >= 0 and similarity <= 1, f"{similarity} is not in [0, 1] range."
     return similarity
 
@@ -227,8 +263,8 @@ def get_subtask_similarity(subtask_decomp_A: list, subtask_decomp_B: list) -> di
     semantic_scores = np.array([], dtype=np.float64)
     interval_weights = np.array([], dtype=np.float64)
 
-    _FINAL_STEP_A = subtask_decomp_A[-1][END_STEP_IDX]
-    _FINAL_STEP_B = subtask_decomp_B[-1][END_STEP_IDX]
+    _FINAL_STEP_A = subtask_decomp_A[-1][END_STEP_IDX] + 1
+    _FINAL_STEP_B = subtask_decomp_B[-1][END_STEP_IDX] + 1
     _MAX_LENGTH = max(_FINAL_STEP_A, _FINAL_STEP_B)
 
     for subtask_a in subtask_decomp_A:
@@ -238,10 +274,10 @@ def get_subtask_similarity(subtask_decomp_A: list, subtask_decomp_B: list) -> di
                 _SD = get_semantic_distance(
                     subtask_a[DESCRIPTION_IDX], subtask_b[DESCRIPTION_IDX]
                 )
-                # Small window length normalized over entire trajectory length
+                # Combined window length normalized over entire trajectory length
                 _INTERVAL_WEIGHT = (
-                    min(subtask_a[END_STEP_IDX], subtask_b[END_STEP_IDX])
-                    - max(subtask_a[START_STEP_IDX], subtask_b[START_STEP_IDX])
+                    max(subtask_a[END_STEP_IDX], subtask_b[END_STEP_IDX])
+                    - min(subtask_a[START_STEP_IDX], subtask_b[START_STEP_IDX])
                     + 1
                 ) / _MAX_LENGTH
 

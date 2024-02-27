@@ -1,7 +1,7 @@
 import os
 import random
 
-from task_decomposition.constants import POSSIBLE_SUBTASKS
+from task_decomposition.constants import POSSIBLE_SUBTASKS, SHAKESPEARE_SUBTASKS
 import google.generativeai as genai
 
 genai.configure(api_key=os.getenv("GOOGLE_API_KEY"))
@@ -21,6 +21,9 @@ def get_random_subtask_decomposition(N: int):
     """
     # create a subtask decomposition, with random start and end steps,
     # until we've reached the length limit
+    if POSSIBLE_SUBTASKS == []:
+        assert f"POSSIBLE_SUBTASKS in task_decomposition/constants.py is empty"
+
     subtask_decomposition = []
     i = 0
     while i <= N:

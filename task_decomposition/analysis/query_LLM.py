@@ -17,7 +17,7 @@ from task_decomposition.paths import (
     LLM_OUTPUT_PATH,
 )
 
-WAITTIME = 2  # [seconds] the waittime to make the next API call
+WAITTIME = 45  # [seconds] the waittime to make the next API call
 
 
 def sleep_with_progress(n):
