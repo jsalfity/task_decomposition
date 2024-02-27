@@ -42,3 +42,4 @@ POSSIBLE_SUBTASKS = [
 ]
 
 USE_MODULE_URL = "https://tfhub.dev/google/universal-sentence-encoder/4"
+BERT_MODEL = "bert-base-uncased"

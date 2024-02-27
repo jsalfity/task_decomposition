@@ -5,6 +5,8 @@ import numpy as np
 
 import tensorflow_hub as hub
 import tensorflow as tf
+from transformers import BertTokenizer, BertModel
+from scipy.spatial.distance import cosine
 
 from task_decomposition.paths import ROBOT_TRAJ_GROUNDTRUTH_DATA_PATH, LLM_OUTPUT_PATH
 from task_decomposition.constants import (
@@ -16,6 +18,9 @@ from task_decomposition.constants import (
     USE_MODULE_URL,
 )
 
+
+Bert_Tokenizer = BertTokenizer.from_pretrained("bert-base-uncased")
+Bert = BertModel.from_pretrained("bert-base-uncased")
 UniversalSentenceEncoder = hub.load(USE_MODULE_URL)
 
 
@@ -170,21 +175,36 @@ def get_IOU(subtask_A: tuple, subtask_B: tuple) -> np.float64:
     return iou
 
 
+def bert_encode(text):
+    """
+    Encode the text using BERT
+    """
+    inputs = Bert_Tokenizer(text, return_tensors="pt")
+    outputs = Bert(**inputs)
+    return outputs.last_hidden_state.mean(dim=1)[0].detach().numpy()
+
+
 def get_semantic_distance(A: str, B: str) -> np.float64:
     """
     Compare the similarity between two descriptions using USE Encodings
     """
+
+    ## BERT model
+    # embedding1 = bert_encode(A)
+    # embedding2 = bert_encode(B)
+    # similarity = 1 - cosine(embedding1, embedding2)
+
+    ## USE model
     embedding1 = UniversalSentenceEncoder([A])
     embedding2 = UniversalSentenceEncoder([B])
-
     normalized_tensor1 = tf.nn.l2_normalize(embedding1, axis=-1)
     normalized_tensor2 = tf.nn.l2_normalize(embedding2, axis=-1)
     cosine_similarity = tf.reduce_sum(
         tf.multiply(normalized_tensor1, normalized_tensor2), axis=-1
     )
-
-    # map cosine similarity from [-1, 1] to [0, 1]
-    similarity = (cosine_similarity + 1) / 2
+    similarity = (
+        cosine_similarity + 1
+    ) / 2  # map cosine similarity from [-1, 1] to [0, 1]
 
     assert similarity >= 0 and similarity <= 1, f"{similarity} is not in [0, 1] range."
     return similarity
