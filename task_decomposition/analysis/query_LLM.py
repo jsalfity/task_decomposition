@@ -16,8 +16,11 @@ from task_decomposition.paths import (
     ROBOT_TRAJ_VIDEO_PATH,
     LLM_OUTPUT_PATH,
 )
-
-WAITTIME = 45  # [seconds] the waittime to make the next API call
+from task_decomposition.constants import (
+    GPT_MAX_TOKENS_PER_MINUE,
+    GPT_MAX_RESPONSE_TOKENS,
+    WAITTIME,
+)
 
 
 def sleep_with_progress(n):
@@ -107,6 +110,7 @@ def main():
         # Some will fail, so keep track of them
         failed_calls = []
         last_API_call_timestamp = datetime.now() - timedelta(seconds=1000)
+        tokens_used_this_minute = 0
         for txt_file, video_file in zip(textual_files, video_files):
             assert (
                 txt_file.split(".")[0] == video_file.split(".")[0]
@@ -115,18 +119,31 @@ def main():
             config["video_filename"] = video_file if config["video_input"] else False
             config["robot_traj_runid"] = txt_file.split(".")[0]
 
-            # check if we need to wait before making the next API call
-            timetowait = (
-                WAITTIME - (datetime.now() - last_API_call_timestamp).total_seconds()
-            )
-            timetowait = int(timetowait) + 1
-            if timetowait < WAITTIME:
-                print(f"Waiting {timetowait} seconds before making the next API call.")
-                sleep_with_progress(timetowait)
+            # We cannot go over the GPT_MAX_TOKENS_PER_MINUE
+            if config["llm_model"] == "gpt-4-vision-preview" and (
+                tokens_used_this_minute + GPT_MAX_RESPONSE_TOKENS
+                > GPT_MAX_TOKENS_PER_MINUE
+            ):
+                print(
+                    f"Used {tokens_used_this_minute} tokens this minute. Waiting for the next minute to start."
+                )
+                sleep_with_progress(10)
+                tokens_used_this_minute = 0
+            # # check if we need to wait before making the next API call
+            # timetowait = (
+            #     WAITTIME - (datetime.now() - last_API_call_timestamp).total_seconds()
+            # )
+            # timetowait = int(timetowait) + 1
+            # if timetowait < WAITTIME:
+            #     print(f"Waiting {timetowait} seconds before making the next API call.")
+            #     sleep_with_progress(timetowait)
 
-            last_API_call_timestamp = datetime.now()
+            # last_API_call_timestamp = datetime.now()
             try:
                 response, usage = run_decomposition(config)
+                tokens_used_this_minute += (
+                    usage["total_tokens"] if "total_tokens" in usage else 0
+                )
             except Exception as e:
                 print(f"Error calling {config['txt_filename']}. Skipping...")
                 print(f"{e}")
@@ -141,7 +158,7 @@ def main():
         video_file = config["video_filename"]
         if config["textual_input_file"] and config["video_input_file"]:
             assert txt_file.split(".")[0] == video_file.split(".")[0]
-        config["demo_id"] = video_file.split(".")[0]
+        config["robot_traj_runid"] = video_file.split(".")[0]
         try:
             response, usage = run_decomposition(config=config)
         except Exception as e:

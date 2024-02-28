@@ -9,7 +9,7 @@ import openai
 import google.generativeai as genai
 
 from task_decomposition.paths import ROBOT_TRAJ_TEXT_PATH, ROBOT_TRAJ_VIDEO_PATH
-from task_decomposition.constants import MAX_RESPONSE_TOKENS
+from task_decomposition.constants import GPT_MAX_RESPONSE_TOKENS
 
 openai.api_key = os.getenv("OPENAI_API_KEY")
 genai.configure(api_key=os.getenv("GOOGLE_API_KEY"))
@@ -42,7 +42,7 @@ def get_completion(prompt: str, llm_model: str) -> Union[dict, str]:
             model=llm_model,
             messages=messages,
             temperature=0,
-            max_tokens=MAX_RESPONSE_TOKENS,
+            max_tokens=GPT_MAX_RESPONSE_TOKENS,
         )
 
         response = API_response.choices[0].message["content"]
