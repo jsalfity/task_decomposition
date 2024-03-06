@@ -9,7 +9,7 @@ import openai
 import google.generativeai as genai
 
 from task_decomposition.paths import ROBOT_TRAJ_TEXT_PATH, ROBOT_TRAJ_VIDEO_PATH
-from task_decomposition.constants import MAX_RESPONSE_TOKENS
+from task_decomposition.constants import GPT_MAX_RESPONSE_TOKENS
 
 openai.api_key = os.getenv("OPENAI_API_KEY")
 genai.configure(api_key=os.getenv("GOOGLE_API_KEY"))
@@ -19,6 +19,10 @@ from task_decomposition.utils.prompts import (
     TXT_DATA_DESCRIPTION,
     FRAME_DATA_DESCRIPTION,
     ENV_DESCRIPTION,
+    STACK_INCONTEXT,
+    LIFT_INCONTEXT,
+    DOOR_INCONTEXT,
+    PICKPLACE_INCONTEXT,
 )
 
 
@@ -42,7 +46,7 @@ def get_completion(prompt: str, llm_model: str) -> Union[dict, str]:
             model=llm_model,
             messages=messages,
             temperature=0,
-            max_tokens=MAX_RESPONSE_TOKENS,
+            max_tokens=GPT_MAX_RESPONSE_TOKENS,
         )
 
         response = API_response.choices[0].message["content"]
@@ -82,9 +86,24 @@ def get_textual_data_for_prompt(config: dict) -> Union[pd.DataFrame, str]:
     return df, text
 
 
+def get_incontext(config: dict) -> str:
+    if config["env_name"] == "Stack":
+        return STACK_INCONTEXT
+    elif config["env_name"] == "Lift":
+        return LIFT_INCONTEXT
+    elif config["env_name"] == "Door":
+        return DOOR_INCONTEXT
+    elif config["env_name"] == "PickPlace":
+        return PICKPLACE_INCONTEXT
+    else:
+        raise ValueError("env_name must be one of 'Stack', 'Lift', 'Door', 'PickPlace'")
+
+
 def get_prompt(config: dict) -> str:
     """ """
     PROMPT = f"""{TASK_DESCRIPTION} + {ENV_DESCRIPTION(config['env_name'])}\n"""
+    if config["in_context"]:
+        PROMPT += get_incontext(config)
 
     if not config["textual_input"] and not config["video_input"]:
         raise ValueError("Must use at least one of txt, frames, or video.")

@@ -6,19 +6,23 @@ llm_model: "gpt-4-vision-preview"
 # llm_model: "gemini-pro-vision" # ONLY ACCEPTING 16 IMAGES AT THIS TIME :(
 
 ###### Environment Options (Choose One) ######
-env_name: NutAssemblySquare # Stack Lift PickPlace Door NutAssemblySquare ToolHang
+env_name: PickPlace # Stack Lift PickPlace Door NutAssemblySquare ToolHang
 
-multiple_queries: True # Query on all files according to llm_model and env_name
+multiple_queries: False # Query on all files according to llm_model and env_name
 
 ### When calling invidiual files, you have to specify the file name:
-# robot_traj_runid = <env_name>_<data>-time_<>
+# robot_traj_runid: <env_name>_<data>-time_<>
+robot_traj_runid: PickPlace_20240220-222841_28
+video_filename: PickPlace_20240220-222841_28.mp4
+textual_filename: PickPlace_20240220-222841_28.txt
 
 # Input Modality to the LLM
+in_context: True
 textual_input: True
 video_input: True
 save_response: True
 
 # Data Slicing Options
 resize_frames: 256
-frame_step: 10
-txt_step: 10
+frame_step: 5
+txt_step: 1
