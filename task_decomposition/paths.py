@@ -13,7 +13,8 @@ ROBOT_TRAJ_TEXT_PATH = (
 ROBOT_TRAJ_VIDEO_PATH = lambda env_name: cd + f"/data/robot_traj_videos/{env_name}"
 
 LLM_QUERY_CONFIG_YAML = cd + "/analysis/query_LLM_config.yaml"
-LLM_OUTPUT_PATH = (
-    lambda llm_model, input_mode, env_name: cd
-    + f"/data/{llm_model}_outputs/{input_mode}/{env_name}"
+LLM_OUTPUT_PATH = lambda llm_model, input_mode, env_name, in_context: (
+    cd + f"/data/{llm_model}_outputs/{input_mode}_noincontext/{env_name}"
+    if not in_context
+    else cd + f"/data/{llm_model}_outputs/{input_mode}/{env_name}"
 )

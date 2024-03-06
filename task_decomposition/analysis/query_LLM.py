@@ -4,12 +4,11 @@ from collections import defaultdict
 from datetime import datetime, timedelta
 import json
 import yaml
-import tqdm
+from tqdm import tqdm
 from time import sleep
 
 from task_decomposition.utils.offload_cost import calculate_usage_cost
 from task_decomposition.utils.querying import get_completion, get_prompt
-from tqdm import tqdm
 from task_decomposition.paths import (
     LLM_QUERY_CONFIG_YAML,
     ROBOT_TRAJ_TEXT_PATH,
@@ -69,6 +68,7 @@ def run_decomposition(config: dict, verbose=False):
             llm_model=config["llm_model"],
             input_mode=input_mode,
             env_name=config["env_name"],
+            in_context=config["in_context"],
         )
         savepath = savepath + "/" + config["robot_traj_runid"] + ".json"
         with open(savepath, "a") as f:
@@ -110,6 +110,7 @@ def main():
         # Some will fail, so keep track of them
         failed_calls = []
         last_API_call_timestamp = datetime.now() - timedelta(seconds=1000)
+        last_prompt_tokens = 5000  # upper bound guess
         tokens_used_this_minute = 0
         for txt_file, video_file in zip(textual_files, video_files):
             assert (
@@ -121,7 +122,7 @@ def main():
 
             # We cannot go over the GPT_MAX_TOKENS_PER_MINUE
             if config["llm_model"] == "gpt-4-vision-preview" and (
-                tokens_used_this_minute + GPT_MAX_RESPONSE_TOKENS
+                tokens_used_this_minute + last_prompt_tokens + GPT_MAX_RESPONSE_TOKENS
                 > GPT_MAX_TOKENS_PER_MINUE
             ):
                 print(
@@ -141,9 +142,9 @@ def main():
             # last_API_call_timestamp = datetime.now()
             try:
                 response, usage = run_decomposition(config)
-                tokens_used_this_minute += (
-                    usage["total_tokens"] if "total_tokens" in usage else 0
-                )
+                if usage != {}:
+                    tokens_used_this_minute += usage["total_tokens"]
+                    last_prompt_tokens = usage["prompt_tokens"]
             except Exception as e:
                 print(f"Error calling {config['txt_filename']}. Skipping...")
                 print(f"{e}")
