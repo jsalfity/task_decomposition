@@ -16,7 +16,7 @@ from task_decomposition.constants import GPT_MAX_RESPONSE_TOKENS
 
 # openai.api_key = os.getenv("OPENAI_API_KEY")
 # genai.configure(api_key=os.getenv("GOOGLE_API_KEY"))
-vertexai.init(project="gen-lang-client-0368774908")
+vertexai.init(project="gen-lang-client-0368774908", location='us-central1')
 
 from task_decomposition.utils.prompts import (
     TASK_DESCRIPTION,
@@ -63,7 +63,7 @@ def get_completion(prompt: str, llm_model: str) -> Union[dict, str]:
         usage = {}
 
     elif llm_model == "gemini-pro-vision":
-        model = vertexai_GenerativeModel("gemini-1.0-pro-vision")
+        model = vertexai_GenerativeModel("gemini-pro-vision")
         response = model.generate_content(prompt)
         response = response.candidates[0].content.parts[0].text
         usage = {}
@@ -179,10 +179,12 @@ def get_prompt(config: dict) -> str:
             #         for frame_data in base64Frames
             #     ]
             # }
-            gcloud_URI = GCLOUD_URI + config['video_filename']
+            gcloud_filepath = GCLOUD_URI + config['env_name']+ "/" + config['video_filename']
             PROMPT = [
-                Part.from_uri(gcloud_URI, mime_type="video/mp4"),
-                PROMPT + FRAME_DATA_DESCRIPTION
+                Part.from_text(PROMPT + FRAME_DATA_DESCRIPTION),
+                # Part.from_uri(uri=gcloud_filepath, mime_type="video/mp4")
+                # Part.from_uri(uri="gs://task_decomposition_data/IMG_2788.jpeg", mime_type="image/jpeg")
+                Part.from_uri(uri="gs://task_decomposition_data/Door_20240213-183948_0.mp4", mime_type="video/mp4")
             ]
 
     return PROMPT

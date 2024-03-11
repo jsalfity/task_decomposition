@@ -19,4 +19,4 @@ LLM_OUTPUT_PATH = lambda llm_model, input_mode, env_name, in_context: (
     else cd + f"/data/{llm_model}_outputs/{input_mode}/{env_name}"
 )
 
-GCLOUD_URI = "gs://task_decomposition_data/"
+GCLOUD_URI =  "gs://task_decomposition_data/robot_traj_video/"
