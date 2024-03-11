@@ -5,14 +5,18 @@ import pandas as pd
 import cv2
 import base64
 
-import openai
-import google.generativeai as genai
+# import openai
+# import google.generativeai as genai
+import vertexai # Gemini Pro Vision
+from vertexai.generative_models import GenerativeModel as vertexai_GenerativeModel
+from vertexai.generative_models import Part
 
-from task_decomposition.paths import ROBOT_TRAJ_TEXT_PATH, ROBOT_TRAJ_VIDEO_PATH
+from task_decomposition.paths import ROBOT_TRAJ_TEXT_PATH, ROBOT_TRAJ_VIDEO_PATH, GCLOUD_URI
 from task_decomposition.constants import GPT_MAX_RESPONSE_TOKENS
 
-openai.api_key = os.getenv("OPENAI_API_KEY")
-genai.configure(api_key=os.getenv("GOOGLE_API_KEY"))
+# openai.api_key = os.getenv("OPENAI_API_KEY")
+# genai.configure(api_key=os.getenv("GOOGLE_API_KEY"))
+vertexai.init(project="gen-lang-client-0368774908")
 
 from task_decomposition.utils.prompts import (
     TASK_DESCRIPTION,
@@ -52,12 +56,17 @@ def get_completion(prompt: str, llm_model: str) -> Union[dict, str]:
         response = API_response.choices[0].message["content"]
         usage = API_response.usage
 
-    elif llm_model == "gemini-pro" or llm_model == "gemini-pro-vision":
+    elif llm_model == "gemini-pro":
         model = genai.GenerativeModel(llm_model)
         response = model.generate_content(prompt)
         response = response.parts[0].text
         usage = {}
 
+    elif llm_model == "gemini-pro-vision":
+        model = vertexai_GenerativeModel("gemini-1.0-pro-vision")
+        response = model.generate_content(prompt)
+        response = response.candidates[0].content.parts[0].text
+        usage = {}
     else:
         raise NotImplementedError
 
@@ -161,14 +170,19 @@ def get_prompt(config: dict) -> str:
             #     ],
             # }
 
-            ## This is to upload images, but only accepting 16 at a time.
-            N_FRAMES_ACCEPTED = 16
-            PROMPT = {
-                "parts": [{"text": PROMPT + FRAME_DATA_DESCRIPTION}]
-                + [
-                    {"inline_data": {"mime_type": "image/jpeg", "data": frame_data}}
-                    for frame_data in base64Frames[:N_FRAMES_ACCEPTED]
-                ]
-            }
+            # This is to upload images, but only accepting 16 at a time.
+            # N_FRAMES_ACCEPTED = 16
+            # PROMPT = {
+            #     "parts": [{"text": PROMPT + FRAME_DATA_DESCRIPTION}]
+            #     + [
+            #         {"inline_data": {"mime_type": "image/jpeg", "data": frame_data}}
+            #         for frame_data in base64Frames
+            #     ]
+            # }
+            gcloud_URI = GCLOUD_URI + config['video_filename']
+            PROMPT = [
+                Part.from_uri(gcloud_URI, mime_type="video/mp4"),
+                PROMPT + FRAME_DATA_DESCRIPTION
+            ]
 
     return PROMPT
