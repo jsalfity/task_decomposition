@@ -1,6 +1,8 @@
+import os
+
 # For querying
 GPT_MAX_TOKENS_PER_MINUE = 40000
-GPT_MAX_RESPONSE_TOKENS = 1200
+GPT_MAX_RESPONSE_TOKENS = 800
 WAITTIME = 60
 
 START_STEP_IDX = 0
@@ -64,5 +66,7 @@ SHAKESPEARE_SUBTASKS = [
     "My words fly up, my thoughts remain below: Words without thoughts never to heaven go",
 ]
 
+# https://www.tensorflow.org/hub/caching
+os.environ["TFHUB_CACHE_DIR"] = "/Users/jonathansalfity/.cache/tfhub_modules"
 USE_MODULE_URL = "https://tfhub.dev/google/universal-sentence-encoder/4"
 BERT_MODEL = "bert-base-uncased"

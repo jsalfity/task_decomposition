@@ -128,7 +128,7 @@ def main():
                 print(
                     f"Used {tokens_used_this_minute} tokens this minute. Waiting for the next minute to start."
                 )
-                sleep_with_progress(10)
+                sleep_with_progress(WAITTIME)
                 tokens_used_this_minute = 0
             # # check if we need to wait before making the next API call
             # timetowait = (
@@ -146,9 +146,9 @@ def main():
                     tokens_used_this_minute += usage["total_tokens"]
                     last_prompt_tokens = usage["prompt_tokens"]
             except Exception as e:
-                print(f"Error calling {config['txt_filename']}. Skipping...")
+                print(f"Error calling {config['robot_traj_runid']}. Skipping...")
                 print(f"{e}")
-                failed_calls.append(config["txt_filename"])
+                failed_calls.append(config["robot_traj_runid"])
 
         if len(failed_calls) > 0:
             print("The following files failed to call the API:")
