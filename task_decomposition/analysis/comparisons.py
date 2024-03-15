@@ -5,8 +5,9 @@ import numpy as np
 
 import tensorflow_hub as hub
 import tensorflow as tf
-from transformers import BertTokenizer, BertModel
-from scipy.spatial.distance import cosine
+
+# from transformers import BertTokenizer, BertModel
+# from scipy.spatial.distance import cosine
 
 from task_decomposition.paths import ROBOT_TRAJ_GROUNDTRUTH_DATA_PATH, LLM_OUTPUT_PATH
 from task_decomposition.constants import (
@@ -175,24 +176,24 @@ def get_IOU(subtask_A: tuple, subtask_B: tuple) -> np.float64:
     return iou
 
 
-def get_BERT_distance(A: str, B: str) -> np.float64:
-    """
-    Compare the similarity between two descriptions using BERT Encodings
-    """
+# def get_BERT_distance(A: str, B: str) -> np.float64:
+#     """
+#     Compare the similarity between two descriptions using BERT Encodings
+#     """
 
-    def _bert_encode(text):
-        """
-        Encode the text using BERT
-        """
-        inputs = Bert_Tokenizer(text, return_tensors="pt")
-        outputs = Bert(**inputs)
-        return outputs.last_hidden_state.mean(dim=1)[0].detach().numpy()
+#     def _bert_encode(text):
+#         """
+#         Encode the text using BERT
+#         """
+#         inputs = Bert_Tokenizer(text, return_tensors="pt")
+#         outputs = Bert(**inputs)
+#         return outputs.last_hidden_state.mean(dim=1)[0].detach().numpy()
 
-    ## BERT model
-    embedding1 = _bert_encode(A)
-    embedding2 = _bert_encode(B)
-    similarity = 1 - cosine(embedding1, embedding2)
-    return similarity
+#     ## BERT model
+#     embedding1 = _bert_encode(A)
+#     embedding2 = _bert_encode(B)
+#     similarity = cosine(embedding1, embedding2)
+#     return similarity
 
 
 def get_USE_distance(A: str, B: str) -> np.float64:
@@ -208,23 +209,17 @@ def get_USE_distance(A: str, B: str) -> np.float64:
         tf.multiply(normalized_tensor1, normalized_tensor2), axis=-1
     )
     cosine_similarity = cosine_similarity.numpy()[0]
-    similarity = (
-        cosine_similarity + 1
-    ) / 2  # map cosine similarity from [-1, 1] to [0, 1]
-    return similarity
+    cosine_similarity = np.clip(cosine_similarity, -1, 1)  # Due to float point errors
+    return cosine_similarity
 
 
 def get_semantic_distance(A: str, B: str) -> np.float64:
     """
     Compare the similarity between two descriptions using USE Encodings
     """
-    # similarity = get_BERT_distance(A, B)
-    similarity = get_USE_distance(A, B)
-
-    # Normalize the similarity to [0, 1], removing the bias
-    similarity = np.clip((similarity - 0.5) * 2, 0, 1)
-    assert similarity >= 0 and similarity <= 1, f"{similarity} is not in [0, 1] range."
-    return similarity
+    distance = get_USE_distance(A, B)
+    assert distance >= -1 and distance <= 1, f"{distance} is not in [-1, 1] range."
+    return distance
 
 
 def is_valid_subtask(subtask: tuple) -> bool:
