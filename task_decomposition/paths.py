@@ -2,8 +2,10 @@ import os
 
 cd = os.path.dirname(os.path.realpath(__file__))
 
+SAVE_PLOTS_PATH = cd + "/plots"
 DEMO_CONFIG_YAML = cd + "/scripts/demo_config.yaml"
 DATA_PATH = cd + "/data"
+BASELINES_DATA = cd + "/data/baselines"
 ROBOT_TRAJ_GROUNDTRUTH_DATA_PATH = (
     lambda env_name: cd + f"/data/robot_traj_texts/groundtruths/{env_name}"
 )
