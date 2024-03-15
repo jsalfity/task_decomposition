@@ -1,28 +1,28 @@
 ###### LLM Options (Choose One) ######
-llm_model: "gpt-4-vision-preview"
-# llm_model: "gpt-4-1106-preview"
+# llm_model: "gpt-4-vision-preview"
+llm_model: "gpt-4-0125-preview"
 # llm_model: "gpt-3.5-turbo-1106"
 # llm_model: "gemini-pro"
 # llm_model: "gemini-pro-vision" # ONLY ACCEPTING 16 IMAGES AT THIS TIME :(
 
 ###### Environment Options (Choose One) ######
-env_name: PickPlace # Stack Lift PickPlace Door NutAssemblySquare ToolHang
+env_name: Door # Stack Lift PickPlace Door NutAssemblySquare ToolHang
 
 multiple_queries: False # Query on all files according to llm_model and env_name
 
 ### When calling invidiual files, you have to specify the file name:
 # robot_traj_runid: <env_name>_<data>-time_<>
-robot_traj_runid: PickPlace_20240220-222841_28
-video_filename: PickPlace_20240220-222841_28.mp4
-textual_filename: PickPlace_20240220-222841_28.txt
+robot_traj_runid: Door_20240220-173547_5
+video_filename:  Door_20240220-173547_5.mp4
+textual_filename: Door_20240220-173547_5.txt
 
 # Input Modality to the LLM
-in_context: True
+in_context: False
 textual_input: True
-video_input: True
+video_input: False
 save_response: True
 
 # Data Slicing Options
 resize_frames: 256
-frame_step: 5
+frame_step: 1
 txt_step: 1

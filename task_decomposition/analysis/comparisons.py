@@ -117,7 +117,7 @@ def extract_subtask_from_LLM_output_file(filepath: str, llm_model: str) -> list:
 
     if (
         llm_model == "gpt-4-vision-preview"
-        or llm_model == "gpt-4-1106-preview"
+        or llm_model == "gpt-4-0125-preview"
         or llm_model == "gemini-pro"
         or llm_model == "gemini-pro-vision"
     ):

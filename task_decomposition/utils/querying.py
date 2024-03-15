@@ -39,7 +39,7 @@ def _get_runid_filename(config: dict, kind: str) -> str:
 
 def get_completion(prompt: str, llm_model: str) -> Union[dict, str]:
     """"""
-    if llm_model == "gpt-4-vision-preview":
+    if llm_model == "gpt-4-vision-preview" or llm_model == "gpt-4-0125-preview":
         messages = [{"role": "user", "content": prompt}]
 
         API_response = openai.ChatCompletion.create(
