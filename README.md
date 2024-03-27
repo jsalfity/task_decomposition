@@ -1,7 +1,22 @@
 # Task Decomposition
-Repo for testing out the task decomposition project
+This repository is the code base for the IROS 2024 submission, "Temporal and Semantic Evaluation Metrics for Foundation Models in Post-Hoc Analysis of Robotic Sub-tasks" by Jonathan Salfity, Selma Wanna, Minkyu Choi, and Mitch Pryor. The corresponding author is Jonathan Salfity (j [dot] salfity [at] utexas [dot] edu).
+
+The code base is divided into the following sections:
+- Data Generation through Robosuite simulations and Finite State machine (FSM) implementation is in  (`scripts/`). The data is stored in `data/` as `.txt` and/or `.mp4` files upon generation, depending on the config file. For data used in the original paper submission, contact j [dot] salfity [at] utexas [dot] edu for access.
+- Querying a Foundation Model (FM) for sub-task decomposition is in `(analysis/query_LLM.py)`
+- Analysis of the FM output, comparison with groundtruth data, plot and table generation is in `(analysis/main_metrics_calculations.ipynb)`
+- The main metrics (temporal and semantic) calculations are in `analysis/comparisons.py`, specifically the `get_subtask_similarity` function.
+
+Supporting functions including API call, prompt building, and in-context learning examples are found in `/utils`.
+The random baseline implementation is in `/utils/random_subtask_decomposition.py`.
 
 ## Prerequisites
+Install this package
+```sh
+pip install -e .
+```
+
+### To run the robosuite simulations
 Download the mujoco binaries from [here](https://github.com/google-deepmind/mujoco/releases).
 Place in `~/.mujoco/mujoco<>/` folder. Install mujoco via pip
 ```sh
@@ -11,11 +26,6 @@ pip install mujoco
 Install [`robosuite`](https://robosuite.ai/docs/installation.html):
 ```sh
 pip install robosuite
-```
-
-Install this package
-```sh
-pip install -e .
 ```
 
 ## Running robosuite simulation and generating data
@@ -30,6 +40,7 @@ python scripts/run_demo.py
 ```
 
 ### Running downloaded demo_v141.hdf5 files and generating data
+(This data is not used in the IROS paper)
 Go to the robomimic site to download data: https://robomimic.github.io/docs/datasets/robomimic_v0.1.html.
 (Note that this currently only seems to work with Safari broswer).
 Place the downloaded hdf5 files in the respective `data/robomimic` folder.
@@ -41,36 +52,37 @@ Example:
 python scripts/record_robomimic_data.py --dataset path/to/robomimic/demo_v141.hdf5 --num_demos 1 --save_txt 1 --save_video 1
 ```
 
-(Hacky) To modify the columns recorded in the txt file, modify the `get_data_to_record(env_name: str)` and `def query_sim_for_data(env, desired_obs):` functions.
-
-## Querying an LLM
-(Assuming you have set up OpenAI and generativeai python packages and set the API keys as environment variables, i.e. `OPENAI_API_KEY` and `GENERATIVEAI_API_KEY`)
+## Querying an FM
+Assuming you have set up OpenAI and generativeai python packages and set the API keys as environment variables, i.e. `OPENAI_API_KEY` and `GOOGLE_API_KEY`.
 
 The configuration file for the LLM is in `config/query_LLM_config.yaml`.
-The following are options for the LLM model:
+The following are options for the FM model:
 - `gpt-4-vision-preview`
 - `gpt-4-1106-preview`
 - `gemini-pro`
-- `gemini-pro-vision`
+- `gemini-pro-vision` (Not in this repo, called via Google Cloud Vertix AI API)
 
+All states in each environment are in R^3 and represent the x-y-z position of the object in the environment. All actions are in R^7, using the Robosuites `OSC_POSE` controller.
 The following are options for the environment:
-- `Stack`
+- `Door`:
+  - States: `robot0_eef_pos`, `door_pos`, `handle_pos`, `door_to_eef_pos`, `handle_to_eef_pos`.
 - `Lift`
-- `Door`
+  - States: `robot0_eef_pos`, `cube_pos`, `gripper_to_cube`.
 - `PickPlace`
-- `ToolHang`
-- `NutAssemblySquare`
+  - States: `robot0_eef_pos`, `Can_pos`, `Can_to_robot0_eef_pos`.
+- `Stack`
+  - States: `robot0_eef_pos`, `cubeA_pos`, `cubeB_pos`, `gripper_to_cubeA`, `gripper_to_cubeB`, `cubeA_to_cubeB`.
 
-The following are options for input modalities to include in the LLM prompt query, which can be used in combination with each other:
-- `textual_input` 
-- `video_input`
 
-Set the configuration file for the LLM and the environment to query in `config/query_LLM_config.yaml`.
+The following are options for input modalities and in-context learning examples to include in the LLM prompt query, which can be used in combination with each other:
+- `textual_input`: (True or False) 
+- `video_input`: (True or False)
+- `in_context`: (True or False)
 
 To run the LLM, run the following command:
 ```sh
 python analysis/query_LLM.py
 ```
 
-## Comparison between GPT output and groundtruth data (WIP)
-See `analysis/compare_GPT_groundtruth.ipynb` to generate plots show in the report.
+## Comparison between FM output and groundtruth data
+See `analysis/main_metrics_calculations.ipynb` to generate plots show in the paper.

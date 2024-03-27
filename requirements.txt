@@ -12,3 +12,7 @@ h5py
 
 # required for nvisii renderer
 open3d
+
+# required for LLM calls
+openai
+google
