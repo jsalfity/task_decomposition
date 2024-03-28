@@ -1,5 +1,5 @@
 # Task Decomposition
-This repository is the code base for the IROS 2024 submission, "Temporal and Semantic Evaluation Metrics for Foundation Models in Post-Hoc Analysis of Robotic Sub-tasks" by Jonathan Salfity, Selma Wanna, Minkyu Choi, and Mitch Pryor. The corresponding author is Jonathan Salfity (j [dot] salfity [at] utexas [dot] edu).
+This repository is the code base for the IROS 2024 submission: [Temporal and Semantic Evaluation Metrics for Foundation Models in Post-Hoc Analysis of Robotic Sub-tasks](https://arxiv.org/abs/2403.17238) by Jonathan Salfity, Selma Wanna, Minkyu Choi, and Mitch Pryor. The corresponding author is Jonathan Salfity (j [dot] salfity [at] utexas [dot] edu).
 
 The code base is divided into the following sections:
 - Data Generation through Robosuite simulations and Finite State machine (FSM) implementation is in  (`scripts/`). The data is stored in `data/` as `.txt` and/or `.mp4` files upon generation, depending on the config file. For data used in the original paper submission, contact j [dot] salfity [at] utexas [dot] edu for access.
@@ -7,8 +7,7 @@ The code base is divided into the following sections:
 - Analysis of the FM output, comparison with groundtruth data, plot and table generation is in `(analysis/main_metrics_calculations.ipynb)`
 - The main metrics (temporal and semantic) calculations are in `analysis/comparisons.py`, specifically the `get_subtask_similarity` function.
 
-Supporting functions including API call, prompt building, and in-context learning examples are found in `/utils`.
-The random baseline implementation is in `/utils/random_subtask_decomposition.py`.
+Supporting functions including API call, prompt building, in-context learning examples, and random baseline implementation are found in `/utils`.
 
 ## Prerequisites
 Install this package
