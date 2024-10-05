@@ -1,6 +1,9 @@
 #mac os x
 .DS_Store
 
+# Environment
+venv/*
+
 # vs code
 .vscode/*
 .vscode/launch.json
