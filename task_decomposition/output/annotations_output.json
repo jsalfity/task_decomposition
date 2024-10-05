@@ -1,0 +1,417 @@
+{
+    "Door_20240213-183948_0.mp4": {
+        "1": {
+            "username": "luna",
+            "created_at": "2024-10-02 15:46:09.445322",
+            "subtask_decomposition": [
+                [
+                    0,
+                    20,
+                    "move to above door handle"
+                ],
+                [
+                    20,
+                    40,
+                    "move down to turn door handle"
+                ],
+                [
+                    41,
+                    56,
+                    "open door"
+                ],
+                [
+                    57,
+                    79,
+                    "return  to home"
+                ]
+            ],
+            "time_spent": 657
+        },
+        "2": {
+            "username": "kevin_torres",
+            "created_at": "2024-10-02 15:47:53.526493",
+            "subtask_decomposition": [
+                [
+                    0,
+                    20,
+                    "arm moves over door handle"
+                ],
+                [
+                    21,
+                    39,
+                    "arm pushes down on door handle"
+                ],
+                [
+                    40,
+                    56,
+                    "arm pulls on door handle"
+                ],
+                [
+                    57,
+                    79,
+                    "arm releases door handle and stows away"
+                ]
+            ],
+            "time_spent": 413
+        }
+    },
+    "Lift_20240220-124804_17.mp4": {
+        "3": {
+            "username": "kevin_torres",
+            "created_at": "2024-10-02 15:49:50.442366",
+            "subtask_decomposition": [
+                [
+                    0,
+                    12,
+                    "arm moves over block"
+                ],
+                [
+                    12,
+                    15,
+                    "arm grasps block"
+                ],
+                [
+                    16,
+                    28,
+                    "arm lifts the block "
+                ]
+            ],
+            "time_spent": 95
+        },
+        "4": {
+            "username": "luna",
+            "created_at": "2024-10-02 15:50:37.558504",
+            "subtask_decomposition": [
+                [
+                    0,
+                    12,
+                    "move to object"
+                ],
+                [
+                    13,
+                    15,
+                    "grasp object"
+                ],
+                [
+                    16,
+                    28,
+                    "lift object"
+                ]
+            ],
+            "time_spent": 246
+        }
+    },
+    "Lift_20240220-124810_18.mp4": {
+        "5": {
+            "username": "kevin_torres",
+            "created_at": "2024-10-02 15:52:03.283526",
+            "subtask_decomposition": [
+                [
+                    0,
+                    14,
+                    "arm moves over block"
+                ],
+                [
+                    15,
+                    16,
+                    "arm grasps block"
+                ],
+                [
+                    17,
+                    29,
+                    "arm lifts block"
+                ]
+            ],
+            "time_spent": 117
+        },
+        "10": {
+            "username": "luna",
+            "created_at": "2024-10-02 16:02:56.824330",
+            "subtask_decomposition": [
+                [
+                    0,
+                    13,
+                    "approach object"
+                ],
+                [
+                    14,
+                    16,
+                    "grasp object"
+                ],
+                [
+                    17,
+                    29,
+                    "lift object"
+                ]
+            ],
+            "time_spent": 71
+        }
+    },
+    "PickPlace_20240220-222633_14.mp4": {
+        "6": {
+            "username": "kevin_torres",
+            "created_at": "2024-10-02 15:54:41.998654",
+            "subtask_decomposition": [
+                [
+                    0,
+                    54,
+                    "arm moves over red object closest to camera"
+                ],
+                [
+                    55,
+                    66,
+                    "arm grasps over red object closest to camera"
+                ],
+                [
+                    67,
+                    99,
+                    "arm lifts red object over the top right box"
+                ]
+            ],
+            "time_spent": 145
+        },
+        "7": {
+            "username": "luna",
+            "created_at": "2024-10-02 15:56:56.119920",
+            "subtask_decomposition": [
+                [
+                    0,
+                    10,
+                    "move to above soda can"
+                ],
+                [
+                    11,
+                    15,
+                    "move down"
+                ],
+                [
+                    16,
+                    57,
+                    "align before approaching soda can"
+                ],
+                [
+                    58,
+                    64,
+                    "approach soda can"
+                ],
+                [
+                    65,
+                    66,
+                    "grasp soda can"
+                ],
+                [
+                    67,
+                    74,
+                    "pick up soda can"
+                ],
+                [
+                    75,
+                    99,
+                    "move soda towards above place pose"
+                ]
+            ],
+            "time_spent": 356
+        }
+    },
+    "Door_20240213-183957_1.mp4": {
+        "8": {
+            "username": "kevin_torres",
+            "created_at": "2024-10-02 15:57:16.718662",
+            "subtask_decomposition": [
+                [
+                    0,
+                    20,
+                    "arm moves over door handle"
+                ],
+                [
+                    21,
+                    41,
+                    "arm pushes down on door handle"
+                ],
+                [
+                    42,
+                    61,
+                    "arm pulls door handle"
+                ],
+                [
+                    62,
+                    79,
+                    "arm releases door handle and stows away"
+                ]
+            ],
+            "time_spent": 140
+        },
+        "9": {
+            "username": "luna",
+            "created_at": "2024-10-02 16:01:22.935944",
+            "subtask_decomposition": [
+                [
+                    0,
+                    6,
+                    "move up"
+                ],
+                [
+                    7,
+                    20,
+                    "move to above door handle"
+                ],
+                [
+                    21,
+                    40,
+                    "move down to turn door handle"
+                ],
+                [
+                    41,
+                    70,
+                    "open door"
+                ],
+                [
+                    71,
+                    79,
+                    "do nothing"
+                ]
+            ],
+            "time_spent": 154
+        }
+    },
+    "PickPlace_20240220-222641_15.mp4": {
+        "13": {
+            "username": "MinkyuChoi",
+            "created_at": "2024-10-02 19:51:30.630761",
+            "subtask_decomposition": [
+                [
+                    0,
+                    14,
+                    "reaching out to the object"
+                ],
+                [
+                    14,
+                    19,
+                    "grabbing the object"
+                ],
+                [
+                    19,
+                    27,
+                    "moving the grabber to grab the object"
+                ],
+                [
+                    27,
+                    33,
+                    "lifting the object"
+                ],
+                [
+                    33,
+                    68,
+                    "moving the object to the target location"
+                ],
+                [
+                    68,
+                    99,
+                    "put down the object"
+                ]
+            ],
+            "time_spent": 164
+        }
+    },
+    "Stack_20240220-131128_41.mp4": {
+        "17": {
+            "username": "swanbeck",
+            "created_at": "2024-10-03 12:58:08.969363",
+            "subtask_decomposition": [
+                [
+                    0,
+                    8,
+                    "moving to above the first cube"
+                ],
+                [
+                    9,
+                    20,
+                    "approaching the first cube"
+                ],
+                [
+                    21,
+                    24,
+                    "grasping the first cube"
+                ],
+                [
+                    25,
+                    47,
+                    "lifting the first cube"
+                ],
+                [
+                    48,
+                    60,
+                    "placing the first cube on the second cube"
+                ],
+                [
+                    61,
+                    64,
+                    "moving from the stack"
+                ]
+            ],
+            "time_spent": 152
+        }
+    },
+    "Lift_20240220-125041_41.mp4": {
+        "18": {
+            "username": "swanbeck",
+            "created_at": "2024-10-03 12:59:36.495185",
+            "subtask_decomposition": [
+                [
+                    0,
+                    14,
+                    "approaching the object"
+                ],
+                [
+                    15,
+                    18,
+                    "grasping the object"
+                ],
+                [
+                    19,
+                    31,
+                    "lifting the object"
+                ]
+            ],
+            "time_spent": 53
+        }
+    },
+    "Door_20240213-184004_2.mp4": {
+        "19": {
+            "username": "swanbeck",
+            "created_at": "2024-10-03 14:07:40.953926",
+            "subtask_decomposition": [
+                [
+                    0,
+                    10,
+                    "arm moves"
+                ],
+                [
+                    10,
+                    20,
+                    "door opens"
+                ]
+            ],
+            "time_spent": 32
+        }
+    },
+    "PickPlace_20240220-222651_16.mp4": {
+        "20": {
+            "username": "gb",
+            "created_at": "2024-10-04 23:06:12.906996",
+            "subtask_decomposition": [
+                [
+                    0,
+                    10,
+                    "arms"
+                ],
+                [
+                    10,
+                    20,
+                    "pickup"
+                ]
+            ],
+            "time_spent": 11
+        }
+    }
+}
