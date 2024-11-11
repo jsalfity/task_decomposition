@@ -1,0 +1,6541 @@
+{
+    "Door_20240213-183948_0.mp4": {
+        "34": {
+            "username": "jsalfity",
+            "created_at": "2024-10-08 02:42:54.124086",
+            "subtask_decomposition": [
+                [
+                    0,
+                    8,
+                    "moving up"
+                ],
+                [
+                    9,
+                    25,
+                    "moving to above handle"
+                ],
+                [
+                    10,
+                    41,
+                    "turning door handle"
+                ],
+                [
+                    42,
+                    60,
+                    "opening door"
+                ],
+                [
+                    61,
+                    79,
+                    "doing nothing"
+                ]
+            ],
+            "time_spent": 57
+        }
+    },
+    "Lift_20240220-124804_17.mp4": {
+        "35": {
+            "username": "jsalfity",
+            "created_at": "2024-10-08 02:58:55.372577",
+            "subtask_decomposition": [
+                [
+                    0,
+                    11,
+                    "moving to above cube"
+                ],
+                [
+                    11,
+                    16,
+                    "grasping the cube"
+                ],
+                [
+                    18,
+                    28,
+                    "lifting the cube"
+                ]
+            ],
+            "time_spent": 47
+        }
+    },
+    "PickPlace_20240220-222633_14.mp4": {
+        "67": {
+            "username": "jsalfity",
+            "created_at": "2024-10-08 18:07:29.996578",
+            "subtask_decomposition": [
+                [
+                    0,
+                    10,
+                    "moving above the can"
+                ],
+                [
+                    11,
+                    24,
+                    "fine positioning above the can"
+                ],
+                [
+                    25,
+                    62,
+                    "knocking down other object"
+                ],
+                [
+                    63,
+                    65,
+                    "grasping the can"
+                ],
+                [
+                    66,
+                    75,
+                    "lifting the can"
+                ],
+                [
+                    76,
+                    99,
+                    "bringing the can to home position"
+                ]
+            ],
+            "time_spent": 102
+        }
+    },
+    "Stack_20240220-131205_46.mp4": {
+        "100": {
+            "username": "selma",
+            "created_at": "2024-10-09 17:31:28.146278",
+            "subtask_decomposition": [
+                [
+                    0,
+                    10,
+                    "reach for the red block"
+                ],
+                [
+                    11,
+                    40,
+                    "pick red block"
+                ],
+                [
+                    41,
+                    71,
+                    "place red block on top of green block"
+                ]
+            ],
+            "time_spent": 183
+        }
+    },
+    "PickPlace_20240220-222709_18.mp4": {
+        "102": {
+            "username": "selma",
+            "created_at": "2024-10-09 17:39:05.487945",
+            "subtask_decomposition": [
+                [
+                    0,
+                    18,
+                    "move to the red soda can"
+                ],
+                [
+                    19,
+                    48,
+                    "pick up the soda"
+                ],
+                [
+                    49,
+                    85,
+                    "move the can to the top left cubby with respect to the robot"
+                ],
+                [
+                    85,
+                    99,
+                    "place the soda in the cubby"
+                ]
+            ],
+            "time_spent": 71
+        }
+    },
+    "Door_20240213-184004_2.mp4": {
+        "103": {
+            "username": "selma",
+            "created_at": "2024-10-09 17:43:17.714281",
+            "subtask_decomposition": [
+                [
+                    0,
+                    19,
+                    "move toward the door handle"
+                ],
+                [
+                    20,
+                    40,
+                    "turn the handle"
+                ],
+                [
+                    41,
+                    57,
+                    "pull the door open towards you"
+                ],
+                [
+                    58,
+                    79,
+                    "do nothing"
+                ]
+            ],
+            "time_spent": 197
+        }
+    },
+    "Lift_20240220-124810_18.mp4": {
+        "104": {
+            "username": "selma",
+            "created_at": "2024-10-09 20:47:52.937905",
+            "subtask_decomposition": [
+                [
+                    0,
+                    10,
+                    "move to red block"
+                ],
+                [
+                    11,
+                    17,
+                    "grasp the block"
+                ],
+                [
+                    18,
+                    29,
+                    "pick up the red block"
+                ]
+            ],
+            "time_spent": 105
+        }
+    },
+    "Door_20240213-183957_1.mp4": {
+        "105": {
+            "username": "selma",
+            "created_at": "2024-10-09 20:50:10.040495",
+            "subtask_decomposition": [
+                [
+                    0,
+                    20,
+                    "move to the door handle"
+                ],
+                [
+                    21,
+                    40,
+                    "pull down on the handle"
+                ],
+                [
+                    41,
+                    61,
+                    "pull the door open toward you"
+                ],
+                [
+                    62,
+                    79,
+                    "do nothing"
+                ]
+            ],
+            "time_spent": 97
+        }
+    },
+    "PickPlace_20240220-222641_15.mp4": {
+        "133": {
+            "username": "cpetlowany",
+            "created_at": "2024-10-10 15:28:18.516298",
+            "subtask_decomposition": [
+                [
+                    0,
+                    13,
+                    "Move to above object"
+                ],
+                [
+                    13,
+                    23,
+                    "Reach down to object"
+                ],
+                [
+                    24,
+                    26,
+                    "Close gripper"
+                ],
+                [
+                    27,
+                    32,
+                    "Lift object"
+                ],
+                [
+                    33,
+                    68,
+                    "Move object above goal"
+                ],
+                [
+                    69,
+                    99,
+                    "Lower object"
+                ]
+            ],
+            "time_spent": 256
+        }
+    },
+    "Lift_20240220-124816_19.mp4": {
+        "134": {
+            "username": "cpetlowany",
+            "created_at": "2024-10-10 15:41:18.442998",
+            "subtask_decomposition": [
+                [
+                    0,
+                    10,
+                    "Reach down to object"
+                ],
+                [
+                    11,
+                    14,
+                    "Close gripper"
+                ],
+                [
+                    15,
+                    27,
+                    "Lift object"
+                ]
+            ],
+            "time_spent": 75
+        }
+    },
+    "PickPlace_20240220-222651_16.mp4": {
+        "135": {
+            "username": "cpetlowany",
+            "created_at": "2024-10-10 16:46:46.206837",
+            "subtask_decomposition": [
+                [
+                    0,
+                    7,
+                    "Moving over object"
+                ],
+                [
+                    8,
+                    17,
+                    "Moving down to object"
+                ],
+                [
+                    18,
+                    19,
+                    "Closing gripper"
+                ],
+                [
+                    20,
+                    26,
+                    "Lifting object"
+                ],
+                [
+                    27,
+                    52,
+                    "Moving object above place position"
+                ],
+                [
+                    53,
+                    99,
+                    "Lowering object"
+                ]
+            ],
+            "time_spent": 153
+        }
+    },
+    "Door_20240213-184012_3.mp4": {
+        "137": {
+            "username": "cpetlowany",
+            "created_at": "2024-10-10 16:51:07.694120",
+            "subtask_decomposition": [
+                [
+                    0,
+                    6,
+                    "Lifting gripper"
+                ],
+                [
+                    7,
+                    20,
+                    "Moving gripper over handle"
+                ],
+                [
+                    21,
+                    47,
+                    "Lowering gripper to turn handle"
+                ],
+                [
+                    48,
+                    79,
+                    "Pulling away from handle"
+                ]
+            ],
+            "time_spent": 81
+        }
+    },
+    "Lift_20240220-124823_20.mp4": {
+        "138": {
+            "username": "cpetlowany",
+            "created_at": "2024-10-10 16:53:38.747329",
+            "subtask_decomposition": [
+                [
+                    0,
+                    14,
+                    "Moving over object"
+                ],
+                [
+                    15,
+                    17,
+                    "Closing gripper"
+                ],
+                [
+                    18,
+                    30,
+                    "Lifting object"
+                ]
+            ],
+            "time_spent": 60
+        }
+    },
+    "PickPlace_20240220-222700_17.mp4": {
+        "139": {
+            "username": "cpetlowany",
+            "created_at": "2024-10-10 16:56:19.196595",
+            "subtask_decomposition": [
+                [
+                    0,
+                    17,
+                    "Moving above object"
+                ],
+                [
+                    18,
+                    27,
+                    "Moving down to object"
+                ],
+                [
+                    28,
+                    29,
+                    "Closing gripper"
+                ],
+                [
+                    30,
+                    37,
+                    "Lifting object"
+                ],
+                [
+                    38,
+                    74,
+                    "Moving object above desired place location"
+                ],
+                [
+                    75,
+                    99,
+                    "Lowering object"
+                ]
+            ],
+            "time_spent": 141
+        }
+    },
+    "Door_20240213-184020_4.mp4": {
+        "140": {
+            "username": "mathewh",
+            "created_at": "2024-10-11 00:05:05.212463",
+            "subtask_decomposition": [
+                [
+                    1,
+                    20,
+                    "Alignment with object"
+                ],
+                [
+                    21,
+                    40,
+                    "Pushing down on object"
+                ],
+                [
+                    41,
+                    73,
+                    "Pull object toward self"
+                ],
+                [
+                    74,
+                    79,
+                    "rest"
+                ]
+            ],
+            "time_spent": 193
+        }
+    },
+    "Lift_20240220-124829_21.mp4": {
+        "141": {
+            "username": "mathewh",
+            "created_at": "2024-10-11 00:06:55.517764",
+            "subtask_decomposition": [
+                [
+                    1,
+                    16,
+                    "move to object"
+                ],
+                [
+                    16,
+                    18,
+                    "pick up object"
+                ],
+                [
+                    19,
+                    31,
+                    "move object up"
+                ]
+            ],
+            "time_spent": 64
+        }
+    },
+    "PickPlace_20240220-222718_19.mp4": {
+        "142": {
+            "username": "mathewh",
+            "created_at": "2024-10-11 00:09:11.003896",
+            "subtask_decomposition": [
+                [
+                    1,
+                    23,
+                    "move above object"
+                ],
+                [
+                    23,
+                    25,
+                    "pick up object"
+                ],
+                [
+                    26,
+                    99,
+                    "move to endpoint"
+                ]
+            ],
+            "time_spent": 80
+        }
+    },
+    "Lift_20240220-124835_22.mp4": {
+        "143": {
+            "username": "mathewh",
+            "created_at": "2024-10-11 00:27:46.262253",
+            "subtask_decomposition": [
+                [
+                    1,
+                    16,
+                    "move above object"
+                ],
+                [
+                    17,
+                    19,
+                    "grasp object"
+                ],
+                [
+                    20,
+                    32,
+                    "pick up object"
+                ]
+            ],
+            "time_spent": 69
+        }
+    },
+    "Door_20240213-184028_5.mp4": {
+        "144": {
+            "username": "mathewh",
+            "created_at": "2024-10-11 00:30:27.193185",
+            "subtask_decomposition": [
+                [
+                    1,
+                    18,
+                    "move above object"
+                ],
+                [
+                    19,
+                    40,
+                    "push down object"
+                ],
+                [
+                    41,
+                    57,
+                    "pull object"
+                ],
+                [
+                    58,
+                    79,
+                    "return home"
+                ]
+            ],
+            "time_spent": 139
+        }
+    },
+    "Door_20240213-184036_6.mp4": {
+        "145": {
+            "username": "mathewh",
+            "created_at": "2024-10-11 00:32:14.219677",
+            "subtask_decomposition": [
+                [
+                    1,
+                    19,
+                    "move above object"
+                ],
+                [
+                    20,
+                    40,
+                    "push down on object"
+                ],
+                [
+                    41,
+                    55,
+                    "pull object"
+                ],
+                [
+                    56,
+                    79,
+                    "return home"
+                ]
+            ],
+            "time_spent": 99
+        }
+    },
+    "Lift_20240220-124842_23.mp4": {
+        "146": {
+            "username": "mathewh",
+            "created_at": "2024-10-11 00:33:45.737715",
+            "subtask_decomposition": [
+                [
+                    1,
+                    14,
+                    "move above object"
+                ],
+                [
+                    15,
+                    18,
+                    "grasp object"
+                ],
+                [
+                    19,
+                    31,
+                    "pick up object"
+                ]
+            ],
+            "time_spent": 73
+        }
+    },
+    "PickPlace_20240220-222727_20.mp4": {
+        "147": {
+            "username": "mathewh",
+            "created_at": "2024-10-11 00:37:23.121848",
+            "subtask_decomposition": [
+                [
+                    1,
+                    17,
+                    "move above object"
+                ],
+                [
+                    18,
+                    19,
+                    "grasp object"
+                ],
+                [
+                    20,
+                    26,
+                    "pick up object"
+                ],
+                [
+                    27,
+                    72,
+                    "move to waypoint"
+                ]
+            ],
+            "time_spent": 111
+        }
+    },
+    "Door_20240213-184043_7.mp4": {
+        "148": {
+            "username": "mathewh",
+            "created_at": "2024-10-11 00:40:15.768717",
+            "subtask_decomposition": [
+                [
+                    1,
+                    20,
+                    "move above object"
+                ],
+                [
+                    21,
+                    42,
+                    "move down on object"
+                ],
+                [
+                    43,
+                    59,
+                    "pull object"
+                ],
+                [
+                    60,
+                    78,
+                    "return home"
+                ]
+            ],
+            "time_spent": 163
+        }
+    },
+    "Lift_20240220-124849_24.mp4": {
+        "149": {
+            "username": "mathewh",
+            "created_at": "2024-10-11 00:41:27.573526",
+            "subtask_decomposition": [
+                [
+                    1,
+                    14,
+                    "move above item"
+                ],
+                [
+                    15,
+                    16,
+                    "grasp object"
+                ],
+                [
+                    17,
+                    30,
+                    "pick up object"
+                ]
+            ],
+            "time_spent": 60
+        }
+    },
+    "PickPlace_20240220-222736_21.mp4": {
+        "151": {
+            "username": "mathewh",
+            "created_at": "2024-10-11 00:48:42.914065",
+            "subtask_decomposition": [
+                [
+                    1,
+                    15,
+                    "move above object"
+                ],
+                [
+                    16,
+                    25,
+                    "move down on object and grasp"
+                ],
+                [
+                    26,
+                    34,
+                    "pick up object"
+                ],
+                [
+                    35,
+                    99,
+                    "move to waypoint"
+                ]
+            ],
+            "time_spent": 91
+        }
+    },
+    "Door_20240213-184051_8.mp4": {
+        "152": {
+            "username": "mathewh",
+            "created_at": "2024-10-11 00:51:06.265883",
+            "subtask_decomposition": [
+                [
+                    1,
+                    20,
+                    "move above object"
+                ],
+                [
+                    21,
+                    41,
+                    "push down on object"
+                ],
+                [
+                    42,
+                    59,
+                    "pull on object"
+                ],
+                [
+                    60,
+                    79,
+                    "return home"
+                ]
+            ],
+            "time_spent": 80
+        }
+    },
+    "Lift_20240220-124855_25.mp4": {
+        "153": {
+            "username": "mathewh",
+            "created_at": "2024-10-11 00:52:15.632195",
+            "subtask_decomposition": [
+                [
+                    1,
+                    13,
+                    "move above object"
+                ],
+                [
+                    14,
+                    15,
+                    "grasp object"
+                ],
+                [
+                    16,
+                    28,
+                    "pick up object"
+                ]
+            ],
+            "time_spent": 61
+        }
+    },
+    "PickPlace_20240220-222746_22.mp4": {
+        "154": {
+            "username": "mathewh",
+            "created_at": "2024-10-11 00:55:25.168119",
+            "subtask_decomposition": [
+                [
+                    1,
+                    11,
+                    "move above object"
+                ],
+                [
+                    12,
+                    21,
+                    "move down on object"
+                ],
+                [
+                    22,
+                    23,
+                    "grasp object"
+                ],
+                [
+                    24,
+                    30,
+                    "pick up object"
+                ],
+                [
+                    31,
+                    99,
+                    "move to waypoint"
+                ]
+            ],
+            "time_spent": 116
+        }
+    },
+    "Door_20240213-184058_9.mp4": {
+        "155": {
+            "username": "mathewh",
+            "created_at": "2024-10-11 00:57:37.712480",
+            "subtask_decomposition": [
+                [
+                    1,
+                    20,
+                    "move above object"
+                ],
+                [
+                    21,
+                    39,
+                    "push down on object"
+                ],
+                [
+                    40,
+                    51,
+                    "pull object"
+                ],
+                [
+                    52,
+                    60,
+                    "return home"
+                ],
+                [
+                    61,
+                    79,
+                    "push door in "
+                ]
+            ],
+            "time_spent": 103
+        }
+    },
+    "Lift_20240220-124903_26.mp4": {
+        "156": {
+            "username": "mathewh",
+            "created_at": "2024-10-11 00:59:10.030280",
+            "subtask_decomposition": [
+                [
+                    1,
+                    13,
+                    "move down on object"
+                ],
+                [
+                    13,
+                    14,
+                    "grasp object"
+                ],
+                [
+                    15,
+                    28,
+                    "pick up object"
+                ]
+            ],
+            "time_spent": 65
+        }
+    },
+    "PickPlace_20240220-222755_23.mp4": {
+        "158": {
+            "username": "mathewh",
+            "created_at": "2024-10-11 01:06:22.295698",
+            "subtask_decomposition": [
+                [
+                    1,
+                    24,
+                    "push on object"
+                ],
+                [
+                    25,
+                    31,
+                    "move down on object"
+                ],
+                [
+                    32,
+                    33,
+                    "grasp"
+                ],
+                [
+                    34,
+                    40,
+                    "pick up object"
+                ],
+                [
+                    41,
+                    99,
+                    "move to endpoint"
+                ]
+            ],
+            "time_spent": 102
+        }
+    },
+    "Door_20240213-184106_10.mp4": {
+        "159": {
+            "username": "mathewh",
+            "created_at": "2024-10-11 01:08:16.332077",
+            "subtask_decomposition": [
+                [
+                    1,
+                    20,
+                    "move above object"
+                ],
+                [
+                    21,
+                    41,
+                    "push down on object"
+                ],
+                [
+                    42,
+                    59,
+                    "pull on object"
+                ],
+                [
+                    60,
+                    71,
+                    "move home"
+                ],
+                [
+                    72,
+                    79,
+                    "pause"
+                ]
+            ],
+            "time_spent": 100
+        }
+    },
+    "Lift_20240220-124911_27.mp4": {
+        "160": {
+            "username": "mathewh",
+            "created_at": "2024-10-11 01:09:32.182457",
+            "subtask_decomposition": [
+                [
+                    1,
+                    19,
+                    "move down on object"
+                ],
+                [
+                    20,
+                    22,
+                    "grasp object"
+                ],
+                [
+                    23,
+                    35,
+                    "pick up object"
+                ]
+            ],
+            "time_spent": 44
+        }
+    },
+    "PickPlace_20240220-222805_24.mp4": {
+        "166": {
+            "username": "swanbeck",
+            "created_at": "2024-10-11 17:12:46.860705",
+            "subtask_decomposition": [
+                [
+                    0,
+                    7,
+                    "open gripper"
+                ],
+                [
+                    8,
+                    78,
+                    "move to above object"
+                ],
+                [
+                    79,
+                    95,
+                    "pick up object"
+                ]
+            ],
+            "time_spent": 117
+        }
+    },
+    "Door_20240213-184114_11.mp4": {
+        "167": {
+            "username": "swanbeck",
+            "created_at": "2024-10-11 17:14:13.625373",
+            "subtask_decomposition": [
+                [
+                    0,
+                    19,
+                    "move to above handle"
+                ],
+                [
+                    20,
+                    40,
+                    "turn handle"
+                ],
+                [
+                    41,
+                    55,
+                    "open door"
+                ]
+            ],
+            "time_spent": 67
+        }
+    },
+    "Lift_20240220-124918_28.mp4": {
+        "168": {
+            "username": "swanbeck",
+            "created_at": "2024-10-11 17:15:16.636242",
+            "subtask_decomposition": [
+                [
+                    0,
+                    13,
+                    "reach down to object"
+                ],
+                [
+                    14,
+                    17,
+                    "grasp object"
+                ],
+                [
+                    18,
+                    30,
+                    "lift object"
+                ]
+            ],
+            "time_spent": 50
+        }
+    },
+    "PickPlace_20240220-222814_25.mp4": {
+        "169": {
+            "username": "swanbeck",
+            "created_at": "2024-10-11 17:17:09.091390",
+            "subtask_decomposition": [
+                [
+                    0,
+                    10,
+                    "move to above object"
+                ],
+                [
+                    11,
+                    22,
+                    "reach down to grasp object"
+                ],
+                [
+                    23,
+                    30,
+                    "lift object"
+                ],
+                [
+                    31,
+                    99,
+                    "place object"
+                ]
+            ],
+            "time_spent": 105
+        }
+    },
+    "Door_20240213-184121_12.mp4": {
+        "170": {
+            "username": "swanbeck",
+            "created_at": "2024-10-11 17:18:25.600122",
+            "subtask_decomposition": [
+                [
+                    0,
+                    25,
+                    "move to door handle"
+                ],
+                [
+                    26,
+                    46,
+                    "turn door handle"
+                ],
+                [
+                    47,
+                    63,
+                    "open door"
+                ]
+            ],
+            "time_spent": 69
+        },
+        "172": {
+            "username": "Caleb",
+            "created_at": "2024-10-11 17:23:49.091467",
+            "subtask_decomposition": [
+                [
+                    0,
+                    20,
+                    "Approach "
+                ],
+                [
+                    20,
+                    46,
+                    "turn handle"
+                ],
+                [
+                    47,
+                    69,
+                    "pull open door"
+                ]
+            ],
+            "time_spent": 302
+        }
+    },
+    "Lift_20240220-124924_29.mp4": {
+        "171": {
+            "username": "swanbeck",
+            "created_at": "2024-10-11 17:19:25.270812",
+            "subtask_decomposition": [
+                [
+                    0,
+                    16,
+                    "move down to object"
+                ],
+                [
+                    17,
+                    19,
+                    "grasp object"
+                ],
+                [
+                    20,
+                    32,
+                    "lift object"
+                ]
+            ],
+            "time_spent": 51
+        }
+    },
+    "PickPlace_20240220-222824_26.mp4": {
+        "173": {
+            "username": "Andon",
+            "created_at": "2024-10-11 17:38:56.491933",
+            "subtask_decomposition": [
+                [
+                    0,
+                    15,
+                    "move over object"
+                ],
+                [
+                    15,
+                    27,
+                    "lower to object"
+                ],
+                [
+                    27,
+                    39,
+                    "pick up object"
+                ],
+                [
+                    39,
+                    73,
+                    "move object over"
+                ],
+                [
+                    73,
+                    99,
+                    "place object"
+                ]
+            ],
+            "time_spent": 123
+        }
+    },
+    "Door_20240213-184129_13.mp4": {
+        "174": {
+            "username": "Andon",
+            "created_at": "2024-10-11 17:40:54.220745",
+            "subtask_decomposition": [
+                [
+                    0,
+                    21,
+                    "move above handle"
+                ],
+                [
+                    21,
+                    30,
+                    "lower to handle"
+                ],
+                [
+                    30,
+                    47,
+                    "turn handle"
+                ],
+                [
+                    47,
+                    65,
+                    "pull handle"
+                ],
+                [
+                    65,
+                    79,
+                    "move away from handle"
+                ]
+            ],
+            "time_spent": 110
+        }
+    },
+    "Lift_20240220-124931_30.mp4": {
+        "175": {
+            "username": "Andon",
+            "created_at": "2024-10-11 17:42:28.965490",
+            "subtask_decomposition": [
+                [
+                    0,
+                    12,
+                    "move above object"
+                ],
+                [
+                    12,
+                    16,
+                    "grasp object"
+                ],
+                [
+                    16,
+                    28,
+                    "lift object"
+                ]
+            ],
+            "time_spent": 85
+        }
+    },
+    "PickPlace_20240220-222832_27.mp4": {
+        "176": {
+            "username": "Andon",
+            "created_at": "2024-10-11 17:44:11.349232",
+            "subtask_decomposition": [
+                [
+                    0,
+                    12,
+                    "move above object"
+                ],
+                [
+                    12,
+                    20,
+                    "lower to object"
+                ],
+                [
+                    20,
+                    31,
+                    "lift object"
+                ],
+                [
+                    31,
+                    66,
+                    "move object"
+                ]
+            ],
+            "time_spent": 69
+        }
+    },
+    "PickPlace_20240220-222851_29.mp4": {
+        "177": {
+            "username": "Caleb",
+            "created_at": "2024-10-11 18:38:45.626618",
+            "subtask_decomposition": [
+                [
+                    0,
+                    15,
+                    "Approach"
+                ],
+                [
+                    16,
+                    28,
+                    "grasp"
+                ],
+                [
+                    29,
+                    35,
+                    "retrieve"
+                ],
+                [
+                    36,
+                    74,
+                    "Approach goal"
+                ],
+                [
+                    75,
+                    99,
+                    "Place object"
+                ]
+            ],
+            "time_spent": 163
+        }
+    },
+    "Door_20240213-184151_16.mp4": {
+        "178": {
+            "username": "Caleb",
+            "created_at": "2024-10-11 18:44:55.991204",
+            "subtask_decomposition": [
+                [
+                    0,
+                    19,
+                    "Approach Task"
+                ],
+                [
+                    20,
+                    40,
+                    "Turn Handle"
+                ],
+                [
+                    41,
+                    57,
+                    "pull handle"
+                ],
+                [
+                    58,
+                    79,
+                    "done"
+                ]
+            ],
+            "time_spent": 120
+        }
+    },
+    "Door_20240213-184137_14.mp4": {
+        "179": {
+            "username": "kevin_torres",
+            "created_at": "2024-10-11 19:20:22.099015",
+            "subtask_decomposition": [
+                [
+                    0,
+                    6,
+                    "robot arm unstows"
+                ],
+                [
+                    7,
+                    20,
+                    "robot arm moves above door handle"
+                ],
+                [
+                    21,
+                    38,
+                    "robot arm pushes down the door handle"
+                ],
+                [
+                    39,
+                    54,
+                    "robot arm pulls door handle"
+                ],
+                [
+                    55,
+                    79,
+                    "robot arm stows away"
+                ]
+            ],
+            "time_spent": 137
+        }
+    },
+    "Lift_20240220-124937_31.mp4": {
+        "180": {
+            "username": "kevin_torres",
+            "created_at": "2024-10-11 19:22:11.409892",
+            "subtask_decomposition": [
+                [
+                    0,
+                    10,
+                    "robot arm moves over block"
+                ],
+                [
+                    11,
+                    17,
+                    "robot arm grips block"
+                ],
+                [
+                    18,
+                    30,
+                    "robot arm lifts block"
+                ]
+            ],
+            "time_spent": 65
+        }
+    },
+    "PickPlace_20240220-222841_28.mp4": {
+        "181": {
+            "username": "kevin_torres",
+            "created_at": "2024-10-11 19:24:11.693159",
+            "subtask_decomposition": [
+                [
+                    0,
+                    13,
+                    "robot arm attempts to move over red cylinder object"
+                ],
+                [
+                    14,
+                    33,
+                    "robot arm starts colliding with other objects and knocking them over"
+                ],
+                [
+                    33,
+                    99,
+                    "robot arm is idle over the knocked over items"
+                ]
+            ],
+            "time_spent": 114
+        }
+    },
+    "Door_20240213-184144_15.mp4": {
+        "182": {
+            "username": "kevin_torres",
+            "created_at": "2024-10-11 19:25:55.564295",
+            "subtask_decomposition": [
+                [
+                    0,
+                    6,
+                    "robot arm unstows"
+                ],
+                [
+                    7,
+                    20,
+                    "robot arm moves over door handle"
+                ],
+                [
+                    21,
+                    41,
+                    "robot arm pushes down on door handle"
+                ],
+                [
+                    42,
+                    58,
+                    "robot arm pulls door handle"
+                ],
+                [
+                    59,
+                    79,
+                    "robot arm stows away"
+                ]
+            ],
+            "time_spent": 97
+        }
+    },
+    "Lift_20240220-124944_32.mp4": {
+        "183": {
+            "username": "kevin_torres",
+            "created_at": "2024-10-11 19:27:40.893558",
+            "subtask_decomposition": [
+                [
+                    0,
+                    15,
+                    "robot arm moves over block"
+                ],
+                [
+                    16,
+                    19,
+                    "robot arm grips block"
+                ],
+                [
+                    20,
+                    32,
+                    "robot arm lifts block"
+                ]
+            ],
+            "time_spent": 55
+        }
+    },
+    "Lift_20240220-124951_33.mp4": {
+        "184": {
+            "username": "kevin_torres",
+            "created_at": "2024-10-11 19:28:55.844058",
+            "subtask_decomposition": [
+                [
+                    0,
+                    12,
+                    "robot arm moves over block"
+                ],
+                [
+                    13,
+                    17,
+                    "robot arm grips over block"
+                ],
+                [
+                    18,
+                    29,
+                    "robot arm lifts block"
+                ]
+            ],
+            "time_spent": 68
+        }
+    },
+    "Stack_20240220-130630_1.mp4": {
+        "185": {
+            "username": "kevin_torres",
+            "created_at": "2024-10-11 19:31:19.935560",
+            "subtask_decomposition": [
+                [
+                    0,
+                    24,
+                    "robot arm moves over red block"
+                ],
+                [
+                    25,
+                    27,
+                    "robot arm grips red block"
+                ],
+                [
+                    28,
+                    40,
+                    "robot arm lifts red block"
+                ],
+                [
+                    41,
+                    56,
+                    "robot arm moves red block over to the top of the green block"
+                ],
+                [
+                    57,
+                    59,
+                    "robot arm releases grip of red block"
+                ],
+                [
+                    60,
+                    62,
+                    "robot arm stows away"
+                ]
+            ],
+            "time_spent": 133
+        }
+    },
+    "Stack_20240220-130620_0.mp4": {
+        "186": {
+            "username": "kevin_torres",
+            "created_at": "2024-10-11 19:33:49.497470",
+            "subtask_decomposition": [
+                [
+                    0,
+                    25,
+                    "robot arm moves over to the red block"
+                ],
+                [
+                    26,
+                    29,
+                    "robot arm grips over red block"
+                ],
+                [
+                    30,
+                    43,
+                    "robot arm lifts red block"
+                ],
+                [
+                    44,
+                    61,
+                    "robot arm moves red block over to the top of the green block"
+                ],
+                [
+                    62,
+                    63,
+                    "robot arm releases grip on red block"
+                ],
+                [
+                    64,
+                    67,
+                    "robot arm stows away"
+                ]
+            ],
+            "time_spent": 136
+        }
+    },
+    "Door_20240213-184158_17.mp4": {
+        "187": {
+            "username": "kevin_torres",
+            "created_at": "2024-10-11 19:36:49.617648",
+            "subtask_decomposition": [
+                [
+                    0,
+                    20,
+                    "robot arm moves over to door handle"
+                ],
+                [
+                    21,
+                    40,
+                    "robot arm pushes down on door handle"
+                ],
+                [
+                    41,
+                    53,
+                    "robot arm pulls door handle"
+                ],
+                [
+                    54,
+                    79,
+                    "robot arm stows away"
+                ]
+            ],
+            "time_spent": 99
+        }
+    },
+    "Lift_20240220-124957_34.mp4": {
+        "188": {
+            "username": "kevin_torres",
+            "created_at": "2024-10-11 19:37:48.985904",
+            "subtask_decomposition": [
+                [
+                    0,
+                    15,
+                    "robot arm moves over red block"
+                ],
+                [
+                    16,
+                    17,
+                    "robot arm grips over red block"
+                ],
+                [
+                    18,
+                    30,
+                    "robot arm lifts red block"
+                ]
+            ],
+            "time_spent": 54
+        }
+    },
+    "Door_20240213-184206_18.mp4": {
+        "199": {
+            "username": "selma",
+            "created_at": "2024-10-14 12:43:03.892284",
+            "subtask_decomposition": [
+                [
+                    0,
+                    20,
+                    "move to door handle"
+                ],
+                [
+                    20,
+                    39,
+                    "pull open door"
+                ],
+                [
+                    40,
+                    57,
+                    "pull open door"
+                ],
+                [
+                    58,
+                    79,
+                    "do nothing"
+                ]
+            ],
+            "time_spent": 135
+        }
+    },
+    "Lift_20240220-125003_35.mp4": {
+        "200": {
+            "username": "selma",
+            "created_at": "2024-10-14 12:46:06.874765",
+            "subtask_decomposition": [
+                [
+                    0,
+                    10,
+                    "reach for the red block"
+                ],
+                [
+                    11,
+                    15,
+                    "grasp the block"
+                ],
+                [
+                    16,
+                    28,
+                    "lift the block"
+                ]
+            ],
+            "time_spent": 57
+        }
+    },
+    "Stack_20240220-130638_2.mp4": {
+        "202": {
+            "username": "selma",
+            "created_at": "2024-10-14 13:08:42.072106",
+            "subtask_decomposition": [
+                [
+                    0,
+                    15,
+                    "move to above the red block"
+                ],
+                [
+                    15,
+                    28,
+                    "reach down to grab the red block"
+                ],
+                [
+                    29,
+                    30,
+                    "grasp the red block"
+                ],
+                [
+                    31,
+                    43,
+                    "pick up the red block"
+                ],
+                [
+                    44,
+                    72,
+                    "place on the green block"
+                ]
+            ],
+            "time_spent": 108
+        }
+    },
+    "Door_20240213-184213_19.mp4": {
+        "203": {
+            "username": "selma",
+            "created_at": "2024-10-14 13:10:42.090581",
+            "subtask_decomposition": [
+                [
+                    0,
+                    19,
+                    "reach above the door handle"
+                ],
+                [
+                    20,
+                    40,
+                    "pull down on the door handle"
+                ],
+                [
+                    41,
+                    56,
+                    "pull door open toward robot"
+                ],
+                [
+                    57,
+                    79,
+                    "do nothing"
+                ]
+            ],
+            "time_spent": 95
+        }
+    },
+    "Lift_20240220-125010_36.mp4": {
+        "204": {
+            "username": "selma",
+            "created_at": "2024-10-14 13:12:03.878945",
+            "subtask_decomposition": [
+                [
+                    0,
+                    49,
+                    "move to above red block"
+                ]
+            ],
+            "time_spent": 38
+        }
+    },
+    "Stack_20240220-130646_3.mp4": {
+        "205": {
+            "username": "selma",
+            "created_at": "2024-10-14 21:29:18.236648",
+            "subtask_decomposition": [
+                [
+                    0,
+                    7,
+                    "move to red block"
+                ],
+                [
+                    8,
+                    13,
+                    "reach down to grab red block"
+                ],
+                [
+                    13,
+                    26,
+                    "pick up the red block"
+                ],
+                [
+                    26,
+                    47,
+                    "move to the green block"
+                ],
+                [
+                    48,
+                    64,
+                    "place the red block on the green block"
+                ]
+            ],
+            "time_spent": 105
+        }
+    },
+    "Door_20240220-173504_0.mp4": {
+        "206": {
+            "username": "selma",
+            "created_at": "2024-10-14 21:31:18.495686",
+            "subtask_decomposition": [
+                [
+                    0,
+                    20,
+                    "move the gripper toward the door handle"
+                ],
+                [
+                    21,
+                    39,
+                    "pull down on the door handle"
+                ],
+                [
+                    40,
+                    79,
+                    "pull door open toward the robot"
+                ]
+            ],
+            "time_spent": 100
+        }
+    },
+    "Lift_20240220-125017_37.mp4": {
+        "232": {
+            "username": "selma",
+            "created_at": "2024-10-15 13:25:49.199852",
+            "subtask_decomposition": [
+                [
+                    0,
+                    10,
+                    "move toward the red block"
+                ],
+                [
+                    11,
+                    20,
+                    "grasp red block"
+                ],
+                [
+                    21,
+                    32,
+                    "lift red block"
+                ]
+            ],
+            "time_spent": 68
+        }
+    },
+    "Stack_20240220-130653_4.mp4": {
+        "233": {
+            "username": "selma",
+            "created_at": "2024-10-15 13:28:05.481794",
+            "subtask_decomposition": [
+                [
+                    0,
+                    9,
+                    "move to above red block"
+                ],
+                [
+                    10,
+                    26,
+                    "pick up red block"
+                ],
+                [
+                    27,
+                    40,
+                    "lift and move red block toward green block"
+                ],
+                [
+                    53,
+                    65,
+                    "place red block on top of green block"
+                ]
+            ],
+            "time_spent": 107
+        }
+    },
+    "Door_20240220-173515_1.mp4": {
+        "234": {
+            "username": "selma",
+            "created_at": "2024-10-15 13:30:00.151507",
+            "subtask_decomposition": [
+                [
+                    0,
+                    19,
+                    "move toward above the door handle"
+                ],
+                [
+                    20,
+                    42,
+                    "pull down on the door handle"
+                ],
+                [
+                    43,
+                    59,
+                    "pull open the door toward the robot"
+                ],
+                [
+                    60,
+                    79,
+                    "do nothing"
+                ]
+            ],
+            "time_spent": 102
+        }
+    },
+    "Lift_20240220-125024_38.mp4": {
+        "235": {
+            "username": "jlyle",
+            "created_at": "2024-10-15 15:01:25.210454",
+            "subtask_decomposition": [
+                [
+                    0,
+                    11,
+                    "move to above object"
+                ],
+                [
+                    12,
+                    15,
+                    "grasp object"
+                ],
+                [
+                    16,
+                    29,
+                    "lift object straight up"
+                ]
+            ],
+            "time_spent": 155
+        }
+    },
+    "Stack_20240220-130701_5.mp4": {
+        "236": {
+            "username": "jlyle",
+            "created_at": "2024-10-15 15:04:26.040167",
+            "subtask_decomposition": [
+                [
+                    0,
+                    12,
+                    "move to above red object"
+                ],
+                [
+                    13,
+                    24,
+                    "move down to red object"
+                ],
+                [
+                    25,
+                    27,
+                    "grasp red object"
+                ],
+                [
+                    28,
+                    40,
+                    "lift red object straight up"
+                ],
+                [
+                    41,
+                    57,
+                    "move red object over green object"
+                ],
+                [
+                    58,
+                    70,
+                    "lower red object onto green object"
+                ],
+                [
+                    71,
+                    76,
+                    "release red object"
+                ]
+            ],
+            "time_spent": 171
+        }
+    },
+    "Door_20240220-173523_2.mp4": {
+        "237": {
+            "username": "jlyle",
+            "created_at": "2024-10-15 15:07:08.561927",
+            "subtask_decomposition": [
+                [
+                    0,
+                    20,
+                    "move to above door handle"
+                ],
+                [
+                    21,
+                    40,
+                    "rotate door handle downwards"
+                ],
+                [
+                    41,
+                    57,
+                    "pull door open"
+                ],
+                [
+                    58,
+                    79,
+                    "release door handle"
+                ]
+            ],
+            "time_spent": 152
+        }
+    },
+    "Lift_20240220-125030_39.mp4": {
+        "238": {
+            "username": "jlyle",
+            "created_at": "2024-10-15 15:08:50.667540",
+            "subtask_decomposition": [
+                [
+                    0,
+                    11,
+                    "move to object"
+                ],
+                [
+                    12,
+                    14,
+                    "grasp object"
+                ],
+                [
+                    15,
+                    27,
+                    "lift object straight up"
+                ]
+            ],
+            "time_spent": 52
+        }
+    },
+    "Stack_20240220-130710_6.mp4": {
+        "239": {
+            "username": "jlyle",
+            "created_at": "2024-10-15 15:11:42.878552",
+            "subtask_decomposition": [
+                [
+                    0,
+                    14,
+                    "move to above red object"
+                ],
+                [
+                    15,
+                    27,
+                    "move down to red object"
+                ],
+                [
+                    28,
+                    30,
+                    "grasp red object"
+                ],
+                [
+                    31,
+                    43,
+                    "lift red object straight up"
+                ],
+                [
+                    44,
+                    57,
+                    "move red object to above green object"
+                ],
+                [
+                    58,
+                    72,
+                    "release red object on green object"
+                ]
+            ],
+            "time_spent": 155
+        }
+    },
+    "Door_20240220-173532_3.mp4": {
+        "240": {
+            "username": "jlyle",
+            "created_at": "2024-10-15 15:17:01.451480",
+            "subtask_decomposition": [
+                [
+                    0,
+                    23,
+                    "move to above door handle"
+                ],
+                [
+                    24,
+                    38,
+                    "push door handle down"
+                ],
+                [
+                    39,
+                    41,
+                    "slightly open door"
+                ],
+                [
+                    42,
+                    79,
+                    "move away from handle"
+                ]
+            ],
+            "time_spent": 164
+        }
+    },
+    "Lift_20240220-125035_40.mp4": {
+        "241": {
+            "username": "jlyle",
+            "created_at": "2024-10-15 15:20:57.414383",
+            "subtask_decomposition": [
+                [
+                    0,
+                    12,
+                    "move to object"
+                ],
+                [
+                    13,
+                    15,
+                    "grasp object"
+                ],
+                [
+                    16,
+                    28,
+                    "lift object straight up"
+                ]
+            ],
+            "time_spent": 54
+        }
+    },
+    "Stack_20240220-130718_7.mp4": {
+        "242": {
+            "username": "jlyle",
+            "created_at": "2024-10-15 15:23:30.698517",
+            "subtask_decomposition": [
+                [
+                    0,
+                    10,
+                    "move to above red object"
+                ],
+                [
+                    11,
+                    28,
+                    "move down to red object"
+                ],
+                [
+                    29,
+                    32,
+                    "grasp red object"
+                ],
+                [
+                    33,
+                    61,
+                    "move red object above green object"
+                ],
+                [
+                    62,
+                    70,
+                    "place red object on green object"
+                ],
+                [
+                    71,
+                    74,
+                    "move straight up"
+                ]
+            ],
+            "time_spent": 140
+        }
+    },
+    "Door_20240220-173539_4.mp4": {
+        "243": {
+            "username": "jlyle",
+            "created_at": "2024-10-15 15:26:10.386140",
+            "subtask_decomposition": [
+                [
+                    0,
+                    22,
+                    "move to above door handle"
+                ],
+                [
+                    23,
+                    45,
+                    "push door handle down"
+                ],
+                [
+                    46,
+                    57,
+                    "pull door open"
+                ],
+                [
+                    58,
+                    79,
+                    "release door handle"
+                ]
+            ],
+            "time_spent": 88
+        }
+    },
+    "Lift_20240220-125041_41.mp4": {
+        "244": {
+            "username": "jlyle",
+            "created_at": "2024-10-15 15:27:38.727531",
+            "subtask_decomposition": [
+                [
+                    0,
+                    15,
+                    "move to object"
+                ],
+                [
+                    16,
+                    18,
+                    "grasp object"
+                ],
+                [
+                    19,
+                    31,
+                    "lift object straight up"
+                ]
+            ],
+            "time_spent": 76
+        }
+    },
+    "Stack_20240220-130726_8.mp4": {
+        "245": {
+            "username": "jlyle",
+            "created_at": "2024-10-15 15:31:31.605193",
+            "subtask_decomposition": [
+                [
+                    0,
+                    10,
+                    "move to above red object"
+                ],
+                [
+                    11,
+                    30,
+                    "lower to red object"
+                ],
+                [
+                    31,
+                    34,
+                    "grasp red object"
+                ],
+                [
+                    35,
+                    63,
+                    "move red object above green object"
+                ],
+                [
+                    64,
+                    69,
+                    "place red object on green object"
+                ],
+                [
+                    70,
+                    74,
+                    "move straight up"
+                ]
+            ],
+            "time_spent": 205
+        }
+    },
+    "Lift_20240220-124741_13.mp4": {
+        "247": {
+            "username": "phl",
+            "created_at": "2024-10-15 15:53:59.067773",
+            "subtask_decomposition": [
+                [
+                    0,
+                    10,
+                    "move to the object"
+                ],
+                [
+                    11,
+                    15,
+                    "grab the object"
+                ],
+                [
+                    16,
+                    28,
+                    "lift the object"
+                ]
+            ],
+            "time_spent": 98
+        }
+    },
+    "PickPlace_20240220-222624_13.mp4": {
+        "248": {
+            "username": "phl",
+            "created_at": "2024-10-15 15:57:14.482127",
+            "subtask_decomposition": [
+                [
+                    0,
+                    21,
+                    "reach the object"
+                ],
+                [
+                    222,
+                    32,
+                    "lift the object"
+                ],
+                [
+                    33,
+                    60,
+                    "Move the object horizontally until it is above the destination."
+                ],
+                [
+                    61,
+                    99,
+                    "vertically move the object to the destination"
+                ]
+            ],
+            "time_spent": 186
+        }
+    },
+    "PickPlace_20240220-222557_10.mp4": {
+        "249": {
+            "username": "phl",
+            "created_at": "2024-10-15 15:59:08.175085",
+            "subtask_decomposition": [
+                [
+                    0,
+                    26,
+                    "reach the object"
+                ],
+                [
+                    27,
+                    30,
+                    "grab the object"
+                ],
+                [
+                    31,
+                    75,
+                    "Move the object horizontally until it is above the destination."
+                ]
+            ],
+            "time_spent": 75
+        }
+    },
+    "Lift_20240220-124759_16.mp4": {
+        "250": {
+            "username": "phl",
+            "created_at": "2024-10-15 16:00:31.386760",
+            "subtask_decomposition": [
+                [
+                    0,
+                    11,
+                    "reach the object"
+                ],
+                [
+                    12,
+                    15,
+                    "grab the object"
+                ],
+                [
+                    16,
+                    28,
+                    "pick up object"
+                ]
+            ],
+            "time_spent": 61
+        }
+    },
+    "Stack_20240220-131212_47.mp4": {
+        "251": {
+            "username": "phl",
+            "created_at": "2024-10-15 16:03:52.632507",
+            "subtask_decomposition": [
+                [
+                    0,
+                    7,
+                    "move to above object"
+                ],
+                [
+                    8,
+                    20,
+                    "reach down to grab object"
+                ],
+                [
+                    21,
+                    24,
+                    "grab the object"
+                ],
+                [
+                    25,
+                    40,
+                    "pick up object"
+                ],
+                [
+                    41,
+                    56,
+                    "move the object to the green cube"
+                ],
+                [
+                    67,
+                    72,
+                    "move away from object"
+                ]
+            ],
+            "time_spent": 190
+        }
+    },
+    "Lift_20240220-124747_14.mp4": {
+        "252": {
+            "username": "phl",
+            "created_at": "2024-10-15 16:04:44.318957",
+            "subtask_decomposition": [
+                [
+                    0,
+                    14,
+                    "move to object"
+                ],
+                [
+                    15,
+                    29,
+                    "pick up object"
+                ]
+            ],
+            "time_spent": 35
+        }
+    },
+    "PickPlace_20240220-222606_11.mp4": {
+        "253": {
+            "username": "phl",
+            "created_at": "2024-10-15 16:06:48.326104",
+            "subtask_decomposition": [
+                [
+                    0,
+                    8,
+                    "move to above object"
+                ],
+                [
+                    37,
+                    57,
+                    "reach down to grab object"
+                ],
+                [
+                    58,
+                    65,
+                    "pick up object"
+                ],
+                [
+                    66,
+                    92,
+                    "Move the object horizontally until it is above the destination."
+                ]
+            ],
+            "time_spent": 104
+        }
+    },
+    "Stack_20240220-131220_48.mp4": {
+        "254": {
+            "username": "phl",
+            "created_at": "2024-10-15 16:09:09.140169",
+            "subtask_decomposition": [
+                [
+                    0,
+                    15,
+                    "move to above object"
+                ],
+                [
+                    16,
+                    24,
+                    "reach down to object"
+                ],
+                [
+                    25,
+                    30,
+                    "grab object"
+                ],
+                [
+                    31,
+                    45,
+                    "pick up object"
+                ],
+                [
+                    46,
+                    65,
+                    "move the object to above green cube"
+                ],
+                [
+                    66,
+                    79,
+                    "drop the object"
+                ]
+            ],
+            "time_spent": 130
+        }
+    },
+    "PickPlace_20240220-222615_12.mp4": {
+        "255": {
+            "username": "phl",
+            "created_at": "2024-10-15 16:10:58.553467",
+            "subtask_decomposition": [
+                [
+                    0,
+                    15,
+                    "move to above object"
+                ],
+                [
+                    16,
+                    28,
+                    "reach down to grab object"
+                ],
+                [
+                    29,
+                    35,
+                    "pick up object"
+                ],
+                [
+                    36,
+                    70,
+                    "Move the object horizontally until it is above the destination."
+                ],
+                [
+                    71,
+                    94,
+                    "drop the object"
+                ]
+            ],
+            "time_spent": 90
+        }
+    },
+    "Lift_20240220-124753_15.mp4": {
+        "256": {
+            "username": "phl",
+            "created_at": "2024-10-15 16:12:08.290143",
+            "subtask_decomposition": [
+                [
+                    0,
+                    12,
+                    "reach down to object"
+                ],
+                [
+                    13,
+                    15,
+                    "grab the object"
+                ],
+                [
+                    16,
+                    28,
+                    "pick up object"
+                ]
+            ],
+            "time_spent": 45
+        }
+    },
+    "Stack_20240220-131227_49.mp4": {
+        "257": {
+            "username": "phl",
+            "created_at": "2024-10-15 16:23:38.940710",
+            "subtask_decomposition": [
+                [
+                    0,
+                    12,
+                    "move to above object"
+                ],
+                [
+                    13,
+                    31,
+                    "reach down to grab object"
+                ],
+                [
+                    32,
+                    50,
+                    "pick up object"
+                ],
+                [
+                    51,
+                    65,
+                    "Move the object to the destination above the green cube"
+                ],
+                [
+                    66,
+                    71,
+                    "move away from object"
+                ]
+            ],
+            "time_spent": 95
+        }
+    },
+    "Door_20240220-173547_5.mp4": {
+        "259": {
+            "username": "talal",
+            "created_at": "2024-10-15 16:40:04.068297",
+            "subtask_decomposition": [
+                [
+                    1,
+                    6,
+                    "move up"
+                ],
+                [
+                    7,
+                    20,
+                    "move to above door handle"
+                ],
+                [
+                    21,
+                    39,
+                    "push door handle down"
+                ],
+                [
+                    41,
+                    79,
+                    "maintain contact, pull door handle horizontally"
+                ]
+            ],
+            "time_spent": 243
+        }
+    },
+    "Lift_20240220-125047_42.mp4": {
+        "261": {
+            "username": "talal",
+            "created_at": "2024-10-15 16:44:00.582926",
+            "subtask_decomposition": [
+                [
+                    0,
+                    13,
+                    "move arm forward and down"
+                ],
+                [
+                    14,
+                    16,
+                    "grab cube and maintain contact"
+                ],
+                [
+                    17,
+                    29,
+                    "move cube up"
+                ]
+            ],
+            "time_spent": 105
+        }
+    },
+    "Stack_20240220-130734_9.mp4": {
+        "263": {
+            "username": "talal",
+            "created_at": "2024-10-15 16:59:59.009293",
+            "subtask_decomposition": [
+                [
+                    0,
+                    7,
+                    "translate end effector to red cube horizontally"
+                ],
+                [
+                    8,
+                    20,
+                    "center arm above red cube and move down"
+                ],
+                [
+                    21,
+                    29,
+                    "center arm to red cube"
+                ],
+                [
+                    30,
+                    32,
+                    "clasp cube and hold"
+                ],
+                [
+                    33,
+                    46,
+                    "move cube up"
+                ],
+                [
+                    47,
+                    58,
+                    "move arm forward and shift left"
+                ],
+                [
+                    58,
+                    67,
+                    "lower arm to center of green cube"
+                ],
+                [
+                    68,
+                    69,
+                    "release red cube"
+                ],
+                [
+                    70,
+                    72,
+                    "move arm up"
+                ]
+            ],
+            "time_spent": 524
+        }
+    },
+    "Door_20240220-173555_6.mp4": {
+        "264": {
+            "username": "fregal",
+            "created_at": "2024-10-15 17:05:00.251546",
+            "subtask_decomposition": [
+                [
+                    0,
+                    23,
+                    "move to above robot"
+                ],
+                [
+                    24,
+                    45,
+                    "push down on door handle"
+                ],
+                [
+                    46,
+                    61,
+                    "open the door"
+                ],
+                [
+                    62,
+                    79,
+                    "move away from object"
+                ]
+            ],
+            "time_spent": 261
+        },
+        "265": {
+            "username": "talal",
+            "created_at": "2024-10-15 17:05:09.290507",
+            "subtask_decomposition": [
+                [
+                    0,
+                    7,
+                    "move arm up"
+                ],
+                [
+                    8,
+                    19,
+                    "move arm horizontally above door handle"
+                ],
+                [
+                    20,
+                    44,
+                    "lower arm to push door handle down"
+                ],
+                [
+                    45,
+                    61,
+                    "pivot arm and pull door handle towards robot"
+                ],
+                [
+                    62,
+                    68,
+                    "release door handle, move arm away"
+                ],
+                [
+                    69,
+                    79,
+                    "hold position, do nothing"
+                ]
+            ],
+            "time_spent": 299
+        }
+    },
+    "Lift_20240220-125053_43.mp4": {
+        "266": {
+            "username": "fregal",
+            "created_at": "2024-10-15 17:06:40.010946",
+            "subtask_decomposition": [
+                [
+                    0,
+                    17,
+                    "move to above object"
+                ],
+                [
+                    18,
+                    20,
+                    "grip object"
+                ],
+                [
+                    21,
+                    33,
+                    "pick up object"
+                ]
+            ],
+            "time_spent": 88
+        }
+    },
+    "Door_20240220-173603_7.mp4": {
+        "268": {
+            "username": "fregal",
+            "created_at": "2024-10-15 17:11:10.404824",
+            "subtask_decomposition": [
+                [
+                    0,
+                    25,
+                    "move to above door handle"
+                ],
+                [
+                    26,
+                    40,
+                    "push down on door handle"
+                ],
+                [
+                    41,
+                    79,
+                    "open door"
+                ]
+            ],
+            "time_spent": 82
+        }
+    },
+    "Lift_20240220-125059_44.mp4": {
+        "269": {
+            "username": "fregal",
+            "created_at": "2024-10-15 17:12:29.037888",
+            "subtask_decomposition": [
+                [
+                    0,
+                    12,
+                    "move to above object"
+                ],
+                [
+                    13,
+                    15,
+                    "grasp object"
+                ],
+                [
+                    16,
+                    28,
+                    "pick up object"
+                ]
+            ],
+            "time_spent": 70
+        }
+    },
+    "Stack_20240220-130749_11.mp4": {
+        "270": {
+            "username": "fregal",
+            "created_at": "2024-10-15 17:15:30.239460",
+            "subtask_decomposition": [
+                [
+                    0,
+                    28,
+                    "move to above the object"
+                ],
+                [
+                    29,
+                    31,
+                    "grasp object"
+                ],
+                [
+                    33,
+                    61,
+                    "move object above other object"
+                ],
+                [
+                    62,
+                    63,
+                    "release object"
+                ],
+                [
+                    64,
+                    67,
+                    "move away from object"
+                ]
+            ],
+            "time_spent": 169
+        }
+    },
+    "Door_20240220-173611_8.mp4": {
+        "271": {
+            "username": "fregal",
+            "created_at": "2024-10-15 17:17:38.975287",
+            "subtask_decomposition": [
+                [
+                    0,
+                    23,
+                    "move to above door handle"
+                ],
+                [
+                    24,
+                    43,
+                    "push down on door handle"
+                ],
+                [
+                    44,
+                    58,
+                    "open door"
+                ],
+                [
+                    59,
+                    79,
+                    "move away from object"
+                ]
+            ],
+            "time_spent": 117
+        }
+    },
+    "Lift_20240220-125105_45.mp4": {
+        "272": {
+            "username": "fregal",
+            "created_at": "2024-10-15 17:18:56.560912",
+            "subtask_decomposition": [
+                [
+                    0,
+                    16,
+                    "move to above object"
+                ],
+                [
+                    17,
+                    19,
+                    "grasp object"
+                ],
+                [
+                    20,
+                    32,
+                    "pick up object"
+                ]
+            ],
+            "time_spent": 65
+        }
+    },
+    "Stack_20240220-130932_25.mp4": {
+        "273": {
+            "username": "jsalfity",
+            "created_at": "2024-10-15 17:19:17.427269",
+            "subtask_decomposition": [
+                [
+                    0,
+                    7,
+                    "move to directly above the cube"
+                ],
+                [
+                    8,
+                    17,
+                    "reach directly down to the cube"
+                ],
+                [
+                    18,
+                    23,
+                    "grasp the cube"
+                ],
+                [
+                    24,
+                    36,
+                    "bring the cube directly up"
+                ],
+                [
+                    37,
+                    45,
+                    "bring the green cube above the red cube"
+                ],
+                [
+                    46,
+                    53,
+                    "place the green cube on the red cube"
+                ],
+                [
+                    54,
+                    55,
+                    "release the green cube"
+                ],
+                [
+                    55,
+                    59,
+                    "go home"
+                ]
+            ],
+            "time_spent": 142
+        }
+    },
+    "Stack_20240220-130757_12.mp4": {
+        "274": {
+            "username": "fregal",
+            "created_at": "2024-10-15 17:21:15.301647",
+            "subtask_decomposition": [
+                [
+                    0,
+                    23,
+                    "move to above object"
+                ],
+                [
+                    24,
+                    26,
+                    "grasp object"
+                ],
+                [
+                    27,
+                    63,
+                    "move object above other object"
+                ],
+                [
+                    64,
+                    65,
+                    "release object"
+                ],
+                [
+                    66,
+                    68,
+                    "move away from object"
+                ]
+            ],
+            "time_spent": 114
+        }
+    },
+    "Door_20240220-173619_9.mp4": {
+        "275": {
+            "username": "fregal",
+            "created_at": "2024-10-15 17:24:46.179779",
+            "subtask_decomposition": [
+                [
+                    0,
+                    24,
+                    "move to above door handle"
+                ],
+                [
+                    25,
+                    40,
+                    "push down on door handle"
+                ],
+                [
+                    41,
+                    54,
+                    "open door"
+                ],
+                [
+                    55,
+                    79,
+                    "move away from object"
+                ]
+            ],
+            "time_spent": 200
+        }
+    },
+    "Lift_20240220-125111_46.mp4": {
+        "276": {
+            "username": "fregal",
+            "created_at": "2024-10-15 17:25:51.764146",
+            "subtask_decomposition": [
+                [
+                    0,
+                    17,
+                    "move to above object"
+                ],
+                [
+                    18,
+                    19,
+                    "grasp object"
+                ],
+                [
+                    20,
+                    32,
+                    "pick up object"
+                ]
+            ],
+            "time_spent": 56
+        }
+    },
+    "Stack_20240220-130804_13.mp4": {
+        "277": {
+            "username": "fregal",
+            "created_at": "2024-10-15 17:28:01.115177",
+            "subtask_decomposition": [
+                [
+                    0,
+                    25,
+                    "move to above object"
+                ],
+                [
+                    26,
+                    28,
+                    "grasp object"
+                ],
+                [
+                    29,
+                    60,
+                    "move object to above other object"
+                ],
+                [
+                    61,
+                    62,
+                    "release object"
+                ],
+                [
+                    63,
+                    65,
+                    "move away from object"
+                ]
+            ],
+            "time_spent": 119
+        }
+    },
+    "Door_20240220-173627_10.mp4": {
+        "278": {
+            "username": "fregal",
+            "created_at": "2024-10-15 17:30:36.607913",
+            "subtask_decomposition": [
+                [
+                    0,
+                    24,
+                    "move to above door handle"
+                ],
+                [
+                    25,
+                    44,
+                    "push down on door handle"
+                ],
+                [
+                    45,
+                    61,
+                    "open door"
+                ],
+                [
+                    62,
+                    79,
+                    "move away from object"
+                ]
+            ],
+            "time_spent": 136
+        }
+    },
+    "Stack_20240220-130741_10.mp4": {
+        "279": {
+            "username": "cevahir",
+            "created_at": "2024-10-15 17:33:06.246297",
+            "subtask_decomposition": [
+                [
+                    0,
+                    8,
+                    "move to above object"
+                ],
+                [
+                    9,
+                    20,
+                    "reach down to grab red object"
+                ],
+                [
+                    21,
+                    55,
+                    "pick up red object"
+                ],
+                [
+                    47,
+                    55,
+                    "place red object on the green object"
+                ],
+                [
+                    56,
+                    60,
+                    "move away from red object"
+                ]
+            ],
+            "time_spent": 310
+        }
+    },
+    "Lift_20240220-125117_47.mp4": {
+        "280": {
+            "username": "fregal",
+            "created_at": "2024-10-15 17:34:03.175633",
+            "subtask_decomposition": [
+                [
+                    0,
+                    12,
+                    "move to above object"
+                ],
+                [
+                    13,
+                    15,
+                    "grasp object"
+                ],
+                [
+                    16,
+                    28,
+                    "pick up object"
+                ]
+            ],
+            "time_spent": 193
+        },
+        "281": {
+            "username": "cevahir",
+            "created_at": "2024-10-15 17:34:27.222765",
+            "subtask_decomposition": [
+                [
+                    0,
+                    12,
+                    "reach down to grab object"
+                ],
+                [
+                    13,
+                    28,
+                    "pick up object"
+                ]
+            ],
+            "time_spent": 66
+        }
+    },
+    "Stack_20240220-130812_14.mp4": {
+        "282": {
+            "username": "fregal",
+            "created_at": "2024-10-15 17:36:21.495362",
+            "subtask_decomposition": [
+                [
+                    0,
+                    30,
+                    "move to above object"
+                ],
+                [
+                    31,
+                    32,
+                    "grasp object"
+                ],
+                [
+                    33,
+                    62,
+                    "move object above other object"
+                ],
+                [
+                    63,
+                    64,
+                    "release object"
+                ],
+                [
+                    65,
+                    68,
+                    "move away from object"
+                ]
+            ],
+            "time_spent": 114
+        }
+    },
+    "Door_20240220-173635_11.mp4": {
+        "283": {
+            "username": "cevahir",
+            "created_at": "2024-10-15 17:37:32.048869",
+            "subtask_decomposition": [
+                [
+                    0,
+                    21,
+                    "move to above door handle"
+                ],
+                [
+                    22,
+                    39,
+                    "push down door handle"
+                ],
+                [
+                    40,
+                    56,
+                    "open door"
+                ],
+                [
+                    57,
+                    79,
+                    "move away from door"
+                ]
+            ],
+            "time_spent": 169
+        },
+        "284": {
+            "username": "fregal",
+            "created_at": "2024-10-15 17:38:02.327940",
+            "subtask_decomposition": [
+                [
+                    0,
+                    25,
+                    "move to above door handle"
+                ],
+                [
+                    26,
+                    39,
+                    "push down on door handle"
+                ],
+                [
+                    40,
+                    55,
+                    "open door"
+                ],
+                [
+                    56,
+                    79,
+                    "move away from object"
+                ]
+            ],
+            "time_spent": 80
+        }
+    },
+    "Lift_20240220-125123_48.mp4": {
+        "285": {
+            "username": "fregal",
+            "created_at": "2024-10-15 17:39:06.185355",
+            "subtask_decomposition": [
+                [
+                    0,
+                    12,
+                    "move to above object"
+                ],
+                [
+                    13,
+                    15,
+                    "grasp object"
+                ],
+                [
+                    16,
+                    28,
+                    "pick up object"
+                ]
+            ],
+            "time_spent": 51
+        },
+        "288": {
+            "username": "cevahir",
+            "created_at": "2024-10-15 17:43:17.195607",
+            "subtask_decomposition": [
+                [
+                    0,
+                    12,
+                    "reach down to grab object"
+                ],
+                [
+                    13,
+                    28,
+                    "pick up object"
+                ]
+            ],
+            "time_spent": 53
+        }
+    },
+    "Stack_20240220-130820_15.mp4": {
+        "286": {
+            "username": "fregal",
+            "created_at": "2024-10-15 17:41:07.748134",
+            "subtask_decomposition": [
+                [
+                    0,
+                    23,
+                    "move to above object"
+                ],
+                [
+                    24,
+                    26,
+                    "grasp object"
+                ],
+                [
+                    27,
+                    62,
+                    "move object to above other object"
+                ],
+                [
+                    63,
+                    64,
+                    "release object"
+                ],
+                [
+                    65,
+                    68,
+                    "move away from object"
+                ]
+            ],
+            "time_spent": 111
+        }
+    },
+    "Door_20240220-173643_12.mp4": {
+        "287": {
+            "username": "fregal",
+            "created_at": "2024-10-15 17:43:02.375048",
+            "subtask_decomposition": [
+                [
+                    0,
+                    23,
+                    "move to above door handle"
+                ],
+                [
+                    24,
+                    40,
+                    "push down on door handle"
+                ],
+                [
+                    41,
+                    44,
+                    "open door"
+                ],
+                [
+                    45,
+                    79,
+                    "move away from object"
+                ]
+            ],
+            "time_spent": 101
+        }
+    },
+    "Lift_20240220-125129_49.mp4": {
+        "289": {
+            "username": "cevahir",
+            "created_at": "2024-10-15 17:44:06.467127",
+            "subtask_decomposition": [
+                [
+                    0,
+                    14,
+                    "reach down to grab object"
+                ],
+                [
+                    15,
+                    31,
+                    "pick up object"
+                ]
+            ],
+            "time_spent": 40
+        }
+    },
+    "Door_20240220-173651_13.mp4": {
+        "291": {
+            "username": "cevahir",
+            "created_at": "2024-10-15 17:50:10.844879",
+            "subtask_decomposition": [
+                [
+                    0,
+                    20,
+                    "move above door handle"
+                ],
+                [
+                    21,
+                    40,
+                    "push down door handle"
+                ],
+                [
+                    41,
+                    55,
+                    "open door"
+                ],
+                [
+                    56,
+                    79,
+                    "move away from door"
+                ]
+            ],
+            "time_spent": 181
+        }
+    },
+    "PickPlace_20240213-110236_0.mp4": {
+        "292": {
+            "username": "cevahir",
+            "created_at": "2024-10-15 17:53:52.718697",
+            "subtask_decomposition": [
+                [
+                    0,
+                    10,
+                    "move above red cylinder"
+                ],
+                [
+                    11,
+                    25,
+                    "push red box"
+                ],
+                [
+                    26,
+                    105,
+                    "wait"
+                ],
+                [
+                    106,
+                    111,
+                    "white box falls down"
+                ],
+                [
+                    112,
+                    119,
+                    "wait"
+                ]
+            ],
+            "time_spent": 209
+        }
+    },
+    "PickPlace_20240220-222548_9.mp4": {
+        "293": {
+            "username": "jsalfity",
+            "created_at": "2024-10-15 18:50:04.702022",
+            "subtask_decomposition": [
+                [
+                    0,
+                    10,
+                    "position directly above the can"
+                ],
+                [
+                    11,
+                    22,
+                    "reach down to the can"
+                ],
+                [
+                    23,
+                    25,
+                    "grasp the can"
+                ],
+                [
+                    26,
+                    31,
+                    "vertically lift the can"
+                ],
+                [
+                    32,
+                    59,
+                    "bring the can to the other side of the table"
+                ],
+                [
+                    60,
+                    76,
+                    "try to place the can in the goal position"
+                ],
+                [
+                    77,
+                    99,
+                    "place the can in the final position, but don't let go"
+                ]
+            ],
+            "time_spent": 143
+        }
+    },
+    "Stack_20240220-130828_16.mp4": {
+        "294": {
+            "username": "snarf-snarf",
+            "created_at": "2024-10-15 20:11:27.900330",
+            "subtask_decomposition": [
+                [
+                    1,
+                    13,
+                    "find red object"
+                ],
+                [
+                    14,
+                    34,
+                    "reach down to grab object"
+                ],
+                [
+                    35,
+                    36,
+                    "grasp object"
+                ],
+                [
+                    36,
+                    50,
+                    "pick up object"
+                ],
+                [
+                    51,
+                    60,
+                    "move to green object"
+                ],
+                [
+                    61,
+                    68,
+                    "lower object"
+                ],
+                [
+                    69,
+                    70,
+                    "drop object"
+                ],
+                [
+                    71,
+                    73,
+                    "move away from objects"
+                ]
+            ],
+            "time_spent": 158
+        }
+    },
+    "Door_20240220-173659_14.mp4": {
+        "295": {
+            "username": "snarf-snarf",
+            "created_at": "2024-10-15 20:14:20.584440",
+            "subtask_decomposition": [
+                [
+                    1,
+                    20,
+                    "find the handle"
+                ],
+                [
+                    21,
+                    45,
+                    "open handle"
+                ],
+                [
+                    46,
+                    60,
+                    "open door"
+                ],
+                [
+                    61,
+                    79,
+                    "return to default pose"
+                ]
+            ],
+            "time_spent": 109
+        }
+    },
+    "PickPlace_20240213-110247_1.mp4": {
+        "296": {
+            "username": "snarf-snarf",
+            "created_at": "2024-10-15 20:17:59.134120",
+            "subtask_decomposition": [
+                [
+                    1,
+                    8,
+                    "find red cylinder"
+                ],
+                [
+                    9,
+                    21,
+                    "move down and grasp red cylinder"
+                ],
+                [
+                    22,
+                    28,
+                    "pick up red cylinder"
+                ],
+                [
+                    29,
+                    56,
+                    "find grey cylinder"
+                ],
+                [
+                    57,
+                    119,
+                    "try to place object in center of square"
+                ]
+            ],
+            "time_spent": 189
+        }
+    },
+    "Door_20240220-173707_15.mp4": {
+        "297": {
+            "username": "snarf-snarf",
+            "created_at": "2024-10-15 20:19:37.135138",
+            "subtask_decomposition": [
+                [
+                    1,
+                    20,
+                    "find door handle"
+                ],
+                [
+                    21,
+                    41,
+                    "turn door handle"
+                ],
+                [
+                    42,
+                    60,
+                    "pull door open"
+                ],
+                [
+                    61,
+                    79,
+                    "return to default pose"
+                ]
+            ],
+            "time_spent": 88
+        }
+    },
+    "Door_20240220-173723_17.mp4": {
+        "298": {
+            "username": "snarf-snarf",
+            "created_at": "2024-10-15 20:21:06.187766",
+            "subtask_decomposition": [
+                [
+                    1,
+                    19,
+                    "find door handle"
+                ],
+                [
+                    20,
+                    41,
+                    "turn door handle"
+                ],
+                [
+                    42,
+                    60,
+                    "open door"
+                ],
+                [
+                    61,
+                    79,
+                    "return to default pose"
+                ]
+            ],
+            "time_spent": 75
+        }
+    },
+    "Stack_20240220-131058_37.mp4": {
+        "299": {
+            "username": "snarf-snarf",
+            "created_at": "2024-10-15 20:23:34.854360",
+            "subtask_decomposition": [
+                [
+                    1,
+                    9,
+                    "find red object"
+                ],
+                [
+                    10,
+                    21,
+                    "reach down to object"
+                ],
+                [
+                    22,
+                    24,
+                    "grasp object"
+                ],
+                [
+                    25,
+                    47,
+                    "find green object"
+                ],
+                [
+                    48,
+                    55,
+                    "lower red object to green object"
+                ],
+                [
+                    56,
+                    57,
+                    "drop red object"
+                ],
+                [
+                    58,
+                    61,
+                    "move away from objects"
+                ]
+            ],
+            "time_spent": 128
+        }
+    },
+    "Door_20240220-173844_27.mp4": {
+        "300": {
+            "username": "snarf-snarf",
+            "created_at": "2024-10-15 20:25:16.680971",
+            "subtask_decomposition": [
+                [
+                    1,
+                    20,
+                    "find door handle"
+                ],
+                [
+                    21,
+                    40,
+                    "turn door handle"
+                ],
+                [
+                    41,
+                    58,
+                    "open door"
+                ],
+                [
+                    59,
+                    79,
+                    "return to default pose"
+                ]
+            ],
+            "time_spent": 92
+        }
+    },
+    "Lift_20240220-124734_12.mp4": {
+        "301": {
+            "username": "snarf-snarf",
+            "created_at": "2024-10-15 20:27:43.230008",
+            "subtask_decomposition": [
+                [
+                    1,
+                    11,
+                    "reach down to red object"
+                ],
+                [
+                    12,
+                    15,
+                    "grasp object"
+                ],
+                [
+                    16,
+                    29,
+                    "pick up object"
+                ]
+            ],
+            "time_spent": 44
+        }
+    },
+    "Lift_20240220-124617_0.mp4": {
+        "302": {
+            "username": "snarf-snarf",
+            "created_at": "2024-10-15 20:28:47.303572",
+            "subtask_decomposition": [
+                [
+                    1,
+                    12,
+                    "reach down to red object"
+                ],
+                [
+                    13,
+                    17,
+                    "grasp object"
+                ],
+                [
+                    18,
+                    30,
+                    "pick up object"
+                ]
+            ],
+            "time_spent": 45
+        }
+    },
+    "Lift_20240220-124710_8.mp4": {
+        "303": {
+            "username": "snarf-snarf",
+            "created_at": "2024-10-15 20:30:50.801454",
+            "subtask_decomposition": [
+                [
+                    1,
+                    13,
+                    "reach down to red object"
+                ],
+                [
+                    14,
+                    16,
+                    "grasp object"
+                ],
+                [
+                    17,
+                    28,
+                    "pick up object"
+                ]
+            ],
+            "time_spent": 110
+        }
+    },
+    "Stack_20240220-130835_17.mp4": {
+        "331": {
+            "username": "Sanat",
+            "created_at": "2024-10-16 02:25:57.391114",
+            "subtask_decomposition": [
+                [
+                    0,
+                    8,
+                    "move to above red block"
+                ],
+                [
+                    9,
+                    20,
+                    "reach down to grab red block"
+                ],
+                [
+                    21,
+                    36,
+                    "grab and pick up red block"
+                ],
+                [
+                    37,
+                    44,
+                    "move red block to green block"
+                ],
+                [
+                    45,
+                    53,
+                    "lower red block to green block"
+                ],
+                [
+                    54,
+                    55,
+                    "drop red block onto green block"
+                ],
+                [
+                    56,
+                    58,
+                    "move up"
+                ]
+            ],
+            "time_spent": 284
+        }
+    },
+    "Stack_20240220-130842_18.mp4": {
+        "332": {
+            "username": "Sanat",
+            "created_at": "2024-10-16 02:29:50.596530",
+            "subtask_decomposition": [
+                [
+                    0,
+                    14,
+                    "move to red block"
+                ],
+                [
+                    15,
+                    27,
+                    "move down to grab red block"
+                ],
+                [
+                    28,
+                    29,
+                    "grab red block"
+                ],
+                [
+                    30,
+                    43,
+                    "pick up red block"
+                ],
+                [
+                    44,
+                    58,
+                    "move red block to green block"
+                ],
+                [
+                    59,
+                    66,
+                    "lower red block to green block"
+                ],
+                [
+                    67,
+                    68,
+                    "drop red block onto green block"
+                ],
+                [
+                    69,
+                    72,
+                    "move up"
+                ]
+            ],
+            "time_spent": 179
+        }
+    },
+    "PickPlace_20240213-110257_2.mp4": {
+        "333": {
+            "username": "Sanat",
+            "created_at": "2024-10-16 02:35:19.788784",
+            "subtask_decomposition": [
+                [
+                    0,
+                    10,
+                    "move towards red cylinder"
+                ],
+                [
+                    11,
+                    21,
+                    "lower to red cylinder"
+                ],
+                [
+                    22,
+                    23,
+                    "grab red cylinder"
+                ],
+                [
+                    24,
+                    30,
+                    "pick up red cylinder"
+                ],
+                [
+                    31,
+                    55,
+                    "move the red cylinder to its destination"
+                ],
+                [
+                    56,
+                    119,
+                    "lower red cylinder"
+                ]
+            ],
+            "time_spent": 280
+        }
+    },
+    "Stack_20240220-130849_19.mp4": {
+        "335": {
+            "username": "Sanat",
+            "created_at": "2024-10-16 02:44:28.009693",
+            "subtask_decomposition": [
+                [
+                    0,
+                    11,
+                    "move to red block"
+                ],
+                [
+                    12,
+                    25,
+                    "lower to red block"
+                ],
+                [
+                    26,
+                    27,
+                    "grab red block"
+                ],
+                [
+                    28,
+                    40,
+                    "pick up red block"
+                ],
+                [
+                    41,
+                    52,
+                    "move red block to green block"
+                ],
+                [
+                    53,
+                    59,
+                    "lower red block to green block"
+                ],
+                [
+                    60,
+                    61,
+                    "drop red block onto green block"
+                ],
+                [
+                    62,
+                    65,
+                    "move up"
+                ]
+            ],
+            "time_spent": 177
+        }
+    },
+    "Door_20240220-173715_16.mp4": {
+        "336": {
+            "username": "Sanat",
+            "created_at": "2024-10-16 02:48:00.911519",
+            "subtask_decomposition": [
+                [
+                    0,
+                    6,
+                    "move up"
+                ],
+                [
+                    7,
+                    19,
+                    "move to door handle"
+                ],
+                [
+                    20,
+                    41,
+                    "lower down door handle "
+                ],
+                [
+                    42,
+                    57,
+                    "pull door handle"
+                ],
+                [
+                    58,
+                    79,
+                    "move away"
+                ]
+            ],
+            "time_spent": 145
+        }
+    },
+    "PickPlace_20240213-110306_3.mp4": {
+        "337": {
+            "username": "Sanat",
+            "created_at": "2024-10-16 02:51:15.354768",
+            "subtask_decomposition": [
+                [
+                    0,
+                    14,
+                    "move to red cylinder"
+                ],
+                [
+                    15,
+                    25,
+                    "lower to red cylinder"
+                ],
+                [
+                    26,
+                    27,
+                    "grab red cylinder"
+                ],
+                [
+                    28,
+                    34,
+                    "move up with red cylinder"
+                ],
+                [
+                    35,
+                    70,
+                    "move red cylinder to destination"
+                ],
+                [
+                    71,
+                    119,
+                    "lower red cylinder"
+                ]
+            ],
+            "time_spent": 151
+        }
+    },
+    "Stack_20240220-130856_20.mp4": {
+        "338": {
+            "username": "Sanat",
+            "created_at": "2024-10-16 02:56:57.120738",
+            "subtask_decomposition": [
+                [
+                    0,
+                    11,
+                    "move to red block"
+                ],
+                [
+                    12,
+                    25,
+                    "lower down to red block"
+                ],
+                [
+                    26,
+                    27,
+                    "grab red block"
+                ],
+                [
+                    28,
+                    40,
+                    "pick up red block"
+                ],
+                [
+                    41,
+                    51,
+                    "move red block to green block"
+                ],
+                [
+                    52,
+                    59,
+                    "lower red block to green block"
+                ],
+                [
+                    60,
+                    62,
+                    "drop red block"
+                ],
+                [
+                    63,
+                    65,
+                    "move up"
+                ]
+            ],
+            "time_spent": 272
+        }
+    },
+    "PickPlace_20240213-110316_4.mp4": {
+        "339": {
+            "username": "Sanat",
+            "created_at": "2024-10-16 03:00:53.656006",
+            "subtask_decomposition": [
+                [
+                    0,
+                    8,
+                    "move to red cylinder"
+                ],
+                [
+                    9,
+                    18,
+                    "lower to red cylinder"
+                ],
+                [
+                    19,
+                    20,
+                    "grab red cylinder"
+                ],
+                [
+                    21,
+                    28,
+                    "move up with red cylinder"
+                ],
+                [
+                    29,
+                    53,
+                    "move red cylinder to destination"
+                ],
+                [
+                    54,
+                    119,
+                    "lower red cylinder"
+                ]
+            ],
+            "time_spent": 187
+        }
+    },
+    "Stack_20240220-130904_21.mp4": {
+        "340": {
+            "username": "Sanat",
+            "created_at": "2024-10-16 03:06:34.213882",
+            "subtask_decomposition": [
+                [
+                    0,
+                    16,
+                    "move to red block"
+                ],
+                [
+                    17,
+                    28,
+                    "move down to red block"
+                ],
+                [
+                    29,
+                    31,
+                    "grab red block"
+                ],
+                [
+                    32,
+                    44,
+                    "move up with red block"
+                ],
+                [
+                    45,
+                    53,
+                    "move red block to green block"
+                ],
+                [
+                    54,
+                    60,
+                    "lower red block to green block"
+                ],
+                [
+                    61,
+                    62,
+                    "drop red block onto green block"
+                ],
+                [
+                    63,
+                    66,
+                    "move up"
+                ]
+            ],
+            "time_spent": 265
+        }
+    },
+    "Door_20240220-173731_18.mp4": {
+        "341": {
+            "username": "Sanat",
+            "created_at": "2024-10-16 03:11:25.500151",
+            "subtask_decomposition": [
+                [
+                    0,
+                    6,
+                    "move up"
+                ],
+                [
+                    7,
+                    20,
+                    "move to door handle"
+                ],
+                [
+                    21,
+                    46,
+                    "lower door handle"
+                ],
+                [
+                    47,
+                    64,
+                    "pull door handle"
+                ],
+                [
+                    65,
+                    79,
+                    "move away"
+                ]
+            ],
+            "time_spent": 187
+        }
+    },
+    "PickPlace_20240213-110325_5.mp4": {
+        "342": {
+            "username": "Sanat",
+            "created_at": "2024-10-16 03:15:00.233509",
+            "subtask_decomposition": [
+                [
+                    0,
+                    11,
+                    "move to red cylinder"
+                ],
+                [
+                    12,
+                    22,
+                    "lower to red cylinder"
+                ],
+                [
+                    23,
+                    24,
+                    "grab red cylinder"
+                ],
+                [
+                    25,
+                    31,
+                    "move up with red cylinder"
+                ],
+                [
+                    32,
+                    56,
+                    "move red cylinder to destination"
+                ],
+                [
+                    57,
+                    119,
+                    "lower red cylinder"
+                ]
+            ],
+            "time_spent": 141
+        }
+    },
+    "Stack_20240220-130911_22.mp4": {
+        "343": {
+            "username": "Sanat",
+            "created_at": "2024-10-16 03:34:34.065881",
+            "subtask_decomposition": [
+                [
+                    0,
+                    10,
+                    "move to red block"
+                ],
+                [
+                    11,
+                    32,
+                    "lower to red block"
+                ],
+                [
+                    33,
+                    34,
+                    "grab red block"
+                ],
+                [
+                    35,
+                    48,
+                    "pick up red block"
+                ],
+                [
+                    49,
+                    66,
+                    "move red block to green block"
+                ],
+                [
+                    67,
+                    76,
+                    "lower red block to green block"
+                ],
+                [
+                    77,
+                    78,
+                    "drop red block onto green block"
+                ],
+                [
+                    78,
+                    79,
+                    "move up"
+                ]
+            ],
+            "time_spent": 145
+        }
+    },
+    "Door_20240220-173740_19.mp4": {
+        "344": {
+            "username": "agnes",
+            "created_at": "2024-10-16 15:37:26.341095",
+            "subtask_decomposition": [
+                [
+                    0,
+                    20,
+                    "Move above the door handle"
+                ],
+                [
+                    21,
+                    41,
+                    "Push down the door handle"
+                ],
+                [
+                    42,
+                    59,
+                    "Pull the door open "
+                ],
+                [
+                    60,
+                    67,
+                    "Move away from the door"
+                ]
+            ],
+            "time_spent": 328
+        }
+    },
+    "Stack_20240220-131157_45.mp4": {
+        "346": {
+            "username": "agnes",
+            "created_at": "2024-10-16 15:49:15.720818",
+            "subtask_decomposition": [
+                [
+                    0,
+                    12,
+                    "Move to above the block"
+                ],
+                [
+                    13,
+                    28,
+                    "Reach down to grab the block"
+                ],
+                [
+                    29,
+                    53,
+                    "Move the block above another block"
+                ],
+                [
+                    54,
+                    62,
+                    "Stack the block on top of the other block"
+                ],
+                [
+                    63,
+                    67,
+                    "Move away from the task"
+                ]
+            ],
+            "time_spent": 354
+        }
+    },
+    "Lift_20240220-124728_11.mp4": {
+        "348": {
+            "username": "agnes",
+            "created_at": "2024-10-16 15:54:18.497294",
+            "subtask_decomposition": [
+                [
+                    0,
+                    15,
+                    "Move to the object"
+                ],
+                [
+                    16,
+                    19,
+                    "Grab the object"
+                ],
+                [
+                    20,
+                    31,
+                    "Lift up the object"
+                ]
+            ],
+            "time_spent": 69
+        }
+    },
+    "Door_20240220-173852_28.mp4": {
+        "349": {
+            "username": "agnes",
+            "created_at": "2024-10-16 15:57:54.857427",
+            "subtask_decomposition": [
+                [
+                    0,
+                    19,
+                    "Move to above the door handle"
+                ],
+                [
+                    20,
+                    40,
+                    "push down the door handle"
+                ],
+                [
+                    41,
+                    57,
+                    "Pull the door open"
+                ],
+                [
+                    58,
+                    67,
+                    "Move away from the door handle"
+                ]
+            ],
+            "time_spent": 175
+        }
+    },
+    "Door_20240220-173804_22.mp4": {
+        "350": {
+            "username": "agnes",
+            "created_at": "2024-10-16 16:01:05.067702",
+            "subtask_decomposition": [
+                [
+                    0,
+                    21,
+                    "move above the door handle"
+                ],
+                [
+                    22,
+                    42,
+                    "Push down the door handle"
+                ],
+                [
+                    43,
+                    63,
+                    "Pull the door open"
+                ],
+                [
+                    44,
+                    79,
+                    "Move away from the door handle"
+                ]
+            ],
+            "time_spent": 177
+        }
+    },
+    "Lift_20240220-124626_1.mp4": {
+        "351": {
+            "username": "agnes",
+            "created_at": "2024-10-16 16:03:00.060636",
+            "subtask_decomposition": [
+                [
+                    0,
+                    12,
+                    "Move down to grab the object"
+                ],
+                [
+                    12,
+                    14,
+                    "Grab the object"
+                ],
+                [
+                    15,
+                    27,
+                    "Lift up the object"
+                ]
+            ],
+            "time_spent": 72
+        }
+    },
+    "Stack_20240220-130918_23.mp4": {
+        "352": {
+            "username": "agnes",
+            "created_at": "2024-10-16 16:06:19.528969",
+            "subtask_decomposition": [
+                [
+                    0,
+                    12,
+                    "Move on top of the red block"
+                ],
+                [
+                    13,
+                    26,
+                    "Move down to grab the red block"
+                ],
+                [
+                    27,
+                    42,
+                    "Lift up the red block"
+                ],
+                [
+                    43,
+                    48,
+                    "Move the red block above the green block"
+                ],
+                [
+                    49,
+                    58,
+                    "Move down to put the red block on top of the green block"
+                ]
+            ],
+            "time_spent": 158
+        }
+    },
+    "Stack_20240220-130925_24.mp4": {
+        "353": {
+            "username": "agnes",
+            "created_at": "2024-10-16 16:16:08.759073",
+            "subtask_decomposition": [
+                [
+                    0,
+                    8,
+                    "Move on top of the red block"
+                ],
+                [
+                    9,
+                    27,
+                    "Reach down to grab the red block"
+                ],
+                [
+                    28,
+                    41,
+                    "Lift up the red block"
+                ],
+                [
+                    42,
+                    49,
+                    "Move the red block above the green block"
+                ],
+                [
+                    50,
+                    59,
+                    "Put the red block on top of the green block"
+                ],
+                [
+                    60,
+                    63,
+                    "Move away from the blocks"
+                ]
+            ],
+            "time_spent": 156
+        }
+    },
+    "Door_20240220-173748_20.mp4": {
+        "354": {
+            "username": "agnes",
+            "created_at": "2024-10-16 16:17:59.583222",
+            "subtask_decomposition": [
+                [
+                    0,
+                    19,
+                    "Move to above the door handle"
+                ],
+                [
+                    20,
+                    43,
+                    "Push down the door handle"
+                ],
+                [
+                    44,
+                    61,
+                    "Pull the door open"
+                ],
+                [
+                    62,
+                    79,
+                    "Move away from the door"
+                ]
+            ],
+            "time_spent": 98
+        }
+    },
+    "PickPlace_20240213-110335_6.mp4": {
+        "355": {
+            "username": "Mitch",
+            "created_at": "2024-10-16 18:10:41.856708",
+            "subtask_decomposition": [
+                [
+                    0,
+                    18,
+                    "Move to object"
+                ],
+                [
+                    18,
+                    21,
+                    "Grasp object"
+                ],
+                [
+                    21,
+                    78,
+                    "move object"
+                ],
+                [
+                    78,
+                    119,
+                    "hold object in place"
+                ]
+            ],
+            "time_spent": 205
+        }
+    },
+    "Lift_20240220-124632_2.mp4": {
+        "357": {
+            "username": "jsalfity",
+            "created_at": "2024-10-16 18:22:47.233214",
+            "subtask_decomposition": [
+                [
+                    0,
+                    9,
+                    "reach down the cube"
+                ],
+                [
+                    10,
+                    14,
+                    "roll the cube over"
+                ],
+                [
+                    15,
+                    16,
+                    "grasp the cube"
+                ],
+                [
+                    17,
+                    28,
+                    "lift the cube directly up"
+                ]
+            ],
+            "time_spent": 62
+        }
+    },
+    "PickPlace_20240213-110345_7.mp4": {
+        "358": {
+            "username": "ligma",
+            "created_at": "2024-10-16 19:14:33.039475",
+            "subtask_decomposition": [
+                [
+                    0,
+                    25,
+                    "Move towards object"
+                ],
+                [
+                    26,
+                    35,
+                    "Pick object up"
+                ],
+                [
+                    36,
+                    63,
+                    "Move object across table"
+                ],
+                [
+                    64,
+                    82,
+                    "put object down"
+                ],
+                [
+                    83,
+                    119,
+                    "move object into position"
+                ]
+            ],
+            "time_spent": 248
+        }
+    },
+    "Door_20240220-173757_21.mp4": {
+        "359": {
+            "username": "ligma",
+            "created_at": "2024-10-16 19:16:59.353421",
+            "subtask_decomposition": [
+                [
+                    0,
+                    21,
+                    "Move arm up and across"
+                ],
+                [
+                    22,
+                    47,
+                    "Push handle down"
+                ],
+                [
+                    48,
+                    60,
+                    "Pull door back"
+                ],
+                [
+                    63,
+                    78,
+                    "Reset arm position"
+                ]
+            ],
+            "time_spent": 133
+        }
+    },
+    "Stack_20240220-131112_39.mp4": {
+        "360": {
+            "username": "ligma",
+            "created_at": "2024-10-16 19:20:57.745687",
+            "subtask_decomposition": [
+                [
+                    0,
+                    7,
+                    "Move to above object"
+                ],
+                [
+                    8,
+                    20,
+                    "Move towards object"
+                ],
+                [
+                    29,
+                    31,
+                    "Grasp object"
+                ],
+                [
+                    32,
+                    45,
+                    "Pick up object"
+                ],
+                [
+                    46,
+                    59,
+                    "Move object across table"
+                ],
+                [
+                    60,
+                    70,
+                    "Stack object"
+                ],
+                [
+                    71,
+                    76,
+                    "Reset arm"
+                ]
+            ],
+            "time_spent": 222
+        }
+    },
+    "PickPlace_20240213-110354_8.mp4": {
+        "361": {
+            "username": "ligma",
+            "created_at": "2024-10-16 19:23:23.143295",
+            "subtask_decomposition": [
+                [
+                    1,
+                    13,
+                    "Move to above object"
+                ],
+                [
+                    14,
+                    24,
+                    "Reach towards object"
+                ],
+                [
+                    25,
+                    33,
+                    "Pick up object"
+                ],
+                [
+                    34,
+                    61,
+                    "Move object across table"
+                ],
+                [
+                    62,
+                    119,
+                    "Place object down"
+                ]
+            ],
+            "time_spent": 128
+        }
+    },
+    "Door_20240220-173820_24.mp4": {
+        "362": {
+            "username": "ligma",
+            "created_at": "2024-10-16 19:31:52.888561",
+            "subtask_decomposition": [
+                [
+                    0,
+                    9,
+                    "Move arm up"
+                ],
+                [
+                    10,
+                    20,
+                    "Move arm towards door"
+                ],
+                [
+                    21,
+                    40,
+                    "Move arm down "
+                ],
+                [
+                    41,
+                    62,
+                    "Pull door back"
+                ],
+                [
+                    63,
+                    79,
+                    "Reset arm"
+                ]
+            ],
+            "time_spent": 493
+        }
+    },
+    "Stack_20240220-131105_38.mp4": {
+        "363": {
+            "username": "ligma",
+            "created_at": "2024-10-16 19:34:15.619501",
+            "subtask_decomposition": [
+                [
+                    0,
+                    11,
+                    "Move arm above object"
+                ],
+                [
+                    12,
+                    32,
+                    "Reach down and grab object"
+                ],
+                [
+                    33,
+                    69,
+                    "Move object across table"
+                ],
+                [
+                    71,
+                    74,
+                    "Drop object"
+                ],
+                [
+                    75,
+                    77,
+                    "Move arm up"
+                ]
+            ],
+            "time_spent": 125
+        }
+    },
+    "PickPlace_20240220-222521_6.mp4": {
+        "364": {
+            "username": "ligma",
+            "created_at": "2024-10-16 19:36:30.664613",
+            "subtask_decomposition": [
+                [
+                    0,
+                    9,
+                    "Move arm over object"
+                ],
+                [
+                    10,
+                    41,
+                    "Reach down towards object"
+                ],
+                [
+                    40,
+                    50,
+                    "Pick object up"
+                ],
+                [
+                    51,
+                    75,
+                    "Move object across table"
+                ],
+                [
+                    76,
+                    99,
+                    "Place object down"
+                ]
+            ],
+            "time_spent": 125
+        }
+    },
+    "PickPlace_20240213-110432_12.mp4": {
+        "365": {
+            "username": "ligma",
+            "created_at": "2024-10-16 19:38:54.408683",
+            "subtask_decomposition": [
+                [
+                    0,
+                    13,
+                    "Move to above object"
+                ],
+                [
+                    14,
+                    24,
+                    "Reach down towards object"
+                ],
+                [
+                    25,
+                    27,
+                    "Grasp object"
+                ],
+                [
+                    28,
+                    33,
+                    "Pick up object"
+                ],
+                [
+                    34,
+                    59,
+                    "Move object across table"
+                ],
+                [
+                    60,
+                    75,
+                    "Place object down"
+                ],
+                [
+                    76,
+                    119,
+                    "Try to push object into position"
+                ]
+            ],
+            "time_spent": 134
+        }
+    },
+    "Door_20240220-173812_23.mp4": {
+        "366": {
+            "username": "ligma",
+            "created_at": "2024-10-16 19:41:01.642118",
+            "subtask_decomposition": [
+                [
+                    0,
+                    8,
+                    "Move arm up"
+                ],
+                [
+                    9,
+                    22,
+                    "Move towards door"
+                ],
+                [
+                    23,
+                    25,
+                    "Move arm towards handle"
+                ],
+                [
+                    26,
+                    41,
+                    "Push handle down"
+                ],
+                [
+                    42,
+                    55,
+                    "Pull door back"
+                ],
+                [
+                    56,
+                    79,
+                    "Reset arm"
+                ]
+            ],
+            "time_spent": 115
+        }
+    },
+    "Door_20240220-173836_26.mp4": {
+        "367": {
+            "username": "ligma",
+            "created_at": "2024-10-16 19:44:35.501346",
+            "subtask_decomposition": [
+                [
+                    0,
+                    10,
+                    "Move arm up"
+                ],
+                [
+                    11,
+                    27,
+                    "Move arm towards handle"
+                ],
+                [
+                    28,
+                    45,
+                    "Push handle down"
+                ],
+                [
+                    46,
+                    60,
+                    "Pull door back"
+                ],
+                [
+                    61,
+                    79,
+                    "Reset arm"
+                ]
+            ],
+            "time_spent": 203
+        }
+    },
+    "Door_20240220-173859_29.mp4": {
+        "368": {
+            "username": "ligma",
+            "created_at": "2024-10-16 20:04:18.550693",
+            "subtask_decomposition": [
+                [
+                    0,
+                    10,
+                    "Move arm up"
+                ],
+                [
+                    11,
+                    24,
+                    "Move towards handle"
+                ],
+                [
+                    25,
+                    43,
+                    "Push handle down"
+                ],
+                [
+                    44,
+                    59,
+                    "Pull door back"
+                ],
+                [
+                    60,
+                    79,
+                    "Reset arm"
+                ]
+            ],
+            "time_spent": 72
+        }
+    },
+    "PickPlace_20240213-110522_17.mp4": {
+        "369": {
+            "username": "ligma",
+            "created_at": "2024-10-16 20:06:23.388681",
+            "subtask_decomposition": [
+                [
+                    0,
+                    14,
+                    "Move across table"
+                ],
+                [
+                    15,
+                    26,
+                    "Reach towards object"
+                ],
+                [
+                    27,
+                    33,
+                    "Pick object up"
+                ],
+                [
+                    34,
+                    56,
+                    "Move object across table"
+                ],
+                [
+                    57,
+                    82,
+                    "Place object down"
+                ],
+                [
+                    83,
+                    119,
+                    "Adjust robot position"
+                ]
+            ],
+            "time_spent": 100
+        }
+    },
+    "PickPlace_20240213-110404_9.mp4": {
+        "370": {
+            "username": "talal",
+            "created_at": "2024-10-16 21:36:20.070825",
+            "subtask_decomposition": [
+                [
+                    0,
+                    15,
+                    "hover arm above  can"
+                ],
+                [
+                    15,
+                    26,
+                    "lower arm to center of can"
+                ],
+                [
+                    26,
+                    119,
+                    "hold position"
+                ]
+            ],
+            "time_spent": 200
+        }
+    },
+    "Lift_20240220-124722_10.mp4": {
+        "371": {
+            "username": "talal",
+            "created_at": "2024-10-16 21:39:58.084037",
+            "subtask_decomposition": [
+                [
+                    0,
+                    7,
+                    "lower arm to cube"
+                ],
+                [
+                    7,
+                    14,
+                    "flip over cube"
+                ],
+                [
+                    15,
+                    16,
+                    "grasp cube"
+                ]
+            ],
+            "time_spent": 168
+        }
+    },
+    "PickPlace_20240220-222539_8.mp4": {
+        "372": {
+            "username": "talal",
+            "created_at": "2024-10-16 21:42:56.059441",
+            "subtask_decomposition": [
+                [
+                    0,
+                    17,
+                    "translate arm towards red can"
+                ],
+                [
+                    17,
+                    28,
+                    "lower end effector towards can"
+                ],
+                [
+                    29,
+                    99,
+                    "hold position"
+                ]
+            ],
+            "time_spent": 153
+        }
+    },
+    "PickPlace_20240220-222530_7.mp4": {
+        "373": {
+            "username": "jsalfity",
+            "created_at": "2024-10-16 21:48:33.483923",
+            "subtask_decomposition": [
+                [
+                    0,
+                    12,
+                    "position directly over the can"
+                ],
+                [
+                    13,
+                    24,
+                    "reach directly down to the can"
+                ],
+                [
+                    25,
+                    26,
+                    "grasp the can"
+                ],
+                [
+                    27,
+                    35,
+                    "lift the can directly up"
+                ],
+                [
+                    36,
+                    62,
+                    "bring the can to the other side of the table"
+                ],
+                [
+                    63,
+                    85,
+                    "set the can down"
+                ],
+                [
+                    86,
+                    99,
+                    "fine tune the can position"
+                ]
+            ],
+            "time_spent": 130
+        }
+    },
+    "Stack_20240220-130939_26.mp4": {
+        "375": {
+            "username": "ben",
+            "created_at": "2024-10-17 01:36:46.228840",
+            "subtask_decomposition": [
+                [
+                    0,
+                    6,
+                    "move to above red cube"
+                ],
+                [
+                    7,
+                    23,
+                    "reach down to grab red cube"
+                ],
+                [
+                    24,
+                    26,
+                    "grab red cube"
+                ],
+                [
+                    27,
+                    58,
+                    "move to above green cube"
+                ],
+                [
+                    59,
+                    65,
+                    "reach down to stack red cube on green cube"
+                ],
+                [
+                    66,
+                    68,
+                    "release red cube"
+                ],
+                [
+                    69,
+                    72,
+                    "move away from red cube"
+                ]
+            ],
+            "time_spent": 137
+        },
+        "381": {
+            "username": "ben",
+            "created_at": "2024-10-17 02:01:21.687700",
+            "subtask_decomposition": [
+                [
+                    0,
+                    6,
+                    "move to above red cube"
+                ],
+                [
+                    7,
+                    19,
+                    "reach down for red cube"
+                ],
+                [
+                    20,
+                    23,
+                    "center gripper on red cube"
+                ],
+                [
+                    24,
+                    40,
+                    "pick up red cube"
+                ],
+                [
+                    41,
+                    58,
+                    "move to above green cube"
+                ],
+                [
+                    59,
+                    65,
+                    "move down"
+                ],
+                [
+                    66,
+                    68,
+                    "release red cube"
+                ],
+                [
+                    69,
+                    72,
+                    "move away from stacked cubes"
+                ]
+            ],
+            "time_spent": 241
+        }
+    },
+    "PickPlace_20240213-110413_10.mp4": {
+        "376": {
+            "username": "ben",
+            "created_at": "2024-10-17 01:39:38.378475",
+            "subtask_decomposition": [
+                [
+                    0,
+                    14,
+                    "move to above can"
+                ],
+                [
+                    15,
+                    24,
+                    "reach down for can"
+                ],
+                [
+                    25,
+                    26,
+                    "grab can"
+                ],
+                [
+                    27,
+                    119,
+                    "move can to correct bin"
+                ]
+            ],
+            "time_spent": 157
+        }
+    },
+    "Stack_20240220-130947_27.mp4": {
+        "377": {
+            "username": "ben",
+            "created_at": "2024-10-17 01:44:03.453750",
+            "subtask_decomposition": [
+                [
+                    0,
+                    13,
+                    "move to above red cube"
+                ],
+                [
+                    14,
+                    16,
+                    "reach down to grab red cube"
+                ],
+                [
+                    27,
+                    28,
+                    "grab red cube"
+                ],
+                [
+                    29,
+                    57,
+                    "move red cube to above green cube"
+                ],
+                [
+                    58,
+                    64,
+                    "move down to stack red cube on green cube"
+                ],
+                [
+                    65,
+                    67,
+                    "release red cube"
+                ],
+                [
+                    68,
+                    71,
+                    "move away from red cube"
+                ]
+            ],
+            "time_spent": 251
+        }
+    },
+    "PickPlace_20240213-110422_11.mp4": {
+        "378": {
+            "username": "ben",
+            "created_at": "2024-10-17 01:47:41.396109",
+            "subtask_decomposition": [
+                [
+                    0,
+                    11,
+                    "move to above can"
+                ],
+                [
+                    12,
+                    22,
+                    "reach down for can"
+                ],
+                [
+                    23,
+                    24,
+                    "grab can"
+                ],
+                [
+                    25,
+                    32,
+                    "lift can"
+                ],
+                [
+                    33,
+                    66,
+                    "move can to above correct bin"
+                ],
+                [
+                    67,
+                    85,
+                    "lower can into correct bin"
+                ],
+                [
+                    86,
+                    119,
+                    "attempt to shift can over into goal position"
+                ]
+            ],
+            "time_spent": 205
+        }
+    },
+    "Stack_20240220-130954_28.mp4": {
+        "379": {
+            "username": "ben",
+            "created_at": "2024-10-17 01:51:40.159395",
+            "subtask_decomposition": [
+                [
+                    0,
+                    8,
+                    "move to above red cube"
+                ],
+                [
+                    9,
+                    23,
+                    "reach down for red cube"
+                ],
+                [
+                    24,
+                    28,
+                    "center gripper on red cube"
+                ],
+                [
+                    29,
+                    31,
+                    "grab red cube"
+                ],
+                [
+                    46,
+                    59,
+                    "move to above green cube"
+                ],
+                [
+                    60,
+                    65,
+                    "stack red cube on green cube"
+                ],
+                [
+                    66,
+                    69,
+                    "release red cube"
+                ],
+                [
+                    70,
+                    73,
+                    "move away from red cube"
+                ]
+            ],
+            "time_spent": 219
+        }
+    },
+    "Door_20240220-173828_25.mp4": {
+        "380": {
+            "username": "ben",
+            "created_at": "2024-10-17 01:56:15.688879",
+            "subtask_decomposition": [
+                [
+                    0,
+                    20,
+                    "move to above door handle"
+                ],
+                [
+                    21,
+                    23,
+                    "reach down for door handle"
+                ],
+                [
+                    24,
+                    43,
+                    "turn door handle"
+                ],
+                [
+                    44,
+                    60,
+                    "open door"
+                ],
+                [
+                    61,
+                    70,
+                    "move away from handle"
+                ],
+                [
+                    71,
+                    79,
+                    "remain stationary"
+                ]
+            ],
+            "time_spent": 258
+        }
+    },
+    "Stack_20240220-131001_29.mp4": {
+        "382": {
+            "username": "ben",
+            "created_at": "2024-10-17 02:04:01.368329",
+            "subtask_decomposition": [
+                [
+                    0,
+                    10,
+                    "move to above red cube"
+                ],
+                [
+                    11,
+                    29,
+                    "reach down for red cube"
+                ],
+                [
+                    30,
+                    45,
+                    "pick up red cube"
+                ],
+                [
+                    46,
+                    61,
+                    "move to above green cube"
+                ],
+                [
+                    62,
+                    68,
+                    "move down"
+                ],
+                [
+                    69,
+                    71,
+                    "release red cube"
+                ],
+                [
+                    72,
+                    75,
+                    "move away from stacked cubes"
+                ]
+            ],
+            "time_spent": 143
+        }
+    },
+    "Lift_20240220-124651_5.mp4": {
+        "383": {
+            "username": "jsalfity",
+            "created_at": "2024-10-17 05:03:37.364632",
+            "subtask_decomposition": [
+                [
+                    0,
+                    12,
+                    "reach directly down to the cube"
+                ],
+                [
+                    13,
+                    16,
+                    "grasp the cube"
+                ],
+                [
+                    17,
+                    28,
+                    "lift cube directly up"
+                ]
+            ],
+            "time_spent": 41
+        }
+    },
+    "Stack_20240220-131151_44.mp4": {
+        "397": {
+            "username": "brad",
+            "created_at": "2024-10-17 20:15:30.551123",
+            "subtask_decomposition": [
+                [
+                    0,
+                    8,
+                    "move to above object"
+                ],
+                [
+                    8,
+                    19,
+                    "reach down to grab object"
+                ],
+                [
+                    19,
+                    37,
+                    "pick up object"
+                ],
+                [
+                    37,
+                    47,
+                    "move object above another object"
+                ],
+                [
+                    47,
+                    58,
+                    "place red object on green object 58"
+                ],
+                [
+                    58,
+                    63,
+                    "move away from red and green object"
+                ]
+            ],
+            "time_spent": 1076
+        }
+    },
+    "PickPlace_20240213-110442_13.mp4": {
+        "398": {
+            "username": "brad",
+            "created_at": "2024-10-17 20:19:26.992169",
+            "subtask_decomposition": [
+                [
+                    0,
+                    10,
+                    "knock over box"
+                ],
+                [
+                    10,
+                    15,
+                    "move over can"
+                ],
+                [
+                    15,
+                    26,
+                    "reach down to grab can"
+                ],
+                [
+                    26,
+                    33,
+                    "pick up can"
+                ],
+                [
+                    33,
+                    67,
+                    "move can above can goal location"
+                ],
+                [
+                    67,
+                    119,
+                    "put can near goal location"
+                ]
+            ],
+            "time_spent": 222
+        }
+    },
+    "Stack_20240220-131009_30.mp4": {
+        "399": {
+            "username": "brad",
+            "created_at": "2024-10-17 20:22:06.219600",
+            "subtask_decomposition": [
+                [
+                    0,
+                    15,
+                    "move above red block"
+                ],
+                [
+                    15,
+                    28,
+                    "reach down to grab red block"
+                ],
+                [
+                    28,
+                    45,
+                    "pick up red block"
+                ],
+                [
+                    45,
+                    59,
+                    "move red block above green block"
+                ],
+                [
+                    59,
+                    69,
+                    "place red block on green block"
+                ],
+                [
+                    69,
+                    74,
+                    "move away from bred and green block"
+                ]
+            ],
+            "time_spent": 151
+        }
+    },
+    "PickPlace_20240213-110452_14.mp4": {
+        "400": {
+            "username": "brad",
+            "created_at": "2024-10-17 20:24:21.268520",
+            "subtask_decomposition": [
+                [
+                    0,
+                    14,
+                    "move above can"
+                ],
+                [
+                    14,
+                    23,
+                    "reach down to grab can"
+                ],
+                [
+                    23,
+                    34,
+                    "pick up can"
+                ],
+                [
+                    34,
+                    70,
+                    "move can above can goal location"
+                ],
+                [
+                    70,
+                    119,
+                    "place can near goal can location"
+                ]
+            ],
+            "time_spent": 124
+        }
+    },
+    "Stack_20240220-131016_31.mp4": {
+        "401": {
+            "username": "brad",
+            "created_at": "2024-10-17 20:26:48.725318",
+            "subtask_decomposition": [
+                [
+                    0,
+                    13,
+                    "move to above red block"
+                ],
+                [
+                    13,
+                    24,
+                    "reach down to grab red block"
+                ],
+                [
+                    24,
+                    41,
+                    "pick up red block"
+                ],
+                [
+                    41,
+                    51,
+                    "move red block above green block"
+                ],
+                [
+                    51,
+                    60,
+                    "place red block on green block"
+                ],
+                [
+                    60,
+                    65,
+                    "move away from red and green block"
+                ]
+            ],
+            "time_spent": 132
+        }
+    },
+    "PickPlace_20240213-110502_15.mp4": {
+        "402": {
+            "username": "brad",
+            "created_at": "2024-10-17 20:28:58.625576",
+            "subtask_decomposition": [
+                [
+                    0,
+                    13,
+                    "move to above can"
+                ],
+                [
+                    13,
+                    21,
+                    "reach down to grab can"
+                ],
+                [
+                    21,
+                    32,
+                    "pick up can"
+                ],
+                [
+                    32,
+                    66,
+                    "move can above can goal location"
+                ],
+                [
+                    66,
+                    119,
+                    "place can near goal can location"
+                ]
+            ],
+            "time_spent": 113
+        }
+    },
+    "Stack_20240220-131023_32.mp4": {
+        "403": {
+            "username": "brad",
+            "created_at": "2024-10-17 20:33:02.516159",
+            "subtask_decomposition": [
+                [
+                    0,
+                    7,
+                    "move above red cube"
+                ],
+                [
+                    14,
+                    27,
+                    "reach down to grab red cube"
+                ],
+                [
+                    27,
+                    43,
+                    "pick up red cube"
+                ],
+                [
+                    43,
+                    52,
+                    "move red cube above green cube"
+                ],
+                [
+                    52,
+                    62,
+                    "place red cube on green cube"
+                ],
+                [
+                    62,
+                    66,
+                    "move away from red and green cube"
+                ]
+            ],
+            "time_spent": 234
+        },
+        "405": {
+            "username": "ben",
+            "created_at": "2024-10-17 20:45:37.034738",
+            "subtask_decomposition": [
+                [
+                    0,
+                    14,
+                    "move to above red cube"
+                ],
+                [
+                    15,
+                    27,
+                    "reach down to grab red cube"
+                ],
+                [
+                    28,
+                    43,
+                    "pick up red cube"
+                ],
+                [
+                    44,
+                    52,
+                    "move to above green cube"
+                ],
+                [
+                    53,
+                    59,
+                    "move down"
+                ],
+                [
+                    60,
+                    62,
+                    "release red cube"
+                ],
+                [
+                    63,
+                    66,
+                    "move away from stacked cubes"
+                ]
+            ],
+            "time_spent": 908
+        }
+    },
+    "PickPlace_20240213-110512_16.mp4": {
+        "404": {
+            "username": "brad",
+            "created_at": "2024-10-17 20:35:33.302641",
+            "subtask_decomposition": [
+                [
+                    0,
+                    12,
+                    "move above can"
+                ],
+                [
+                    12,
+                    14,
+                    "reach down to pick up can"
+                ]
+            ],
+            "time_spent": 57
+        }
+    },
+    "Stack_20240220-131030_33.mp4": {
+        "406": {
+            "username": "ben",
+            "created_at": "2024-10-17 20:47:59.714248",
+            "subtask_decomposition": [
+                [
+                    0,
+                    12,
+                    "move to above red cube"
+                ],
+                [
+                    13,
+                    20,
+                    "reach down for red cube"
+                ],
+                [
+                    21,
+                    79,
+                    "collide with green cube and get stuck"
+                ]
+            ],
+            "time_spent": 119
+        }
+    },
+    "Stack_20240220-131037_34.mp4": {
+        "407": {
+            "username": "ben",
+            "created_at": "2024-10-17 20:50:52.333145",
+            "subtask_decomposition": [
+                [
+                    0,
+                    10,
+                    "move to above red cube"
+                ],
+                [
+                    11,
+                    22,
+                    "reach down to grab red cube"
+                ],
+                [
+                    23,
+                    38,
+                    "pick up red cube"
+                ],
+                [
+                    39,
+                    49,
+                    "move to above green cube"
+                ],
+                [
+                    50,
+                    58,
+                    "move down"
+                ],
+                [
+                    59,
+                    60,
+                    "release red cube"
+                ],
+                [
+                    61,
+                    63,
+                    "move away from stacked cubes"
+                ]
+            ],
+            "time_spent": 157
+        }
+    },
+    "PickPlace_20240213-110532_18.mp4": {
+        "408": {
+            "username": "ben",
+            "created_at": "2024-10-17 20:54:15.302523",
+            "subtask_decomposition": [
+                [
+                    0,
+                    14,
+                    "move to above can"
+                ],
+                [
+                    15,
+                    41,
+                    "reach down for can and knock over box in the process"
+                ],
+                [
+                    42,
+                    50,
+                    "pick up can"
+                ],
+                [
+                    51,
+                    85,
+                    "move to above correct bin"
+                ],
+                [
+                    86,
+                    100,
+                    "lower can"
+                ],
+                [
+                    101,
+                    119,
+                    "attempt to shift can into goal position"
+                ]
+            ],
+            "time_spent": 189
+        }
+    },
+    "Stack_20240220-131044_35.mp4": {
+        "409": {
+            "username": "ben",
+            "created_at": "2024-10-17 20:57:27.425675",
+            "subtask_decomposition": [
+                [
+                    0,
+                    9,
+                    "move to above red cube"
+                ],
+                [
+                    10,
+                    28,
+                    "reach down for red cube"
+                ],
+                [
+                    29,
+                    45,
+                    "pick up red cube"
+                ],
+                [
+                    46,
+                    58,
+                    "move to above green cube"
+                ],
+                [
+                    59,
+                    65,
+                    "move down"
+                ],
+                [
+                    66,
+                    68,
+                    "release red cube"
+                ],
+                [
+                    69,
+                    72,
+                    "move away from stacked cubes"
+                ]
+            ],
+            "time_spent": 172
+        }
+    },
+    "PickPlace_20240213-110542_19.mp4": {
+        "410": {
+            "username": "ben",
+            "created_at": "2024-10-17 20:59:45.642190",
+            "subtask_decomposition": [
+                [
+                    0,
+                    10,
+                    "move to above can"
+                ],
+                [
+                    11,
+                    19,
+                    "reach down for can"
+                ],
+                [
+                    20,
+                    28,
+                    "pick up can"
+                ],
+                [
+                    29,
+                    60,
+                    "move to above correct bin"
+                ],
+                [
+                    61,
+                    80,
+                    "lower can into correct bin"
+                ],
+                [
+                    81,
+                    119,
+                    "attempt to shift can into goal position"
+                ]
+            ],
+            "time_spent": 120
+        }
+    },
+    "Stack_20240220-131051_36.mp4": {
+        "411": {
+            "username": "ben",
+            "created_at": "2024-10-17 21:02:27.834803",
+            "subtask_decomposition": [
+                [
+                    0,
+                    7,
+                    "move to above red cube"
+                ],
+                [
+                    8,
+                    26,
+                    "reach down for red cube"
+                ],
+                [
+                    27,
+                    41,
+                    "pick up red cube"
+                ],
+                [
+                    42,
+                    52,
+                    "move to above green cube"
+                ],
+                [
+                    53,
+                    60,
+                    "lower red cube"
+                ],
+                [
+                    61,
+                    62,
+                    "release red cube"
+                ],
+                [
+                    63,
+                    66,
+                    "move away from stacked cubes"
+                ]
+            ],
+            "time_spent": 141
+        }
+    },
+    "Stack_20240220-131143_43.mp4": {
+        "413": {
+            "username": "Sai Shankar",
+            "created_at": "2024-10-18 04:42:58.285421",
+            "subtask_decomposition": [
+                [
+                    0,
+                    21,
+                    "move to the red cube"
+                ],
+                [
+                    22,
+                    39,
+                    "pick up the red cube"
+                ],
+                [
+                    40,
+                    70,
+                    "move the red cube to the top of the green cube"
+                ],
+                [
+                    71,
+                    99,
+                    "place the red cube on top of the green cube"
+                ]
+            ],
+            "time_spent": 120
+        }
+    },
+    "Lift_20240220-124716_9.mp4": {
+        "414": {
+            "username": "Sai Shankar",
+            "created_at": "2024-10-18 04:49:16.430418",
+            "subtask_decomposition": [
+                [
+                    0,
+                    9,
+                    "move to the red cube"
+                ],
+                [
+                    10,
+                    18,
+                    "grasp red cube"
+                ],
+                [
+                    19,
+                    29,
+                    "lift the red cube"
+                ]
+            ],
+            "time_spent": 357
+        }
+    },
+    "Stack_20240220-131135_42.mp4": {
+        "415": {
+            "username": "Sai Shankar",
+            "created_at": "2024-10-18 04:52:06.751885",
+            "subtask_decomposition": [
+                [
+                    0,
+                    18,
+                    "move to the red cube"
+                ],
+                [
+                    19,
+                    29,
+                    "pick up red cube"
+                ],
+                [
+                    30,
+                    50,
+                    "move the red cube on top of the green cube"
+                ],
+                [
+                    51,
+                    58,
+                    "place the red cube on top of the green cube"
+                ]
+            ],
+            "time_spent": 140
+        }
+    },
+    "PickPlace_20240220-222512_5.mp4": {
+        "416": {
+            "username": "Sai Shankar",
+            "created_at": "2024-10-18 04:53:35.668271",
+            "subtask_decomposition": [
+                [
+                    0,
+                    20,
+                    "move to the red cylinder"
+                ]
+            ],
+            "time_spent": 28
+        }
+    },
+    "PickPlace_20240220-222426_0.mp4": {
+        "417": {
+            "username": "Sai Shankar",
+            "created_at": "2024-10-18 04:57:03.662188",
+            "subtask_decomposition": [
+                [
+                    0,
+                    22,
+                    "move to the red cylinder"
+                ],
+                [
+                    23,
+                    29,
+                    "grasp red cylinder"
+                ],
+                [
+                    30,
+                    81,
+                    "move the red cylinder to its box"
+                ],
+                [
+                    82,
+                    99,
+                    "place the red cylinder in its box"
+                ]
+            ],
+            "time_spent": 192
+        }
+    },
+    "Lift_20240220-124645_4.mp4": {
+        "418": {
+            "username": "Sai Shankar",
+            "created_at": "2024-10-18 04:58:18.077065",
+            "subtask_decomposition": [
+                [
+                    0,
+                    12,
+                    "move to the red cube"
+                ],
+                [
+                    13,
+                    20,
+                    "grasp the red cube"
+                ],
+                [
+                    21,
+                    29,
+                    "lift the red cube"
+                ]
+            ],
+            "time_spent": 59
+        }
+    },
+    "PickPlace_20240220-222436_1.mp4": {
+        "419": {
+            "username": "Sai Shankar",
+            "created_at": "2024-10-18 04:59:28.943227",
+            "subtask_decomposition": [
+                [
+                    0,
+                    99,
+                    "move to the red cylinder"
+                ]
+            ],
+            "time_spent": 62
+        }
+    },
+    "PickPlace_20240220-222445_2.mp4": {
+        "421": {
+            "username": "Sai Shankar",
+            "created_at": "2024-10-18 05:03:47.201589",
+            "subtask_decomposition": [
+                [
+                    0,
+                    21,
+                    "move to the red cylinder"
+                ],
+                [
+                    63,
+                    72,
+                    "grasp the red cylinder "
+                ],
+                [
+                    73,
+                    99,
+                    "move the red cylinder to its box"
+                ]
+            ],
+            "time_spent": 111
+        }
+    },
+    "Lift_20240220-124657_6.mp4": {
+        "422": {
+            "username": "pronghorn",
+            "created_at": "2024-10-18 08:34:50.149203",
+            "subtask_decomposition": [
+                [
+                    0,
+                    14,
+                    "move to above object"
+                ],
+                [
+                    15,
+                    17,
+                    "grasp object"
+                ],
+                [
+                    18,
+                    30,
+                    "move object up"
+                ]
+            ],
+            "time_spent": 11836
+        }
+    },
+    "PickPlace_20240220-222454_3.mp4": {
+        "423": {
+            "username": "pronghorn",
+            "created_at": "2024-10-18 08:41:37.625712",
+            "subtask_decomposition": [
+                [
+                    0,
+                    14,
+                    "move to above can"
+                ],
+                [
+                    15,
+                    18,
+                    "move down"
+                ],
+                [
+                    19,
+                    20,
+                    "bumps into carton"
+                ],
+                [
+                    21,
+                    27,
+                    "corrects and continues down towards can"
+                ],
+                [
+                    28,
+                    31,
+                    "grasp can"
+                ],
+                [
+                    32,
+                    38,
+                    "move can up"
+                ],
+                [
+                    38,
+                    75,
+                    "move can over desired can location"
+                ],
+                [
+                    75,
+                    99,
+                    "place can in desired can location"
+                ]
+            ],
+            "time_spent": 393
+        }
+    },
+    "Stack_20240220-131120_40.mp4": {
+        "424": {
+            "username": "pronghorn",
+            "created_at": "2024-10-18 08:45:49.349948",
+            "subtask_decomposition": [
+                [
+                    0,
+                    11,
+                    "move over red block"
+                ],
+                [
+                    12,
+                    29,
+                    "lowers over red block"
+                ],
+                [
+                    30,
+                    32,
+                    "grasp red block"
+                ],
+                [
+                    32,
+                    45,
+                    "move red block up"
+                ],
+                [
+                    45,
+                    56,
+                    "move red block over green block"
+                ],
+                [
+                    57,
+                    63,
+                    "lower red block above green block"
+                ],
+                [
+                    64,
+                    66,
+                    "ungrasp and drop red block on green block"
+                ],
+                [
+                    68,
+                    69,
+                    "move up"
+                ]
+            ],
+            "time_spent": 234
+        }
+    },
+    "Lift_20240220-124703_7.mp4": {
+        "425": {
+            "username": "pronghorn",
+            "created_at": "2024-10-18 08:50:14.282457",
+            "subtask_decomposition": [
+                [
+                    0,
+                    14,
+                    "moves to red block"
+                ],
+                [
+                    15,
+                    16,
+                    "grasp red block"
+                ],
+                [
+                    17,
+                    30,
+                    "move red block up"
+                ]
+            ],
+            "time_spent": 243
+        }
+    },
+    "PickPlace_20240220-222503_4.mp4": {
+        "426": {
+            "username": "pronghorn",
+            "created_at": "2024-10-18 08:54:19.493123",
+            "subtask_decomposition": [
+                [
+                    0,
+                    9,
+                    "move to above can"
+                ],
+                [
+                    10,
+                    25,
+                    "move down to grasp can"
+                ],
+                [
+                    26,
+                    30,
+                    "grasp can"
+                ],
+                [
+                    31,
+                    37,
+                    "move can up"
+                ],
+                [
+                    38,
+                    68,
+                    "move can over desired can location"
+                ],
+                [
+                    69,
+                    99,
+                    "lower can into desired can location"
+                ]
+            ],
+            "time_spent": 225
+        }
+    },
+    "Stack_20240220-131128_41.mp4": {
+        "427": {
+            "username": "pronghorn",
+            "created_at": "2024-10-18 08:59:59.865555",
+            "subtask_decomposition": [
+                [
+                    0,
+                    8,
+                    "widen grip and move to above red block"
+                ],
+                [
+                    9,
+                    21,
+                    "lower to grasp red block"
+                ],
+                [
+                    22,
+                    24,
+                    "grasp red block"
+                ],
+                [
+                    25,
+                    37,
+                    "lift red block up"
+                ],
+                [
+                    38,
+                    47,
+                    "move red block to above green block"
+                ],
+                [
+                    48,
+                    59,
+                    "lower red block closer to green block"
+                ],
+                [
+                    60,
+                    61,
+                    "drop red block on green block"
+                ],
+                [
+                    61,
+                    64,
+                    "move up"
+                ]
+            ],
+            "time_spent": 326
+        }
+    },
+    "Lift_20240220-124638_3.mp4": {
+        "430": {
+            "username": "jsalfity",
+            "created_at": "2024-10-20 17:49:48.548286",
+            "subtask_decomposition": [
+                [
+                    0,
+                    11,
+                    "reaching down towards the cube"
+                ],
+                [
+                    12,
+                    17,
+                    "grasp the cube"
+                ],
+                [
+                    18,
+                    29,
+                    "lift the cube"
+                ]
+            ],
+            "time_spent": 47
+        }
+    }
+}
