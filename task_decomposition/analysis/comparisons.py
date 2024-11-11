@@ -9,7 +9,11 @@ import tensorflow as tf
 # from transformers import BertTokenizer, BertModel
 # from scipy.spatial.distance import cosine
 
-from task_decomposition.paths import ROBOT_TRAJ_GROUNDTRUTH_DATA_PATH, LLM_OUTPUT_PATH
+from task_decomposition.paths import (
+    ROBOT_TRAJ_GROUNDTRUTH_DATA_PATH,
+    LLM_OUTPUT_PATH,
+    ANNOTATION_JSON,
+)
 from task_decomposition.constants import (
     START_STEP_IDX,
     END_STEP_IDX,
@@ -144,6 +148,42 @@ def extract_subtask_from_LLM_output_file(filepath: str, llm_model: str) -> list:
 
     return subtask_decomposition
 
+
+def extract_subtask_from_annotation_file(runid: str) -> list:
+    """
+    This function extracts the subtask from the annotation file.
+    The annotation file is a json, with the field "subtask_decomposition" containing the output of the human annotator.
+    """
+    # read the json file and load as a dictionary
+    with open(ANNOTATION_JSON, "r") as f:
+        data = json.load(f)
+
+    # add .mp4 to end of run_id if it is not already there
+    if runid[-4:] != ".mp4":
+        runid += ".mp4"
+
+    # Retrieve the inner dictionary (first value inside the run_id's dictionary)
+    inner_dict = next(iter(data[runid].values()))
+
+    return inner_dict['subtask_decomposition']
+
+def extract_timespent_from_annotation_file(runid: str) -> list:
+    """
+    This function extracts the subtask from the annotation file.
+    The annotation file is a json, with the field "subtask_decomposition" containing the output of the human annotator.
+    """
+    # read the json file and load as a dictionary
+    with open(ANNOTATION_JSON, "r") as f:
+        data = json.load(f)
+
+    # add .mp4 to end of run_id if it is not already there
+    if runid[-4:] != ".mp4":
+        runid += ".mp4"
+
+    # Retrieve the inner dictionary (first value inside the run_id's dictionary)
+    inner_dict = next(iter(data[runid].values()))
+
+    return inner_dict['time_spent']
 
 def intersection(subtask_A: tuple, subtask_B: tuple) -> bool:
     """
