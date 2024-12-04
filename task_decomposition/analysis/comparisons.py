@@ -167,6 +167,24 @@ def extract_subtask_from_annotation_file(runid: str) -> list:
 
     return inner_dict['subtask_decomposition']
 
+def extract_user_from_annotation_file(runid: str) -> str:
+    """
+    This function extracts the user from the annotation file.
+    The annotation file is a json, with the field "subtask_decomposition" containing the output of the human annotator.
+    """
+    # read the json file and load as a dictionary
+    with open(ANNOTATION_JSON, "r") as f:
+        data = json.load(f)
+
+    # add .mp4 to end of run_id if it is not already there
+    if runid[-4:] != ".mp4":
+        runid += ".mp4"
+
+    # Retrieve the inner dictionary (first value inside the run_id's dictionary)
+    inner_dict = next(iter(data[runid].values()))
+
+    return inner_dict['username']
+
 def extract_timespent_from_annotation_file(runid: str) -> list:
     """
     This function extracts the subtask from the annotation file.
